@@ -23,6 +23,10 @@ body {
  */
 .navbar-fixed-top {
   border: 0;
+  background-color: #1A5276;
+}
+.navbar-brand {
+	color : white;
 }
 
 /*
