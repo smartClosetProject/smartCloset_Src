@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<!-- DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd"-->
+<!-- DTD 파일이란 XML의 문법을 정의해 놓은 파일이다. XML은 DTD 파일을 먼저 확인하여 문법을 확인하도록 되어 있다. DTD 파일의 경로를 웹의 절대 경로로 지정하면 된다.-->
+<!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
 	<!-- Appenders -->
@@ -12,6 +14,14 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.spring.client">
+		<level value="info" />
+	</logger>
+	
+	<logger name="com.spring.admin">
+		<level value="info" />
+	</logger>
+	
+	<logger name="com.spring.common">
 		<level value="info" />
 	</logger>
 	
