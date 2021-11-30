@@ -107,3 +107,9 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.mini_icon{
+	width: 20px;
+	height: 20px;
+	position: static;
+}
