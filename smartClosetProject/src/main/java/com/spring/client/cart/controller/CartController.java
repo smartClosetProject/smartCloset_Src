@@ -23,7 +23,7 @@ public class CartController {
 	 ************************************/
 	@GetMapping("cartList")
 	public String cartList() {
-		
+		log.info("카트 리스트 호출 성공");
 		return "cart/cart";
 	}
 }
