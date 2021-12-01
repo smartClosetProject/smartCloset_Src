@@ -54,7 +54,7 @@
 			.page {
 				margin-top:50px;
 				margin-left: 220px;
-				margin-bottom: 50px;
+				margin-bottom: 70px;
 		    }
 		    
 		    /* footer */

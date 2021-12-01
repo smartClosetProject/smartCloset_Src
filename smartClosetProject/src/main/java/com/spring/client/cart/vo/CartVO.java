@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartVO {
-	private int cart_num;
-	private int cart_goodsCount;
+	private int cart_num = 0;
+	private int cart_goodsCount = 0;
 	private String cart_regdate;
-	private int m_num;
-	private String pro_num;
+	private int m_num = 0;
+	private String pro_num = "";
 }

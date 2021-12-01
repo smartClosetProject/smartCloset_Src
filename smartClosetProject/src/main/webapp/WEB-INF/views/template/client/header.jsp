@@ -48,7 +48,7 @@
 			</ul></li>
 	</ul>
 	<ul class="nav navbar-nav navbar-right">
-		<li><a href="#"><span
+		<li><a href="/cart/cartList"><span
 				class="glyphicon glyphicon glyphicon-shopping-cart"></span> </a></li>
 		<li><a href="#"><span class="glyphicon glyphicon-user"></span>
 		</a></li>
