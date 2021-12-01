@@ -5,11 +5,11 @@
   
 <tiles-definitions>
 	
-	<definition name="content" template="/WEB-INF/views/template/admin/contentLayout.jsp">
+	<definition name="content" template="/WEB-INF/views/template/admin/admin_Layout.jsp">
 		<put-attribute name="title" value="나의 첫 스프링 사이트" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/template/admin/footer.jsp" />
-		<put-attribute name="navbar" value="/WEB-INF/views/template/admin/navbar.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/admin/admin_footer.jsp" />
+		<put-attribute name="navbar" value="/WEB-INF/views/template/admin/admin_navbar.jsp" />
 	</definition>
 	
 	<definition name="nboard/*" extends="content"> 							<!-- 뷰단과 관련된 내용으로 name은 컨트롤러가 반환해주는 뷰정보이다. -->
