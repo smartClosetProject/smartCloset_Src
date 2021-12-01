@@ -35,54 +35,49 @@
 		</script>
 	</head>
 	<body>
-		<form>
-			<div>
-				<h2>MY PAGE</h2>
-			</div>
-			<div>
-				<label>회원님</label>
-				<hr>
-			</div>
-			<div>
-				<h3>나의 주문 처리 현황</h3>
-				<ul>
-					<li>
-						<strong>입금전</strong>
-						<span>
-							<span id="money">0</span>
-						</span>
-					</li>
-					<li>
-						<strong>배송준비중</strong>
-						<span>
-							<span id="money">0</span>
-						</span>
-					</li>
-					<li>
-						<strong>배송중</strong>
-						<span>
-							<span id="">0</span>
-						</span>
-					</li>
-					<li>
-						<strong>배송완료</strong>
-						<span>
-							<span id="">0</span>
-						</span>
-					</li>
+	<div>
+		<h2>MY PAGE</h2>
+	</div>
+		<div>
+			<label>${name}회원님</label>
+			<hr>
+		</div>
+		<div>
+			<h3>나의 주문 처리 현황</h3>
+			<ul>
+				<li>
+					<strong>입금전</strong>
+					<span>
+						<span id="money">0</span>
+					</span>
+				</li>
+				<li>
+					<strong>배송준비중</strong>
+					<span>
+						<span id="money">0</span>
+					</span>
+				</li>
+				<li>
+					<strong>배송중</strong>
+					<span>
+						<span id="">0</span>
+					</span>
+				</li>
+				<li>
+					<strong>배송완료</strong>
+					<span>
+						<span id="">0</span>
+					</span>
+				</li>
 					
-				</ul>
-			</div>
-			
+			</ul>
+		</div>	
 			<div>
 				<input type="button" id="updateBtn" name="updateBtn" value="회원정보 수정">
 				<input type="button" id="serchBtn" name="serchBtn" value="주문내역조회">
 				<input type="button" id="cartBtn" name="cartBtn" value="장바구니">
 				<input type="button" id="boardSerchBtn" name="boardSerchBtn" value="게시물조회">
-				<input type="button" id="smartClosetBtn" name="smartClosetBtn" value="스마트옷장">
-									
-			</div>
-		</form>
-	
+				<input type="button" id="smartClosetBtn" name="smartClosetBtn" value="스마트옷장">							
+			</div>	
 	</body>
 </html>
