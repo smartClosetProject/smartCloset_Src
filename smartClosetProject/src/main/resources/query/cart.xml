@@ -2,8 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.client.cart.dao.CartDAO">
 	
+	<select id="isExist" parameterType="cart" resultType="int">
+		SELECT NVL((SELECT 1 FROM cart
+					WHERE m_num = #{m_num} AND pro_num = #{pro_num}), 0) state
+		FROM dual
+	</select>
+	
+	<insert id="insertCart" parameterType="cart">
+		INSERT INTO cart(cart_num, cart_goodsCount, m_num, pro_num)
+		VALUES(cart_seq.NEXTVAL, #{cart_goodsCount}, #{m_num}, #{pro_num})
+	</insert>
+	
+	<delete id="deleteEachCart" parameterType="cart">
+		DELETE FROM cart
+		WHERE cart_num = #{cart_num}
+	</delete>
+	
+	<delete id="deleteAllCart" parameterType="cart">
+		DELETE FROM cart
+		WHERE m_num = #{m_num}
+	</delete>
+	
+	<update id="modifyCount" parameterType="cart">
+		UPDATE cart
+		SET cart_goodsCount = #{cart_goodsCount}
+		WHERE m_num = #{m_num} AND pro_num = #{pro_num}
+	</update>
+	
 	<select id="cartList" parameterType="cart" resultType="cart">
-		asd
+		
 	</select>
 	
 </mapper>
