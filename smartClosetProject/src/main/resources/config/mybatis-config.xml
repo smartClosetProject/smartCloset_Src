@@ -3,9 +3,8 @@
 <configuration>
 
 	<!-- VO 풀네임이 너무 길어 별칭 부여 -->
-<!-- 	<typeAliases>
-		<typeAlias type="com.spring.client.board.vo.BoardVO" alias="board" />
-		<typeAlias type="com.spring.client.reply.vo.ReplyVO" alias="reply" />
-	</typeAliases> -->
+	<typeAliases>
+		<typeAlias type="com.spring.admin.prdetail.vo.PrDetailVO" alias="prDetail" />
+	</typeAliases>
 
 </configuration>
