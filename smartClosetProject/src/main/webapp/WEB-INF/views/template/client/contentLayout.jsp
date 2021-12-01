@@ -72,11 +72,11 @@
 	<body>
 		<div class="container">
 			<nav class="navbar navbar-default navbar-fixed-top">
-				<tiles:insertAttribute name="header" />
+				<tiles:insertAttribute name="clientHeader" />
 			</nav>
 			
 			<div class="container-fluid">
-				<tiles:insertAttribute name="aside" />
+				<tiles:insertAttribute name="clientAside" />
 				
 				<div class="col-sm-9 page">
 					<tiles:insertAttribute name="body" />
@@ -84,7 +84,7 @@
 			</div>
 		</div>
 		<div>
-			<tiles:insertAttribute name="footer" />
+			<tiles:insertAttribute name="clientFooter" />
 		</div>
 	</body>
 </html>
