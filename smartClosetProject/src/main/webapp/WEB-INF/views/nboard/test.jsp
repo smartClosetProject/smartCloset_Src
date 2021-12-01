@@ -8,7 +8,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 		
-		<title>상세 페이지</title>
+		<title>메인 페이지</title>
 		
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
@@ -24,6 +24,6 @@
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<h1>test</h1>
+		<h1>메인 페이지 입니다.</h1>
 	</body>
 </html>
