@@ -23,6 +23,10 @@ body {
  */
 .navbar-fixed-top {
   border: 0;
+  background-color: #1A5276;
+}
+.navbar-brand {
+	color : white;
 }
 
 /*
@@ -102,4 +106,10 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
+}
+
+.mini_icon{
+	width: 20px;
+	height: 20px;
+	position: static;
 }
