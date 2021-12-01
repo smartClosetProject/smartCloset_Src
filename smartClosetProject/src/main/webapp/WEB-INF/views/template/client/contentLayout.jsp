@@ -54,6 +54,7 @@
 			.page {
 				margin-top:50px;
 				margin-left: 220px;
+				margin-bottom: 50px;
 		    }
 		    
 		    /* footer */
@@ -63,10 +64,6 @@
 				padding: 15px;
 				position: relative;
 		    }
-		    
-			footer p {
-				margin-left: 220px;
-			}
   		</style>
 		<script type="text/javascript">
 			
@@ -85,7 +82,8 @@
 					<tiles:insertAttribute name="body" />
 				</div>
 			</div>
-			
+		</div>
+		<div>
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</body>
