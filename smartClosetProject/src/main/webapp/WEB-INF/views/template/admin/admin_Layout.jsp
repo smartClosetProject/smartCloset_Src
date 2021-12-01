@@ -43,29 +43,37 @@
 	
 		padding: 15px 0;
 	
-		text-align: center;
+		text-align: left;
 	
 		color: white;
-	
-		background:  #EEEEEE;
+
+		}
+		
+		.container{
+			margin-left: 200px !important;
 		}
    </style>
   </head>
 
   <body>
-
-    <!-- Fixed navbar -->
-    <nav>
-    	<tiles:insertAttribute name="navbar" />
-    </nav>
-
-    <!-- Begin page content -->
-    <div class="container">
-      <div class="page-header">
-        <h2><tiles:getAsString name="title" /></h2>
-      </div>
-      <tiles:insertAttribute name="body" />
-    </div>
+  
+  		<div class="container">
+			<nav class="navbar navbar-fixed-top">
+				<tiles:insertAttribute name="header" ignore="true"/>
+			</nav>
+			<div>
+				<tiles:insertAttribute name="navbar" ignore="true"/>
+			</div>
+			
+			<div class="container-fluid">
+				 <div class="page-header">
+				        <h2><tiles:getAsString name="title" /></h2>
+				      </div>
+				<div class="col-sm-9 page">
+					<tiles:insertAttribute name="body" ignore="true"/>
+				</div>
+			</div>
+		</div>
 	
     <footer class="footer">
       <tiles:insertAttribute name="footer" />
