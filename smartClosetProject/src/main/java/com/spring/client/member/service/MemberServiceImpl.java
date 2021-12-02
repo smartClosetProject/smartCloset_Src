@@ -25,13 +25,21 @@ public class MemberServiceImpl implements MemberService{
 		return member;
 	}
 
-
+	//회원정보 수정 페이지 구현
 	@Override
-	public MemberVO MemberUpdate(MemberVO mvo) {
-		MemberVO update = memberDao.MemberUpdate(mvo);
+	public MemberVO updateForm(MemberVO mvo) {
+		MemberVO update = memberDao.updateForm(mvo);
 		return update;
 	}
-	//회원정보 수정 페이지 구현
+
+	//회원 정보 수정 처리
+	@Override
+	public int memberUpdate(MemberVO mvo) {
+		int result = 0;
+		result = memberDao.memberUpdate(mvo);
+		return result;
+	}
+
 	
 
 }

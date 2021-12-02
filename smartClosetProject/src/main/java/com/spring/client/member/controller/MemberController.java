@@ -3,8 +3,10 @@ package com.spring.client.member.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.client.member.service.MemberService;
 import com.spring.client.member.vo.MemberVO;
@@ -43,7 +45,36 @@ public class MemberController {
 	@RequestMapping("updateForm")
 	public String updateForm(@ModelAttribute("data") MemberVO mvo, Model model) {
 		log.info("updateForm 호출 성공");
-		return null;
+		
+		mvo.setM_id("smartmember");
+		MemberVO updateData = memberService.updateForm(mvo);
+		model.addAttribute("updateData", updateData);
+		
+	
+		
+		return "member/updateForm";
+	}
+	
+	/******************************************
+	 * 회원 정보 수정 처리
+	 * **************************************/
+	@PostMapping
+	public String memberUpdate(@ModelAttribute MemberVO mvo, RedirectAttributes ras) {
+		log.info("memberUpdate 호출 성공");
+		
+		int result = 0;
+		String url = "";
+		
+		result = memberService.memberUpdate(mvo);
+		ras.addFlashAttribute("data", mvo);
+		
+		System.out.println(result);
+		if(result == 1) {
+			url="/member/mypage";
+		} else if(result == 0) {
+			url = "/member/updateForm";
+		}
+		return "redirect:" + url;
 	}
 
 

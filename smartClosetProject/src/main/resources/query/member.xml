@@ -4,7 +4,20 @@
 	<select id="memberMypage" parameterType="member" resultType="member">
 		SELECT m_id, m_passwd, m_name, m_email, m_phone, m_addr, m_regdate,m_mile,m_acc
 		FROM member
-		WHERE m_id = #{m_id}
 	</select>
-
+	
+	<!-- 회원정보 수정 뷰 -->
+	<select id="updateForm" parameterType="member" resultType="member">
+		SELECT m_num,m_id, m_passwd, m_name, m_email, m_phone, m_addr, m_regdate,m_mile,m_acc
+		FROM member
+		WHERE m_id = #{m_id}	
+	</select>
+	
+	<!-- 회원정보 수정 처리 -->
+	<update id="memberUpdate" parameterType="member">
+		UPDATE member
+		SET m_addr = #{m_addr}, m_phone = #{m_phone}, m_passwd = #{m_passwd}, m_email = #{m_email}
+		WHERE m_id = #{m_id}
+	</update>
+	
 </mapper>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 
-		<title>마이페이지</title>
+		<title>Insert title here</title>
 		
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
@@ -19,12 +18,8 @@
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
-		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
-		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
-		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
 				//회원 정보 수정 버튼 클릭시
@@ -33,11 +28,13 @@
 				});
 			});
 		</script>
+		
 	</head>
 	<body>
-	<div>
-		<h2>MY PAGE</h2>
-	</div>
+	<form>
+		<div>
+			<h2>MY PAGE</h2>
+		</div>
 		<div>
 			<label>${name}회원님</label>
 			<hr>
@@ -78,6 +75,8 @@
 				<input type="button" id="cartBtn" name="cartBtn" value="장바구니">
 				<input type="button" id="boardSerchBtn" name="boardSerchBtn" value="게시물조회">
 				<input type="button" id="smartClosetBtn" name="smartClosetBtn" value="스마트옷장">							
-			</div>	
+			</div>
+			</form>	
+	
 	</body>
 </html>
