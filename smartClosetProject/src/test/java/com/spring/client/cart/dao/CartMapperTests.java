@@ -64,7 +64,7 @@ public class CartMapperTests {
 //	@Test
 //	public void testModifyCount() {
 //		CartVO cvo = new CartVO();
-//		cvo.setCart_goodsCount(7);
+//		cvo.setCart_goodsCount(10);
 //		cvo.setM_id("javauser");
 //		cvo.setPro_num("TS_0112_M_W");
 //		
