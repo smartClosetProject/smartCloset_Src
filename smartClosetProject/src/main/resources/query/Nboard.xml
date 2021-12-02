@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="package com.spring.admin.nboard.dao.NboardDAO">
+<mapper namespace="com.spring.admin.nboard.dao.NboardDAO">
 
 	<!-- 게시판 리스트 기본 조회 -->
 	
@@ -9,4 +9,27 @@
 		FROM notice
 		ORDER BY n_num desc
 	</select> 
+	
+	<select id="nboardDetail" parameterType="nboard" resultType="nboard">
+		SELECT n_num, n_content, n_author, n_title, TO_CHAR(n_writedate, 'YYYY-MM-DD HH24:MI:SS') AS n_writedate, n_important
+		FROM notice
+		WHERE n_num = #{n_num}
+	</select>
+	
+	<!-- Session 작업 필요 -->
+	<insert id="nboardInsert" parameterType="nboard">
+		INSERT INTO notice(n_num, ad_num, n_title, n_content, n_author, n_important)
+		VALUES (notice_seq.nextval, 1, #{n_title}, #{n_content}, '${n_author}', #{n_important})
+	</insert>
+	
+	<update id="nboardUpdate" parameterType="nboard">
+		UPDATE notice
+		SET n_title = #{n_title}, n_content = #{n_content}, n_important = #{n_important}
+		WHERE n_num = #{n_num}
+	</update>	
+	<delete id="nboardDelete" parameterType="nboard">
+		DELETE FROM notice
+		WHERE n_num = #{n_num}
+	</delete>
+	
 </mapper>

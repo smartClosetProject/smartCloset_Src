@@ -49,7 +49,7 @@
 
 		}
 		
-		.container{
+		.container1{
 			margin-left: 200px !important;
 		}
    </style>
@@ -57,7 +57,7 @@
 
   <body>
   
-  		<div class="container">
+  		<div class="container container1">
 			<nav class="navbar navbar-fixed-top">
 				<tiles:insertAttribute name="header" ignore="true"/>
 			</nav>
@@ -85,8 +85,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="/resources/include/dist/js/bootstrap.min.js"></script>
-    <script src="/resources/include/assets/js/docs.min.js"></script>
+    <script src="/resources/include/dist/assets/js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="/resources/include/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/resources/include/dist/assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
