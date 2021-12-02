@@ -73,8 +73,6 @@ public class CartController {
 		log.info("modifyCount 호출 성공");
 		
 		int result = cartService.modifyCount(cvo);
-		System.out.println(result);
-		System.out.println(cvo.getCart_goodsCount());
 		if (result == 1) {
 			return "success";
 		} else {

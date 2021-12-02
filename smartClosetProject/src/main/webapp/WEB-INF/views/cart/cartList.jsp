@@ -48,15 +48,15 @@
 				$(".shipCharge").html(shipCharge.toLocaleString() + "원");
 				$(".totalPayment").html((totalPrice + shipCharge).toLocaleString() + "원");
 				
-				// 수량 변경 처리(실패함) - 값이 변경되어있는 값이 아니라 기존 값으로 들어옴
+				// 수량 변경 처리
 				$(".modifyCountBtn").click(function() {
 					let m_id = "${cartList[0].m_id }";
 					let pro_num = $(this).attr("data-proNum");
-					let proCount = parseInt($(this).); // attr이 아니라 이게 input의 바뀐 value를 가져 와야 함
+					let proCount = parseInt($(this).parents("tr[class='cartInfo']").find("input[type='number']").val()); // attr이 아니라 이게 input의 바뀐 value를 가져 와야 함
 					console.log(proCount);
 					
 					//console.log($("input[type='number']").val());
-					/*if ($("input[type='number']").val() <= 0) {
+					/*if ($("input[type='number']").val() <= 0) { // 인트가 아님을 인지하자
 						alert("0 이하의 수량으로는 변경할 수 없습니다.");
 						return;
 					}*/
