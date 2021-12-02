@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.client.cart.service.CartService;
@@ -43,25 +45,21 @@ public class CartController {
 		}
 	}
 	
-	@GetMapping("deleteEachCart")
-	public String deleteEachCart(@ModelAttribute CartVO cvo) {
-		log.info("deleteEachCart 호출 성공");
-		
-		cartService.deleteEachCart(cvo);
-		return "redirect:/cart/cartList";
-	}
-	
-	@GetMapping("deleteSelectCart")
-	public String deleteSelectCart(@ModelAttribute List<CartVO> list) {
+	@ResponseBody
+	@PostMapping("deleteSelectCart")
+	public String deleteSelectCart(@RequestParam(value = "chkBox[]") List<Integer> chkArr, CartVO cvo) {
 		log.info("deleteSelectCart 호출 성공");
 		
-		for (CartVO cvo : list) {
-			cartService.deleteEachCart(cvo);
+		int cart_Num = 0;
+		for (Integer i : chkArr) {
+			cart_Num = i;
+			cvo.setCart_num(cart_Num);
+			cartService.deleteSelectCart(cvo);
 		}
-		return "redirect:/cart/cartList";
+		return "success";
 	}
 	
-	@GetMapping("deleteAllCart")
+	@PostMapping("deleteAllCart")
 	public String deleteAllCart(@ModelAttribute CartVO cvo) {
 		log.info("deleteAllCart 호출 성공");
 		
@@ -69,12 +67,19 @@ public class CartController {
 		return "redirect:/cart/cartList";
 	}
 	
-	@GetMapping("modifyCount")
+	@ResponseBody
+	@PostMapping("modifyCount")
 	public String modifyCount(@ModelAttribute CartVO cvo) {
 		log.info("modifyCount 호출 성공");
 		
-		cartService.modifyCount(cvo);
-		return "redirect:/cart/cartList";
+		int result = cartService.modifyCount(cvo);
+		System.out.println(result);
+		System.out.println(cvo.getCart_goodsCount());
+		if (result == 1) {
+			return "success";
+		} else {
+			return "failure";
+		}
 	}
 	
 	@GetMapping("cartList")

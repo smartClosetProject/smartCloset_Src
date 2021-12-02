@@ -29,8 +29,8 @@ public class CartServiceImpl implements CartService {
 	}
 	
 	@Override
-	public int deleteEachCart(CartVO cvo) {
-		int result = cartDao.deleteEachCart(cvo);
+	public int deleteSelectCart(CartVO cvo) {
+		int result = cartDao.deleteSelectCart(cvo);
 		return result;
 	}
 
