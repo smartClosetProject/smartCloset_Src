@@ -1,5 +1,7 @@
 package com.spring.client.cart.dao;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ public class CartMapperTests {
 //	@Test
 //	public void testIsExist() {
 //		CartVO cvo = new CartVO();
-//		cvo.setM_num(210000);
+//		cvo.setM_id("smartmember");
 //		cvo.setPro_num("TS_0112_S_SB");
 //		
 //		int result = cartDao.isExist(cvo);
@@ -32,9 +34,10 @@ public class CartMapperTests {
 //	@Test
 //	public void testInsertCart() {
 //		CartVO cvo = new CartVO();
-//		cvo.setCart_goodsCount(2);
-//		cvo.setM_num(210000);
-//		cvo.setPro_num("TS_0112_S_W");
+//		cvo.setCart_goodsCount(5);
+//		cvo.setM_num(220000);
+//		cvo.setM_id("javauser");
+//		cvo.setPro_num("TS_0112_M_W");
 //		
 //		int result = cartDao.insertCart(cvo);
 //		log.info("result : " + result);
@@ -43,7 +46,7 @@ public class CartMapperTests {
 //	@Test
 //	public void testDeleteEachCart() {
 //		CartVO cvo = new CartVO();
-//		cvo.setCart_num(6);
+//		cvo.setCart_num(14);
 //		
 //		int result = cartDao.deleteEachCart(cvo);
 //		log.info("result : " + result);
@@ -52,20 +55,32 @@ public class CartMapperTests {
 //	@Test
 //	public void testDeleteAllCart() {
 //		CartVO cvo = new CartVO();
-//		cvo.setM_num(210000);
+//		cvo.setM_id("javauser");
 //		
 //		int result = cartDao.deleteAllCart(cvo);
 //		log.info("result : " + result);
 //	}
 	
+//	@Test
+//	public void testModifyCount() {
+//		CartVO cvo = new CartVO();
+//		cvo.setCart_goodsCount(7);
+//		cvo.setM_id("javauser");
+//		cvo.setPro_num("TS_0112_M_W");
+//		
+//		int result = cartDao.modifyCount(cvo);
+//		log.info("result : " + result);
+//	}
+	
 	@Test
-	public void testModifyCount() {
+	public void testCartList() {
 		CartVO cvo = new CartVO();
-		cvo.setCart_goodsCount(5);
-		cvo.setM_num(210000);
-		cvo.setPro_num("TS_0112_S_W");
+		cvo.setM_id("smartmember");
 		
-		int result = cartDao.modifyCount(cvo);
-		log.info("result : " + result);
+		List<CartVO> list = cartDao.cartList(cvo);
+		
+		for (CartVO vo : list) {
+			log.info(vo);
+		}
 	}
 }

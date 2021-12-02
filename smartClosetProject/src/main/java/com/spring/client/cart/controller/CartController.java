@@ -1,8 +1,6 @@
 package com.spring.client.cart.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -80,20 +77,22 @@ public class CartController {
 		return "redirect:/cart/cartList";
 	}
 	
-//	@GetMapping("cartList")
-//	public String cartList(@ModelAttribute CartVO cvo, Model model) {
-//		log.info("cartList 호출 성공");
-//		int m_num = (int) session.getAttribute("m_num");
-//		m_num = 210000;
-//		cvo.setM_num(m_num);
-//		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		List<CartVO> list = cartService.cartList(cvo);
-//		
-//		if (m_num != 0) {
-//			return "cart/cartList";
-//		} else {
-//			return "redirect:/member/login"; 
-//		}
-//	}
+	@GetMapping("cartList")
+	public String cartList(@ModelAttribute CartVO cvo, Model model) {
+		log.info("cartList 호출 성공");
+		
+		String m_id = "";
+		m_id = (String) session.getAttribute("m_id");
+		m_id = "smartmember"; // 임시 생성
+		cvo.setM_id(m_id);
+		
+		List<CartVO> cartList = cartService.cartList(cvo);
+		model.addAttribute("cartList", cartList);
+		
+		if (!m_id.equals("")) {
+			return "cart/cartList";
+		} else {
+			return "redirect:/member/login"; 
+		}
+	}
 }

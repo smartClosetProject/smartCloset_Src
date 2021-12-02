@@ -13,6 +13,7 @@ public class CartVO {
 	private int cart_goodsCount = 0;// 상품 개수
 	private int m_num = 0;			// 회원 번호
 	private String pro_num = "";	// 상품 번호
+	private String m_id = "";		// 회원 아이디
 	
 	private String pro_size = ""; 	// 상품 사이즈
 	private String pro_color = ""; 	// 상품 색상
