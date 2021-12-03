@@ -106,6 +106,11 @@
 					let confirm_del = confirm("선택한 상품을 삭제하시겠습니까?");
 					
 					if (confirm_del) {
+						if ($("input[type='checkbox']:checked").length <= 0) {
+							alert("하나 이상의 상품을 선택해 주세요.");
+							return;
+						}
+						
 						let chkArr = new Array();
 						
 						$("input[class='chkBox']:checked").each(function() {
@@ -174,13 +179,23 @@
 				
 				// 전체 상품 주문 
 				$("#orderAll").click(function() {
-					$(".chkBox").prop("checked", true);
-					orderSelect();
+					let confirm_order = confirm("전체 상품을 주문하시겠습니까?");
+					if (confirm_order) {
+						$(".chkBox").prop("checked", true);
+						orderSelect();
+					}
 				});
 				
 				// 선택 상품 주문
 				$("#orderSelect").click(function() {
-					orderSelect();
+					let confirm_order = confirm("전체 상품을 주문하시겠습니까?");
+					if (confirm_order) {
+						if ($("input[type='checkbox']:checked").length <= 0) {
+							alert("하나 이상의 상품을 선택해 주세요.");
+							return;
+						}
+						orderSelect();
+					}
 				});
 			});
 			
@@ -205,15 +220,13 @@
 				
 				selectTotalPayment = selectTotalPrice + selectShipCharge;
 				$("#totalPayment").val(selectTotalPayment);
-				let confirm_order = confirm("선택한 상품을 주문하시겠습니까?");
 				
-				if (confirm_order) {
-					$("#cartFrm").attr({
-						"method" : "post",
-						"action" : "/order/orderForm"
-					});
-					$("#cartFrm").submit();
-				}
+				$("#cartFrm").attr({
+					"method" : "post",
+					"action" : "/order/orderForm"
+				});
+				$("#cartFrm").submit();
+
 			}
 		</script>
 	</head>
