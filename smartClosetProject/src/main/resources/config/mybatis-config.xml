@@ -10,6 +10,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.spring.admin.nboard.vo.NboardVO" alias="nboard"/>
+		<typeAlias type="com.spring.admin.admin.vo.AdminVO" alias="admin"/>
 	</typeAliases>
 
 </configuration>

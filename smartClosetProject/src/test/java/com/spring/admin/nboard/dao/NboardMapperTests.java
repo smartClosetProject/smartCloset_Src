@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.spring.admin.admin.dao.AdminDAO;
+import com.spring.admin.admin.vo.AdminVO;
 import com.spring.admin.nboard.vo.NboardVO;
 
 import lombok.Setter;
@@ -20,6 +22,9 @@ public class NboardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private NboardDAO nboardDAO;
 	
+	@Setter(onMethod_ = @Autowired)
+	private AdminDAO adminDAO;
+	
 //	@Test
 //	public void testBoardList() {
 //		List<BoardVO> list = boardDAO.boardList();
@@ -28,22 +33,22 @@ public class NboardMapperTests {
 //		}
 //	}
 //	
-	@Test
-	public void testBoardList() { // 검색 추가
-		NboardVO bvo = new NboardVO();
-		
-		bvo.setPageNum(2);
-		bvo.setAmount(10);
-		
-		// 검색 조건 부여
-		// bvo.setSearch("b_title");
-		// bvo.setKeyword("스프링");
-		
-		List<NboardVO> list = nboardDAO.nboardList(bvo);
-		for (NboardVO vo : list) {
-			log.info(vo);
-		}
-	}
+//	@Test
+//	public void testBoardList() { // 검색 추가
+//		NboardVO bvo = new NboardVO();
+//		
+//		bvo.setPageNum(2);
+//		bvo.setAmount(10);
+//		
+//		// 검색 조건 부여
+//		// bvo.setSearch("b_title");
+//		// bvo.setKeyword("스프링");
+//		
+//		List<NboardVO> list = nboardDAO.nboardList(bvo);
+//		for (NboardVO vo : list) {
+//			log.info(vo);
+//		}
+//	}
 	
 //	@Test
 //	public void testBoardInsert() {
@@ -114,4 +119,13 @@ public class NboardMapperTests {
 //		
 //		boardDAO.boardDelete(bvo);
 //	}
+	@Test
+	public void testAdminlogin() { // 검색 추가
+		AdminVO avo = new AdminVO();
+		avo.setAd_id("admin1");
+		avo.setAd_passwd("admin1234");
+		
+		adminDAO.adminLogin(avo);
+	}
+	
 }

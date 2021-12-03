@@ -5,15 +5,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
         <div class="sidebar">
-        <a href="adminInfo"><img alt="설정" src="/resources/image/setting_icon.png" class="mini_icon" /></a>
+        <a href="/admin/adminInfo"><img alt="설정" src="/resources/image/setting_icon.png" class="mini_icon" /></a>
         <div>
 	        <h3> 관리자 이름 </h3>
 	        <h4> 관리자 id </h4> <br/>
         </div>
           <ul class="nav nav-sidebar">
-            <li><a href="nboardTest">메인 페이지</a></li>
+            <li><a href="/nboard/nboardTest">메인 페이지</a></li>
             <li class="active">
-            <a href="nboardList">공지 관리</a>
+            <a href="/nboard/nboardList">공지 관리</a>
             </li>
             <li><a href="#">주문 관리</a></li>
             <li><a href="#">상품 관리</a></li>

@@ -96,47 +96,6 @@
 						<textarea class="form-control" name="n_content" id="n_content" 
 								rows="12" style="resize : none">${updateData.n_content }</textarea>
 					</div>
-					
-					
-					
-					
-					
-					<!-- <table class="table table-bordered">
-						<tr>
-							<td>글 번호</td>
-							<td>${updateData.n_num}</td>
-							<td>작성일</td>
-							<td>${updateData.n_writedate}</td>
-						</tr>
-						<tr>
-							<td>작성자</td>
-							<td>${updateData.n_author}</td>
-							<td>중요여부</td>
-							<td>
-							<c:choose>
-								<c:when test="${updateData.n_important eq 1}">
-									<input type="checkbox" id="n_important" name="n_important" checked="checked" value="${updateData.n_important}"/>
-								</c:when>
-								<c:otherwise>
-									<input type="checkbox" id="n_important" name="n_important" value="${updateData.n_important}"/>
-								</c:otherwise>
-							</c:choose>
-							</td>
-						</tr>
-						<tr>
-							<td>글 제목</td>
-							<td colspan="3">
-								<input class="form-control" type="text" name="n_title" id="n_title" value="${updateData.n_title }">
-							</td>
-						</tr>
-						<tr class="table-height">
-							<td>글 내용</td>
-							<td colspan="3">
-								<textarea class="form-control" name="n_content" id="n_content" 
-								rows="12" style="resize : none">${updateData.n_content }</textarea>
-							</td>
-						</tr>
-					</table>  -->
 				</form>
 			</div>
 			<form>

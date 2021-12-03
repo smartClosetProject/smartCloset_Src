@@ -53,9 +53,10 @@
 					<td>주소</tr>
 					<td colspan="3">${adminInfo.ad_addr}</td>
 				</tr>
-			
 			</table>
 		
+			<input type="button" class="btn btn-default text-right btn-sm" id="pwdChangeBtn" name="pwdChangeBtn" value="비밀번호 변경"/>
+			<input type="button" class="btn btn-default text-right btn-sm" id="pwdChangeBtn" name="pwdChangeBtn" value="취소"/>
 		</div>
 	
 	</body>

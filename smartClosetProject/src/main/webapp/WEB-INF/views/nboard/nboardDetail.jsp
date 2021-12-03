@@ -76,10 +76,10 @@
 			</form>
 			<%-- =================== 버튼 출력 시작 =================== --%>
 			<div class="text-right contentBtn" style="margin-bottom : 20px">
-				<button type="button" class="btn btn-default text-right btn-sm" id="insertFormBtn">작성</button>
-				<button type="button" class="btn btn-default text-right btn-sm" id="updateFormBtn">수정</button>
-				<button type="button" class="btn btn-default text-right btn-sm" id="boardDeleteBtn">삭제</button>
-				<button type="button" class="btn btn-default text-right btn-sm" id="boardListBtn">목록</button>
+				<input type="button" class="btn btn-default btn-sm" id="insertFormBtn" value="작성"/>
+				<input type="button" class="btn btn-default btn-sm" id="updateFormBtn" value="수정"/>
+				<input type="button" class="btn btn-default btn-sm" id="boardDeleteBtn" value="삭제"/>
+				<input type="button" class="btn btn-default btn-sm" id="boardListBtn" value="목록"/>
 			</div>
 			<%-- =================== 버튼 출력 종료 =================== --%>
 		
