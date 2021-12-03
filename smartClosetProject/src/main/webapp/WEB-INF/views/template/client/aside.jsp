@@ -5,7 +5,7 @@
 		<li><a href="#section2">로그인</a></li>
 		<li><a href="#section2">회원가입</a></li>
 		<li><a href="/member/mypage">마이페이지</a></li>
-		<li><a href="#section2">리뷰게시판</a></li>
+		<li><a href="/review/reviewList">리뷰게시판</a></li>
 		<li><a href="#section2">QnA게시판</a></li>
 		<li><a href="#section2">공지게시판</a></li>
 	</ul>

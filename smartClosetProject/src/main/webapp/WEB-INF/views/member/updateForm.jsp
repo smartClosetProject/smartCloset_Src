@@ -26,7 +26,7 @@
 				$("#memberUpdateBtn").click(function(){
 					if(!chkData("#m_passwd","비밀번호를")) {
 						return;
-					} else if (!chkData("#m_passwd_confirm","비빌번호 확인을")) {
+					} else if (!chkData("#m_passwd2","비빌번호 확인을")) {
 						return;
 					} else if (!chkData("#m_phone2","핸드폰 번호를")) {
 						return;
@@ -44,6 +44,26 @@
 						$("#f_updateForm").submit();
 					}
 				});
+				$('.pw').focusout(function(){
+					var pwd1 = $("#m_passwd").val();
+					var pwd2 = $("#m_passwd2").val();
+					
+					if(pwd1!=""&&pwd2==""){
+						null;
+					} else if(pwd1 != "" || pwd2!=""){
+						if(pwd1 == pwd2){
+							$("#alert-success").css('display', 'inline-block');
+							$("#alert-danger").css('display', 'none');
+						} else {
+							alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인 해주세요.");
+						    $("#alert-success").css('display', 'none');
+			                $("#alert-danger").css('display', 'inline-block');
+			               	$(".pw").val("");
+			     
+						}
+					}
+				});
+					
 				
 				$("#memberExitBtn").click(function(){
 					
@@ -76,13 +96,17 @@
 					<th>비밀번호
 						<img src="/resources/image/star.jpg" alt="필수">
 					</th>
-					<td><input type="password" id="m_passwd" name="m_passwd" maxlength="8">(영문자 8자)</td>
+					<td><input type="password" id="m_passwd" class="pw" name="m_passwd" maxlength="8">(8자까지 가능합니다.)</td>
 				</tr>
 				<tr>
 					<th>비밀번호확인
 						<img src="/resources/image/star.jpg" alt="필수">
 					</th>
-					<td><input type="password" id="m_passwd_confirm" name="m_passwd_confirm"></td>
+					<td><input type="password" id="m_passwd2" class="pw" name="m_passwd2">
+						<span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
+    					<span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
+					</td>
+					
 				<tr>
 					<th>이름
 						<img src="/resources/image/star.jpg" alt="필수">
@@ -127,8 +151,8 @@
 		</form>
 		<form>
 			<div class="ec-base-button justify">
-				<button type="button" id="memberExitBtn"  class="btn btn-success opacity" >회원탈퇴</button>
-				<button type="button" id="memberUpdateBtn" class="btn btn-success">회원정보수정</button>
+				<button type="button" id="memberExitBtn"  class="btn btn-default btn-lg active" >회원탈퇴</button>
+				<button type="button" id="memberUpdateBtn" class="btn btn-default btn-lg active">회원정보수정</button>
 			</div>
 		</form>
 	</body>
