@@ -36,7 +36,7 @@
 				let shipCharge = 0; // 배송비
 				let totalPayment = 0; // 예상 결제가
 				
-				// 주문 금액 처리
+				// 총 상품금액 처리
 				$(".cartInfo").each(function() {
 					let price = parseInt($(this).find("input[type='checkbox']").attr("data-prPrice"));
 					let count = parseInt($(this).find("input[type='checkbox']").attr("data-goodsCount"));
@@ -48,7 +48,7 @@
 					shipCharge = 2500;
 				}
 				
-				// 예상 결제가 처리
+				// 예상 결제금액 처리
 				totalPayment = totalPrice + shipCharge
 				
 				// 금액 뷰단 입력
@@ -173,22 +173,48 @@
 				});
 				
 				// 전체 상품 주문 
-				
+				$("#orderAll").click(function() {
+					$(".chkBox").prop("checked", true);
+					orderSelect();
+				});
 				
 				// 선택 상품 주문
 				$("#orderSelect").click(function() {
-					$("#totalPayment").val(totalPayment);
-					let confirm_order = confirm("선택한 상품을 주문하시겠습니까?");
-					
-					if (confirm_order) {
-						$("#cartFrm").attr({
-							"method" : "post",
-							"action" : "/order/orderForm"
-						});
-						$("#cartFrm").submit();
-					}
+					orderSelect();
 				});
 			});
+			
+			function orderSelect() {
+				let selectPrice = 0;
+				let selectCount = 0;
+				let selectTotalPrice = 0;
+				let selectShipCharge = 0;
+				let selectTotalPayment = 0;
+				
+				$("input[type='checkbox']:checked").each(function() {
+					selectPrice = parseInt($(this).attr("data-prPrice"));
+					selectCount = parseInt($(this).attr("data-goodsCount"));
+					if (!isNaN(selectPrice) && !isNaN(selectCount)) {
+						selectTotalPrice += selectPrice * selectCount;
+					}
+				});
+				
+				if (selectTotalPrice > 0 && selectTotalPrice < 50000 ) {
+					selectShipCharge = 2500;
+				}
+				
+				selectTotalPayment = selectTotalPrice + selectShipCharge;
+				$("#totalPayment").val(selectTotalPayment);
+				let confirm_order = confirm("선택한 상품을 주문하시겠습니까?");
+				
+				if (confirm_order) {
+					$("#cartFrm").attr({
+						"method" : "post",
+						"action" : "/order/orderForm"
+					});
+					$("#cartFrm").submit();
+				}
+			}
 		</script>
 	</head>
 	<body>

@@ -40,6 +40,7 @@ public class OrderController {
 		ovo.setM_id(m_id);
 		
 		OrderVO vo = orderService.orderForm(ovo);
+		vo.setOrder_totalPayment(totalPayment);
 		model.addAttribute("order", vo);
 		
 		return "order/orderForm";
