@@ -48,6 +48,9 @@
 		color: white;
 
 		}
+		.nav>li>a{
+			padding-left: 20px !important;
+		}
 		
 		.container1{
 			margin-left: 200px !important;

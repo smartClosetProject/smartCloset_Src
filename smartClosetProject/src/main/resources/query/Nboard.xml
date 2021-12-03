@@ -5,10 +5,41 @@
 	<!-- 게시판 리스트 기본 조회 -->
 	
 	<select id="nboardList" parameterType="nboard" resultType="nboard">
+		<![CDATA[
 		SELECT n_num, n_author, n_title, TO_CHAR(n_writedate, 'YYYY-MM-DD') AS n_writedate
-		FROM notice
-		ORDER BY n_num desc
+		FROM (SELECT /*+ INDEX_DESC(notice notice_pk) */ 
+				ROWNUM rnum, n_num, n_author, n_title, n_writedate
+			  FROM notice
+			  WHERE ]]>
+			  <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+			  		<include refid="nboardSearch"></include>
+			  </trim>
+		<![CDATA[ ROWNUM <= #{pageNum} * #{amount} 
+			) nboardlist
+			WHERE rnum > (#{pageNum} - 1) * #{amount}
+		]]>
+		
 	</select> 
+	
+	<sql id="nboardSearch">
+		<if test="search == 'n_title'">
+			<![CDATA[ n_title LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test="search == 'n_content'">
+			<![CDATA[ n_content LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test="search == 'n_author'">
+			<![CDATA[ n_author LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+	</sql>
+	
+	<!-- 전체 레코드 수 조회 -->
+	<select id="nboardListCnt" parameterType="nboard" resultType="int">
+		SELECT count(*) FROM notice
+		<trim prefix=" WHERE (" suffix=")">
+			<include refid="nboardSearch"></include>
+		</trim>
+	</select>
 	
 	<select id="nboardDetail" parameterType="nboard" resultType="nboard">
 		SELECT n_num, n_content, n_author, n_title, TO_CHAR(n_writedate, 'YYYY-MM-DD HH24:MI:SS') AS n_writedate, n_important

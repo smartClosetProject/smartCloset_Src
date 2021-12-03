@@ -57,4 +57,9 @@ public class NboardServiceImpl implements NboardService{
 		return result;
 	}
 
+	@Override
+	public int nboardListCnt(NboardVO nvo) {
+		return nboardDao.nboardListCnt(nvo);
+	}
+
 }

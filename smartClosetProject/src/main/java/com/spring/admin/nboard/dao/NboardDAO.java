@@ -10,5 +10,5 @@ public interface NboardDAO {
 	public int nboardInsert(NboardVO nvo);
 	public int nboardUpdate(NboardVO nvo);
 	public int nboardDelete(NboardVO nvo);
-
+	public int nboardListCnt(NboardVO nvo);
 }

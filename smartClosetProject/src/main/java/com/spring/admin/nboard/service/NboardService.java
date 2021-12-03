@@ -11,5 +11,6 @@ public interface NboardService {
 	public NboardVO updateForm(NboardVO nvo);
 	public int nboardUpdate(NboardVO nvo);
 	public int nboardDelete(NboardVO nvo);
+	public int nboardListCnt(NboardVO nvo);
 
 }

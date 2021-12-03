@@ -35,6 +35,12 @@
 					if(!chkData("#n_title","제목을")) return;
 					else if(!chkData("#n_content","내용을")) return;
 					else {
+						if($("#n_important").is(":checked")){
+							$("#n_important").val(1);
+						} else {
+							$("#n_important").val(0);
+						}
+						
 						console.log($("#n_important").val());
 						$("#f_updateForm").attr({
 							"method" : "post",
@@ -62,8 +68,40 @@
 			<div class="container">
 				<form id="f_updateForm" class="f_updateForm">
 					<input type="hidden" id="n_num" name="n_num" value="${updateData.n_num}"/>
+					<h3 class="text-left">공지 수정</h3><br>
+					<div class="form-group" style="font-weight : bold">
+						<p>글 번호 | ${updateData.n_num}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						작성일  | ${updateData.n_writedate}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						작성자  | ${updateData.n_author}</p>
+					</div>
+					<div class="form-group">
+						<label for="n_title">글 제목</label> 
+						<input class="form-control" type="text" name="n_title" id="n_title" value="${updateData.n_title }">
+					</div>
+					<div class="form-group">
+						<label for="n_important">중요 여부</label> 
+						<c:choose>
+							<c:when test="${updateData.n_important eq 1}">
+								<input type="checkbox" id="n_important" name="n_important" checked="checked" value="${updateData.n_important}"/>
+							</c:when>
+							<c:otherwise>
+								<input type="checkbox" id="n_important" name="n_important" value="${updateData.n_important}"/>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<div class="form-group">
+						<label for="n_content">글 내용</label> 
+						<textarea class="form-control" name="n_content" id="n_content" 
+								rows="12" style="resize : none">${updateData.n_content }</textarea>
+					</div>
 					
-					<table class="table table-bordered">
+					
+					
+					
+					
+					<!-- <table class="table table-bordered">
 						<tr>
 							<td>글 번호</td>
 							<td>${updateData.n_num}</td>
@@ -77,10 +115,10 @@
 							<td>
 							<c:choose>
 								<c:when test="${updateData.n_important eq 1}">
-									<input type="checkbox" id="n_important" name="n_important" checked="checked" value="1"/>
+									<input type="checkbox" id="n_important" name="n_important" checked="checked" value="${updateData.n_important}"/>
 								</c:when>
 								<c:otherwise>
-									<input type="checkbox" id="n_important" name="n_important" value="0"/>
+									<input type="checkbox" id="n_important" name="n_important" value="${updateData.n_important}"/>
 								</c:otherwise>
 							</c:choose>
 							</td>
@@ -95,17 +133,17 @@
 							<td>글 내용</td>
 							<td colspan="3">
 								<textarea class="form-control" name="n_content" id="n_content" 
-								rows="8">${updateData.n_content }</textarea>
+								rows="12" style="resize : none">${updateData.n_content }</textarea>
 							</td>
 						</tr>
-					</table>
+					</table>  -->
 				</form>
 			</div>
 			<form>
 				<div class="text-right">
-					<button type="button" id="boardUpdateBtn" class="btn btn-primary btn-sm">수정</button>
-					<button type="button" id="boardCancelBtn" class="btn btn-primary btn-sm">취소</button>
-					<button type="button" id="boardListBtn" class="btn btn-primary btn-sm">목록</button>
+					<button type="button" id="boardUpdateBtn" class="btn btn-default btn-sm">수정</button>
+					<button type="button" id="boardCancelBtn" class="btn btn-default btn-sm">취소</button>
+					<button type="button" id="boardListBtn" class="btn btn-default btn-sm">목록</button>
 				</div>
 			</form>
 		</div>

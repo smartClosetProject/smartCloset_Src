@@ -11,8 +11,10 @@
 	        <h4> 관리자 id </h4> <br/>
         </div>
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">메인 페이지 <span class="sr-only">(current)</span></a></li>
-            <li><a href="nboardList">공지 관리</a></li>
+            <li><a href="nboardTest">메인 페이지</a></li>
+            <li class="active">
+            <a href="nboardList">공지 관리</a>
+            </li>
             <li><a href="#">주문 관리</a></li>
             <li><a href="#">상품 관리</a></li>
             <li><a href="#">회원 관리</a></li>

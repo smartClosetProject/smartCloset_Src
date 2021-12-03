@@ -53,7 +53,7 @@
 	<body>
 		<div class="container">
 			<form id="f_writeForm">
-				<h3 class="text-center">글쓰기 입력 화면</h3>
+				<h3 class="text-left">공지 작성</h3><br>
 				<div class="form-group">
 					<label for="n_author">작성자</label> 
 					<input type="text" class="form-control" name="n_author" id="n_author"
@@ -70,12 +70,12 @@
 				</div>
 				<div class="form-group">
 					<label for="n_content">글 내용</label> 
-					<textarea class="form-control" rows="7" name="n_content" id="n_content"></textarea>
+					<textarea class="form-control" rows="10" name="n_content" id="n_content" style="resize : none"></textarea>
 				</div>
 				<div class="text-right">
-					<button type="button" class="btn btn-success" id="boardInsertBtn">저장</button>
-					<button type="button" class="btn btn-success" id="boardCancelBtn">취소</button>
-					<button type="button" class="btn btn-success" id="boardListBtn">목록</button>
+					<button type="button" class="btn btn-default btn-sm" id="boardInsertBtn">저장</button>
+					<button type="button" class="btn btn-default btn-sm" id="boardCancelBtn">취소</button>
+					<button type="button" class="btn btn-default btn-sm" id="boardListBtn">목록</button>
 				</div>
 			</form>
 		</div>

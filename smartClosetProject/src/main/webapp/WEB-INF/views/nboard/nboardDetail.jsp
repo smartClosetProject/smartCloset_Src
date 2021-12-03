@@ -75,11 +75,11 @@
 				<input type="hidden" name="n_num" value="${detail.n_num}">
 			</form>
 			<%-- =================== 버튼 출력 시작 =================== --%>
-			<div class="col-md-3 text-right">
-				<button type="button" class="btn btn-success text-right btn-sm" id="insertFormBtn">작성</button>
-				<button type="button" class="btn btn-success text-right btn-sm" id="updateFormBtn">수정</button>
-				<button type="button" class="btn btn-success text-right btn-sm" id="boardDeleteBtn">삭제</button>
-				<button type="button" class="btn btn-success text-right btn-sm" id="boardListBtn">목록</button>
+			<div class="text-right contentBtn" style="margin-bottom : 20px">
+				<button type="button" class="btn btn-default text-right btn-sm" id="insertFormBtn">작성</button>
+				<button type="button" class="btn btn-default text-right btn-sm" id="updateFormBtn">수정</button>
+				<button type="button" class="btn btn-default text-right btn-sm" id="boardDeleteBtn">삭제</button>
+				<button type="button" class="btn btn-default text-right btn-sm" id="boardListBtn">목록</button>
 			</div>
 			<%-- =================== 버튼 출력 종료 =================== --%>
 		
@@ -104,7 +104,7 @@
 					<c:otherwise><td>X</td></c:otherwise>
 					</c:choose>
 				</tr>
-				<tr class="table-height">
+				<tr class="table-height" style="height : 400px">
 					<td>글 내용</td>
 					<td colspan="3">${detail.n_content}</td>
 				</tr>

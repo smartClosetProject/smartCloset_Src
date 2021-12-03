@@ -28,22 +28,22 @@ public class NboardMapperTests {
 //		}
 //	}
 //	
-//	@Test
-//	public void testBoardList() { // 검색 추가
-//		BoardVO bvo = new BoardVO();
-//		
-//		bvo.setPageNum(2);
-//		bvo.setAmount(10);
-//		
-//		// 검색 조건 부여
-//		// bvo.setSearch("b_title");
-//		// bvo.setKeyword("스프링");
-//		
-//		List<BoardVO> list = boardDAO.boardList(bvo);
-//		for (BoardVO vo : list) {
-//			log.info(vo);
-//		}
-//	}
+	@Test
+	public void testBoardList() { // 검색 추가
+		NboardVO bvo = new NboardVO();
+		
+		bvo.setPageNum(2);
+		bvo.setAmount(10);
+		
+		// 검색 조건 부여
+		// bvo.setSearch("b_title");
+		// bvo.setKeyword("스프링");
+		
+		List<NboardVO> list = nboardDAO.nboardList(bvo);
+		for (NboardVO vo : list) {
+			log.info(vo);
+		}
+	}
 	
 //	@Test
 //	public void testBoardInsert() {
@@ -84,20 +84,20 @@ public class NboardMapperTests {
 //		log.info("결과 : " + result2);
 //	}
 	
-	@Test
-	public void testBoardUpdate() {
-		NboardVO nvo = new NboardVO();
-		nvo.setAd_num(1);
-		nvo.setN_author("관리자");
-		nvo.setN_content("1111");
-		nvo.setN_title("11");
-		nvo.setN_num(1);
-		nvo.setN_important(0);
-		
-		int result = nboardDAO.nboardUpdate(nvo);
-//		int result = boardDAO.boardUpdate(bvo);
-		log.info("result : " + result);
-	}
+//	@Test
+//	public void testBoardUpdate() {
+//		NboardVO nvo = new NboardVO();
+//		nvo.setAd_num(1);
+//		nvo.setN_author("관리자");
+//		nvo.setN_content("1111");
+//		nvo.setN_title("11");
+//		nvo.setN_num(1);
+//		nvo.setN_important(0);
+//		
+//		int result = nboardDAO.nboardUpdate(nvo);
+////		int result = boardDAO.boardUpdate(bvo);
+//		log.info("result : " + result);
+//	}
 	
 //	@Test
 //	public void testBoardDelete() {
