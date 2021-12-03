@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
         <div class="sidebar">
-        <img alt="설정" src="/resources/image/setting_icon.png" class="mini_icon"/>
+        <a href="adminInfo"><img alt="설정" src="/resources/image/setting_icon.png" class="mini_icon" /></a>
         <div>
 	        <h3> 관리자 이름 </h3>
 	        <h4> 관리자 id </h4> <br/>
