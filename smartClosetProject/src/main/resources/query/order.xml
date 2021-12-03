@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.client.order.dao.OrderDAO">
+
+	<select id="orderForm" parameterType="order" resultType="order">
+		SELECT m_name, m_addr, m_phone, m_email, m_mile
+		FROM member
+		WHERE m_id = #{m_id}
+	</select>
+		
+	<insert id="orderAll" parameterType="order">
+		INSERT INTO sc_order(order_num, order_recipient, order_address,
+							  order_totalPayment, order_state, m_id)
+		VALUES(order_seq.NEXTVAL, #{order_recipient}, #{order_address},
+				#{order_totalPayment}, #{order_state}, #{m_id}) 
+	</insert>
+	
+	<insert id="orderAllDetail" parameterType="orderDetail">
+		INSERT INTO sc_order_detail(od_num, od_goodsCount, order_num, pro_num)
+			   SELECT order_detail_seq.NEXTVAL, cart_goodsCount, #{order_num}, pro_num
+			   FROM cart WHERE m_id = #{m_id}
+	</insert>
+</mapper>

@@ -31,17 +31,16 @@ public class CartMapperTests {
 //		log.info("result : " + result);
 //	}
 	
-	@Test
-	public void testInsertCart() {
-		CartVO cvo = new CartVO();
-		cvo.setCart_goodsCount(3);
-		cvo.setM_num(210000);
-		cvo.setM_id("smartmember");
-		cvo.setPro_num("TS_0112_S_SB");
-		
-		int result = cartDao.insertCart(cvo);
-		log.info("result : " + result);
-	}
+//	@Test
+//	public void testInsertCart() {
+//		CartVO cvo = new CartVO();
+//		cvo.setCart_goodsCount(2);
+//		cvo.setM_id("smartmember");
+//		cvo.setPro_num("TS_0112_M_W");
+//		
+//		int result = cartDao.insertCart(cvo);
+//		log.info("result : " + result);
+//	}
 	
 //	@Test
 //	public void testDeleteEachCart() {
@@ -72,15 +71,15 @@ public class CartMapperTests {
 //		log.info("result : " + result);
 //	}
 	
-//	@Test
-//	public void testCartList() {
-//		CartVO cvo = new CartVO();
-//		cvo.setM_id("smartmember");
-//		
-//		List<CartVO> list = cartDao.cartList(cvo);
-//		
-//		for (CartVO vo : list) {
-//			log.info(vo);
-//		}
-//	}
+	@Test
+	public void testCartList() {
+		CartVO cvo = new CartVO();
+		cvo.setM_id("smartmember");
+		
+		List<CartVO> list = cartDao.cartList(cvo);
+		
+		for (CartVO vo : list) {
+			log.info(vo);
+		}
+	}
 }

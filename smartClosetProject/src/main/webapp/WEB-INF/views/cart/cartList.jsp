@@ -9,7 +9,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 		
-		<title>title here</title>
+		<title></title>
 		
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
@@ -25,11 +25,16 @@
 			input[type=number]::-webkit-outer-spin-button {  
    				opacity: 1;
 			}
+			.cartNotice table tr td {
+				color : gray;
+				font-size: 12px;
+			}
 		</style>
 		<script type="text/javascript">
 			$(function() {
 				let totalPrice = 0; // 주문 금액
-				let shipCharge = 2500; // 배송비
+				let shipCharge = 0; // 배송비
+				let totalPayment = 0; // 예상 결제가
 				
 				// 주문 금액 처리
 				$(".cartInfo").each(function() {
@@ -39,14 +44,17 @@
 				});
 				
 				// 배송비 처리
-				if (totalPrice >= 50000) {
-					shipCharge = 0;
+				if (totalPrice > 0 && totalPrice < 50000 ) {
+					shipCharge = 2500;
 				}
+				
+				// 예상 결제가 처리
+				totalPayment = totalPrice + shipCharge
 				
 				// 금액 뷰단 입력
 				$(".totalPrice").html(totalPrice.toLocaleString() + "원");
 				$(".shipCharge").html(shipCharge.toLocaleString() + "원");
-				$(".totalPayment").html((totalPrice + shipCharge).toLocaleString() + "원");
+				$(".totalPayment").html(totalPayment.toLocaleString() + "원");
 				
 				// 수량 변경 처리
 				$(".modifyCountBtn").click(function() {
@@ -163,15 +171,40 @@
 						$("#deleteAllFrm").submit();
 					}
 				});
+				
+				// 전체 상품 주문 
+				
+				
+				// 선택 상품 주문
+				$("#orderSelect").click(function() {
+					$("#totalPayment").val(totalPayment);
+					let confirm_order = confirm("선택한 상품을 주문하시겠습니까?");
+					
+					if (confirm_order) {
+						$("#cartFrm").attr({
+							"method" : "post",
+							"action" : "/order/orderForm"
+						});
+						$("#cartFrm").submit();
+					}
+				});
 			});
 		</script>
 	</head>
 	<body>
+		<!-- <div> 
+			카리나 <img src="https://thumbs.gfycat.com/KindheartedWateryAfricanpiedkingfisher-size_restricted.gif">
+		</div>
+		<div>
+			<img src="https://blog.kakaocdn.net/dn/mG2KK/btrgTDPvv8k/tkuWxvlKEDhCp5kbhecFpk/img.gif">
+		</div> -->
 		<div class="container-fluid">
 			<form id="deleteAllFrm">
 				<input type="hidden" name="m_id" value="${cartList[0].m_id }">
+				
 			</form>
-			<form>
+			<form id="cartFrm">
+				<input type="hidden" name="totalPayment" id="totalPayment" >
 				<div class="text-center">
 					<br><br><br><br>
 					<h3>장바구니</h3>
@@ -198,7 +231,7 @@
 									<tr class="cartInfo">
 										<td class="text-center">
 											<input type="checkbox" name="chkBox" class="chkBox" data-cartNum="${cart.cart_num }" 
-												data-prPrice="${cart.pr_price }" data-goodsCount="${cart.cart_goodsCount }">
+												data-prPrice="${cart.pr_price }" data-goodsCount="${cart.cart_goodsCount }" value="${cart.cart_num}">
 										</td>
 										<td class="text-center">${cart.pr_thumb }</td>
 										<td class="text-center">
@@ -262,15 +295,23 @@
 		</div>
 		
 		<div class="text-center">
-			<input type="button" value="전체 상품 주문">
-			<input type="button" value="선택 상품 주문">
+			<input type="button" id="orderAll" value="전체 상품 주문">
+			<input type="button" id="orderSelect" value="선택 상품 주문">
 		</div>
-		
-		<!-- <div>
-			<img src="https://thumbs.gfycat.com/KindheartedWateryAfricanpiedkingfisher-size_restricted.gif">
+		<br><br><br>
+		<div class="cartNotice">
+			<table class="table table-bordered">
+				<tr>
+					<td>이용안내</td>
+				</tr>
+				<tr>
+					<td>
+						-장바구니에 보관된 상품은 [7일] 후 자동으로 삭제됩니다.<br>
+						-선택하신 상품의 수량을 변경하시려면 수량변경 후 [변경] 버튼을 누르시면 됩니다.<br>
+						-[전체 상품 주문] 버튼을 누르시면 장바구니의 구분없이 선택된 모든 상품에 대한 주문/결제가 이루어집니다.
+					</td>
+				</tr>
+			</table>
 		</div>
-		<div>
-			<img src="https://blog.kakaocdn.net/dn/mG2KK/btrgTDPvv8k/tkuWxvlKEDhCp5kbhecFpk/img.gif">
-		</div> -->
 	</body>
 </html>

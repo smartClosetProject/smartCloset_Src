@@ -5,6 +5,8 @@
 	<!-- VO 풀네임이 너무 길어 별칭 부여 -->
  	<typeAliases>
 		<typeAlias type="com.spring.client.cart.vo.CartVO" alias="cart" />
+		<typeAlias type="com.spring.client.order.vo.OrderVO" alias="order" />
+		<typeAlias type="com.spring.client.order.vo.OrderDetailVO" alias="orderDetail" />
 	</typeAliases>
 
 </configuration>

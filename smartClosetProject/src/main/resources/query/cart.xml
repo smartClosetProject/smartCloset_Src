@@ -9,8 +9,8 @@
 	</select>
 	
 	<insert id="insertCart" parameterType="cart">
-		INSERT INTO cart(cart_num, cart_goodsCount, m_num, pro_num, m_id)
-		VALUES(cart_seq.NEXTVAL, #{cart_goodsCount}, #{m_num}, #{pro_num}, #{m_id})
+		INSERT INTO cart(cart_num, cart_goodsCount, pro_num, m_id)
+		VALUES(cart_seq.NEXTVAL, #{cart_goodsCount}, #{pro_num}, #{m_id})
 	</insert>
 	
 	<delete id="deleteSelectCart" parameterType="cart">
@@ -30,11 +30,11 @@
 	</update>
 	
 	<select id="cartList" parameterType="cart" resultType="cart">
-		SELECT cart_num, cart_goodsCount, m_id, m_num, p.pro_num, pro_size, pro_color, 
+		SELECT cart_num, cart_goodsCount, m_id, p.pro_num, pro_size, pro_color, 
 				pr_name, p.pr_price, pr_thumb
 		FROM cart c INNER JOIN product p ON c.pro_num = p.pro_num
            		 	INNER JOIN pr_detail pr ON p.pr_num = pr.pr_num
-        WHERE m_id = #{m_id}
+        WHERE m_id = #{m_id} and <![CDATA[ (SYSDATE - cart_regdate) < 7 ]]>
 	</select>
 	
 </mapper>
