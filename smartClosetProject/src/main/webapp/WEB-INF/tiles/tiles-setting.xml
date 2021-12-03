@@ -4,14 +4,7 @@
   "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
   
 <tiles-definitions>
-	
-	<definition name="content" template="/WEB-INF/views/template/admin/contentLayout.jsp">
-		<put-attribute name="title" value="나의 첫 스프링 사이트" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/template/admin/footer.jsp" />
-		<put-attribute name="navbar" value="/WEB-INF/views/template/admin/navbar.jsp" />
-	</definition>
-	
+
 	<definition name="contentClient" template="/WEB-INF/views/template/client/contentLayout.jsp">
 		<put-attribute name="title" value="나의 첫 스프링 사이트" />
 		<put-attribute name="body" value="" />
@@ -29,8 +22,4 @@
 		<put-attribute name="body" value="/WEB-INF/views/order/{1}.jsp" />
 	</definition>
 
-	<definition name="nboard/*" extends="content"> 							<!-- 뷰단과 관련된 내용으로 name은 컨트롤러가 반환해주는 뷰정보이다. -->
-		<put-attribute name="body" value="/WEB-INF/views/nboard/{1}.jsp" /> <!-- name의 board/* *에 적용되는 문구가 {1}이다.  -->
-	</definition>														   	<!-- board/*/*라면 *에 적용되는 문구는 {2}이다. -->
-	
 </tiles-definitions>
