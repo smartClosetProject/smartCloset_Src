@@ -5,6 +5,7 @@
 	<!-- VO 풀네임이 너무 길어 별칭 부여 -->
 	<typeAliases>
 		<typeAlias type="com.spring.admin.prdetail.vo.PrDetailVO" alias="prDetail" />
+		<typeAlias type="com.spring.admin.prdetail.vo.ProductVO" alias="product" />
 	</typeAliases>
 
 </configuration>

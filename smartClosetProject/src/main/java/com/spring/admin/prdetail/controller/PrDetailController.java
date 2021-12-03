@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.admin.prdetail.service.PrDetailService;
 import com.spring.admin.prdetail.vo.PrDetailVO;
+import com.spring.admin.prdetail.vo.ProductVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -25,13 +26,45 @@ public class PrDetailController {
 	
 	@RequestMapping(value="prDetailList", method = RequestMethod.GET)
 	public String prDetailList(@ModelAttribute("data") PrDetailVO prvo, Model model) {
-		/*
-		 * log.info("prDetailList 출력 성공");
-		 * 
-		 * List<PrDetailVO> prDetailList = prDetailService.prDetailList(prvo);
-		 * model.addAttribute("prDetailList",prDetailList);
-		 */
+		
+		 log.info("prDetailList 출력 성공");
+		  
+		 List<PrDetailVO> prDetailList = prDetailService.prDetailList(prvo);
+		 model.addAttribute("prDetailList",prDetailList);
+		 
 		
 		return "prDetail/prDetailList";
 	}
+	@RequestMapping(value="/writeForm")
+	public String writeForm() {
+		log.info("writeForm 호출 성공");
+		return "prDetail/writeForm";
+	}
+	@RequestMapping(value="/prDetailInsert",method=RequestMethod.POST)
+	public String prDetailInsert(PrDetailVO prvo, Model model) throws Exception{
+		log.info("insert 호출 성공");
+		
+		int result=0;
+		String url="";
+		result=prDetailService.prDetailInsert(prvo);
+		if(result==1) {
+			url="/prDetail/prDetailList";
+		}else {
+			url="/prDetail/writeForm";
+		}
+		return "redirect:"+url;
+	}
+	
+	@RequestMapping(value="/productDetail", method = RequestMethod.GET)
+	public String productDetail(@ModelAttribute("data") ProductVO pvo, Model model) {
+		
+		 log.info("prDetailDt 출력 성공");
+		  
+		 List<ProductVO> productDetail = prDetailService.productDetail(pvo);
+		 model.addAttribute("productDetail",productDetail);
+		 
+		
+		return "prDetail/productDetail";
+	}
+
 }

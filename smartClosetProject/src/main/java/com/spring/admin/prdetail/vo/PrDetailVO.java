@@ -22,4 +22,10 @@ public class PrDetailVO {
 	private String pr_season;
 	private String pr_issale;
 	private String pr_regdate;
+	
+	private String cl_num;
+	private String category;
+	
+	private MultipartFile file;
+	private MultipartFile file1;
 }
