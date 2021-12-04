@@ -35,6 +35,7 @@
 		FROM cart c INNER JOIN product p ON c.pro_num = p.pro_num
            		 	INNER JOIN pr_detail pr ON p.pr_num = pr.pr_num
         WHERE m_id = #{m_id} and <![CDATA[ (SYSDATE - cart_regdate) < 7 ]]>
+        ORDER BY cart_regdate
 	</select>
 	
 </mapper>

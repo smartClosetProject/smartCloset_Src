@@ -31,16 +31,16 @@ public class CartMapperTests {
 //		log.info("result : " + result);
 //	}
 	
-//	@Test
-//	public void testInsertCart() {
-//		CartVO cvo = new CartVO();
-//		cvo.setCart_goodsCount(2);
-//		cvo.setM_id("smartmember");
-//		cvo.setPro_num("TS_0112_M_W");
-//		
-//		int result = cartDao.insertCart(cvo);
-//		log.info("result : " + result);
-//	}
+	@Test
+	public void testInsertCart() {
+		CartVO cvo = new CartVO();
+		cvo.setCart_goodsCount(2);
+		cvo.setM_id("smartmember");
+		cvo.setPro_num("TS_0112_M_W");
+		
+		int result = cartDao.insertCart(cvo);
+		log.info("result : " + result);
+	}
 	
 //	@Test
 //	public void testDeleteEachCart() {

@@ -114,7 +114,7 @@
 			$(function() {
 				// 회원 정보와 동일 체크박스 처리
 				$("#isEqual").click(function() {
-					let isEqual = $("input[name='isEqual']").prop("checked");
+					let isEqual = $("#isEqual").prop("checked");
 					if (isEqual) {
 						$("#m_name").val("${order.m_name}");
 						$("#m_addr").val("${order.m_addr}");
@@ -177,6 +177,13 @@
 	</head>
 	<body>
 		<form class="form-horizontal">
+			<input type="hidden" name="m_mileApply">
+			<input type="hidden" name="m_mileAdd">
+			<input type="hidden" name="totalSum">
+			<%-- <c:forEach>
+				
+			</c:forEach> --%>
+			
 			<div class="header">
 				<h3>주문/결제</h3>
 			</div>
@@ -184,7 +191,7 @@
 				<h3>배송지</h3><hr>
 			</div>
 			<div class="box">
-				<input type="checkbox" id="isEqual" value="equal">
+				<input type="checkbox" name="isEqual" id="isEqual" value="equal">
 				<label>&nbsp;회원 정보와 동일</label>
 			</div>
 			<div class="info form-group">
