@@ -198,6 +198,7 @@
 						if (isNaN(applyMile2)) {
 							applyMile2 = 0;
 						}
+						$("input[name='m_mile']").val(${order.m_mile });
 						$("input[name='m_mileApply']").val(applyMile2);
 						$("input[name='m_mileAdd']").val(Math.floor((${order.order_totalPayment} - applyMile2) * 0.02));
 						$("input[name='order_totalPayment']").val(${order.order_totalPayment} - applyMile2);
@@ -214,7 +215,9 @@
 			function totalSum() {
 				let m_mile = ${order.m_mile };
 				let applyMile = parseInt($("#m_mileApply").val());
-				
+				if ($("#m_mileApply").val() == "") {
+					return;
+				}
 				if (applyMile > m_mile) {
 					applyMile = m_mile;
 				}
@@ -228,9 +231,10 @@
 	</head>
 	<body>
 		<form name="orderFrm" id="orderFrm" class="form-horizontal">
-			<!-- <input type="hidden" name="m_mileApply">
+			<input type="hidden" name="m_mile">
+			<input type="hidden" name="m_mileApply">
 			<input type="hidden" name="m_mileAdd">
-			<input type="hidden" name="order_totalPayment"> -->
+			<input type="hidden" name="order_totalPayment">
 			
 			<div class="header">
 				<h3>주문/결제</h3>

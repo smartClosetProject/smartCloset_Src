@@ -96,11 +96,15 @@
 					} else {
 						$(".chkBox").prop("checked", false);
 					}
-				})
+				});
 				
-				// 개별 체크박스 선택 시 전체 체크박스 해제
+				// 개별 체크박스 선택 시 처리 전체 체크박스 처리
 				$(".chkBox").click(function() {
-					$("#allCheck").prop("checked", false);
+					if ($(".chkBox:checked").length == $(".chkBox").length) {
+						$("#allCheck").prop("checked", true);
+					} else {
+						$("#allCheck").prop("checked", false);
+					}
 				});
 				
 				// 선택된 상품 삭제 처리
