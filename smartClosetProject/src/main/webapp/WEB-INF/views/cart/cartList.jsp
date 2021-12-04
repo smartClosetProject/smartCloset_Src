@@ -29,6 +29,9 @@
 				color : gray;
 				font-size: 12px;
 			}
+			input[type="button"] {
+				border: none;
+			}
 		</style>
 		<script type="text/javascript">
 			$(function() {
@@ -187,7 +190,7 @@
 				
 				// 선택 상품 주문
 				$("#orderSelect").click(function() {
-					let confirm_order = confirm("전체 상품을 주문하시겠습니까?");
+					let confirm_order = confirm("선택 상품을 주문하시겠습니까?");
 					if (confirm_order) {
 						if ($("input[type='checkbox']:checked").length <= 0) {
 							alert("하나 이상의 상품을 선택해 주세요.");
@@ -225,7 +228,6 @@
 					"action" : "/order/orderForm"
 				});
 				$("#cartFrm").submit();
-
 			}
 		</script>
 	</head>
@@ -285,11 +287,11 @@
 												<input type="number" min="1" id="Count" value="${cart.cart_goodsCount }">
 											</div>
 											<div>
-												<input type="button" data-proNum="${cart.pro_num }" class="modifyCountBtn" value="변경">
+												<input type="button" data-proNum="${cart.pro_num }" class="modifyCountBtn btn-xs" value="변경">
 											</div>
 										</td>
 										<td class="text-center">
-											<input type="button" class="deleteEachBtn" data-cartNum=${cart.cart_num } value="삭제">
+											<input type="button" class="deleteEachBtn btn-sm" data-cartNum=${cart.cart_num } value="삭제">
 										</td>
 									</tr>
 								</c:forEach>
@@ -310,8 +312,8 @@
 							</tr>
 						</tbody>
 					</table>
-					<input type="button" id="deleteSelectBtn" value="선택삭제">
-					<input type="button" id="deleteAllBtn" value="장바구니 비우기">
+					<input type="button" id="deleteSelectBtn" class="btn" value="선택삭제">
+					<input type="button" id="deleteAllBtn" class="btn" value="장바구니 비우기">
 				</div>
 				<br><br><br>
 				
@@ -333,8 +335,8 @@
 		</div>
 		
 		<div class="text-center">
-			<input type="button" id="orderAll" value="전체 상품 주문">
-			<input type="button" id="orderSelect" value="선택 상품 주문">
+			<input type="button" id="orderAll" class="btn" value="전체 상품 주문">
+			<input type="button" id="orderSelect" class="btn" value="선택 상품 주문">
 		</div>
 		<br><br><br>
 		<div class="cartNotice">

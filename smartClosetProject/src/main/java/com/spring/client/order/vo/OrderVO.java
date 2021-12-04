@@ -5,8 +5,6 @@ import lombok.Data;
 @Data
 public class OrderVO {
 	private int order_num = 0;				// 주문 번호
-	private String order_recipient = "";	// 수령인
-	private String order_address = "";		// 배송지
 	private int order_totalPayment = 0;		// 결제금액
 	private String order_state = "";		// 주문 상태
 	private String order_cancelReason = "";	// 주문 취소 사유
@@ -19,4 +17,9 @@ public class OrderVO {
 	private String m_phone = "";			// 휴대폰번호
 	private String m_email = "";			// 회원 이메일
 	private int m_mile = 0;					// 적립금
+	
+	private int m_mileApply = 0;			// 사용 적립금
+	private int m_mileAdd = 0;				// 추가 적립금
+	private String shipMessage = "";		// 배송 메시지
+	private String payMethod = "";			// 결제 수단
 }

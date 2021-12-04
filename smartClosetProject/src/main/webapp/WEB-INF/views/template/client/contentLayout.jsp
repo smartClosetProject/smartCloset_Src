@@ -28,6 +28,15 @@
 			.navbar-default {
 				background:transparent;
 			}
+			
+			/* 헤더 */
+			#header {
+				width: 1170px;
+				height: 52px; 
+				position: fixed; 
+				z-index: 1;
+				text-align: center;
+			}
 		
 			/* 사이드바 */
 			.sidenav {
@@ -36,7 +45,7 @@
 				width: 220px;
 				height: 100%;
 				margin-left: -30px;
-				margin-top: 50px;
+				margin-top: 52px;
 			}
 		    
 			.sidenav .large li a {
@@ -70,21 +79,25 @@
 		</script>
 	</head>
 	<body>
-		<div class="container">
-			<nav class="navbar navbar-default navbar-fixed-top">
-				<tiles:insertAttribute name="clientHeader" />
-			</nav>
-			
-			<div class="container-fluid">
-				<tiles:insertAttribute name="clientAside" />
+		<div>
+			<div class="container" style="padding: 0px">
+				<nav id="header" class="navbar navbar-default">
+					<tiles:insertAttribute name="clientHeader" />
+				</nav>
+			</div>
 				
-				<div class="col-sm-9 page">
-					<tiles:insertAttribute name="body" />
+			<div class="container">
+				<div class="container-fluid">
+					<tiles:insertAttribute name="clientAside" />
+					
+					<div class="col-sm-9 page">
+						<tiles:insertAttribute name="body" />
+					</div>
 				</div>
 			</div>
-		</div>
-		<div>
-			<tiles:insertAttribute name="clientFooter" />
+			<div>
+				<tiles:insertAttribute name="clientFooter" />
+			</div>
 		</div>
 	</body>
 </html>

@@ -53,8 +53,12 @@
 			.msg {
 				margin-left: 13px;
 			}
-			.mile {
-				margin-bottom: 4px;
+			#m_mileApply {
+				text-align: right;
+			}
+			input[type=number]::-webkit-inner-spin-button, 
+			input[type=number]::-webkit-outer-spin-button {  
+   				opacity: 0;
 			}
 			.mileApply {
 				background-color: #CBDDF5;
@@ -67,7 +71,7 @@
 				margin-left: 30px;
 			}
 			.applyMile2 {
-				margin-left: 700px;
+				margin-left: 630px;
 			}
 			.n {
 				width: 150px;
@@ -98,9 +102,77 @@
 				text-decoration: none;
 				font-weight: bold;
 			}
+			#selectMessage {
+				font-size: 14px;
+			}
+			input[type='radio'], input[type='checkbox'] {
+				width: 15px;
+				height: 15px;
+			}
 		</style>
 		<script type="text/javascript">
+			$(function() {
+				// 회원 정보와 동일 체크박스 처리
+				$("#isEqual").click(function() {
+					let isEqual = $("input[name='isEqual']").prop("checked");
+					if (isEqual) {
+						$("#m_name").val("${order.m_name}");
+						$("#m_addr").val("${order.m_addr}");
+						$("#m_phone").val("${order.m_phone}");
+						$("#m_email").val("${order.m_email}");
+					} else {
+						$("#m_name").val("");
+						$("#m_addr").val("");
+						$("#m_phone").val("");
+						$("#m_email").val("");
+					}
+				});
+				
+				// 배송 메세지 선택
+				$("#message").change(function() {
+					$("#message option:selected").each(function() {
+						if ($(this).val() == "직접입력") { 
+							$("#selectMessage").val(""); 
+							$("#selectMessage").attr("readonly", false);
+							$("#selectMessage").focus();
+						} else if ($(this).index() == 0) {
+							$("#selectMessage").val("");
+							$("#selectMessage").attr("readonly", true);
+						} else {
+							$("#selectMessage").val($(this).text());
+							$("#selectMessage").attr("readonly", true);
+						}
+					});
+				});
+				
+				// 적립금 적용과 최종 결제가 처리
+				$("#m_mileApply").focusout(function() {
+					totalSum();
+				});
+				
+				$("#m_mileApply").keydown(function(key) {
+	                if (key.keyCode == 13) {
+	                	totalSum();
+	                }
+	            });
+
+				// 결제하기 처리 - 유효성 검사
+				
+			});
 			
+			function totalSum() {
+				let m_mile = ${order.m_mile };
+				let applyMile = parseInt($("#m_mileApply").val());
+				
+				if (applyMile > m_mile) {
+					applyMile = m_mile;
+				}
+				$("#applyMile2").html(applyMile.toLocaleString() + "원");
+				$("#applyShipCharge").html("-" + applyMile.toLocaleString() + "원");
+				
+				let totalSum = (${order.order_totalPayment} - applyMile).toLocaleString();
+				$(".totalSum").html(totalSum);
+			}
 		</script>
 	</head>
 	<body>
@@ -112,7 +184,7 @@
 				<h3>배송지</h3><hr>
 			</div>
 			<div class="box">
-				<input type="checkbox" name="isEqual" id="isEqual" value="equal">
+				<input type="checkbox" id="isEqual" value="equal">
 				<label>&nbsp;회원 정보와 동일</label>
 			</div>
 			<div class="info form-group">
@@ -137,17 +209,18 @@
 				<div class="form-group">
 					<label for="m_phone" class="col-sm-2 control-label">이메일<span class="star"> *</span></label>
 					<div class="col-sm-8">
- 						<input type="email" name="m_phone" id="m_phone" class="form-control" placeholder="SmartCloset@example.com">
+ 						<input type="email" name="m_email" id="m_email" class="form-control" placeholder="SmartCloset@example.com">
 					</div>
 				</div>
 				<div class="text-center col-sm-10">
-					<select class="form-control msg">
+					<select id="message" class="form-control msg">
 						<option value="">-- 메시지 선택 (선택사항)</option>
 						<option value="배송 전에 미리 연락바랍니다.">배송 전에 미리 연락바랍니다.</option>
 						<option value="부재 시 문 앞에 놓아주세요.">부재 시 문 앞에 놓아주세요.</option>
 						<option value="빠른 배송 부탁드립니다.">빠른 배송 부탁드립니다.</option>
-						<option value="">직접 입력</option>
+						<option value="직접입력">직접 입력</option>
 					</select>
+					<input type="text" name="shipMessage" id="selectMessage" class="form-control msg" readonly="readonly">
 				</div><br>
 
 			</div>
@@ -160,11 +233,11 @@
 					value="${order.m_mile }" groupingUsed="true" />원)</span>
 			</div>
 			<div>
-				<input type="number" name="m_mile" id="m_mile" class="form-control">
+				<input type="number" id="m_mileApply" class="form-control">
 			</div>
 			<div class="mileApply">
 				<span class="applyMile1">적용금액</span>
-				<span class="applyMile2">0원</span>
+				<span class="applyMile2" id="applyMile2">원</span>
 			</div>
 			<div class="title">
 				<hr><h3>결제정보</h3><hr>
@@ -174,22 +247,24 @@
 				<label class="v">
 				<c:set var="payment" value="${order.order_totalPayment }" />
 				<c:if test="${payment < 52500 }">
-					${order.order_totalPayment - 2500} 
+					<fmt:formatNumber type="currency" currencySymbol="" maxFractionDigits="0" 
+					value="${order.order_totalPayment - 2500}" groupingUsed="true" />
 				</c:if>
 				<c:if test="${payment >= 52500 }">
-					${order.order_totalPayment }
+					<fmt:formatNumber type="currency" currencySymbol="" maxFractionDigits="0" 
+					value="${order.order_totalPayment}" groupingUsed="true" />
 				</c:if>
 				원</label>
 			</div>
 			<div>
 				<label class="n">할인/부가결제</label>
-				<label class="v">-?원</label>
+				<label class="v" id="applyShipCharge">원</label>
 			</div>
 			<div>
 				<label class="n">배송비</label>
 				<label class="v">
 				<c:if test="${payment < 52500 }">
-					+2500
+					+2,500
 				</c:if>
 				<c:if test="${payment >= 52500 }">
 					+0
@@ -198,7 +273,7 @@
 			</div>
 			<div class="mileApply">
 				<span class="applyMile1">결제금액</span>
-				<span class="applyMile2">0원</span>
+				<span class="applyMile2"><span class="totalSum"></span>원</span>
 			</div>
 			<div class="title">
 				<hr><h3>결제수단</h3><hr>
@@ -210,8 +285,8 @@
 					</tr>
 					<tr>
 						<td class="text-center">
-							<span><input type="radio" name="payment" value="실시간 계좌이체"><label> 실시간 계좌이체</label></span>
-							<span><input type="radio" name="payment" value="카드 결제"><label> 카드 결제</label></span>
+							<span><input type="radio" name="payMethod" value="실시간 계좌이체"><label>&nbsp;실시간 계좌이체</label></span>
+							<span><input type="radio" name="payMethod" value="카드 결제"><label>&nbsp;카드 결제</label></span>
 						</td>
 					</tr>
 				</table>
@@ -224,8 +299,9 @@
 				<label>[필수] 청약철회 방침 동의</label><hr>
 			</div>
 			<div class="header" id="goPayment">
-				<h3><a href="/order/orderComplete"><fmt:formatNumber type="currency" currencySymbol="" maxFractionDigits="0" 
-					value="${order.order_totalPayment }" groupingUsed="true" />원 결제하기</a></h3>
+				<h3><a href="/order/orderComplete"><span class="totalSum">
+				<fmt:formatNumber type="currency" currencySymbol="" maxFractionDigits="0" 
+					value="${order.order_totalPayment}" groupingUsed="true" /></span>원 결제하기</a></h3>
 			</div>
 		</form>
 	</body>

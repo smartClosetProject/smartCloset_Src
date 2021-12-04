@@ -39,12 +39,19 @@
 				background-color: white;
 			}
 		</style>
+		<script type="text/javascript">
+			$(function() {
+				$("#back").click(function() {
+					history.back();
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<div id="all">
-			<div class="smart container" style="padding: 0px">
+			<div class="container" style="padding: 0px">
 				<nav>
-					<a href="historyback" style="color: black"><span class="glyphicon glyphicon-remove"></span></a>
+					<a href="#" id="back" style="color: black"><span class="glyphicon glyphicon-remove"></span></a>
 					<span id="Main">SmartCloset</span>
 					<a href="/cart/cartList" style="color: black"><span class="glyphicon glyphicon-shopping-cart"></span></a>
 				</nav>
