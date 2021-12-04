@@ -1,6 +1,7 @@
 package com.spring.client.order.controller;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,9 +44,18 @@ public class OrderController {
 		OrderVO vo = orderService.orderForm(ovo);
 		vo.setOrder_totalPayment(totalPayment);
 		model.addAttribute("order", vo);
-		model.addAttribute("cart", cartNum);
+		session.setAttribute("cart", cartNum);
 		
 		return "order/orderForm";
+	}
+	
+	@PostMapping("orderComplete")
+	public String OrderComplete(@ModelAttribute OrderVO ovo, Model model) {
+		log.info("OrderComplete 호출 성공");
+		
+		System.out.println(ovo);
+		
+		return "order/orderComplete";
 	}
 	
 	// 필요없는거 받아옴. 하지만 주문 완료 페이지에서 반드시 필요. 배열 받아오는 거.
@@ -73,12 +84,15 @@ public class OrderController {
 //		return "order/orderForm";
 //	}
 	
-//	@PostMapping("orderAll")
+//	@GetMapping("orderAll")
 //	public String orderAll(@ModelAttribute OrderVO ovo, OrderDetailVO odvo, Model model) {
 //		String m_id = (String) session.getAttribute("m_id");
 //		m_id = "smartmember";
 //		odvo.setM_id(m_id);
-//
+//		
+//		System.out.println(session.getAttribute("cart"));
+//		session.removeAttribute("cart");
+//		System.out.println(session.getAttribute("cart"));
 //		
 //		return "";
 //	}

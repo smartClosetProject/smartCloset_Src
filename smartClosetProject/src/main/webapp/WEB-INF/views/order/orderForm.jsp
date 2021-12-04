@@ -94,20 +94,23 @@
 			#allAgreelabel {
 				font-size: 22px;
 			}
-			a:link, a:visited, a:active {
-				text-decoration: none;
-				color: white;
-			}
-			a:hover {
-				text-decoration: none;
-				font-weight: bold;
-			}
 			#selectMessage {
 				font-size: 14px;
 			}
 			input[type='radio'], input[type='checkbox'] {
 				width: 15px;
 				height: 15px;
+			}
+			#goPayment {
+				width: 870px;
+				border: none;
+				height: 52px;
+				color: white;
+				background-color: black;
+				font-size: 24px;
+			}
+			#goPayment:hover {
+				font-weight: bold;
 			}
 		</style>
 		<script type="text/javascript">
@@ -156,8 +159,56 @@
 	                }
 	            });
 
-				// 결제하기 처리 - 유효성 검사
+				// 모든 약관 동의 체크 시 모두 체크
+				$("#allAgree").click(function() {
+					if ($("#allAgree").prop("checked")) {
+						$(".agreeChk").prop("checked", true);
+					} else {
+						$(".agreeChk").prop("checked", false);
+					}
+				});
 				
+				// 필수 체크 해제 시 모든 약관 동의 해제
+				$("#agree").click(function() {
+					if (!$("#agree").prop("checked")) {
+						$("#allAgree").prop("checked", false);
+					}
+				})
+				
+				// 결제하기 처리 - 유효성 검사
+				$("#goPayment").click(function() {
+					if (!chkData("#m_name", "수령인을")) {
+						return;
+					} else if (!chkData("#m_addr", "주소를")) {
+						return;
+					} else if (!chkData("#m_phone", "전화번호를")) {
+						return;
+					} else if (!chkData("#m_email", "이메일을")) {
+						return;
+					} else if ($("input[type='radio']:checked").length == 0) {
+						alert("결제 수단을 선택해 주세요.");
+						$("input[type='radio']").focus();
+						return;
+					} else if ($("input[class='agreeChk']:checked").length == 0) {
+						alert("약관에 동의해 주세요.");
+						$("input[class='agreeChk']").focus();
+						return;
+					} else {
+						let applyMile2 = parseInt($("#m_mileApply").val());
+						if (isNaN(applyMile2)) {
+							applyMile2 = 0;
+						}
+						$("input[name='m_mileApply']").val(applyMile2);
+						$("input[name='m_mileAdd']").val(Math.floor((${order.order_totalPayment} - applyMile2) * 0.02));
+						$("input[name='order_totalPayment']").val(${order.order_totalPayment} - applyMile2);
+						
+						$("#orderFrm").attr({
+							"method" : "post",
+							"action" : "/order/orderComplete"
+						});
+						$("#orderFrm").submit();
+					}
+				});
 			});
 			
 			function totalSum() {
@@ -176,13 +227,10 @@
 		</script>
 	</head>
 	<body>
-		<form class="form-horizontal">
-			<input type="hidden" name="m_mileApply">
+		<form name="orderFrm" id="orderFrm" class="form-horizontal">
+			<!-- <input type="hidden" name="m_mileApply">
 			<input type="hidden" name="m_mileAdd">
-			<input type="hidden" name="totalSum">
-			<%-- <c:forEach>
-				
-			</c:forEach> --%>
+			<input type="hidden" name="order_totalPayment"> -->
 			
 			<div class="header">
 				<h3>주문/결제</h3>
@@ -191,7 +239,7 @@
 				<h3>배송지</h3><hr>
 			</div>
 			<div class="box">
-				<input type="checkbox" name="isEqual" id="isEqual" value="equal">
+				<input type="checkbox" id="isEqual" value="equal">
 				<label>&nbsp;회원 정보와 동일</label>
 			</div>
 			<div class="info form-group">
@@ -305,10 +353,10 @@
 				<input type="checkbox" class="agreeChk" id="agree">
 				<label>[필수] 청약철회 방침 동의</label><hr>
 			</div>
-			<div class="header" id="goPayment">
-				<h3><a href="/order/orderComplete"><span class="totalSum">
+			<div>
+				<button type="button" id="goPayment"><span class="totalSum">
 				<fmt:formatNumber type="currency" currencySymbol="" maxFractionDigits="0" 
-					value="${order.order_totalPayment}" groupingUsed="true" /></span>원 결제하기</a></h3>
+					value="${order.order_totalPayment}" groupingUsed="true" /></span>원 결제하기</button>
 			</div>
 		</form>
 	</body>
