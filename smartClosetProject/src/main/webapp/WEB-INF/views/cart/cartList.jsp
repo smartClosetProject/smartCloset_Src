@@ -63,11 +63,10 @@
 					let proCount = parseInt($(this).parents("tr[class='cartInfo']").find("input[type='number']").val()); // attr이 아니라 이게 input의 바뀐 value를 가져 와야 함
 					console.log(proCount);
 					
-					//console.log($("input[type='number']").val());
-					/*if ($("input[type='number']").val() <= 0) { // 인트가 아님을 인지하자
+					if ($("#Count").val() <= 0) { // 인트가 아님을 인지하자
 						alert("0 이하의 수량으로는 변경할 수 없습니다.");
 						return;
-					}*/
+					}
 					$.ajax({
 						url : "/cart/modifyCount",
 						type : "post",
@@ -283,7 +282,7 @@
 										</td>
 										<td class="text-center" >
 											<div>
-												<input type="number" min="1" id="" value="${cart.cart_goodsCount }">
+												<input type="number" min="1" id="Count" value="${cart.cart_goodsCount }">
 											</div>
 											<div>
 												<input type="button" data-proNum="${cart.pro_num }" class="modifyCountBtn" value="변경">
