@@ -19,6 +19,7 @@
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
+		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript">
@@ -45,6 +46,28 @@
 						});
 					}
 				}
+				// 검색 대상이 변경될 때마다 처리 이벤트
+				$("#search").change(function() {
+					if ($("#search").val() == "all") {
+						$("#keyword").val("검색어 입력");
+					} else if ($("#search").val() != "all") {
+						$("#keyword").val("");
+						$("#keyword").focus();
+					}
+				});
+				// 검색 버튼 클릭 시 처리 이벤트
+				$("#reviewSearchBtn").click(function() {
+					if ($("#search").val() != "all") {
+						if (!chkData("#keyword", "검색어를")) {
+							return;
+						}
+					}
+					goPage();
+				});
+				// 글쓰기 버튼 클릭 시 처리 이벤트
+				$("#insertFormBtn").click(function() {
+					location.href = "/board/writeForm"; /* jsp의 요청은 모두 매핑으로 준다. */
+				});
 				
 			});
 		</script>
@@ -52,16 +75,17 @@
 	<body>
 		<div class="contentContainer container">
 			<form id="r_numForm">
-				<input type="hidden" id="r_num" name="r_num">
+				<input type="hidden" id="m_id" name="m_id">
 			</form>
 			
 			<!-- -------------------검색 시작 ------------------------- -->
-			<div id="rivewSearch" class="text-right">
+			<div id="revewSearch" class="text-right">
 				<form id="r_search" name="r_search" class="form-inline">
 					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum }">
 					<input type="hidden" name="amount" value="${pageMaker.cvo.amount }">
 				</form>
 			</div>
+			<!-- --------------------검색 종료 ---------------------------->
 			<!-- -------------------- 리스트 시작 -------------------------->
 			<div id="reviewList" class="table-height">
 			<table class="table table-bordered">
@@ -78,11 +102,9 @@
 					<c:choose>
 						<c:when test="${not empty reviewList}">
 							<c:forEach var="review" items="${reviewList}" varStatus="status">
-								<tr class="text-center" data-num="${review.r_num}">
+								<tr class="text-center" data-num="${review.r_num}"> <!-- ${review.r_num } 실제 글 번호 -->
 									<td>${count - status.index }</td>
-									<td class="goDetail text-left">
-										${reviewList.r_thumb}
-									</td>
+
 									<td class="text-left">${review.r_thumb}</td>
 									<td class="text-left">${review.r_title}</td>
 									<td class="text-left">${review.m_id}</td>
@@ -104,15 +126,18 @@
 			<div id="reviewSearch">
 			<form>
 					<span class="glyphicon glyphicon-search"></span>&nbsp; 
-						<select id ="serch" name="serch" class="form-control">
+						<select id ="search" name="search" class="form-control">
 							<option value="all">전체</option>
 							<option value="r_title">제목</option>
 							<option value="r_content">내용</option>
 							<option value="m_id">아이디</option>							
 						</select>
-					<input type="text" class="form-control" name="reviewSearch" id="reviewSerch" size="20" placeholder="검색어 입력">
-					<input type="button" name="reviewSearchBtn" class="btn btn-default" id="reviewSerchBtn" value="검색">
+					<input type="text" id="keyword" name="keyword" value="검색어 입력" class="form-control">
+					<input type="button" name="reviewSearchBtn" class="btn btn-default" id="reviewSearchBtn" value="검색">
 			</form>
+			</div>
+				<div class="contentBtn text-right">
+				<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-success">
 			</div>
 			<!-- ---------------------검색 종료 ------------------------------>
 			

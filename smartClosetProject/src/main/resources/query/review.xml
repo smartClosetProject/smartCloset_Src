@@ -12,13 +12,13 @@
 		<!-- 검색 중복사용 소스 -->
 		<sql id="reviewSearch">
 			<if test="search == 'r_title'">
-				<![CDATA[ r_title LIKE '%' || #{keyword} || '%' ]]>
+				<![CDATA[ r_thumb LIKE '%' || #{keyword} || '%' ]]>
 			</if>
 			<if test="search == 'm_id'">
-				<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
+				<![CDATA[ r_title LIKE '%' || #{keyword} || '%' ]]>
 			</if>
 			<if test="search == 'r_content'">
-				<![CDATA[ r_content LIKE '%' || #{keyword} || '%' ]]>
+				<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
 			</if>
 		</sql>
 	
@@ -38,8 +38,9 @@
 			WHERE rnum > (#{pageNum} - 1) * #{amount}
 		]]>		  
 	</select>
+	
 	<!-- 전체 레코드 수 조회 -->
-	<select id="reviewListCnt" parameterType="review" resultType="review">
+	<select id="reviewListCnt" parameterType="review" resultType="int">
 		SELECT count(*) FROM review
 		<trim prefix=" WHERE (" suffix=")">
 			<include refid="reviewSearch"></include>
