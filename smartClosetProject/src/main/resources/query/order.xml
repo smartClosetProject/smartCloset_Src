@@ -14,8 +14,10 @@
 	</select>
 	
 	<insert id="insertOrder" parameterType="order">
-		INSERT INTO sc_order(order_num, order_totalPayment, order_state, m_id)
-		VALUES(#{order_num}, #{order_totalPayment}, #{order_state}, #{m_id})
+		INSERT INTO sc_order(order_num, order_totalPayment, order_state, 
+				order_recipient, order_addr, order_phone, order_shipMessage, m_id)
+		VALUES(#{order_num}, #{order_totalPayment}, #{order_state}, 
+				#{m_name}, #{m_addr}, #{m_phone}, #{shipMessage}, #{m_id})
 	</insert>
 	
 	<insert id="insertOrderDetail" parameterType="orderDetail">
