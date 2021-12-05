@@ -7,17 +7,26 @@
 		FROM member
 		WHERE m_id = #{m_id}
 	</select>
-		
-	<insert id="orderAll" parameterType="order">
-		INSERT INTO sc_order(order_num, order_recipient, order_address,
-							  order_totalPayment, order_state, m_id)
-		VALUES(order_seq.NEXTVAL, #{order_recipient}, #{order_address},
-				#{order_totalPayment}, #{order_state}, #{m_id}) 
+	
+	<select id="orderSeq" resultType="int">
+		SELECT order_seq.NEXTVAL
+		FROM DUAL
+	</select>
+	
+	<insert id="insertOrder" parameterType="order">
+		INSERT INTO sc_order(order_num, order_totalPayment, order_state, m_id)
+		VALUES(#{order_num}, #{order_totalPayment}, #{order_state}, #{m_id})
 	</insert>
 	
-	<insert id="orderAllDetail" parameterType="orderDetail">
-		INSERT INTO sc_order_detail(od_num, od_goodsCount, order_num, pro_num)
-			   SELECT order_detail_seq.NEXTVAL, cart_goodsCount, #{order_num}, pro_num
-			   FROM cart WHERE m_id = #{m_id}
+	<insert id="insertOrderDetail" parameterType="orderDetail">
+		INSERT INTO sc_order_detail(od_num, od_goodscount, order_num, pro_num)
+					SELECT order_detail_seq.NEXTVAL, cart_goodsCount, #{order_num}, pro_num
+					FROM cart WHERE cart_num = #{cart_num}
 	</insert>
+	
+	<update id="updateMile" parameterType="order">
+		UPDATE member
+		SET m_mile = #{m_mile} - #{m_mileApply} + #{m_mileAdd}
+		WHERE m_id = #{m_id}
+	</update>
 </mapper>

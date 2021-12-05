@@ -39,6 +39,12 @@ public class CartMapperTests {
 		cvo.setPro_num("TS_0112_M_W");
 		
 		int result = cartDao.insertCart(cvo);
+		
+		cvo.setCart_goodsCount(3);
+		cvo.setM_id("smartmember");
+		cvo.setPro_num("OJ_0123_M_B");
+		
+		result = cartDao.insertCart(cvo);
 		log.info("result : " + result);
 	}
 	

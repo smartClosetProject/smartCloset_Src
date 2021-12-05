@@ -17,6 +17,17 @@
 		<![endif]-->
 	</head>
 	<body>
-		asd
+		${orderDetail.order_num }<br>
+		${orderDetail.order_regdate }<br>
+		${orderDetail.m_mile }<br>
+		${orderDetail.m_mileApply }<br>
+		${orderDetail.m_mileAdd }<br>
+		${orderDetail.m_name }<br>
+		${orderDetail.m_addr }<br>
+		${orderDetail.m_phone }<br>
+		${orderDetail.m_email }<br>
+		${orderDetail.shipMessage }<br>
+		${orderDetail.payMethod }<br>
+		1
 	</body>
 </html>

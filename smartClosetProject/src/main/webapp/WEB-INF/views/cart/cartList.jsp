@@ -175,11 +175,7 @@
 					let confirm_del = confirm("장바구니를 비우시겠습니까?");
 					
 					if (confirm_del) {
-						$("#deleteAllFrm").attr({
-							"method" : "post",
-							"action" : "/cart/deleteAllCart"
-						});
-						$("#deleteAllFrm").submit();
+						location.href = "/cart/deleteAllCart";
 					}
 				});
 				
@@ -187,6 +183,10 @@
 				$("#orderAll").click(function() {
 					let confirm_order = confirm("전체 상품을 주문하시겠습니까?");
 					if (confirm_order) {
+						if ($("input[type='checkbox']").length == 1) {
+							alert("등록된 상품이 없습니다.");
+							return;
+						}
 						$(".chkBox").prop("checked", true);
 						orderSelect();
 					}
@@ -243,10 +243,6 @@
 			<img src="https://blog.kakaocdn.net/dn/mG2KK/btrgTDPvv8k/tkuWxvlKEDhCp5kbhecFpk/img.gif">
 		</div> -->
 		<div class="container-fluid">
-			<form id="deleteAllFrm">
-				<input type="hidden" name="m_id" value="${cartList[0].m_id }">
-				
-			</form>
 			<form id="cartFrm">
 				<input type="hidden" name="totalPayment" id="totalPayment" >
 				<div class="text-center">
@@ -302,7 +298,7 @@
 							</c:when>
 							<c:otherwise>
 								<tr>
-									<td colspan="6" class="text-center">등록된 게시물이 존재하지 않습니다.</td>
+									<td colspan="6" class="text-center">등록된 상품이 없습니다.</td>
 								</tr>
 							</c:otherwise>
 						</c:choose>

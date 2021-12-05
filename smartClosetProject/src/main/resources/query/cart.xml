@@ -18,7 +18,7 @@
 		WHERE cart_num = #{cart_num}
 	</delete>
 	
-	<delete id="deleteAllCart" parameterType="cart">
+	<delete id="deleteAllCart" parameterType="java.lang.String">
 		DELETE FROM cart
 		WHERE m_id = #{m_id}
 	</delete>

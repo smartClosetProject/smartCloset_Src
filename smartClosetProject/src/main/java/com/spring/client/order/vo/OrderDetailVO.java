@@ -6,8 +6,8 @@ import lombok.Data;
 public class OrderDetailVO {
 	private int od_num = 0;			// 주문 상세 번호
 	private int od_goodsCount = 0;	// 상품 개수
-	private int order_num = 0;		// 주문 번호
+	private long order_num = 0;		// 주문 번호
 	private String pro_num = "";	// 상품 번호
 	
-	private String m_id = "";		// 회원 번호
+	private int cart_num;			// 카트 번호
 }

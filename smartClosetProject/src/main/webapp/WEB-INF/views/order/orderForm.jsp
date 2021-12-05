@@ -17,6 +17,7 @@
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
+		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 		<style type="text/css">
 			nav span {
 				font-size: 20px;
@@ -123,11 +124,19 @@
 						$("#m_addr").val("${order.m_addr}");
 						$("#m_phone").val("${order.m_phone}");
 						$("#m_email").val("${order.m_email}");
+						$("#m_name").prop("readonly", true)
+						$("#m_addr").prop("readonly", true)
+						$("#m_phone").prop("readonly", true)
+						$("#m_email").prop("readonly", true)
 					} else {
 						$("#m_name").val("");
 						$("#m_addr").val("");
 						$("#m_phone").val("");
 						$("#m_email").val("");
+						$("#m_name").prop("readonly", false)
+						$("#m_addr").prop("readonly", false)
+						$("#m_phone").prop("readonly", false)
+						$("#m_email").prop("readonly", false)
 					}
 				});
 				
@@ -194,6 +203,8 @@
 						$("input[class='agreeChk']").focus();
 						return;
 					} else {
+						
+						
 						let applyMile2 = parseInt($("#m_mileApply").val());
 						if (isNaN(applyMile2)) {
 							applyMile2 = 0;

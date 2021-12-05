@@ -5,6 +5,8 @@ import com.spring.client.order.vo.OrderVO;
 
 public interface OrderDAO {
 	OrderVO orderForm(OrderVO ovo);
-	int orderAll(OrderVO ovo);
-	int orderAllDetail(OrderDetailVO odvo);
+	int orderSeq();
+	void insertOrder(OrderVO ovo);
+	void insertOrderDetail(OrderDetailVO odvo);
+	void updateMile(OrderVO ovo);
 }

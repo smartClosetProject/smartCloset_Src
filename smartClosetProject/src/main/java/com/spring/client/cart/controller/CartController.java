@@ -59,11 +59,15 @@ public class CartController {
 		return "success";
 	}
 	
-	@PostMapping("deleteAllCart")
+	@GetMapping("deleteAllCart")
 	public String deleteAllCart(@ModelAttribute CartVO cvo) {
 		log.info("deleteAllCart 호출 성공");
 		
-		cartService.deleteAllCart(cvo);
+		String m_id = "";
+		m_id = (String) session.getAttribute("m_id");
+		m_id = "smartmember";
+		
+		cartService.deleteAllCart(m_id);
 		return "redirect:/cart/cartList";
 	}
 	

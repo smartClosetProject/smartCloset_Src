@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class OrderVO {
-	private int order_num = 0;				// 주문 번호
+	private long order_num = 0;				// 주문 번호
 	private int order_totalPayment = 0;		// 결제금액
 	private String order_state = "";		// 주문 상태
 	private String order_cancelReason = "";	// 주문 취소 사유
