@@ -40,6 +40,9 @@
 			.msg {
 				font-size: 15px;
 			}
+			.orderTh {
+				background-color: #F6F6F6;
+			}
 		</style>
 	</head>
 	<body>
@@ -52,9 +55,9 @@
 			<table class="table table-bordered oDtable">
 				<thead>
 					<tr>
-						<th class="text-center">사용 적립금</th>
-						<th class="text-center">추가 적립금</th>
-						<th class="text-center">최종 적립금</th>
+						<th class="orderTh text-center">사용 적립금</th>
+						<th class="orderTh text-center">추가 적립금</th>
+						<th class="orderTh text-center">최종 적립금</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -102,14 +105,14 @@
 					<col width="80%">
 				</colgroup>
 				<tr>
-					<th class="oDlabel">최종 결제</th>
+					<th class="orderTh oDlabel">최종 결제</th>
 					<td>
 						<fmt:formatNumber type="currency" currencySymbol="" maxFractionDigits="0" 
 							value="${orderDetail.order_totalPayment }" groupingUsed="true" />원
 					</td>
 				</tr>
 				<tr>
-					<th class="oDlabel">결제 수단</th>
+					<th class="orderTh oDlabel">결제 수단</th>
 					<td>${orderDetail.payMethod }</td>
 				</tr>
 			</table>
@@ -126,19 +129,19 @@
 					<col width="80%">
 				</colgroup>
 				<tr>
-					<th class="oDlabel">받는 분</th>
+					<th class="orderTh oDlabel">받는 분</th>
 					<td>${orderDetail.m_name }</td>
 				</tr>
 				<tr>
-					<th class="oDlabel">주소</th>
+					<th class="orderTh oDlabel">주소</th>
 					<td>${orderDetail.m_addr }</td>
 				</tr>
 				<tr>
-					<th class="oDlabel">휴대전화</th>
+					<th class="orderTh oDlabel">휴대전화</th>
 					<td>${orderDetail.m_phone }</td>
 				</tr>
 				<tr>
-					<th class="oDlabel">배송 메시지</th>
+					<th class="orderTh oDlabel">배송 메시지</th>
 					<td>${orderDetail.shipMessage }</td>
 				</tr>
 			</table>

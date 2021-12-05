@@ -73,6 +73,10 @@
 				padding: 15px;
 				position: relative;
 		    }
+		    .mainLi {
+		    	width: 90px;
+		    	text-align: center;
+		    }
   		</style>
 		<script type="text/javascript">
 			

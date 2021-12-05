@@ -32,6 +32,9 @@
 			input[type="button"] {
 				border: none;
 			}
+			.cartTh {
+				background-color: #F6F6F6;
+			}
 		</style>
 		<script type="text/javascript">
 			$(function() {
@@ -254,14 +257,14 @@
 					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<th>
+								<th class="cartTh">
 									<input type="checkbox" name="allCheck" id="allCheck">
 								</th>
-								<th class="text-center">이미지</th>
-								<th class="text-center">상품</th>
-								<th class="text-center">가격</th>
-								<th class="text-center">수량</th>
-								<th></th>
+								<th class="cartTh text-center">이미지</th>
+								<th class="cartTh text-center">상품</th>
+								<th class="cartTh text-center">가격</th>
+								<th class="cartTh text-center">수량</th>
+								<th class="cartTh"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -320,9 +323,9 @@
 				<div>
 					<table class="table table-bordered">
 						<tr>
-							<th class="text-center">총 상품금액</th>
-							<th class="text-center">배송비</th>
-							<th class="text-center">결제 예정 금액</th>
+							<th class="cartTh text-center">총 상품금액</th>
+							<th class="cartTh text-center">배송비</th>
+							<th class="cartTh text-center">결제 예정 금액</th>
 						</tr>
 						<tr>
 							<td class="text-center totalPrice"></td>

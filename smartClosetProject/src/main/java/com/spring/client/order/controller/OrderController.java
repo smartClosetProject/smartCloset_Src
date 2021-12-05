@@ -88,7 +88,7 @@ public class OrderController {
 		
 		orderService.deleteAllCart(m_id);
 		orderService.updateMile(ovo);
-		//session.removeAttribute("cart");
+		session.removeAttribute("cart");
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
 		String dateFormat = sdf.format(cal.getTime());
