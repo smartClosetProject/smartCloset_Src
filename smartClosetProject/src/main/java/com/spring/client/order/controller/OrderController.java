@@ -88,7 +88,7 @@ public class OrderController {
 		
 		orderService.deleteAllCart(m_id);
 		orderService.updateMile(ovo);
-		session.removeAttribute("cart");
+		//session.removeAttribute("cart");
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
 		String dateFormat = sdf.format(cal.getTime());
@@ -106,47 +106,8 @@ public class OrderController {
 		
 		ovo = (OrderVO) session.getAttribute("order");
 		model.addAttribute("orderDetail", ovo);
-		session.removeAttribute("order");
+		// 주문 완료 페이지 벗어날 경우 세션 삭제 예정 session.removeAttribute("order");
 		
 		return "order/orderComplete";
 	}
-	
-	// 필요없는거 받아옴. 하지만 주문 완료 페이지에서 반드시 필요. 배열 받아오는 거.
-//	@PostMapping(value = "orderForm")
-//	public String OrderForm(@RequestParam("chkBox") List<Integer> cartNum, @RequestParam("totalPayment") int totalPayment) {
-//		log.info("OrderForm 호출 성공");
-//		
-//		for (Integer i : cartNum) {
-//			System.out.println(i);
-//		}
-//		System.out.println(totalPayment);
-	
-//		Calendar cal = Calendar.getInstance();
-//		int year = cal.get(Calendar.YEAR);
-//		String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
-//		String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
-//		String subNum = "";
-//		 
-//		for(int i = 1; i <= 6; i ++) {
-//			subNum += (int)(Math.random() * 10);
-//		}
-//		int order_num = Integer.parseInt(ymd + subNum);
-//		ovo.setOrder_num(order_num);
-//		ovo.setOrder_totalPayment(totalPayment);
-	
-//		return "order/orderForm";
-//	}
-	
-//	@GetMapping("orderAll")
-//	public String orderAll(@ModelAttribute OrderVO ovo, OrderDetailVO odvo, Model model) {
-//		String m_id = (String) session.getAttribute("m_id");
-//		m_id = "smartmember";
-//		odvo.setM_id(m_id);
-//		
-//		System.out.println(session.getAttribute("cart"));
-//		session.removeAttribute("cart");
-//		System.out.println(session.getAttribute("cart"));
-//		
-//		return "";
-//	}
 }
