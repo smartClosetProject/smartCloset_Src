@@ -64,8 +64,8 @@
 					</c:otherwise>
 				</c:choose>
 			</table>
-			<input type="button" id="prductList" value="상품 리스트">
-			<input type="button" id="prInsert" value="입력">
+			<input type="button" id="prductList" class="btn btn-info btn-default" value="상품 리스트">
+			<input type="button" id="prInsert" class="btn btn-info btn-default" value="입력">
 		</div>
 	</body>
 </html>

@@ -8,5 +8,6 @@ import com.spring.admin.prdetail.vo.ProductVO;
 public interface PrDetailDAO {
 	public List<PrDetailVO> prDetailList(PrDetailVO prvo);
 	public int prDetailInsert(PrDetailVO prvo);
-	public List<ProductVO> productDetail(PrDetailVO pvo);
+	public int prDetailListCnt(PrDetailVO prvo);
+	public List<ProductVO> productDetail(PrDetailVO prvo);
 }

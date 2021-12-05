@@ -33,7 +33,7 @@ public class PrFileUploadUtil {
 		if(org_name !=null &&(!org_name.equals(""))) {
 			real_name=fileName+"_"+System.currentTimeMillis()+"_"+org_name;
 			
-			String docRoot = "C://productUpload//"+fileName;
+			String docRoot = "C://uploadStorage//"+fileName;
 			makeDir(docRoot);
 			
 			File fileAdd = new File(docRoot+"/"+real_name);
@@ -47,7 +47,7 @@ public class PrFileUploadUtil {
 	//thumb 파일 생성
 	public static String makeThumb(String fileName, int size) throws Exception{
 		String dirName=fileName.substring(0,fileName.indexOf("_"));
-		String imgPath="C://productUploa//"+dirName;
+		String imgPath="C://uploadStorage//"+dirName;
 		
 		File fileAdd= new File(imgPath, fileName);
 		log.info("원본 이미지 파일 : "+fileAdd);
@@ -56,7 +56,7 @@ public class PrFileUploadUtil {
 		BufferedImage destImg
 		=Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_WIDTH,size);
 		
-		String thumbName="thumb_"+fileName+"_"+size;
+		String thumbName="thumb_"+fileName;
 		String docRoot=imgPath+"/thumb";
 		makeDir(docRoot);
 		

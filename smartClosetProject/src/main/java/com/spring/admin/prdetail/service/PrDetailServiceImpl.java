@@ -24,6 +24,11 @@ public class PrDetailServiceImpl implements PrDetailService{
 		list = prDetailDAO.prDetailList(prvo);
 		return list;
 	}
+	//전체 레코드 수 구현
+	@Override
+	public int prDetailListCnt(PrDetailVO prvo) {
+		return prDetailDAO.prDetailListCnt(prvo);
+	}
 	//글 입력 구현
 	@Override
 	public int prDetailInsert(PrDetailVO prvo) throws Exception{
@@ -37,8 +42,8 @@ public class PrDetailServiceImpl implements PrDetailService{
 			prvo.setPr_thumb(thumb);
 		}
 		if(prvo.getFile1().getSize()>0) {
-			String fileName=PrFileUploadUtil.fileUpload(prvo.getFile1(), "prDetail");
-			prvo.setPr_contentimg(fileName);
+			String fileName1=PrFileUploadUtil.fileUpload(prvo.getFile1(), "prDetail");
+			prvo.setPr_contentimg(fileName1);
 		}
 		result=prDetailDAO.prDetailInsert(prvo);
 		return result;

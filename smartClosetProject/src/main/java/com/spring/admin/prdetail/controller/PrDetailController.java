@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.spring.admin.prdetail.service.PrDetailService;
 import com.spring.admin.prdetail.vo.PrDetailVO;
 import com.spring.admin.prdetail.vo.ProductVO;
+import com.spring.common.vo.PageDTO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -32,8 +33,14 @@ public class PrDetailController {
 		 List<PrDetailVO> prDetailList = prDetailService.prDetailList(prvo);
 		 model.addAttribute("prDetailList",prDetailList);
 		 
+		 int total = prDetailService.prDetailListCnt(prvo);
+		 
+		 model.addAttribute("pageMaker", new PageDTO(prvo, total));
+		 
+		 int count = total-(prvo.getPageNum()-1*prvo.getAmount());
+		 model.addAttribute("count", count);
 		
-		return "prDetail/prDetailList";
+		 return "prDetail/prDetailList";
 	}
 	@RequestMapping(value="/writeForm")
 	public String writeForm() {

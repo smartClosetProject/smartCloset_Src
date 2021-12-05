@@ -20,8 +20,9 @@
 		<style type="text/css">
 			.table-height{min-height:450px; padding-left: 270px; width:1700px;}
 			.category select{width:150px; float: left; margin-right:30px;}
-			.date input{width:380px; height:30px; margin-right: 30px; margin-top: 5px;}
-			
+			.date input{width:370px; height:25px; margin-right: 30px; margin-top: 5px;}
+			.issale{margin-right: 75px;}
+			#searchData{height:80px;}
 		</style>
 		<script type="text/javascript">
 			$(function () {
@@ -47,8 +48,40 @@
 							option.append(top[i]);
 							$("#s_search").append(option);
 						}
+					}else if($(this).val()=="하의"){
+						for(i=0;i<pants.length;i++){
+							option=$("<option>");
+							option.attr("value",pants[i]);
+							option.append(pants[i]);
+							$("#s_search").append(option);
+						}
+					}else if($(this).val()=="가방/신발"){
+						for(i=0;i<bag.length;i++){
+							option=$("<option>");
+							option.attr("value",bag[i]);
+							option.append(bag[i]);
+							$("#s_search").append(option);
+						}
+					}else if($(this).val()=="액세서리"){
+						for(i=0;i<acc.length;i++){
+							option=$("<option>");
+							option.attr("value",acc[i]);
+							option.append(acc[i]);
+							$("#s_search").append(option);
+						}
+					}else if($(this).val()=="전체"){
+						option=$("<option>");
+						option.attr("value","전체");
+						option.append("전체");
+						$("#s_search").append(option);
 					}
 				})
+				$("#searchData").click(function(){
+					if($("#pr_num").val()!=""){
+						
+					}
+				}
+				
 				$(".goDetail").click(function(){
 					let pr_num=$(this).parents("tr").attr("data-num");
 					$("#pr_num").val(pr_num);
@@ -79,15 +112,15 @@
 						<table>
 							<tr>
 								<th class="col-md-2">상품번호</th>
-								<td class="col-md-3"><input type="text" id="pr_num" ><input type="hidden" value="pr_num"></td>
+								<td class="col-md-3"><input type="text" id="pr_num" ></td>
 								<th class="col-md-2">카테고리</th>
 								<td class="category col-md-6" >
 									<div>
 									<select id="l_search" name="l_search" class="form-control">
 										<option value="전체">전체</option>
-										<option value="아우터">아우터</option>
 										<option value="상의">상의</option>
 										<option value="하의">하의</option>
+										<option value="아우터">아우터</option>
 										<option value="가방/신발">가방,신발</option>
 										<option value="액세서리">액세서리</option>
 									</select>
@@ -96,7 +129,7 @@
 									</select>
 									</div>
 								</td>
-								<th rowspan="2"class="col-md-2">
+								<th rowspan="3"class="col-md-1">
 									<button id="searchData" class="btn btn-info btn-default">검색</button>
 								</th>
 							</tr>
@@ -105,9 +138,9 @@
 								<td class="col-md-3"><input type="text" id="pr_name"><input type="hidden" value="pr_name"></td>
 								<th class="col-md-2">판매여부</th>
 								<td class="col-md-6" class="issale">
-									<input type="radio" name="pr_issale" value="all"><label>전체</label>
-									<input type="radio" name="pr_issale" value="Y"><label>판매 중</label>
-									<input type="radio" name="pr_issale" value="N"><label>판매 종료</label>
+									<input type="radio" name="pr_issale" value="all"><label class="issale">전체</label>
+									<input type="radio" name="pr_issale" value="Y"><label class="issale">판매 중</label>
+									<input type="radio" name="pr_issale" value="N"><label class="issale">판매 종료</label>
 								</td>
 							</tr>
 							<tr>
@@ -164,6 +197,25 @@
 					</c:choose>
 				</tbody>
 			</table>
+			<div class="text-center">
+				<ul class="pagination">
+					<c:if test="${pageMaker.prev}">
+						<li class="paginate_button previous">
+							<a href="${pageMaker.startPage -1}">Previous</a>
+						</li>
+					</c:if>
+					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+						<li class="paginate_button ${pageMaker.cvo.pageNum ==num ? 'active':'' }">
+							<a href = "${num}">${num}</a>
+						</li>					
+					</c:forEach>
+					<c:if test="${pageMaker.next}">
+						<li class="paginate_button next">
+							<a href ="${pageMaekr.endPage+1}">next</a>
+						</li>
+					</c:if>
+				</ul>
+			</div>
 			<div>
 				<input type="button" value="등록" id="insertFormBtn" class="btn btn-info btn-default" />
 			</div>

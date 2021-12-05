@@ -2,6 +2,8 @@ package com.spring.admin.prdetail.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.common.vo.PrCommonVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PrDetailVO {
+public class PrDetailVO extends PrCommonVO{
 	private String pr_num;
 	private String pr_name;
 	private int pr_price;
