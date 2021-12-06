@@ -19,23 +19,33 @@
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
-		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
+		<style type="text/css">
+			.required {
+				color : red;
+			}
+			.table-height {
+				min-height: 410px;
+			}
+			.contentBtn {
+				min-height: 100px;
+			}
+		</style>
 		<script type="text/javascript">
 			$(function(){
 				// 검색 후 검색 대상과 검색 단어 출력
 				let word = "<c:out value='${data.keyword}' />"
 				let value = "";
 				if (word != "") {
-					$("#keyword").val("<c:out value = '${data.keyword}' />");
-					$("#search").val("<c:out value = '${data.search}' />");
+					$("#reviewKeyword").val("<c:out value = '${data.keyword}' />");
+					$("#re_Search").val("<c:out value = '${data.search}' />");
 				
-					if ($("#search").val() != 'b_content') {
+					if ($("#re_Search").val() != 'r_title') {
 						// :contains()는 특정 텍스트를 포함한 요소 반환
-						if ($("#search").val() == 'b_title') {
+						if ($("#re_Search").val() == 'r_content') {
 							value = "#list tr td.goDetail";
-						} else if ($("#search").val() == 'b_name') {
+						} else if ($("#re_Search").val() == 'm_id') {
 							value = "#list tr td.name";
 						}
 						console.log($(value + ":contains('" + word + "')").html());
@@ -46,19 +56,21 @@
 						});
 					}
 				}
+				
 				// 검색 대상이 변경될 때마다 처리 이벤트
-				$("#search").change(function() {
-					if ($("#search").val() == "all") {
-						$("#keyword").val("검색어 입력");
-					} else if ($("#search").val() != "all") {
-						$("#keyword").val("");
-						$("#keyword").focus();
+				$("#re_Search").change(function() {
+					if ($("#re_Search").val() == "all") {
+						$("#reviewKeyword").val("검색어 입력");
+					} else if ($("#re_Search").val() != "all") {
+						$("#reviewKeyword").val("");
+						$("#reviewKeyword").focus();
 					}
 				});
+				
 				// 검색 버튼 클릭 시 처리 이벤트
 				$("#reviewSearchBtn").click(function() {
-					if ($("#search").val() != "all") {
-						if (!chkData("#keyword", "검색어를")) {
+					if ($("#re_Search").val() != "all") {
+						if (!chkData("#reviewKeyword", "검색어를")) {
 							return;
 						}
 					}
@@ -66,25 +78,51 @@
 				});
 				// 글쓰기 버튼 클릭 시 처리 이벤트
 				$("#insertFormBtn").click(function() {
-					location.href = "/board/writeForm"; /* jsp의 요청은 모두 매핑으로 준다. */
+					$("#r_numForm").attr({
+						"method" : "get",
+						"action" : "/review/writeForm"
+					});
+					$("#r_numForm").submit();
 				});
 				
+				// 제목 클릭 시 상세 페이지 이동을 위한 처리 이벤트
+				$(".goDetail").click(function() {
+					let r_num = $(this).parents("tr").attr("data-num");
+					$("#r_num").val(r_num);
+					console.log(r_num);
+					// 상세 페이지로 이동하기 위해 form 추가 (id : detailForm)
+					$("#r_numForm").attr({
+						"method" : "get",
+						"action" : "/review/reviewDetail"
+					});
+					$("#r_numForm").submit();
+				});
+				
+				// 페이지 클릭 시 처리
+				$(".paginate_button a").click(function(e) {
+					e.preventDefault();
+					$("#r_search").find("input[name='pageNum']").val($(this).attr("href"));
+					goPage();
+				});
 			});
+			// 검색을 위한 실질적인 처리 함수
+			function goPage() {
+				if ($("#re_Search").val() == "all") {
+					$("#reviewKeyword").val("");
+				}
+				$("#r_search").attr({
+					"method" : "get",
+					"action" : "/review/reviewList"
+				});
+				$("#r_search").submit();
+			}
 		</script>
 	</head>
 	<body>
 		<div class="contentContainer container">
 			<form id="r_numForm">
-				<input type="hidden" id="m_id" name="m_id">
+				<input type="hidden" id="r_num" value="r_num" name="r_num">
 			</form>
-			
-			<!-- -------------------검색 시작 ------------------------- -->
-			<div id="revewSearch" class="text-right">
-				<form id="r_search" name="r_search" class="form-inline">
-					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum }">
-					<input type="hidden" name="amount" value="${pageMaker.cvo.amount }">
-				</form>
-			</div>
 			<!-- --------------------검색 종료 ---------------------------->
 			<!-- -------------------- 리스트 시작 -------------------------->
 			<div id="reviewList" class="table-height">
@@ -104,11 +142,9 @@
 							<c:forEach var="review" items="${reviewList}" varStatus="status">
 								<tr class="text-center" data-num="${review.r_num}"> <!-- ${review.r_num } 실제 글 번호 -->
 									<td>${count - status.index }</td>
-
-									<td class="text-left">${review.r_thumb}</td>
-									<td class="text-left">${review.r_title}</td>
+									<td class="text-left"><img src="/uploadStorage/review/thumbnail/${review.r_thumb }"></td>
+									<td class="goDetail text-left">${review.r_title}</td>
 									<td class="text-left">${review.m_id}</td>
-									
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -123,20 +159,24 @@
 			</table>
 			</div>			
 			<%-- =================== 검색 버튼 =================== --%>
-			<div id="reviewSearch">
-			<form>
-					<span class="glyphicon glyphicon-search"></span>&nbsp; 
-						<select id ="search" name="search" class="form-control">
+			<div id="reviewSearch" class="text-left">
+				<form id="r_search" name="r_search" class="form-inline">
+					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum }">
+					<input type="hidden" name="amount" value="${pageMaker.cvo.amount }">
+						<span class="glyphicon glyphicon-search"></span>&nbsp;
+					 <div class="form-group">
+						<select id ="re_Search" name="search" class="form-control">
 							<option value="all">전체</option>
 							<option value="r_title">제목</option>
 							<option value="r_content">내용</option>
 							<option value="m_id">아이디</option>							
 						</select>
-					<input type="text" id="keyword" name="keyword" value="검색어 입력" class="form-control">
-					<input type="button" name="reviewSearchBtn" class="btn btn-default" id="reviewSearchBtn" value="검색">
-			</form>
+							<input type="text" id="reviewKeyword" name="keyword" value="검색어 입력" class="form-control">
+							<button type="button" class="btn btn-default" id="reviewSearchBtn" >검색</button>
+					</div>
+				</form> 
 			</div>
-				<div class="contentBtn text-right">
+			<div class="contentBtn text-right">
 				<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-success">
 			</div>
 			<!-- ---------------------검색 종료 ------------------------------>
@@ -162,6 +202,5 @@
 				</ul>
 			</div>
 		</div>
-	
 	</body>
 </html>

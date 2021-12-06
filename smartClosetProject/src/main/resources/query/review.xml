@@ -12,22 +12,22 @@
 		<!-- 검색 중복사용 소스 -->
 		<sql id="reviewSearch">
 			<if test="search == 'r_title'">
-				<![CDATA[ r_thumb LIKE '%' || #{keyword} || '%' ]]>
-			</if>
-			<if test="search == 'm_id'">
 				<![CDATA[ r_title LIKE '%' || #{keyword} || '%' ]]>
 			</if>
-			<if test="search == 'r_content'">
+			<if test="search == 'm_id'">
 				<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
+			</if>
+			<if test="search == 'r_content'">
+				<![CDATA[ r_content LIKE '%' || #{keyword} || '%' ]]>
 			</if>
 		</sql>
 	
 	<select id="reviewList" parameterType="review" resultType="review">
 		<![CDATA[
-			SELECT  r_num, r_file, r_thumb, r_title, r_content, to_char(r_regdate, 'YYYY-MM-DD') AS r_regdate,m_id 
+			SELECT  r_num, r_thumb, r_title, r_content, to_char(r_regdate, 'YYYY-MM-DD') AS r_regdate,m_id 
 			FROM
 				(SELECT /*+ INDEX_DESC(review review_pk ) */
-					ROWNUM as rnum , r_num, m_id, r_title, r_content, r_thumb, r_file, r_regdate
+					ROWNUM as rnum ,  r_num, r_thumb, r_title, r_content, r_regdate,m_id 
 				FROM review
 				WHERE ]]>
 				 <trim prefix="(" suffix=") AND " prefixOverrides="AND">
@@ -47,5 +47,36 @@
 		</trim>
 	</select>
 	
+	<!-- 글쓰기  -->
+	<insert id="reviewInsert" parameterType="review">
+		INSERT INTO review(r_num, m_id, r_file, r_thumb, r_title, r_content)
+		values(review_seq.nextval, #{m_id}, #{r_file}, #{r_thumb}, #{r_title}, #{r_content})
+	</insert>
+	
+	<!-- 게시물 상세페이지 조회 -->
+	<select id="reviewDetail" parameterType="review" resultType="review">
+		SELECT r_num,r_thumb, r_title, r_content,r_file, TO_CHAR(r_regdate, 'YYYY-MM-DD HH24:MI:SS'),m_id
+		FROM review
+		WHERE r_num = #{r_num}
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<insert id="reviewUpdate" parameterType="review">
+		UPDATE review
+		SET r_title = #{r_title}, r_content = #{r_content}
+			<if test="r_thumb != ''">
+				, r_thumb = #{r_thumb}
+			</if>
+			<if test="r_file != ''">
+				, r_file = #{r_file}
+			</if>
+		WHERE r_num = #{r_num}
+	</insert>
+	
+	<!-- 글 삭제 처리 -->
+	<delete id="reviewDelete" parameterType="review">
+		DELETE FROM review
+		WHERE r_num = #{r_num}
+	</delete>
 
 </mapper>

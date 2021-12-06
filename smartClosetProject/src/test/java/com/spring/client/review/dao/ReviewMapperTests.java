@@ -20,18 +20,44 @@ public class ReviewMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private ReviewDAO reviewDAO;
 	
+//	@Test
+//	public void testReviewList() {
+//		ReviewVO rvo = new ReviewVO();
+//		
+//		rvo.setPageNum(1);
+//		rvo.setAmount(10);
+//		
+//		List<ReviewVO> list = reviewDAO.reviewList(rvo);
+//		for(ReviewVO vo: list) {
+//			log.info(vo);
+//		}
+//	}
+//	@Test
+//	public void testReviewInsert() {
+//		ReviewVO rvo = new ReviewVO();
+//		
+//		rvo.setM_id("smartmember"); 
+//		rvo.setR_title("새로입력");
+//		rvo.setR_content("새로넣는다");
+//		rvo.setR_file("새로운 파일");
+//		rvo.setR_thumb("새로 넣엇네");
+//		
+//		
+//		int result = reviewDAO.reviewInsert(rvo);
+//		if (result == 1) {
+//			log.info("입력 성공");
+//		} else {
+//			log.info("입력 실패");
+//		}
+//	}
 	@Test
-	public void testReviewList() {
+	public void testReviewDetail() {
 		ReviewVO rvo = new ReviewVO();
+		rvo.setR_num(84);
 		
-		rvo.setPageNum(1);
-		rvo.setAmount(10);
+		ReviewVO vo = reviewDAO.reviewDetail(rvo);
+		log.info(vo);
 		
-		List<ReviewVO> list = reviewDAO.reviewList(rvo);
-		for(ReviewVO vo: list) {
-			log.info(vo);
-		}
 	}
-	
 
 }
