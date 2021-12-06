@@ -41,8 +41,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public void deleteAllCart(String m_id) {
-		cartDao.deleteAllCart(m_id);
+	public void deleteSelectCart(int cart_num) {
+		cartDao.deleteSelectCart(cart_num);
 	}
 
 	@Override

@@ -8,6 +8,6 @@ public interface OrderService {
 	int orderSeq();
 	void insertOrder(OrderVO ovo);
 	void insertOrderDetail(OrderDetailVO odvo);
-	void deleteAllCart(String m_id);
+	void deleteSelectCart(int cart_num);
 	void updateMile(OrderVO ovo);
 }

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.client.order.service.OrderService;
 import com.spring.client.order.vo.OrderDetailVO;
@@ -84,9 +83,9 @@ public class OrderController {
 		for (Integer i : cartNums) {
 			odvo.setCart_num(i);
 			orderService.insertOrderDetail(odvo);
+			orderService.deleteSelectCart(i);
 		}
 		
-		orderService.deleteAllCart(m_id);
 		orderService.updateMile(ovo);
 		session.removeAttribute("cart");
 		

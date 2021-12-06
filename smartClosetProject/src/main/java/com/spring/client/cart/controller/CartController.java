@@ -47,14 +47,13 @@ public class CartController {
 	
 	@ResponseBody
 	@PostMapping("deleteSelectCart")
-	public String deleteSelectCart(@RequestParam(value = "chkBox[]") List<Integer> chkArr, CartVO cvo) {
+	public String deleteSelectCart(@RequestParam(value = "chkBox[]") List<Integer> chkArr) {
 		log.info("deleteSelectCart 호출 성공");
 		
 		int cart_Num = 0;
 		for (Integer i : chkArr) {
 			cart_Num = i;
-			cvo.setCart_num(cart_Num);
-			cartService.deleteSelectCart(cvo);
+			cartService.deleteSelectCart(cart_Num);
 		}
 		return "success";
 	}

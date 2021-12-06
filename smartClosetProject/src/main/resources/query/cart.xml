@@ -13,7 +13,7 @@
 		VALUES(cart_seq.NEXTVAL, #{cart_goodsCount}, #{pro_num}, #{m_id})
 	</insert>
 	
-	<delete id="deleteSelectCart" parameterType="cart">
+	<delete id="deleteSelectCart" parameterType="int">
 		DELETE FROM cart
 		WHERE cart_num = #{cart_num}
 	</delete>
