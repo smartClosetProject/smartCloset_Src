@@ -85,6 +85,7 @@
 	</head>
 	<body>
 		<div class="container">
+		<h2>상품 입력 페이지</h2>
 			<form id="insertForm">
 				<div class="form-group">
 					<table class="table-bordered">

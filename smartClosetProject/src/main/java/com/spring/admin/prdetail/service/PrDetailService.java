@@ -7,7 +7,12 @@ import com.spring.admin.prdetail.vo.ProductVO;
 
 public interface PrDetailService {
 	public List<PrDetailVO> prDetailList(PrDetailVO prvo);
+	public int prDetailInsert(PrDetailVO prvo) throws Exception;
 	public int prDetailListCnt(PrDetailVO prvo);
 	public List<ProductVO> productDetail(ProductVO pvo);
-	public int prDetailInsert(PrDetailVO prvo) throws Exception;
+	
+	public List<ProductVO> prNumericalList(ProductVO pvo);
+	public int prNumericalListCnt(ProductVO pvo);
+	
+	public List<ProductVO> warehousingList(ProductVO pvo);
 }

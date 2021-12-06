@@ -73,5 +73,40 @@ public class PrDetailController {
 		
 		return "prDetail/productDetail";
 	}
+	@RequestMapping(value="pr_numerical", method = RequestMethod.GET)
+	public String prNumericalList(@ModelAttribute("data") ProductVO pvo, Model model) {
+		
+		 log.info("prNumericalList 출력 성공");
+		  
+		 List<ProductVO> prNumericalList = prDetailService.prNumericalList(pvo);
+		 model.addAttribute("prNumericalList",prNumericalList);
+		 
+		 int total = prDetailService.prNumericalListCnt(pvo);
+		 
+		 model.addAttribute("pageMaker", new PageDTO(pvo, total));
+		 
+		 int count = total-(pvo.getPageNum()-1*pvo.getAmount());
+		 model.addAttribute("count", count);
+		
+		 return "prDetail/pr_numerical";
+	}
+	
+	@RequestMapping(value="warehousingList", method = RequestMethod.GET)
+	public String warehousingList(@ModelAttribute("data") ProductVO pvo, Model model) {
+		
+		 log.info("warehousingList 출력 성공");
+		  
+		 List<ProductVO> warehousingList = prDetailService.warehousingList(pvo);
+		 model.addAttribute("warehousingList",warehousingList);
+		 
+		 int total = prDetailService.prNumericalListCnt(pvo);
+		 
+		 model.addAttribute("pageMaker", new PageDTO(pvo, total));
+		 
+		 int count = total-(pvo.getPageNum()-1*pvo.getAmount());
+		 model.addAttribute("count", count);
+		
+		 return "prDetail/warehousingList";
+	}
 
 }

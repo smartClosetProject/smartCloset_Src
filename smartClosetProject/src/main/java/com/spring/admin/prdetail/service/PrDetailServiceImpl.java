@@ -51,9 +51,31 @@ public class PrDetailServiceImpl implements PrDetailService{
 	
 	//상세 페이지 구현
 	@Override
-	public List<ProductVO> productDetail (ProductVO pvo) {
+	public List<ProductVO> productDetail(ProductVO pvo) {
 		List<ProductVO> prList = null;
 		prList = prDetailDAO.productDetail(pvo);
 		return prList;
+	}
+	
+	//상품 통게 페이지 구현
+	@Override
+	public List<ProductVO> prNumericalList(ProductVO pvo){
+		List<ProductVO> list=null;
+		list = prDetailDAO.prNumericalList(pvo);
+		return list;
+	}
+	
+	//전체 레코드 수 구현
+	@Override
+	public int prNumericalListCnt(ProductVO pvo) {
+		return prDetailDAO.prDetailListCnt(pvo);
+	}
+	
+	//상품 입고 페이지 구현
+	@Override
+	public List<ProductVO> warehousingList(ProductVO pvo){
+		List<ProductVO> list=null;
+		list = prDetailDAO.warehousingList(pvo);
+		return list;
 	}
 }

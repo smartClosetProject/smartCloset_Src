@@ -33,6 +33,7 @@
 	</head>
 	<body>
 		<div class="container">
+		<h2>상품 상세 페이지</h2>
 			<table class="table table-boardered">
 				<tr>
 					<th class="col-md-2">상품 상세 번호</th>
@@ -51,7 +52,11 @@
 								<td class="col-md-2">${product.pro_color}</td>
 								<td class="col-md-2">${product.pro_size}</td>
 								<td class="col-md-1">${product.pro_stock}</td>
-								<td class="col-md-1">${product.pro_sales}</td>
+								<td class="col-md-1">
+									<c:if test="${not empty board.b_thumb}">
+										<img src="/uploadStorage/prDetail/thumb/${product.pr_thumb}">
+									</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 					</c:when>

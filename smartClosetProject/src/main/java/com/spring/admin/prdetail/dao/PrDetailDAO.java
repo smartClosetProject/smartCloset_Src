@@ -9,5 +9,10 @@ public interface PrDetailDAO {
 	public List<PrDetailVO> prDetailList(PrDetailVO prvo);
 	public int prDetailInsert(PrDetailVO prvo);
 	public int prDetailListCnt(PrDetailVO prvo);
-	public List<ProductVO> productDetail(PrDetailVO prvo);
+	public List<ProductVO> productDetail(ProductVO prvo);
+	
+	public List<ProductVO> prNumericalList(ProductVO pvo);
+	public int prNumericalListCnt(ProductVO pvo);
+	
+	public List<ProductVO> warehousingList(ProductVO pvo);
 }

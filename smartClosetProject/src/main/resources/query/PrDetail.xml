@@ -2,25 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.admin.prdetail.dao.PrDetailDAO">
 
-		<sql id="prDetailSearch">
+<!-- 		<sql id="prDetailSearch"> -->
 		
-		</sql>
+<!-- 		</sql> -->
 	<!-- 상품 리스트 기본 조회 -->
 		<select id="prDetailList" parameterType="prDetail" resultType="prDetail">
-			<![CDATA[select upper(pr_num) as pr_num, pr_name, (pr_categoryl||' > '||pr_categorys) as category, 
+		<![CDATA[select upper(pr_num) as pr_num, pr_name, (pr_categoryl||' > '||pr_categorys) as category, 
 			pr_issale, pr_price
 			from(
 				select/*+index_desc(pr_detail PR_DETAIL_PR_NUM_PK) */
 				rownum as rnum, pr_num, pr_name, pr_categoryl,pr_categorys, pr_issale, pr_price, pr_regdate 
 			from pr_detail
-			where]]> 
-			<trim prefix="(" suffix=") AND" prefixOverrides="AND">
-				<include refid="prDetailSearch"></include>
-			</trim>
+			where ]]>
+<!-- 			<trim prefix="(" suffix=") AND" prefixOverrides="AND"> -->
+<!-- 				<include refid="prDetailSearch"></include> -->
+<!-- 			</trim> -->
 			<![CDATA[ rownum <=#{pageNum}*#{amount}
-			)prDetailList
+ 			)prDetailList
 			where rnum >(#{pageNum} -1)*#{amount}
 			]]>
+		</select>
+		<select id="prDetailListCnt" parameterType="prDetail" resultType="int">
+			select count(*) from pr_detail
 		</select>
 		<insert id="prDetailInsert" parameterType="prDetail">
 			insert into pr_detail (pr_num, pr_name, pr_price, pr_issale, pr_mainimg, 
@@ -33,5 +36,39 @@
 			select pro_num, pro_colorImg, pro_color, pro_size, pro_stock, pro_sales
 			from product where pr_num=#{pr_num}
 		</select>
-
+	<!-- 통계 리스트 조회 -->
+	<select id="prNumericalList" parameterType="product" resultType="product">
+		<![CDATA[select upper(pro_num) as pro_num, pr_name, upper(pr_num) as pr_num, pro_size, pro_color, pro_stock, pro_sales 
+			from(
+				select/*+index_desc(product PRoduct_PRo_NUM_PK) */
+				rownum as rnum, pr.pro_num, pd.pr_name, pr.pr_num, pr.pro_size,pr.pro_color, pr.pro_stock, pr.pro_sales 
+			from product pr inner JOin pr_detail pd on pr.pr_num =pd.pr_num
+			where ]]>
+<!-- 			<trim prefix="(" suffix=") AND" prefixOverrides="AND"> -->
+<!-- 				<include refid="prDetailSearch"></include> -->
+<!-- 			</trim> -->
+			<![CDATA[ rownum <=#{pageNum}*#{amount}
+ 			)prNumericalList
+			where rnum >(#{pageNum} -1)*#{amount}
+			]]>
+		</select>
+		<select id="prNumericalListCnt" parameterType="product" resultType="int">
+			select count(*) from product
+		</select>
+		<!-- 입고 리스트 조회 -->
+		<select id="warehousingList" parameterType="product" resultType="product">
+		<![CDATA[select upper(cl_name) as cl_name, upper(pro_num) as pro_num, cl_price, cl_amount, cl_allPrice, cl_regdate 
+			from(
+				select/*+index_desc(product PRoduct_PRo_NUM_PK) */
+				rownum as rnum, cl.cl_name, pr.pro_num, cl.cl_price, cl.cl_amount, (cl.cl_amount*cl.cl_price) as cl_allPrice, cl.cl_regdate 
+			from product pr inner JOin client cl on cl.cl_num =pr.cl_num
+			where ]]>
+<!-- 			<trim prefix="(" suffix=") AND" prefixOverrides="AND"> -->
+<!-- 				<include refid="prDetailSearch"></include> -->
+<!-- 			</trim> -->
+			<![CDATA[ rownum <=#{pageNum}*#{amount}
+ 			)WarehousingList
+			where rnum >(#{pageNum} -1)*#{amount}
+			]]>
+		</select>
 </mapper>
