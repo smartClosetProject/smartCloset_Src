@@ -7,6 +7,7 @@
 		<typeAlias type="com.spring.client.cart.vo.CartVO" alias="cart" />
 		<typeAlias type="com.spring.client.order.vo.OrderVO" alias="order" />
 		<typeAlias type="com.spring.client.order.vo.OrderDetailVO" alias="orderDetail" />
+		<typeAlias type="com.spring.client.smartcloset.vo.SmartClosetVO" alias="sCloset" />
 	</typeAliases>
 
 </configuration>

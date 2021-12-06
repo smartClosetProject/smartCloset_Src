@@ -94,7 +94,7 @@
 				<div class="container-fluid">
 					<tiles:insertAttribute name="clientAside" />
 					
-					<div class="col-sm-9 page">
+					<div class="col-sm-10 page">
 						<tiles:insertAttribute name="body" />
 					</div>
 				</div>

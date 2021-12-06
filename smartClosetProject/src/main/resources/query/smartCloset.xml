@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.client.smartcloset.dao.SmartClosetDAO">
+
+	<insert id="buyInsertSCloset" parameterType="order">
+		INSERT INTO smart_closet(sc_num, sc_tag1, sc_tag2, sc_tag3, sc_isBuy, sc_image, sc_thumb, m_id)
+					SELECT smart_closet_seq.NEXTVAL, pr_categoryL, pr_categoryS, pr_season, 'YES', pro_colorImg, pro_colorThumb, #{m_id}
+					FROM product 
+					WHERE pro_num = (SELECT pro_num 
+									 FROM cart
+									 WHERE cart_num = #{cart_num})
+	</insert>
+	
+	
+	
+</mapper>

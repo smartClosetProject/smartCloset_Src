@@ -22,4 +22,6 @@ public class OrderVO {
 	private int m_mileAdd = 0;				// 추가 적립금
 	private String shipMessage = "";		// 배송 메시지
 	private String payMethod = "";			// 결제 수단
+	
+	private int cart_num = 0;				// 카트 번호
 }

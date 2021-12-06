@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.spring.client.order.service.OrderService;
 import com.spring.client.order.vo.OrderDetailVO;
 import com.spring.client.order.vo.OrderVO;
+import com.spring.client.smartcloset.service.SmartClosetService;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -32,6 +33,8 @@ public class OrderController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private OrderService orderService;
+	@Setter(onMethod_ = @Autowired)
+	private SmartClosetService sClosetService;
 	@Setter(onMethod_ = @Autowired)
 	private HttpSession session;
 	
@@ -80,15 +83,17 @@ public class OrderController {
 		List<Integer> cartNums = (ArrayList<Integer>) session.getAttribute("cart");
 		odvo.setOrder_num(order_num);
 		
+		//String pro_num = 
 		for (Integer i : cartNums) {
 			odvo.setCart_num(i);
+			ovo.setCart_num(i);
 			orderService.insertOrderDetail(odvo);
+			sClosetService.buyInsertSCloset(ovo);
 			orderService.deleteSelectCart(i);
 		}
-		
 		orderService.updateMile(ovo);
 		session.removeAttribute("cart");
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
 		String dateFormat = sdf.format(cal.getTime());
 		ovo.setOrder_regdate(dateFormat);
@@ -105,7 +110,6 @@ public class OrderController {
 		
 		ovo = (OrderVO) session.getAttribute("order");
 		model.addAttribute("orderDetail", ovo);
-		// 주문 완료 페이지 벗어날 경우 세션 삭제 예정 session.removeAttribute("order");
 		
 		return "order/orderComplete";
 	}
