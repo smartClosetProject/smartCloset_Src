@@ -6,5 +6,8 @@ public interface AdminDAO {
 
 	public AdminVO adminLogin(AdminVO avo);
 	public AdminVO adminInfo(AdminVO avo);
+	public AdminVO readAdminInfo(String ad_id);
+	public int adminUpdate(AdminVO avo);
+
 
 }

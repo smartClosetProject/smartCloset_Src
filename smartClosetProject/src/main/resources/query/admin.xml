@@ -8,5 +8,14 @@
 		FROM admin
 		WHERE ad_id = #{ad_id} and ad_passwd = #{ad_passwd}
 	</select>
-
+	<select id="readAdminInfo" parameterType="String" resultType="admin">
+		SELECT ad_num, ad_id, ad_name, TO_CHAR(ad_regdate, 'YYYY-MM-DD') AS ad_regdate, ad_phone, ad_email, ad_addr
+		FROM admin
+		WHERE ad_id = #{ad_id}
+	</select>
+	<update id="adminUpdate" parameterType="admin">
+		UPDATE admin
+		SET ad_passwd = #{ad_passwd}, ad_name = #{ad_name}, ad_phone = #{ad_phone}, ad_email = #{ad_email}, ad_addr = #{ad_addr}
+		WHERE ad_id = #{ad_id}
+	</update>
 </mapper>

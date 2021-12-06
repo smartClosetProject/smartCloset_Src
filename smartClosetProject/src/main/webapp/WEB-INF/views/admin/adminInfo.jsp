@@ -18,19 +18,37 @@
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
-	
-		<!--[if lt IE 9]>
-		<script src="/resources/js/html5shiv.js"></script>
-		<![endif]-->
+		<script type="text/javascript">
+			$(function () {
+				$("#changeInfoBtn").click(function () {
+					goUrl = "/admin/adminUpdateForm";
+					$("#f_adData").attr("action", goUrl);
+					$("#f_adData").submit();
+				})
+				//메인 페이지로 가는 길 만들어 줘야함
+				$("#toGoMainBtn").click(function () {
+					location.href = "/admin/adminTest";
+				})
+				
+				$("#adminLogoutBtn").click(function () {
+					if(confirm("로그아웃 하시겠습니까?")){
+						location.href = "/admin/adminLogout"
+					}
+				})
+			}); //최상위 $ 종료
+		
+		
+		</script>
+		
 	</head>
 	<body>
 		<div>
 			<form name="f_adData" id="f_adData" method="post">
-				<input type="hidden" name="ad_num" value="${adminInfo.ad_num}">
+				<input type="hidden" name="ad_id" value="${adminInfo.ad_id}">
 			</form>
 			<table class="table table-bordered">
 				<tr>
-					<td>관리자 번호</tr>
+					<td>관리자 번호</td>
 					<td colspan="3">${adminInfo.ad_num}</td>
 				</tr>
 				<tr>
@@ -46,17 +64,18 @@
 					<td>${adminInfo.ad_phone}</td>
 				</tr>
 				<tr>
-					<td>이메일</tr>
+					<td>이메일</td>
 					<td colspan="3">${adminInfo.ad_email}</td>
 				</tr>
 				<tr>
-					<td>주소</tr>
+					<td>주소</td>
 					<td colspan="3">${adminInfo.ad_addr}</td>
 				</tr>
 			</table>
 		
-			<input type="button" class="btn btn-default text-right btn-sm" id="pwdChangeBtn" name="pwdChangeBtn" value="비밀번호 변경"/>
-			<input type="button" class="btn btn-default text-right btn-sm" id="pwdChangeBtn" name="pwdChangeBtn" value="취소"/>
+			<input type="button" class="btn btn-default text-right btn-sm" id="changeInfoBtn" name="changeInfoBtn" value="관리자정보 변경"/>
+			<input type="button" class="btn btn-default text-right btn-sm" id="toGoMainBtn" name="toGoMainBtn" value="메인으로"/>
+			<input type="button" class="btn btn-default text-right btn-sm" id="adminLogoutBtn" name="adminLogoutBtn" value="로그아웃"/>
 		</div>
 	
 	</body>

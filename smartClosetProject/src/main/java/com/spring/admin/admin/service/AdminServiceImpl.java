@@ -25,4 +25,14 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.adminLogin(avo);
 	}
 
+	@Override
+	public AdminVO readAdminInfo(String ad_id) {
+		return adminDao.readAdminInfo(ad_id);
+	}
+
+	@Override
+	public int adminUpdate(AdminVO avo) {
+		return adminDao.adminUpdate(avo);
+	}
+
 }
