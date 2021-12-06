@@ -15,4 +15,5 @@ public interface PrDetailDAO {
 	public int prNumericalListCnt(ProductVO pvo);
 	
 	public List<ProductVO> warehousingList(ProductVO pvo);
+	public int warehousingInsert(ProductVO pvo);
 }

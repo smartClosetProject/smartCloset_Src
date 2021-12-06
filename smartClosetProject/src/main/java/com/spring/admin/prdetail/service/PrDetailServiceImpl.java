@@ -78,4 +78,19 @@ public class PrDetailServiceImpl implements PrDetailService{
 		list = prDetailDAO.warehousingList(pvo);
 		return list;
 	}
+	
+	@Override
+	public int warehousingInsert(ProductVO pvo) throws Exception {
+		int result=0;
+		
+		if(pvo.getFile().getSize()>0) {
+			String fileName=PrFileUploadUtil.fileUpload(pvo.getFile(),"warehousing");
+			pvo.setPro_colorImg(fileName);
+			
+			String thumb = PrFileUploadUtil.makeThumb(fileName, 300);
+			pvo.setPro_colorthumb(thumb);
+		}
+		result=prDetailDAO.warehousingInsert(pvo);
+		return result;
+	}
 }

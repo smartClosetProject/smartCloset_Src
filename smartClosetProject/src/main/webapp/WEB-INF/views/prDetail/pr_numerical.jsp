@@ -23,7 +23,16 @@
 	</head>
 	<body>
 		<div id="prNumericalList" class="table-height">
-		<h2>상품 통계 페이지</h2>
+			<h2>상품 통계 페이지</h2>
+			<form id="Numerical">
+				<div class="contentTit page-header text-right">
+					<select id="prNum" name="prNum">
+						<option value="date">등록일</option>
+						<option value="sales">판매량</option>
+					</select>
+					<button type="button" id="lineup" class="btn btn-info btn-default">정렬</button>
+				</div>
+			</form>
 			<table class="table">
 				<thead>
 					<tr>

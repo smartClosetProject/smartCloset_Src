@@ -13,6 +13,7 @@ public class ProductVO extends PrDetailVO {
 	private String pro_color;
 	private int pro_stock;
 	private int pro_sales;
+	private String pro_colorthumb;
 	
 	private int cl_num;
 	private int cl_price;

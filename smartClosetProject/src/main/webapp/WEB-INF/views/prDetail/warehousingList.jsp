@@ -24,6 +24,13 @@
 			.issale{margin-right: 75px;}
 			#searchData{height:80px;}
 		</style>
+		<script type="text/javascript">
+			$(function(){
+				$("#insertWarBtn").click(function(){
+					location.href="/prDetail/insertWarehousing";
+				})
+			})
+		</script>
 	</head>
 	<body>
 		<div id="prDetailList" class="table-height">
@@ -82,7 +89,7 @@
 				</ul>
 			</div>
 			<div>
-				<input type="button" value="등록" id="insertFormBtn" class="btn btn-info btn-default" />
+				<input type="button" value="등록" id="insertWarBtn" class="btn btn-info btn-default" />
 			</div>
 		</div>
 	</body>

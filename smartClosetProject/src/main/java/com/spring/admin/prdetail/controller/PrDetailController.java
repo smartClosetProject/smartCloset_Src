@@ -108,5 +108,11 @@ public class PrDetailController {
 		
 		 return "prDetail/warehousingList";
 	}
-
+	@RequestMapping(value="/insertWarehousing")
+	public String insertWarehousing() {
+		log.info("insertWarehousing 호출 성공");
+		
+		return "/prDetail/insertWarehousing";
+	}
+	
 }
