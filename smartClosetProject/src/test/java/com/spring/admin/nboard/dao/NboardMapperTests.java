@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.spring.admin.aMember.dao.AmemberDAO;
+import com.spring.admin.aMember.vo.AmemberVO;
 import com.spring.admin.admin.dao.AdminDAO;
 import com.spring.admin.admin.vo.AdminVO;
 import com.spring.admin.nboard.vo.NboardVO;
@@ -25,21 +27,31 @@ public class NboardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private AdminDAO adminDAO;
 	
-//	@Test
-//	public void testBoardList() {
-//		List<BoardVO> list = boardDAO.boardList();
-//		for (BoardVO vo : list) {
-//			log.info(vo);
-//		}
-//	}
-//	
+	@Setter(onMethod_ = @Autowired)
+	private AmemberDAO aMemberDAO;
+	
+	@Test
+	public void testBoardList() {
+		AmemberVO avo = new AmemberVO();
+	
+////		avo.setPageNum(2);
+////		avo.setAmount(10);
+//		
+		List<AmemberVO> list = aMemberDAO.aMemberList(avo);
+		for (AmemberVO vo : list) {
+			log.info(vo);
+		}
+		
+		log.info(aMemberDAO.aMemberListCnt(avo)); 
+	}
+	
 //	@Test
 //	public void testBoardList() { // 검색 추가
 //		NboardVO bvo = new NboardVO();
-//		
-//		bvo.setPageNum(2);
-//		bvo.setAmount(10);
-//		
+////		
+////		bvo.setPageNum(2);
+////		bvo.setAmount(10);
+////		
 //		// 검색 조건 부여
 //		// bvo.setSearch("b_title");
 //		// bvo.setKeyword("스프링");
@@ -49,7 +61,7 @@ public class NboardMapperTests {
 //			log.info(vo);
 //		}
 //	}
-	
+//	
 //	@Test
 //	public void testBoardInsert() {
 //		BoardVO bvo = new BoardVO();
@@ -118,14 +130,14 @@ public class NboardMapperTests {
 //		bvo.setB_num(7);
 //		
 //		boardDAO.boardDelete(bvo);
+////	}
+//	@Test
+//	public void testAdminlogin() { // 검색 추가
+//		AdminVO avo = new AdminVO();
+//		avo.setAd_id("admin1");
+//		avo.setAd_passwd("admin1234");
+//		
+//		adminDAO.adminLogin(avo);
 //	}
-	@Test
-	public void testAdminlogin() { // 검색 추가
-		AdminVO avo = new AdminVO();
-		avo.setAd_id("admin1");
-		avo.setAd_passwd("admin1234");
-		
-		adminDAO.adminLogin(avo);
-	}
 	
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.admin.aMember.dao.AmemberDAO">
+
+	<select id="aMemberList" parameterType="amember" resultType="amember">
+		<![CDATA[
+		SELECT m_id, m_name, TO_CHAR(m_regdate, 'YYYY-MM-DD') AS m_regdate, TO_CHAR(m_exitdate, 'YYYY-MM-DD') AS m_exitdate
+		FROM (SELECT /*+ INDEX_DESC(member member_pk) */ 
+				ROWNUM rnum, m_id, m_name, m_regdate, m_exitdate
+			  FROM member
+			  WHERE ]]>
+			  <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+			  		<include refid="aMemberSearch"></include>
+			  </trim>
+		<![CDATA[ ROWNUM <= #{pageNum} * #{amount} 
+			) aMemberList
+			WHERE rnum > (#{pageNum} - 1) * #{amount}
+		]]>
+		
+	</select> 
+	
+	<sql id="aMemberSearch">
+		<if test='search == "m_id"'>
+			<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test='search == "m_name"'>
+			<![CDATA[ m_name LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+	</sql>
+	
+	<!-- 전체 레코드 수 조회 -->
+	<select id="aMemberListCnt" parameterType="amember" resultType="int">
+		SELECT count(*) FROM member
+		<trim prefix=" WHERE (" suffix=")">
+			<include refid="aMemberSearch"></include>
+		</trim>
+	</select>
+	
+<!-- 	<select id="aMemberDetail" parameterType="aMember" resultType="aMember">
+		SELECT n_num, n_content, n_author, n_title, TO_CHAR(n_writedate, 'YYYY-MM-DD HH24:MI:SS') AS n_writedate, n_important
+		FROM notice
+		WHERE n_num = #{n_num}
+	</select>
+	
+	<update id="aMemberUpdate" parameterType="aMember">
+		UPDATE notice
+		SET n_title = #{n_title}, n_content = #{n_content}, n_important = #{n_important}
+		WHERE n_num = #{n_num}
+	</update>	
+	<delete id="aMemberDelete" parameterType="aMember">
+		DELETE FROM notice
+		WHERE n_num = #{n_num}
+	</delete>
+ -->
+</mapper>

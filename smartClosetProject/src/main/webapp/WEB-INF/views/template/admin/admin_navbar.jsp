@@ -17,7 +17,8 @@
             </li>
             <li><a href="#">주문 관리</a></li>
             <li><a href="#">상품 관리</a></li>
-            <li><a href="#">회원 관리</a></li>
-            <li><a href="#">게시물 관리</a></li>
+            <li><a href="/aMember/aMemberList">회원 관리</a></li>
+            <li><a href="/aReview/aReviewList">리뷰 게시판 관리</a></li>
+            <li><a href="#">QnA 게시판 관리</a></li>
           </ul>
 		</div>

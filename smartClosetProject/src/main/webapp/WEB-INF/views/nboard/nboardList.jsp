@@ -121,7 +121,7 @@
 			<input type="hidden" id="n_num" name="n_num">
 		</form>
 		
-		<%-- ================= 검색 시작 ================== --%>
+	<%-- ================= 검색 시작 ================== --%>
 		<div id="nboardSearch" class="text-left" style="margin-bottom : 20px">
 			<form id="f_search" name="f_search" class="form-inline">
 				<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum }">
