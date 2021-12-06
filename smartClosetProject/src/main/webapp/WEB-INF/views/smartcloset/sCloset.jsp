@@ -19,16 +19,35 @@
 			}
 			#sCfloat1 {
 				float: left;
-				width: 350px;
+				width: 440px;
 				height: 500px;
-				border: 1px solid;
-				margin-right: 12.5px;
+				border: 5px solid #C68A12;
+				margin-right: 15px;
+				overflow-y: scroll;
 			}
 			#sCfloat2 {
 				float: left;
 				width: 440px;
 				height: 600px;
 				border: 1px solid;
+			}
+			.section1 {
+				float: left;
+				width: 80px;
+				height: 110px;
+				border: 1px solid;
+				margin-left: 20px;
+				margin-top: 10px;
+				margin-bottom: 30px;
+			}
+			.section2 {
+				float: left;
+				width: 80px;
+				height: 90px;
+				border: 1px solid;
+			}
+			.tagBtn {
+				height: 20px;
 			}
 		</style>
 	</head>
@@ -40,8 +59,35 @@
 		
 		<div>
 			<div id="sCfloat1">
-				<div clss="section">
-					
+				<div class="section1 text-center">
+					<div class="section2">
+						
+					</div>
+					<button class="tagBtn" type="button">안녕</button>
+				</div>
+				<div class="section1 text-center">
+					<div class="section2">
+						
+					</div>
+					<button class="tagBtn" type="button">안녕</button>
+				</div>
+				<div class="section1 text-center">
+					<div class="section2">
+						
+					</div>
+					<button class="tagBtn" type="button">안녕</button>
+				</div>
+				<div class="section1 text-center">
+					<div class="section2">
+						
+					</div>
+					<button class="tagBtn" type="button">안녕</button>
+				</div>
+				<div class="section1 text-center">
+					<div class="section2">
+						
+					</div>
+					<button class="tagBtn" type="button">안녕</button>
 				</div>
 			</div>
 			<div id="sCfloat2">
