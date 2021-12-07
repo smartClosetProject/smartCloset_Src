@@ -203,17 +203,6 @@
 						$("input[class='agreeChk']").focus();
 						return;
 					} else {
-						
-						
-						let applyMile2 = parseInt($("#m_mileApply").val());
-						if (isNaN(applyMile2)) {
-							applyMile2 = 0;
-						}
-						$("input[name='m_mile']").val(${order.m_mile });
-						$("input[name='m_mileApply']").val(applyMile2);
-						$("input[name='m_mileAdd']").val(Math.floor((${order.order_totalPayment} - applyMile2) * 0.02));
-						$("input[name='order_totalPayment']").val(${order.order_totalPayment} - applyMile2);
-						
 						$("#orderFrm").attr({
 							"method" : "post",
 							"action" : "/order/orderComplete"
@@ -237,6 +226,11 @@
 				
 				let totalSum = (${order.order_totalPayment} - applyMile).toLocaleString();
 				$(".totalSum").html(totalSum);
+				
+				$("input[name='m_mile']").val(${order.m_mile });
+				$("input[name='m_mileApply']").val(applyMile);
+				$("input[name='m_mileAdd']").val(Math.floor((${order.order_totalPayment} - applyMile) * 0.02));
+				$("input[name='order_totalPayment']").val(${order.order_totalPayment} - applyMile);
 			}
 		</script>
 	</head>

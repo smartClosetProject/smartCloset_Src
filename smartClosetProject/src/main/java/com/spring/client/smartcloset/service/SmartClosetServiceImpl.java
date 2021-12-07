@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.client.order.vo.OrderVO;
 import com.spring.client.smartcloset.dao.SmartClosetDAO;
+import com.spring.client.smartcloset.vo.SmartClosetVO;
 
 import lombok.Setter;
 
@@ -21,8 +22,8 @@ public class SmartClosetServiceImpl implements SmartClosetService {
 	}
 
 	@Override
-	public List<String> smartCloset(String m_id) {
-		List<String> thumbList = sClosetDao.smartCloset(m_id);
-		return thumbList;
+	public List<SmartClosetVO> smartCloset(String m_id) {
+		List<SmartClosetVO> closetList = sClosetDao.smartCloset(m_id);
+		return closetList;
 	}
 }

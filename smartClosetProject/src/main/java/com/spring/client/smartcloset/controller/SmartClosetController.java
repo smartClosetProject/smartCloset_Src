@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.client.smartcloset.service.SmartClosetService;
+import com.spring.client.smartcloset.vo.SmartClosetVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -32,8 +33,8 @@ public class SmartClosetController {
 		String m_id = (String) session.getAttribute("m_id");
 		m_id = "smartmember";
 		
-		List<String> thumbList = sClosetService.smartCloset(m_id);
-		model.addAttribute("thumbList", thumbList);
+		List<SmartClosetVO> closetList = sClosetService.smartCloset(m_id);
+		model.addAttribute("closetList", closetList);
 		
 		return "smartcloset/sCloset";
 	}

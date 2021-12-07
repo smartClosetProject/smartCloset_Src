@@ -14,6 +14,7 @@
 		<!--[if lt IE 9]>
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
+		<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 		<style type="text/css">
 			.sCtitle {
 				font-weight: 800;
@@ -33,17 +34,12 @@
 				width: 440px;
 				height: 550px;
 				outline: 1px solid #ADB5BD;
-			}
-			#sCfloat2::after {
-				float: left;
-				width: 440px;
-				height: 530px;
-				content: "";
-				background-image: url("https://t1.daumcdn.net/cfile/tistory/227BC53557C385D122");
+				overflow-y: auto;
+				overflow-x: hidden;
+				background-image: url("/resources/image/codiBack.png");
 				background-size: 440px;
 				background-repeat: no-repeat;
 				background-position: center 0.5cm;
-				opacity: 0.4; 
 			}
 			.section1 {
 				float: left;
@@ -138,19 +134,28 @@
 				right: 15px;
 				font-size: 20px;
 			}
+			.codiCloset {
+				height: 200px;
+			}
 		</style>
 		<script type="text/javascript">
 			$(function() {
 				$(".cloth").data("bor", "none");
 				
-				// 옷 이미지 클릭 시 선택, 선택 취소 효과 
+				// 옷 이미지 클릭 시 선택, 선택 취소 효과.
 				$(".cloth").on("click", function() {
+					let num = $(this).data("num");
+					let imgNum = -1;
+					
 					if ($(this).data("bor") == "none") {
-						$(this).css("outline", "2px solid #3BAEDA");
+						$(this).css("outline", "3px solid #3BAEDA");
 						$(this).data("bor", "exist");
+						$(this).clone().appendTo("#codiSpace").attr("class","codiCloset").data("imgNum", imgNum = imgNum + 1).css("outline", "none"); // 썸네일 이용한 구현 실패. 이미지 복제로 우선 구현.
+						$(".codiCloset").draggable();
 					} else {
 						$(this).css("outline", "none"); 
 						$(this).data("bor", "none");
+						$("#codiSpace img[data-num='" + num + "']").remove();
 					}
 				});
 				
@@ -208,12 +213,12 @@
 			
 			<div>
 				<div id="sCfloat1">
-					<c:if test="${not empty thumbList }">
-						<c:forEach var="thumb" items="${thumbList }">
+					<c:if test="${not empty closetList }">
+						<c:set var="i" value="-1" />
+						<c:forEach var="closet" items="${closetList }">
 							<div class="section1 text-center">
 								<div class="section2">
-									<img class="cloth" src="/uploadStorage/sCloset/thumb/${thumb }" /> 
-			    					<input type="checkbox" class="checkboxs" id="check1" />
+									<img class="cloth" data-num="${i = i + 1 }" src="/uploadStorage/sCloset/${closet.sc_image }" /> 
 								</div>
 								<input type="button" class="btn tagBtn" value="태그수정">
 							</div>	
@@ -225,6 +230,7 @@
 					<div id="codiTitle">
 						<div>코디네이터</div>
 					</div>
+					<div id="codiSpace"></div>  
 				</div>
 				<div class="btns">
 					<input type="button" id="codi" class="btn footerBtn" value="코디">

@@ -34,17 +34,30 @@ public class CartMapperTests {
 	@Test
 	public void testInsertCart() {
 		CartVO cvo = new CartVO();
-		cvo.setCart_goodsCount(2);
+		cvo.setCart_goodsCount(1);
 		cvo.setM_id("smartmember");
-		cvo.setPro_num("TS_0112_M_W");
+		cvo.setPro_num("TS_0112_S_SB");
 		
 		int result = cartDao.insertCart(cvo);
 		
+		cvo.setCart_goodsCount(2);
+		cvo.setM_id("smartmember");
+		cvo.setPro_num("TS_0112_S_W");
+		
+		result = cartDao.insertCart(cvo);
+		
 		cvo.setCart_goodsCount(3);
+		cvo.setM_id("smartmember");
+		cvo.setPro_num("TS_0112_M_W");
+		
+		result = cartDao.insertCart(cvo);
+		
+		cvo.setCart_goodsCount(4);
 		cvo.setM_id("smartmember");
 		cvo.setPro_num("OJ_0123_M_B");
 		
 		result = cartDao.insertCart(cvo);
+		
 		log.info("result : " + result);
 	}
 	

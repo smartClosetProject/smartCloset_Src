@@ -3,8 +3,9 @@ package com.spring.client.smartcloset.dao;
 import java.util.List;
 
 import com.spring.client.order.vo.OrderVO;
+import com.spring.client.smartcloset.vo.SmartClosetVO;
 
 public interface SmartClosetDAO {
 	void buyInsertSCloset(OrderVO ovo);
-	List<String> smartCloset(String m_id);
+	List<SmartClosetVO> smartCloset(String m_id);
 }
