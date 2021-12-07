@@ -112,7 +112,22 @@ public class PrDetailController {
 	public String insertWarehousing() {
 		log.info("insertWarehousing 호출 성공");
 		
-		return "/prDetail/insertWarehousing";
+		return "prDetail/insertWarehousing";
 	}
+	@RequestMapping(value="/warehousingInsert", method=RequestMethod.POST)
+	public String warehousingInsert(ProductVO pvo, Model model)throws Exception{
+		log.info("warehousingInsert 호출 성공");
+		
+		int result=0, result1 =0;
+		String url="";
 	
+		result=prDetailService.warehousing(pvo);
+		result1=prDetailService.warehousingInsert(pvo);
+		if(result==1&&result1==1) {
+			url="/prDetail/warehousingList";
+		}else {
+			url="/prDetail/insertWarehousing";
+		}
+		return "redirect:"+url;
+	}
 }

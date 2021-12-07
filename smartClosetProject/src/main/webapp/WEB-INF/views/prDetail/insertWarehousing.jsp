@@ -61,7 +61,7 @@
 					<tr>
 						<th class="col-md-1">사이즈</th>
 						<td class="col-md-2"  colspan="3">
-							<select id="pro_size" name="pr_size">
+							<select id="pro_size" name="pro_size">
 								<option value="S">S</option>
 								<option value="M">M</option>
 								<option value="L">L</option>

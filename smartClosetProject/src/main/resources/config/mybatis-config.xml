@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias type="com.spring.admin.prdetail.vo.PrDetailVO" alias="prDetail" />
 		<typeAlias type="com.spring.admin.prdetail.vo.ProductVO" alias="product" />
+		<typeAlias type="com.spring.client.product.vo.ProductVO" alias="productC" />
 	</typeAliases>
 
 </configuration>

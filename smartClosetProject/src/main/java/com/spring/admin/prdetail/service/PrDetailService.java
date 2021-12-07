@@ -16,4 +16,5 @@ public interface PrDetailService {
 	
 	public List<ProductVO> warehousingList(ProductVO pvo);
 	public int warehousingInsert(ProductVO pvo) throws Exception;
+	public int warehousing(ProductVO pvo);
 }
