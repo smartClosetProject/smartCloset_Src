@@ -1,20 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.client.product.dao.ProductDAO">
-	<select id="productList" parameterType="productC" resultType="productC">
+	<select id="productListDate" parameterType="productC" resultType="productC">
 		<![CDATA[select  pr_num, pr_name, pr_price, pr_mainimg, pr_thumb, pr_contentimg, 
-		PR_MILE, pr_categoryl, pr_categorys, pr_category ,pr_issale
+		PR_MILE, pr_categoryl, pr_categorys, pr_category ,pr_issale, pr_regdate
 		from(
-			select/*+index_desc(pr_detail PRODUCT_CLIENT_REGDATE) */
+			select/*+index(pr_detail PRODUCT_CLIENT_REGDATE) */
 				rownum as rnum, pr_num, pr_name, pr_price, pr_mainimg, pr_thumb, pr_contentimg, 
-		PR_MILE, pr_categoryl, pr_categorys, (pr_categoryl||' | '||pr_categorys) as pr_category ,pr_issale
-			from pr_detail
-			where ]]>
+		PR_MILE, pr_categoryl, pr_categorys, (pr_categoryl||' | '||pr_categorys) as pr_category ,pr_issale, pr_regdate
+			from pr_detail order by pr_regdate
+			 ]]>
 
-			<![CDATA[ rownum <=#{pageNum}*#{amount}
+			<![CDATA[
  			)prDetailList
-			where rnum >(#{pageNum} -1)*#{amount} and PR_ISSALE='Y'and rnum<6
+			where  PR_ISSALE='Y'and rnum<7  order by pr_regdate desc
 			]]>
 	</select>
+	<select id="productListSales" parameterType="productC" resultType="productC">
+		<![CDATA[select  pr_num, pr_name, pr_price, pr_mainimg, pr_thumb, pr_contentimg, 
+		PR_MILE, pr_categoryl, pr_categorys, pr_category ,pr_issale, pr_regdate
+		from(
+			select/*+index(pr_detail PRODUCT_CLIENT_SALES) */
+				rownum as rnum, pr_num, pr_name, pr_price, pr_mainimg, pr_thumb, pr_contentimg, 
+		PR_MILE, pr_categoryl, pr_categorys, (pr_categoryl||' | '||pr_categorys) as pr_category ,pr_issale, pr_regdate
+			from pr_detail order by pr_sales desc
+			 ]]>
 
+			<![CDATA[ 
+ 			)prDetailList
+			where PR_ISSALE='Y'and rnum<7
+			]]>
+	</select>
 </mapper>
