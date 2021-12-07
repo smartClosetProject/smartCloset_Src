@@ -19,5 +19,5 @@ public class CartVO {
 	
 	private String pr_name = ""; 	// 상품명
 	private String pr_price = ""; 	// 상품 가격
-	private String pr_thumb = ""; 	// 썸네일 이미지
+	private String pro_colorThumb = ""; 	// 썸네일 이미지
 }
