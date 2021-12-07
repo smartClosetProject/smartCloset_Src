@@ -13,7 +13,7 @@
 
 			<![CDATA[ rownum <=#{pageNum}*#{amount}
  			)prDetailList
-			where rnum >(#{pageNum} -1)*#{amount} and PR_ISSALE='Y'and 
+			where rnum >(#{pageNum} -1)*#{amount} and PR_ISSALE='Y'and rnum<6
 			]]>
 	</select>
 
