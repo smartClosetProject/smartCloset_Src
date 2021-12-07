@@ -80,7 +80,6 @@
 					goPage();
 				});
 				
-				// 제목 클릭 시 상세 페이지 이동을 위한 처리 이벤트
 				$(".deleteProc").click(function() {
 					let r_num = $(this).parents("tr").attr("data-num");
 					$("#r_num").val(r_num);

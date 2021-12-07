@@ -35,19 +35,35 @@
 			<include refid="aMemberSearch"></include>
 		</trim>
 	</select>
+	<delete id="aMemberAllDelete">
+		DELETE FROM member WHERE m_exitdate <![CDATA[<]]> add_months(sysdate, -60)
+	</delete>
 	
-<!-- 	<select id="aMemberDetail" parameterType="aMember" resultType="aMember">
-		SELECT n_num, n_content, n_author, n_title, TO_CHAR(n_writedate, 'YYYY-MM-DD HH24:MI:SS') AS n_writedate, n_important
-		FROM notice
-		WHERE n_num = #{n_num}
+ 	<select id="aMemberDetail" parameterType="String" resultType="aMember">
+		SELECT m_id, m_passwd, m_name, m_email, m_phone, m_addr, to_char(m_regdate,'YYYY-MM-DD') as m_regdate, to_char(m_exitdate,'YYYY-MM-DD') as m_exitdate, m_mile, m_acc
+		FROM member
+		WHERE m_id = #{m_id}
 	</select>
 	
-	<update id="aMemberUpdate" parameterType="aMember">
-		UPDATE notice
-		SET n_title = #{n_title}, n_content = #{n_content}, n_important = #{n_important}
-		WHERE n_num = #{n_num}
-	</update>	
-	<delete id="aMemberDelete" parameterType="aMember">
+	<update id="updateExitDate" parameterType="aMember">
+		UPDATE member
+		SET m_exitdate = sysdate
+		WHERE m_id = #{m_id}
+	</update>
+		
+	<update id="resetExitDate" parameterType="aMember">
+		UPDATE member
+		SET m_exitdate = null
+		WHERE m_id = #{m_id}
+	</update>
+		
+	<update id="updateMile" parameterType="aMember">
+		UPDATE member
+		SET m_mile = #{m_mile}
+		WHERE m_id = #{m_id}
+	</update>
+
+<!--	<delete id="aMemberDelete" parameterType="aMember">
 		DELETE FROM notice
 		WHERE n_num = #{n_num}
 	</delete>

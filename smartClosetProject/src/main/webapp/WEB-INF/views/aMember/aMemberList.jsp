@@ -29,11 +29,37 @@
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				//제목 믈릭시 회원 상세 페이지로 이동을 위한 처리 이벤트
+				$(".goDetail").click(function () {
+					let m_id = $(this).parents("tr").attr("data-num");
+					$("#m_id").val(m_id);
+					
+					//상세 페이지로 이동하기 위해 form 추가
+					$("#aMemberListForm").attr({
+						"method" : "get",
+						"action" : "/aMember/aMemberDetail"
+					});
+					$("#aMemberListForm").submit();
+				});
+				
+				// 회원 일괄 탈퇴 기능
+				$("#exitMemberDeleteBtn").click(function () {
+					if(confirm("탈퇴한 후 5년 지난 회원을 일괄 삭제하시겠습니까?")){
+						location.href = "/aMember/aMemberAllDelete";
+						
+					}
+				
+				})
+			}); //최상위 $ 종료
+		
+		</script>
 	</head>
 	<body>
 	<div>
 		<form id="aMemberListForm">
-			<input type="hidden" id="m_id" name="m_id"/>
+			<input type="hidden" id="m_id" name="m_id" value="${aMember.m_id}"/>
 		</form>
 	
 		<%-- ================= 검색 시작 ================== --%>
@@ -60,10 +86,10 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th class="order text-center col-md-1">회원 id</th>
-						<th class="text-center col-md-4">회원 이름</th>
-						<th class="order col-md-1">가입일</th>
-						<th class="text-center col-md-2">탈퇴일</th>
+						<th class=" text-center ">회원 id</th>
+						<th class="text-center ">회원 이름</th>
+						<th class="text-center ">가입일</th>
+						<th class="text-center ">탈퇴일</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -71,10 +97,10 @@
 						<c:when test="${not empty aMemberList}">
 							<c:forEach var="aMember" items="${aMemberList}" varStatus="status">
 								<tr class="text-center" data-num ="${aMember.m_id}">
-									<td class="goDetail text-left">${aMember.m_id }</td>
-									<td >${aMember.m_name}</td>
-									<td class="text-left">${aMember.m_regdate}</td>
-									<td class="text-left">${aMember.m_exitdate}</td>
+									<td class="goDetail text-center">${aMember.m_id }</td>
+									<td class="text-center">${aMember.m_name}</td>
+									<td class="text-center">${aMember.m_regdate}</td>
+									<td class="text-center">${aMember.m_exitdate}</td>
 								</tr>
 							</c:forEach>
 						</c:when>

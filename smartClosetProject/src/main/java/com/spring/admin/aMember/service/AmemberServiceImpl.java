@@ -26,4 +26,30 @@ public class AmemberServiceImpl implements AmemberService {
 		return aMemberDao.aMemberListCnt(amvo);
 	}
 
+	@Override
+	public void aMemberAllDelete() {
+		aMemberDao.aMemberAllDelete();
+	}
+
+	@Override
+	public AmemberVO aMemberDetail(String m_id) {
+		return aMemberDao.aMemberDetail(m_id);
+	}
+
+	@Override
+	public int updateExitDate(AmemberVO amvo) {
+		return aMemberDao.updateExitDate(amvo);
+	}
+	@Override
+	public int resetExitDate(AmemberVO amvo) {
+		return aMemberDao.resetExitDate(amvo);
+	}
+
+	@Override
+	public int updateMile(AmemberVO amvo) {
+		return aMemberDao.updateMile(amvo);
+	}
+
+
+
 }

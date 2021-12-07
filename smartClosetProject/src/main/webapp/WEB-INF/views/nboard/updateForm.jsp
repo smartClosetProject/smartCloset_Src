@@ -64,7 +64,7 @@
 		</script>
 	</head>
 	<body>
-				<div class="container">
+		<div class="container">
 			<div class="container">
 				<form id="f_updateForm" class="f_updateForm">
 					<input type="hidden" id="n_num" name="n_num" value="${updateData.n_num}"/>

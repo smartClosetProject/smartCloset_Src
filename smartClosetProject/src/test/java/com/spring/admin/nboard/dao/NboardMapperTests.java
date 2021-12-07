@@ -30,20 +30,20 @@ public class NboardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private AmemberDAO aMemberDAO;
 	
-	@Test
-	public void testBoardList() {
-		AmemberVO avo = new AmemberVO();
-	
-////		avo.setPageNum(2);
-////		avo.setAmount(10);
+//	@Test
+//	public void testBoardList() {
+//		AmemberVO avo = new AmemberVO();
+//	
+//////		avo.setPageNum(2);
+//////		avo.setAmount(10);
+////		
+//		List<AmemberVO> list = aMemberDAO.aMemberList(avo);
+//		for (AmemberVO vo : list) {
+//			log.info(vo);
+//		}
 //		
-		List<AmemberVO> list = aMemberDAO.aMemberList(avo);
-		for (AmemberVO vo : list) {
-			log.info(vo);
-		}
-		
-		log.info(aMemberDAO.aMemberListCnt(avo)); 
-	}
+//		log.info(aMemberDAO.aMemberListCnt(avo)); 
+//	}
 	
 //	@Test
 //	public void testBoardList() { // 검색 추가
@@ -124,13 +124,15 @@ public class NboardMapperTests {
 //		boardDAO.boardDelete(bvo);
 //	}
 	
-//	@Test
-//	public void testBoardDelete() {
-//		BoardVO bvo = new BoardVO();
-//		bvo.setB_num(7);
-//		
-//		boardDAO.boardDelete(bvo);
-////	}
+	@Test
+	public void testBoardDelete() {
+
+		AmemberVO avo = new AmemberVO();
+		avo.setM_id("smartmember");
+		
+		AmemberVO aavo = aMemberDAO.aMemberDetail(avo.getM_id());
+		log.info(aavo);
+	}
 //	@Test
 //	public void testAdminlogin() { // 검색 추가
 //		AdminVO avo = new AdminVO();
