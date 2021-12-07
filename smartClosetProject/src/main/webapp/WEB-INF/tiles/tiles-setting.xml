@@ -5,20 +5,14 @@
   
 <tiles-definitions>
 	
-	<definition name="content" template="/WEB-INF/views/template/admin/contentLayout.jsp">
-		<put-attribute name="title" value="나의 첫 스프링 사이트" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/template/admin/footer.jsp" />
-		<put-attribute name="navbar" value="/WEB-INF/views/template/admin/navbar.jsp" />
+	<definition template="/WEB-INF/views/template/client/contentLayout.jsp" name="contentClient">
+		<put-attribute name="title" value="스마트옷장"/>
+		<put-attribute name="body" value=""/>
+		<put-attribute name="clientAside" value="/WEB-INF/views/template/client/aside.jsp"/>
+		<put-attribute name="clientHeader" value="/WEB-INF/views/template/client/header.jsp"/>
+		<put-attribute name="clientFooter" value="/WEB-INF/views/template/client/footer.jsp"/>
 	</definition>
 	
-	<definition name="contentClient" template="/WEB-INF/views/template/client/contentLayout.jsp">
-		<put-attribute name="title" value="나의 첫 스프링 사이트" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="clientAside" value="/WEB-INF/views/template/client/aside.jsp" />
-		<put-attribute name="clientHeader" value="/WEB-INF/views/template/client/header.jsp" />
-		<put-attribute name="clientFooter" value="/WEB-INF/views/template/client/footer.jsp" />
-	</definition>
 
 	<definition name="member/*" extends="contentClient"> <!-- 뷰단과 관련된 내용으로 name은 컨트롤러가 반환해주는 뷰정보이다. -->
 		<put-attribute name="title" value="마이페이지" />
@@ -33,5 +27,22 @@
 	<definition name="nboard/*" extends="content"> 							<!-- 뷰단과 관련된 내용으로 name은 컨트롤러가 반환해주는 뷰정보이다. -->
 		<put-attribute name="body" value="/WEB-INF/views/nboard/{1}.jsp" /> <!-- name의 board/* *에 적용되는 문구가 {1}이다.  -->
 	</definition>														   	<!-- board/*/*라면 *에 적용되는 문구는 {2}이다. -->
+	<definition name="cart/*" extends="contentClient">
+		<put-attribute name="title" value="장바구니" />
+		<put-attribute name="body" value="/WEB-INF/views/cart/{1}.jsp" />
+	</definition>
+	<definition name="order/*" extends="contentClient">
+		<put-attribute name="title" value="주문" />
+		<put-attribute name="body" value="/WEB-INF/views/order/{1}.jsp" />
+	</definition>
+	<definition name="smartcloset/*" extends="contentClient">
+		<put-attribute name="body" value="/WEB-INF/views/smartcloset/{1}.jsp" />
+	</definition>
 	
+	<definition name="NotApplyTiles" template="/WEB-INF/views/template/client/empty.jsp">
+		<put-attribute name="content" value="" />
+	</definition>
+	<definition name="order/orderForm" extends="NotApplyTiles">
+		<put-attribute name="content" value="/WEB-INF/views/order/orderForm.jsp"></put-attribute>
+    </definition>
 </tiles-definitions>

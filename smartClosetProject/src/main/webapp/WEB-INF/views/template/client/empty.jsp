@@ -23,84 +23,41 @@
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
-		<style>
-			/* 상단바 투명화 */
-			.navbar-default {
-				background:transparent;
-			}
-			
-			/* 헤더 */
-			#header {
-				width: 1170px;
-				height: 52px; 
-				position: fixed; 
-				z-index: 1;
+		<style type="text/css">
+			nav {
+				width: 900px;
 				text-align: center;
-			}
-		
-			/* 사이드바 */
-			.sidenav {
-				background-color: #F6F6F6;
 				position: fixed;
-				width: 220px;
-				height: 100%;
-				margin-left: -30px;
-				margin-top: 52px;
+				background-color: #F0F0F0;
+				z-index: 1;
 			}
-		    
-			.sidenav .large li a {
-				color : black;
-		    	font-weight: bold;
-		    	font-size : 15px;
-		    }
-		    
-		    .samll li a {
-				font-size : 8px;
-				width: 100px;
-		    }
-		    
-		    /* 본문 */
-			.page {
-				margin-top:50px;
-				margin-left: 220px;
-				margin-bottom: 70px;
-		    }
-		    
-		    /* footer */
-			footer {
-				background-color: #555;
-				color: white;
-				padding: 15px;
-				position: relative;
-		    }
-		    .mainLi {
-		    	width: 90px;
-		    	text-align: center;
-		    }
-  		</style>
+			#all {
+				background-color: #E2E2E2;
+			}
+			.container {
+				width: 900px;
+				background-color: white;
+			}
+		</style>
 		<script type="text/javascript">
-			
+			$(function() {
+				$("#back").click(function() {
+					history.back();
+				});
+			});
 		</script>
 	</head>
 	<body>
-		<div>
+		<div id="all">
 			<div class="container" style="padding: 0px">
-				<nav id="header" class="navbar navbar-default">
-					<tiles:insertAttribute name="clientHeader" />
+				<nav>
+					<a href="#" id="back" style="color: black"><span class="glyphicon glyphicon-remove"></span></a>
+					<span id="Main">SmartCloset</span>
+					<a href="/cart/cartList" style="color: black"><span class="glyphicon glyphicon-shopping-cart"></span></a>
 				</nav>
 			</div>
-				
 			<div class="container">
-				<div class="container-fluid">
-					<tiles:insertAttribute name="clientAside" />
-					
-					<div class="col-sm-10 page">
-						<tiles:insertAttribute name="body" />
-					</div>
-				</div>
-			</div>
-			<div>
-				<tiles:insertAttribute name="clientFooter" />
+				<tiles:insertAttribute name="content" />
 			</div>
 		</div>
 	</body>

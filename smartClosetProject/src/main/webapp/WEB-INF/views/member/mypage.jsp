@@ -20,6 +20,15 @@
 		<![endif]-->
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
+		<style type="text/css">
+		.button4 {
+		   background-color: white;
+		   color: black;
+		   border: 2px solid #e7e7e7;
+		}
+		.button4:hover {background-color: #e7e7e7;}
+		
+		</style>
 		<script type="text/javascript">
 			$(function(){
 				//회원 정보 수정 버튼 클릭시
@@ -76,20 +85,20 @@
 					
 			</ul>
 		</div>	
-			<div style="position: absolute; top: 424px; left:219px; width: 143px; height: 126px;">
-				<input type="button" id="updateBtn" name="updateBtn" value="회원정보 수정">
+			<div style="position: absolute; top: 424px; left:20px; width: 143px; height: 126px;">
+				<input type="button"  class="button button4" id="updateBtn" name="updateBtn" value="회원정보 수정">
 			</div>
-			<div style="position: absolute; top: 424px; left:384px; width: 143px; height: 126px;">
-				<input type="button" id="serchBtn" name="serchBtn" value="주문내역조회">
+			<div style="position: absolute; top: 424px; left:200px; width: 143px; height: 126px;">
+				<input type="button" class="button button4" id="serchBtn" name="serchBtn" value="주문내역조회">
 			</div>
-			<div style="position: absolute; top: 424px; left:549px; width: 143px; height: 126px;">
-				<input type="button" id="cartBtn" name="cartBtn" value="장바구니">
+			<div style="position: absolute; top: 424px; left:380px; width: 143px; height: 126px;">
+				<input type="button" class="button button4" id="cartBtn" name="cartBtn" value="장바구니">
 			</div>
-			<div style="position: absolute; top: 424px; left:714px; width: 143px; height: 126px;">
-				<input type="button" id="boardSerchBtn" name="boardSerchBtn" value="게시물관리">
+			<div style="position: absolute; top: 424px; left:560px; width: 143px; height: 126px;">
+				<input type="button" class="button button4" id="boardSerchBtn" name="boardSerchBtn" value="게시물관리">
 			</div>
-			<div style="position: absolute; top: 424px; left:880px; width: 143px; height: 126px;">
-				<input type="button" id="smartClosetBtn" name="smartClosetBtn" value="스마트옷장">					
+			<div style="position: absolute; top: 424px; left:740px; width: 143px; height: 126px;">
+				<input type="button" class="button button4" id="smartClosetBtn" name="smartClosetBtn" value="스마트옷장">					
 			</div>
 				
 				

@@ -96,13 +96,13 @@
 					<th>비밀번호
 						<img src="/resources/image/star.jpg" alt="필수">
 					</th>
-					<td><input type="password" id="m_passwd" class="pw" name="m_passwd" maxlength="8">(8자까지 가능합니다.)</td>
+					<td><input type="password" id="m_passwd" class="pw" name="m_passwd" maxlength="12">(최대 12글자까지 가능합니다.)</td>
 				</tr>
 				<tr>
 					<th>비밀번호확인
-						<img src="/resources/image/star.jpg" alt="필수">
+						<img src="/resources/image/star.jpg" alt="필수" >
 					</th>
-					<td><input type="password" id="m_passwd2" class="pw" name="m_passwd2">
+					<td><input type="password" id="m_passwd2" class="pw" name="m_passwd2"  maxlength="12">
 						<span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
     					<span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
 					</td>

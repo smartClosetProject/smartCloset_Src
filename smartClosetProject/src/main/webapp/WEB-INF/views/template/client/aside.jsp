@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <nav class="col-sm-3 sidenav">
 	<ul class="nav navbar-nav small">
-		<li><a href="#section2">로그인</a></li>
-		<li><a href="#section2">회원가입</a></li>
-		<li><a href="/member/mypage">마이페이지</a></li>
-		<li><a href="/review/reviewList">리뷰게시판</a></li>
-		<li><a href="#section2">QnA게시판</a></li>
-		<li><a href="#section2">공지게시판</a></li>
+		<li class="mainLi"><a href="#section2">로그인</a></li>
+		<li class="mainLi"><a href="#section2">회원가입</a></li>
+		<li class="mainLi"><a href="/member/mypage">마이페이지</a></li>
+		<li class="mainLi"><a href="/review/reviewList">리뷰게시판</a></li>
+		<li class="mainLi"><a href="#section2">QnA게시판</a></li>
+		<li class="mainLi"><a href="#section2">공지게시판</a></li>
 	</ul>
 	<br><br><br><br><br><br><br><br><br><br><br><br>
 	<ul class="nav nav-stacked large">
