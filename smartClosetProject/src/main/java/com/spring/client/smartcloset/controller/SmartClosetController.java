@@ -1,5 +1,7 @@
 package com.spring.client.smartcloset.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,8 @@ public class SmartClosetController {
 		String m_id = (String) session.getAttribute("m_id");
 		m_id = "smartmember";
 		
-		// 옷장 리스트 출력
+		List<String> thumbList = sClosetService.smartCloset(m_id);
+		model.addAttribute("thumbList", thumbList);
 		
 		return "smartcloset/sCloset";
 	}

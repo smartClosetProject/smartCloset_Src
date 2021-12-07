@@ -124,19 +124,19 @@
 						$("#m_addr").val("${order.m_addr}");
 						$("#m_phone").val("${order.m_phone}");
 						$("#m_email").val("${order.m_email}");
-						$("#m_name").prop("readonly", true)
-						$("#m_addr").prop("readonly", true)
-						$("#m_phone").prop("readonly", true)
-						$("#m_email").prop("readonly", true)
+						$("#m_name").prop("readonly", true);
+						$("#m_addr").prop("readonly", true);
+						$("#m_phone").prop("readonly", true);
+						$("#m_email").prop("readonly", true);
 					} else {
 						$("#m_name").val("");
 						$("#m_addr").val("");
 						$("#m_phone").val("");
 						$("#m_email").val("");
-						$("#m_name").prop("readonly", false)
-						$("#m_addr").prop("readonly", false)
-						$("#m_phone").prop("readonly", false)
-						$("#m_email").prop("readonly", false)
+						$("#m_name").prop("readonly", false);
+						$("#m_addr").prop("readonly", false);
+						$("#m_phone").prop("readonly", false);
+						$("#m_email").prop("readonly", false);
 					}
 				});
 				

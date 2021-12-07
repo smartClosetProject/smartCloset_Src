@@ -1,5 +1,7 @@
 package com.spring.client.smartcloset.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,11 @@ public class SmartClosetServiceImpl implements SmartClosetService {
 	@Override
 	public void buyInsertSCloset(OrderVO ovo) {
 		sClosetDao.buyInsertSCloset(ovo);
+	}
+
+	@Override
+	public List<String> smartCloset(String m_id) {
+		List<String> thumbList = sClosetDao.smartCloset(m_id);
+		return thumbList;
 	}
 }

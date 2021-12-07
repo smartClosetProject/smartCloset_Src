@@ -11,6 +11,9 @@
 									 WHERE cart_num = #{cart_num})
 	</insert>
 	
-	
-	
+	<select id="smartCloset" parameterType="java.lang.String" resultType="String">
+		SELECT DISTINCT sc_thumb FROM smart_closet
+		WHERE m_id = #{m_id}
+	</select>
+	 
 </mapper>
