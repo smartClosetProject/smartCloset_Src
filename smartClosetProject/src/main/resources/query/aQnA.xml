@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.admin.aQnA.dao.AqnaDAO">
+	<sql id="aQnaSearch">
+		<if test="search == 'q_title'">
+			<![CDATA[ q_title LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test="search == 'm_id'">
+			<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test="search == 'q_content'">
+			<![CDATA[ q_content LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+	</sql>
+	
+	<select id="aQnaList" parameterType="aqna" resultType="aqna">
+		<![CDATA[
+			select q_num, q_title, q_content, to_char(q_regdate, 'YYYY-MM-DD')as q_regdate, q_file, m_id,
+			(select count(r_num) from reply where q_num = aQnaList.q_num) as r_cnt
+			from (select /*+ index_desc(qna qna_q_num_pk) */
+					rownum rnum, q_num, q_title, q_content, q_regdate, q_file, m_id
+				from qna
+				where ]]>
+				<trim prefix="(" suffix=") and " prefixOverrides="and">
+					<include refid="aQnaSearch"></include>
+				</trim>
+		<![CDATA[ ROWNUM <= #{pageNum} * #{amount} 
+			) aQnaList
+			WHERE rnum > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+	
+	<select id="aQnaListCnt" parameterType="aqna" resultType="int">
+		select count(*) from qna
+		<trim prefix=" where (" suffix=")">
+			<include refid="aQnaSearch"></include>
+		</trim>
+	</select>
+	<select id="aQnaDetail" parameterMap="aqna" resultType="aqna">
+		select q_num, q_title, q_content, to_char(q_regdate, 'YYYY-MM-DD')as q_regdate, q_file, m_id
+		from qna
+		where q_num = #{q_num}
+	</select>
+
+</mapper>

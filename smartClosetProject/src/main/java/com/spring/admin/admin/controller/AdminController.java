@@ -44,7 +44,7 @@ public class AdminController {
 			return "redirect:/admin/adminInfo";
 		} else {
 			model.addAttribute("msg", "아이디, 비밀번호를 확인하세요.");
-			return "admin/loginForm";
+			return "admin/adminLoginForm";
 		}
 	}
 

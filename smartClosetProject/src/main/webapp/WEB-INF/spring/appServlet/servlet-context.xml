@@ -40,6 +40,8 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean> -->
+	<!-- ViewPreparer 사용을 위한 baen 등록 -->
+	<!-- <beans:bean id="adminPreparer" class="com.spring.admin.AdminPreparer"></beans:bean> -->
 	
 	<!-- 타일즈(tiles) 설정. ViewResolver는 우선순위 타일즈를 실행, 설정파일이 존재하지 않으면 2순위 실행 -->
 	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
@@ -48,6 +50,9 @@
 				<beans:value>/WEB-INF/tiles/tiles-setting.xml</beans:value>
 			</beans:list>
 		</beans:property>
+		<!-- <beans:property name="preparerFactoryClass"
+			value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory">
+		</beans:property> -->
 	</beans:bean>
 	
 	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">

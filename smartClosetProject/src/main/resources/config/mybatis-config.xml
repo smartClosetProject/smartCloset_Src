@@ -13,6 +13,7 @@
 		<typeAlias type="com.spring.admin.admin.vo.AdminVO" alias="admin"/>
 		<typeAlias type="com.spring.admin.aMember.vo.AmemberVO" alias="amember"/>
 		<typeAlias type="com.spring.admin.aReview.vo.AreviewVO" alias="areview"/>
+		<typeAlias type="com.spring.admin.aQnA.vo.AqnaVO" alias="aqna"/>
 	</typeAliases>
 
 </configuration>

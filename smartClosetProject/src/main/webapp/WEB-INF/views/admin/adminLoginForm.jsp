@@ -13,10 +13,55 @@
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
-		<!-- 모바일 웹 페이지 설정 끝 -->
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
+		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
+		<style type="text/css">
+		body {
+			  padding-top: 170px;
+			  padding-bottom: 40px;
+			  background-color: #eee;
+			}
+			
+			.form-signin {
+			  max-width: 330px;
+			  padding: 15px;
+			  margin: 0 auto;
+			}
+			.form-signin .form-signin-heading,
+			.form-signin .checkbox {
+			  margin-bottom: 10px;
+			}
+			.form-signin .checkbox {
+			  font-weight: normal;
+			}
+			.form-signin .form-control {
+			  position: relative;
+			  height: auto;
+			  -webkit-box-sizing: border-box;
+			     -moz-box-sizing: border-box;
+			          box-sizing: border-box;
+			  padding: 10px;
+			  font-size: 16px;
+			}
+			.form-signin .form-control:focus {
+			  z-index: 2;
+			}
+			.form-signin input[type="email"] {
+			  margin-bottom: -1px;
+			  border-bottom-right-radius: 0;
+			  border-bottom-left-radius: 0;
+			}
+			.form-signin input[type="password"] {
+			  margin-bottom: 10px;
+			  border-top-left-radius: 0;
+			  border-top-right-radius: 0;
+			}
+		</style>
+		
 		<script type="text/javascript">
 		$(function () {
 			$("#loginAdminBtn").click(function() {
@@ -47,6 +92,7 @@
 				  <label for="ad_passwd" class="sr-only">비밀번호</label>
 				 <input type="password" name="ad_passwd" id="ad_passwd" class="form-control" placeholder="비밀번호" required style="margin : 20px auto; width : 50%; height : 40px">
         		<button id="loginAdminBtn" class="btn btn-primary btn-block" style="margin : auto; width:200px !important; margin-top : 40px !important" type="submit">로그인</button>
+        		<a>${msg}</a>
 			</form>
 		</div>
 	</body>

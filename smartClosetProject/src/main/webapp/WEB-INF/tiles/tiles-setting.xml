@@ -12,8 +12,16 @@
 		<put-attribute name="navbar" value="/WEB-INF/views/template/admin/admin_navbar.jsp" />
 	</definition>
 	
-	<definition name="*/*" extends="content"> 							<!-- 뷰단과 관련된 내용으로 name은 컨트롤러가 반환해주는 뷰정보이다. -->
-		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" /> <!-- name의 board/* *에 적용되는 문구가 {1}이다.  -->
-	</definition>														   	<!-- board/*/*라면 *에 적용되는 문구는 {2}이다. -->
+	<definition name="*/*" extends="content"> 							
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
+	<definition name="empty" template ="/WEB-INF/views/template/admin/admin_empty.jsp">
+		<put-attribute name="content" value =""/>
+	</definition>
+					
+    <definition name="admin/adminLoginForm" extends="empty">
+          <put-attribute name="content" value="/WEB-INF/views/admin/adminLoginForm.jsp"></put-attribute>    
+    </definition>										   	
 	
 </tiles-definitions>

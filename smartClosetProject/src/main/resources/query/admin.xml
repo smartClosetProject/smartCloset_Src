@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.admin.admin.dao.AdminDAO">
 
-	<!-- 로그인 -->
 	<select id="adminLogin" parameterType="admin" resultType="admin">
 		SELECT ad_num, ad_id, ad_name, TO_CHAR(ad_regdate, 'YYYY-MM-DD') AS ad_regdate, ad_phone, ad_email, ad_addr
 		FROM admin
