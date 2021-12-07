@@ -49,10 +49,10 @@
 	
 	</head>
 	<body>
-	<div class="container">
+	<div>
 			<form id="r_writeForm">
 			<input type="hidden" id="m_id" value="smartmember" name="m_id">
-				<h3 class="text-center">글쓰기 입력 화면</h3>
+				<div style="font-weight: bold;font-size: 36px; text-align:center;">REVIEW</div>
 				<div class="form-group">
 					<label for="m_id">작성자</label> 
 					${m_id}

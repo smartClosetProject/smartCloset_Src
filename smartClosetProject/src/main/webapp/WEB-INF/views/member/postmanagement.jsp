@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,7 +8,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 
-		<title>리뷰 게시판</title>
+		<title>Insert title here</title>
 		
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
@@ -34,6 +34,7 @@
 		</style>
 		<script type="text/javascript">
 			$(function(){
+				//검색후 검색 대상과 검색 단어 출력
 				// 검색 후 검색 대상과 검색 단어 출력
 				let word = "<c:out value='${data.keyword}' />"
 				let value = "";
@@ -44,9 +45,9 @@
 					if ($("#re_Search").val() != 'r_title') {
 						// :contains()는 특정 텍스트를 포함한 요소 반환
 						if ($("#re_Search").val() == 'r_content') {
-							value = "#list tr td.goDetail";
+							value = "#po_list tr td.goDetail";
 						} else if ($("#re_Search").val() == 'm_id') {
-							value = "#list tr td.name";
+							value = "#po_list tr td.name";
 						}
 						console.log($(value + ":contains('" + word + "')").html());
 						
@@ -66,7 +67,6 @@
 						$("#reviewKeyword").focus();
 					}
 				});
-				
 				// 검색 버튼 클릭 시 처리 이벤트
 				$("#reviewSearchBtn").click(function() {
 					if ($("#re_Search").val() != "all") {
@@ -75,14 +75,6 @@
 						}
 					}
 					goPage();
-				});
-				// 글쓰기 버튼 클릭 시 처리 이벤트
-				$("#insertFormBtn").click(function() {
-					$("#r_numForm").attr({
-						"method" : "get",
-						"action" : "/review/writeForm"
-					});
-					$("#r_numForm").submit();
 				});
 				
 				// 제목 클릭 시 상세 페이지 이동을 위한 처리 이벤트
@@ -97,7 +89,6 @@
 					});
 					$("#r_numForm").submit();
 				});
-				
 				// 페이지 클릭 시 처리
 				$(".paginate_button a").click(function(e) {
 					e.preventDefault();
@@ -112,40 +103,52 @@
 				}
 				$("#r_search").attr({
 					"method" : "get",
-					"action" : "/review/reviewList"
+					"action" : "/member/postmanagement"
 				});
 				$("#r_search").submit();
 			}
+			
+		
 		</script>
 	</head>
 	<body>
 		<div class="contentContainer reviewDiv">
 			<form id="r_numForm">
 				<input type="hidden" id="r_num" value="r_num" name="r_num">
+				<input type="hidden" id="q_num" value="q_num" name="q_num">
 			</form>
 			<!-- --------------------검색 종료 ---------------------------->
 			<!-- -------------------- 리스트 시작 -------------------------->
-			<div style="font-weight: bold;font-size: 36px; text-align:center;">REVIEW</div>
+			<div style="font-weight: bold;font-size: 36px; text-align:center;">MY WRITING</div>
 			<div id="reviewList" class="table-height">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
 						<th class="order text-center col-md-1">번호</th>
-						<th class="text-center col-md-2">상품</th>
+						<th class="text-center col-md-2">분류</th>
 						<th class="text-center col-md-4">제목</th>
 						<th class="text-center col-md-2">작성자(아이디)</th>
+						<th class="text-center clo-md-2">작성일</th>
 					</tr>
 				</thead>
-				<tbody id="list" class="table-striped">
+				<tbody id="po_list" class="table-striped">
 					<!-- 데이터 출력 -->
 					<c:choose>
-						<c:when test="${not empty reviewList}">
-							<c:forEach var="review" items="${reviewList}" varStatus="status">
-								<tr class="text-center" data-num="${review.r_num}"> <!-- ${review.r_num } 실제 글 번호 -->
+						<c:when test="${not empty postList}">
+							<c:forEach var="post" items="${postList}" varStatus="status">
+								<tr class="text-center" data-num="${post.r_num}"> <!-- ${review.r_num } 실제 글 번호 -->
 									<td>${count - status.index }</td>
-									<td class="text-left"><img src="/uploadStorage/review/thumbnail/${review.r_thumb }"></td>
-									<td class="goDetail text-left">${review.r_title}</td>
-									<td class="text-left">${review.m_id}</td>
+									<td class="text-left">${post.category}</td>
+									<td class="goDetail text-left">${post.r_title}</td>
+									<td class="text-left">${post.m_id}</td>
+									<td class="text-left">${post.r_regdate}</td>
+							
+								<%-- <tr class="text-center" data-num="${post.q_num}">
+									<td>${count - status.index }</td>
+									<td class="goDetail text-left">${post.q_title}</td>
+									<td class="text-left">${post.m_id}</td>
+									<td class="text-left">${post.r_regdate}</td>
+								</tr> --%>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -176,9 +179,6 @@
 							<button type="button" class="btn btn-default" id="reviewSearchBtn" >검색</button>
 					</div>
 				</form> 
-			</div>
-			<div class="contentBtn text-right">
-				<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-success">
 			</div>
 			<!-- ---------------------검색 종료 ------------------------------>
 			

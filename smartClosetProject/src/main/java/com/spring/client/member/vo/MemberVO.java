@@ -23,4 +23,7 @@ public class MemberVO {
 	private String m_exitdate = ""; // 회원탈퇴일
 	private int m_mile = 0; // 회원마일리지
 	private int m_acc = 0; // 회원주문총금액
+	
+	
+	
 }

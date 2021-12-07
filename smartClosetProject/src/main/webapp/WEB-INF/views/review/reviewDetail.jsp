@@ -51,8 +51,8 @@
 		</script>
 	</head>
 	<body>
-		<div class="container">
-			<div class="text-center"><h3>상세 페이지</h3></div>
+		<div>
+			<div style="font-weight: bold;font-size: 36px; text-align:center;">REVIEW</div>
 			
 			<%-- 수정, 삭제 시 가져갈 글번호, 원본파일명, 썸네일파일명을 전달하는 폼 테이터 --%>
 			<form name="f_data" id="f_data" method="post">
@@ -68,7 +68,7 @@
 				</div>
 			</div>
 			<%-- =============== 상세 정보 보여주기 시작 =============== --%>
-			<div class="container">
+			<div>
 				<table class="table table-bordered">
 		 			<tr>
 		 				<td>글제목</td>

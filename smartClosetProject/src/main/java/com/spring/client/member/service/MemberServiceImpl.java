@@ -1,10 +1,13 @@
 package com.spring.client.member.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.client.member.dao.MemberDAO;
 import com.spring.client.member.vo.MemberVO;
+import com.spring.client.member.vo.PostVO;
 
 import lombok.Setter;
 @Service
@@ -38,6 +41,17 @@ public class MemberServiceImpl implements MemberService{
 		int result = 0;
 		result = memberDao.memberUpdate(mvo);
 		return result;
+	}
+	//내가쓴 게시판 목록 구현
+	@Override
+	public List<PostVO> postList(PostVO pvo) {
+		List<PostVO> list = memberDao.postList(pvo);
+		return list;
+	}
+	//내가 쓴 게시판 목록 레코드 수 구현
+	@Override
+	public int postListCnt(PostVO pvo) {
+		return memberDao.postListCnt(pvo);
 	}
 
 	

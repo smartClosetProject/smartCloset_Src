@@ -6,6 +6,13 @@
 		FROM member
 	</select>
 	
+	<!-- 검색 중복 소스 사용 -->
+	<sql id="postSearch">
+			<if test="search == 'm_id'">
+				<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
+			</if>
+	</sql>
+	
 	<!-- 회원정보 수정 뷰 -->
 	<select id="updateForm" parameterType="member" resultType="member">
 		SELECT m_num,m_id, m_passwd, m_name, m_email, m_phone, m_addr, m_regdate,m_mile,m_acc
@@ -19,5 +26,27 @@
 		SET m_addr = #{m_addr}, m_phone = #{m_phone}, m_passwd = #{m_passwd}, m_email = #{m_email}
 		WHERE m_id = #{m_id}
 	</update>
+	
+	<!-- 게시판 목록 뷰 
+	<select id="postList" parameterType="post" resultType="post">
+		SELECT review.r_num,r_title,r_content,r_regdate, qna.q_num, q_title,q_content,q_date,qna.m_id
+		FROM review INNER JOIN qna
+		ON review.m_id = qna.m_id 
+	</select>-->
+	
+	<select id="postList" parameterType="post" resultType="post">
+		SELECT m_id,r_num, to_char(r_content),r_title, r_regdate from review
+		union
+		SELECT m_id,q_num, to_char(q_content),q_title, q_date from qna
+		order by r_regdate desc
+	</select>
+	
+	<!-- 게시판 목록 레코드 수 조회 -->
+		<select id="postListCnt" parameterType="post" resultType="int">
+		SELECT COUNT(*)  FROM ( SELECT  review.m_id FROM review  UNION ALL SELECT  qna.m_id FROM qna)
+		<trim prefix=" WHERE (" suffix=")">
+			<include refid="postSearch"></include>
+		</trim>
+	</select>
 	
 </mapper>

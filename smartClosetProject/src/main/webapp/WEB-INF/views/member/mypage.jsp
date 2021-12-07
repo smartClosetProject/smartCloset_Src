@@ -43,7 +43,13 @@
 					location.href = "/cart/cart"
 				});
 				//게시물 조회 버튼 클릭시
-				
+				$("#boardSerchBtn").click(function(){
+					$("#boardList").attr({
+						"method" : "get",
+						"action" : "/member/postmanagement"
+					});
+					$("#boardList").submit();
+				});
 				
 				//스마트옷장 버튼 클릭시
 				$("#smartClosetBtn").click(function(){
@@ -54,7 +60,8 @@
 		
 	</head>
 	<body>
-	<form>
+	<form id="boardList">
+		<input type="hidden" name="m_id" id="m_id" value="${mypage.m_id}">
 		<div style="font-weight: bold;font-size: 36px; text-align:center;">MY PAGE</div>
 		<div>
 			<label>${name}회원님</label>

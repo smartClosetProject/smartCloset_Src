@@ -21,6 +21,14 @@
 		<![endif]-->
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
+		<style type="text/css">
+		.button4 {
+		   background-color: white;
+		   color: black;
+		   border: 2px solid #e7e7e7;
+		}
+		.button4:hover {background-color: #e7e7e7;}
+		</style>
 		<script type="text/javascript">
 			$(function(){
 				$("#memberUpdateBtn").click(function(){
@@ -151,8 +159,8 @@
 		</form>
 		<form>
 			<div class="ec-base-button justify">
-				<button type="button" id="memberExitBtn"  class="btn btn-default btn-lg active" >회원탈퇴</button>
-				<button type="button" id="memberUpdateBtn" class="btn btn-default btn-lg active">회원정보수정</button>
+				<button type="button" id="memberExitBtn"  class="button button4" >회원탈퇴</button>
+				<button type="button" id="memberUpdateBtn" class="button button4">회원정보수정</button>
 			</div>
 		</form>
 	</body>
