@@ -37,4 +37,11 @@ public class SmartClosetController {
 		
 		return "smartcloset/sCloset";
 	}
+	
+	@GetMapping("regClosetForm")
+	public String regClosetForm() {
+		log.info("regClosetForm 호출 성공");
+		
+		return "smartcloset/regClosetForm";
+	}
 }

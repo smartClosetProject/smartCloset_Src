@@ -112,11 +112,38 @@
 				text-align: center;
 				background-color: #ADB5BD;
 			}
+			.popup { /* 팝업이 열렸을 때, 팝업창 주변 전체를 어둡게 합니다 */ 
+				display: none; 
+				position: fixed; 
+				width: 100%; 
+				height: 100%; 
+				top: 0; 
+				left: 0; 
+				background: rgba(0,0,0,0.5); 
+			} 
+			.popup-inner { /* 열렸을 때 팝업창 크기와 색상을 지정합니다. */ 
+				position: absolute; 
+				width: 50%; 
+				height: 50%; 
+				top: 50%; 
+				left: 50%; 
+				transform: translate(-50%, -50%); 
+				padding: 10px; 
+				background: #fff; 
+			} 
+			.popup-close{ /* 팝업창 내 닫기 버튼의 위치를 지정합니다. */ 
+				position: absolute; 
+				display: block; 
+				top: 15px; 
+				right: 15px;
+				font-size: 20px;
+			}
 		</style>
 		<script type="text/javascript">
 			$(function() {
 				$(".cloth").data("bor", "none");
 				
+				// 옷 이미지 클릭 시 선택, 선택 취소 효과 
 				$(".cloth").on("click", function() {
 					if ($(this).data("bor") == "none") {
 						$(this).css("outline", "2px solid #3BAEDA");
@@ -125,6 +152,35 @@
 						$(this).css("outline", "none"); 
 						$(this).data("bor", "none");
 					}
+				});
+				
+				// 팝업창 열기
+			    $('[data-popup-open]').on('click', function(e)  {
+					var targeted_popup_class = $(this).attr('data-popup-open');
+					$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+					e.preventDefault();
+			    });
+
+			    // 팝업창 닫기
+			    $('[data-popup-close]').on('click', function(e)  {
+					var targeted_popup_class = $(this).attr('data-popup-close');
+					$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+					e.preventDefault();
+			    });
+			    
+			    // 팝업창 - 등록하기 처리
+			    $("#regBtn").click(function() {
+					
+				});
+			    
+			    // 팝업창 - 취소하기 처리
+			    $("#cancelBtn").on("click", function(e) {
+					var targeted_popup_class = $('[data-popup-close]').attr('data-popup-close');
+					$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+					e.preventDefault();
 				});
 			});
 		</script>
@@ -172,7 +228,19 @@
 				</div>
 				<div class="btns">
 					<input type="button" id="codi" class="btn footerBtn" value="코디">
-					<input type="button" id="reg" class="btn footerBtn" value="옷 등록하기">
+					<input type="button" data-popup-open="regCloset" id="regCloset" class="btn footerBtn" value="옷 등록하기">
+				
+					<div class="popup" data-popup="regCloset">
+						<div class="popup-inner">
+							<div class="popup-contents">
+								<span data-popup-close="regCloset" class="glyphicon glyphicon-remove popup-close"></span>
+								<div>
+									<input type="button" class="btn" id="regBtn" value="등록하기">
+									<input type="button" class="btn" id="cancelBtn" value="취소">
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</form>
