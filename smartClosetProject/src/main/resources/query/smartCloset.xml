@@ -12,7 +12,7 @@
 	</insert>
 	
 	<select id="smartCloset" parameterType="sCloset" resultType="sCloset">
-		SELECT DISTINCT sc_image, sc_thumb FROM smart_closet
+		SELECT DISTINCT sc_num, sc_image, sc_thumb FROM smart_closet
 		<where>
 			m_id = #{m_id}
 			<if test="search == 'buy'">
@@ -33,4 +33,9 @@
 		INSERT INTO smart_closet(sc_num, sc_tag1, sc_tag2, sc_tag3, sc_tag4, sc_tag5, sc_isBuy, sc_image, sc_thumb, m_id)
 		VALUES(smart_closet_seq.NEXTVAL, #{sc_tag1}, #{sc_tag2}, #{sc_tag3}, #{sc_tag4}, #{sc_tag5}, #{sc_isBuy}, #{sc_image}, #{sc_thumb}, #{m_id})
 	</insert>
+	
+	<delete id="deleteCloset" parameterType="int">
+		DELETE FROM smart_closet
+		WHERE sc_num = #{sc_num}
+	</delete>
 </mapper>

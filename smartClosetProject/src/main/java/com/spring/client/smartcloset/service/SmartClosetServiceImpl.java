@@ -39,4 +39,9 @@ public class SmartClosetServiceImpl implements SmartClosetService {
 		}
 		sClosetDao.regCloset(svo);
 	}
+
+	@Override
+	public void deleteCloset(int sc_num) {
+		sClosetDao.deleteCloset(sc_num);
+	}
 }

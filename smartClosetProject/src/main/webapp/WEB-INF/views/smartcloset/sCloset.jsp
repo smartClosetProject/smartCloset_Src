@@ -119,8 +119,8 @@
 			} 
 			.popup-inner { /* 열렸을 때 팝업창 크기와 색상을 지정합니다. */ 
 				position: absolute; 
-				width: 50%; 
-				height: 50%; 
+				width: 920px; 
+				height: 500px; 
 				top: 50%; 
 				left: 50%; 
 				transform: translate(-50%, -50%); 
@@ -157,7 +157,6 @@
 				width: 50%;
 				height: 350px;
 				float: left;
-				border: 1px solid;
 			}
 			#regImage {
 				margin-left: 70px;
@@ -243,9 +242,35 @@
 					}
 				});
 				
-				// 태그변경 처리
+				// 태그수정 처리
 				$(".tagBtn").click(function() {
 					
+				});
+				
+				// 옷 삭제 처리
+				$("#deleteCloset").click(function() {
+					let chkArr = new Array();
+					
+					$(".checkboxs:checked").each(function() {
+						chkArr.push($(this).attr("data-num"));
+					});
+					
+					$.ajax({
+						url : "/sCloset/deleteCloset",
+						type: "post",
+						data : {chkBox : chkArr},
+						dataType : "text",
+						error : function() {
+							alert("시스템 오류입니다. 관리자에 문의하세요.");
+						},
+						success : function(result) {
+							if (result == "success") {
+								location.href = "/sCloset/sClosetHome";
+							} else {
+								alert("삭제에 실패했습니다. 다시 실행해 주세요.");
+							}
+						}
+					});
 				});
 				
 				// 팝업창 열기
@@ -345,6 +370,7 @@
 							<div class="section1 text-center">
 								<div class="section2">
 									<img class="cloth" data-num="${i = i + 1 }" src="/uploadStorage/sCloset/${closet.sc_image }" /> 
+									<input type="checkbox" data-num="${closet.sc_num }" class="checkboxs">
 								</div>
 								<input type="button" class="btn tagBtn" value="태그수정">
 							</div>	
@@ -359,65 +385,66 @@
 					<div id="codiSpace"></div>  
 				</div>
 				<div class="btns">
+					<input type="button" id="deleteCloset" class="btn footerBtn" value="삭제하기">
 					<input type="button" data-popup-open="regCloset" id="regCloset" class="btn footerBtn" value="옷 등록하기">
+				</div>
 				
-					<div class="popup" data-popup="regCloset">
-						<div class="popup-inner">
-							<div class="popup-contents">
-								<span data-popup-close="regCloset" class="glyphicon glyphicon-remove popup-close"></span>
-								<div id="regPopup">
-									<span>등록하기</span>
+				<div class="popup" data-popup="regCloset">
+					<div class="popup-inner">
+						<div class="popup-contents">
+							<span data-popup-close="regCloset" class="glyphicon glyphicon-remove popup-close"></span>
+							<div id="regPopup">
+								<span>등록하기</span>
+							</div>
+							
+							<div id="regSection1">
+								<div id="regImage">
+									<img id="imageArea">
 								</div>
-								
-								<div id="regSection1">
-									<div id="regImage">
-										<img id="imageArea">
+							</div>
+							
+							<div id="regSection2">
+								<div class="form-group">
+									<label for="file" class="col-sm-3 control-label inputsFile">이미지 첨부</label> 
+									<div class="col-sm-9">
+										<input type="file" class="form-control inputsFile" name="file" id="file">
 									</div>
 								</div>
-								
-								<div id="regSection2">
-									<div class="form-group">
-										<label for="file" class="col-sm-3 control-label inputsFile">이미지 첨부</label> 
-										<div class="col-sm-9">
-											<input type="file" class="form-control inputsFile" name="file" id="file">
-										</div>
+								<div id="regMsg">태그는 기억하기 쉬운 단어로 구성해 보세요^^</div>
+								<div class="form-group inputs">
+									<label for="sc_tag1" class="col-sm-2 control-label inputs">태그1 : </label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control inputs tags" name="sc_tag1" id="sc_tag1" placeholder="ex) 아우터">
 									</div>
-									<div id="regMsg">태그는 기억하기 쉬운 단어로 구성해 보세요^^</div>
-									<div class="form-group inputs">
-										<label for="sc_tag1" class="col-sm-2 control-label inputs">태그1 : </label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control inputs tags" name="sc_tag1" id="sc_tag1" placeholder="ex) 아우터">
-										</div>
-									</div>
-									<div class="form-group inputs">
-										<label for="sc_tag2" class="col-sm-2 control-label inputs">태그2 : </label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control inputs tags" name="sc_tag2" id="sc_tag2" placeholder="ex) 패딩">
-										</div>
-									</div>
-									<div class="form-group inputs">
-										<label for="sc_tag3" class="col-sm-2 control-label inputs">태그3 : </label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control inputs tags" name="sc_tag3" id="sc_tag3" placeholder="ex) 겨울">
-										</div>
-									</div>
-									<div class="form-group inputs">
-										<label for="sc_tag4" class="col-sm-2 control-label inputs">태그4 : </label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control inputs tags" name="sc_tag4" id="sc_tag4" placeholder="ex) 검정색">
-										</div>
-									</div>
-									<div class="form-group inputs">
-										<label for="sc_tag5" class="col-sm-2 control-label inputs">태그5 : </label>
-										<div class="col-sm-10">
-											<input type="text" class="form-control inputs tags" name="sc_tag5" id="sc_tag5" placeholder="ex) 2021년">
-										</div>
-									</div>								
 								</div>
-								<div id="regBtns">
-									<input type="button" class="btn" id="regBtn" value="등록하기">
-									<input type="button" class="btn" id="cancelBtn" value="취소">
+								<div class="form-group inputs">
+									<label for="sc_tag2" class="col-sm-2 control-label inputs">태그2 : </label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control inputs tags" name="sc_tag2" id="sc_tag2" placeholder="ex) 패딩">
+									</div>
 								</div>
+								<div class="form-group inputs">
+									<label for="sc_tag3" class="col-sm-2 control-label inputs">태그3 : </label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control inputs tags" name="sc_tag3" id="sc_tag3" placeholder="ex) 겨울">
+									</div>
+								</div>
+								<div class="form-group inputs">
+									<label for="sc_tag4" class="col-sm-2 control-label inputs">태그4 : </label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control inputs tags" name="sc_tag4" id="sc_tag4" placeholder="ex) 검정색">
+									</div>
+								</div>
+								<div class="form-group inputs">
+									<label for="sc_tag5" class="col-sm-2 control-label inputs">태그5 : </label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control inputs tags" name="sc_tag5" id="sc_tag5" placeholder="ex) 2021년">
+									</div>
+								</div>								
+							</div>
+							<div id="regBtns">
+								<input type="button" class="btn" id="regBtn" value="등록하기">
+								<input type="button" class="btn" id="cancelBtn" value="취소">
 							</div>
 						</div>
 					</div>
