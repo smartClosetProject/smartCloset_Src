@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.spring.client.order.vo.OrderVO;
 import com.spring.client.smartcloset.dao.SmartClosetDAO;
 import com.spring.client.smartcloset.vo.SmartClosetVO;
+import com.spring.common.file.FileUploadUtil;
 
 import lombok.Setter;
 
@@ -25,5 +26,17 @@ public class SmartClosetServiceImpl implements SmartClosetService {
 	public List<SmartClosetVO> smartCloset(String m_id) {
 		List<SmartClosetVO> closetList = sClosetDao.smartCloset(m_id);
 		return closetList;
+	}
+
+	@Override
+	public void regCloset(SmartClosetVO svo) throws Exception {
+		if (svo.getFile().getSize() > 0) {
+			String fileName = FileUploadUtil.fileUpload(svo.getFile(), "sCloset");
+			svo.setSc_image(fileName);
+			
+			String thumbName = FileUploadUtil.makeThumbnail(fileName);
+			svo.setSc_thumb(thumbName);
+		}
+		sClosetDao.regCloset(svo);
 	}
 }

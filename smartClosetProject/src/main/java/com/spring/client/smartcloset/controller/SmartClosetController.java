@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.client.smartcloset.service.SmartClosetService;
@@ -39,10 +41,16 @@ public class SmartClosetController {
 		return "smartcloset/sCloset";
 	}
 	
-	@GetMapping("regClosetForm")
-	public String regClosetForm() {
-		log.info("regClosetForm 호출 성공");
+	@PostMapping("regCloset")
+	public String regCloset(@ModelAttribute SmartClosetVO svo) throws Exception {
+		log.info("regCloset 호출 성공");
 		
-		return "smartcloset/regClosetForm";
+		String m_id = (String) session.getAttribute("m_id");
+		m_id = "smartmember";
+		svo.setM_id(m_id);
+		
+		sClosetService.regCloset(svo);
+		
+		return "redirect:/sCloset/sClosetHome";
 	}
 }

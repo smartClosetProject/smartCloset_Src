@@ -93,7 +93,7 @@
 				outline: none;
 			}
 			.btns {
-				margin-left: 280px;
+				margin-left: 310px;
 			}
 			.footerBtn {
 				margin-top: 5px;
@@ -135,7 +135,55 @@
 				font-size: 20px;
 			}
 			.codiCloset {
-				height: 200px;
+				position: relative;
+				height: 175px;
+			}
+			#regPopup {
+				height: 30px;
+				text-align: center;
+				font-size: 20px;
+				background-color: #ADB5BD;
+			}
+			#regSection1 {
+				margin-top: 20px;
+				margin-bottom: 10px;
+				width: 50%;
+				height: 350px;
+				float: left;
+			}
+			#regSection2 {
+				margin-top: 20px;
+				margin-bottom: 10px;
+				width: 50%;
+				height: 350px;
+				float: left;
+				border: 1px solid;
+			}
+			#regImage {
+				margin-left: 70px;
+				
+			}
+			#regImage img {
+				position: relative;
+				width: auto;
+				max-width: 400px;
+				max-height: 350px;
+			}
+			#regMsg {
+				margin-left: 20px;
+				font-size: 12px;
+				color: gray;
+			}
+			
+			.inputsFile {
+				margin-top: 20px;
+				margin-bottom: 20px;
+			}
+			.inputs {
+				margin-bottom: 15px;
+			}
+			#regBtns {
+				text-align: center;
 			}
 		</style>
 		<script type="text/javascript">
@@ -147,10 +195,13 @@
 					let num = $(this).data("num");
 					let imgNum = -1;
 					
+					let top = Math.random() * 100;
+					let left = Math.random() * 50;
+					
 					if ($(this).data("bor") == "none") {
 						$(this).css("outline", "3px solid #3BAEDA");
 						$(this).data("bor", "exist");
-						$(this).clone().appendTo("#codiSpace").attr("class","codiCloset").data("imgNum", imgNum = imgNum + 1).css("outline", "none"); // 썸네일 이용한 구현 실패. 이미지 복제로 우선 구현.
+						$(this).clone().appendTo("#codiSpace").attr("class","codiCloset").data("imgNum", imgNum = imgNum + 1).css("outline", "none").css("top", top).css("left", left); // 썸네일 이용한 구현 실패. 이미지 복제로 우선 구현.
 						$(".codiCloset").draggable();
 					} else {
 						$(this).css("outline", "none"); 
@@ -163,41 +214,77 @@
 			    $('[data-popup-open]').on('click', function(e)  {
 					var targeted_popup_class = $(this).attr('data-popup-open');
 					$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-
 					e.preventDefault();
 			    });
 
 			    // 팝업창 닫기
 			    $('[data-popup-close]').on('click', function(e)  {
-					var targeted_popup_class = $(this).attr('data-popup-close');
-					$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-					e.preventDefault();
+			    	regExit();
 			    });
 			    
-			    // 팝업창 - 등록하기 처리
-			    $("#regBtn").click(function() {
-					
+				 // 팝업창 - 취소하기 처리
+			    $("#cancelBtn").on("click", function(e) {
+			    	regExit();
 				});
 			    
-			    // 팝업창 - 취소하기 처리
-			    $("#cancelBtn").on("click", function(e) {
-					var targeted_popup_class = $('[data-popup-close]').attr('data-popup-close');
-					$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
-
-					e.preventDefault();
+				 // 첨부파일 이미지 미리보기
+			    $("#file").change(function() {
+			    	viewImage(this, '#imageArea');
+				});
+				 
+			    // 팝업창 - 등록하기 처리
+			    $("#regBtn").click(function() {
+			    	if ($(".tags").val() == "") {
+			    		alert("최소 하나의 태그는 등록하셔야 합니다.");
+			    		return;
+			    	} else if ($("#file").val() == "") {
+						alert("상품 이미지를 첨부해 주세요.");
+						return;
+					} else if (!chkFile($("#file"))) {
+						return;
+					} else {
+						console.log(1);
+						$("#sC_frm").attr({
+							"method" : "post",
+							"enctype" : "multipart/form-data",
+							"action" : "/sCloset/regCloset"
+						});
+						$("#sC_frm").submit();
+						
+						regExit();
+					}
 				});
 			});
+			
+			function regExit() {
+				var targeted_popup_class = $('[data-popup-close]').attr('data-popup-close');
+				$('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+				
+				$("#file").val("");
+				$(".tags").val("");
+				$("#imageArea").removeAttr("src");
+			}
+			
+			function viewImage(input, area) {
+			    if (input.files && input.files[0]) {
+			        var reader = new FileReader();
+			        reader.onload = function (e) {
+			            $(area).attr("src", e.target.result);
+			        }
+			        reader.readAsDataURL(input.files[0]);
+			    }
+			}
 		</script>
 	</head>
 	<body>
 		<form id="sC_frm">
+			<input type="hidden" name="sc_isBuy" value="NO">
 			<div>
 				<br>
 				<h2 class="sCtitle">스마트 옷장</h2><hr>
 			</div><br><br>
 			
-			<div class="sCfloats">
+			<div class="sCfloats"> 
 				<div class="sCfloat3">
 					<select id="sC_select" class="form-control">
 						<option value="all">전체 옷장</option>
@@ -233,14 +320,62 @@
 					<div id="codiSpace"></div>  
 				</div>
 				<div class="btns">
-					<input type="button" id="codi" class="btn footerBtn" value="코디">
 					<input type="button" data-popup-open="regCloset" id="regCloset" class="btn footerBtn" value="옷 등록하기">
 				
 					<div class="popup" data-popup="regCloset">
 						<div class="popup-inner">
 							<div class="popup-contents">
 								<span data-popup-close="regCloset" class="glyphicon glyphicon-remove popup-close"></span>
-								<div>
+								<div id="regPopup">
+									<span>등록하기</span>
+								</div>
+								
+								<div id="regSection1">
+									<div id="regImage">
+										<img id="imageArea">
+									</div>
+								</div>
+								
+								<div id="regSection2">
+									<div class="form-group">
+										<label for="file" class="col-sm-3 control-label inputsFile">이미지 첨부</label> 
+										<div class="col-sm-9">
+											<input type="file" class="form-control inputsFile" name="file" id="file">
+										</div>
+									</div>
+									<div id="regMsg">태그는 기억하기 쉬운 단어로 구성해 보세요^^</div>
+									<div class="form-group inputs">
+										<label for="sc_tag1" class="col-sm-2 control-label inputs">태그1 : </label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control inputs tags" name="sc_tag1" id="sc_tag1" placeholder="ex) 아우터">
+										</div>
+									</div>
+									<div class="form-group inputs">
+										<label for="sc_tag2" class="col-sm-2 control-label inputs">태그2 : </label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control inputs tags" name="sc_tag2" id="sc_tag2" placeholder="ex) 패딩">
+										</div>
+									</div>
+									<div class="form-group inputs">
+										<label for="sc_tag3" class="col-sm-2 control-label inputs">태그3 : </label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control inputs tags" name="sc_tag3" id="sc_tag3" placeholder="ex) 겨울">
+										</div>
+									</div>
+									<div class="form-group inputs">
+										<label for="sc_tag4" class="col-sm-2 control-label inputs">태그4 : </label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control inputs tags" name="sc_tag4" id="sc_tag4" placeholder="ex) 검정색">
+										</div>
+									</div>
+									<div class="form-group inputs">
+										<label for="sc_tag5" class="col-sm-2 control-label inputs">태그5 : </label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control inputs tags" name="sc_tag5" id="sc_tag5" placeholder="ex) 2021년">
+										</div>
+									</div>								
+								</div>
+								<div id="regBtns">
 									<input type="button" class="btn" id="regBtn" value="등록하기">
 									<input type="button" class="btn" id="cancelBtn" value="취소">
 								</div>

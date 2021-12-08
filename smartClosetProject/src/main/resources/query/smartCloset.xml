@@ -15,5 +15,9 @@
 		SELECT DISTINCT sc_image, sc_thumb FROM smart_closet
 		WHERE m_id = #{m_id}
 	</select>
-	 
+	
+	<insert id="regCloset" parameterType="sCloset">
+		INSERT INTO smart_closet(sc_num, sc_tag1, sc_tag2, sc_tag3, sc_tag4, sc_tag5, sc_isBuy, sc_image, sc_thumb, m_id)
+		VALUES(smart_closet_seq.NEXTVAL, #{sc_tag1}, #{sc_tag2}, #{sc_tag3}, #{sc_tag4}, #{sc_tag5}, #{sc_isBuy}, #{sc_image}, #{sc_thumb}, #{m_id})
+	</insert>
 </mapper>

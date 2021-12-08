@@ -1,5 +1,7 @@
 package com.spring.client.smartcloset.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -17,4 +19,5 @@ public class SmartClosetVO {
 	private String m_id = "";		// 회원 아이디
 	
 	private String cart_num = "";	// 카트 번호
+	private MultipartFile file;		// 첨부파일
 }
