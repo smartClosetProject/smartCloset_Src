@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.client.member.service.MemberService;
 import com.spring.client.member.vo.MemberVO;
+import com.spring.client.member.vo.MyorderVO;
 import com.spring.client.member.vo.PostVO;
 import com.spring.common.vo.PageDTO;
 
@@ -100,7 +101,27 @@ public class MemberController {
 		model.addAttribute("count", count);
 		return "member/postmanagement";
 	}
-
+	
+	/*********************************************
+	 * 주문내역 조회 출력
+	 * *******************************************/
+	@GetMapping("myorderList")
+	public String MyorderList(@ModelAttribute("data") MyorderVO mvo, Model model) {
+		log.info("myorderList 호출 성공");
+		//주문 내역 조회
+		List<MyorderVO> myorderList = memberService.myorderList(mvo);
+		model.addAttribute("myorderList", myorderList);
+		
+		//전체 레코드 수 구현
+		int total = memberService.myorderListCnt(mvo);
+		//페이징 처리
+		model.addAttribute("pageMaker", new PageDTO(mvo, total));
+		//출력되는 글번호 제어
+		int count = total - (mvo.getPageNum() - 1) * mvo.getAmount();
+		model.addAttribute("count", count);
+		return "member/myorderList";
+		
+	}
 
 
 

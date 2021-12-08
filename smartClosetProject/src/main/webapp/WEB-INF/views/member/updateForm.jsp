@@ -125,7 +125,12 @@
 					<th>주소
 						<img src="/resources/image/star.jpg" alt="필수">
 					</th>
-					<td><input type="text" id="m_addr" name="m_addr" value="${updateData.m_addr}"></td>
+					<td>
+					<input type="text" id="m_addr" name="m_addr" value="${updateData.m_addr}">
+					<input type="text" id="m_addr2" name="m_addr2" value="${updateData.m_addr2}">
+					<input type="text" id="m_addr3" name="m_addr3" value="${updateData.m_addr3}">
+					</td>
+					
 				</tr>
 				<tr>
 					<th>휴대전화

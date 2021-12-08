@@ -22,6 +22,6 @@ public class PostVO extends CommonVO{
 	private String q_content = ""; //QnA 게시판 내용
 	private String q_regdate; //QnA 게시판 등록일
 	
-	private String category = "REVIEW";
+	private String category = "";
 
 }

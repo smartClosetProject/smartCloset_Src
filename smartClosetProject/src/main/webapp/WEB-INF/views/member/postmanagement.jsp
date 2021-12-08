@@ -79,15 +79,26 @@
 				
 				// 제목 클릭 시 상세 페이지 이동을 위한 처리 이벤트
 				$(".goDetail").click(function() {
+					let category = $(this).parents("tr").attr("data-category");
+					//console.log(category);
+					
 					let r_num = $(this).parents("tr").attr("data-num");
 					$("#r_num").val(r_num);
-					console.log(r_num);
-					// 상세 페이지로 이동하기 위해 form 추가 (id : detailForm)
-					$("#r_numForm").attr({
-						"method" : "get",
-						"action" : "/review/reviewDetail"
-					});
-					$("#r_numForm").submit();
+					//console.log(r_num);
+					if(category=="REVIEW"){
+						// 상세 페이지로 이동하기 위해 form 추가 (id : detailForm)
+						$("#r_numForm").attr({
+							"method" : "get",
+							"action" : "/review/reviewDetail"
+						});
+						$("#r_numForm").submit();
+					} else if(category=="QNA"){
+						$("#r_numForm").attr({
+							"method" : "get",
+							"action" : "/qna/qnaDetail"
+						});
+						$("#r_numForm").submit();
+					}
 				});
 				// 페이지 클릭 시 처리
 				$(".paginate_button a").click(function(e) {
@@ -116,6 +127,7 @@
 			<form id="r_numForm">
 				<input type="hidden" id="r_num" value="r_num" name="r_num">
 				<input type="hidden" id="q_num" value="q_num" name="q_num">
+				<input type="hidden" id="r_content" value="r_content" name="r_content">
 			</form>
 			<!-- --------------------검색 종료 ---------------------------->
 			<!-- -------------------- 리스트 시작 -------------------------->
@@ -136,7 +148,7 @@
 					<c:choose>
 						<c:when test="${not empty postList}">
 							<c:forEach var="post" items="${postList}" varStatus="status">
-								<tr class="text-center" data-num="${post.r_num}"> <!-- ${review.r_num } 실제 글 번호 -->
+								<tr class="text-center" data-num="${post.r_num}" data-category="${post.category}"> <!-- ${review.r_num } 실제 글 번호 -->
 									<td>${count - status.index }</td>
 									<td class="text-left">${post.category}</td>
 									<td class="goDetail text-left">${post.r_title}</td>
@@ -171,9 +183,9 @@
 					 <div class="form-group">
 						<select id ="re_Search" name="search" class="form-control">
 							<option value="all">전체</option>
-							<option value="r_title">제목</option>
-							<option value="r_content">내용</option>
-							<option value="m_id">아이디</option>							
+							
+							<option value="r_content">제목</option>
+					
 						</select>
 							<input type="text" id="reviewKeyword" name="keyword" value="검색어 입력" class="form-control">
 							<button type="button" class="btn btn-default" id="reviewSearchBtn" >검색</button>

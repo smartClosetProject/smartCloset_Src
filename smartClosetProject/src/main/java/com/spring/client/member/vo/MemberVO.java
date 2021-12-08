@@ -19,6 +19,8 @@ public class MemberVO {
 	private String m_email = ""; // 회원이메일
 	private String m_phone = ""; // 회원폰번호
 	private String m_addr = ""; // 회원주소
+	private String m_addr2 = ""; // 회원주소2
+	private String m_addr3 = ""; // 회원주소3
 	private String m_regdate = ""; // 회원등록일
 	private String m_exitdate = ""; // 회원탈퇴일
 	private int m_mile = 0; // 회원마일리지

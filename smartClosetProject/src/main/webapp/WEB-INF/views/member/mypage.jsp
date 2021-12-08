@@ -36,7 +36,13 @@
 					location.href = "/member/updateForm";
 				});
 				//주문내역조회 버튼 클릭시
-				
+				$("#serchBtn").click(function(){
+					$("#boardList").attr({
+						"method" : "get",
+						"action" : "/member/myorderList"
+					});
+					$("#boardList").submit();
+				});
 				
 				//장바구니 버튼 클릭시
 				$("#cartBtn").click(function(){

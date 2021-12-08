@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.client.member.dao.MemberDAO;
 import com.spring.client.member.vo.MemberVO;
+import com.spring.client.member.vo.MyorderVO;
 import com.spring.client.member.vo.PostVO;
 
 import lombok.Setter;
@@ -42,6 +43,7 @@ public class MemberServiceImpl implements MemberService{
 		result = memberDao.memberUpdate(mvo);
 		return result;
 	}
+	
 	//내가쓴 게시판 목록 구현
 	@Override
 	public List<PostVO> postList(PostVO pvo) {
@@ -52,6 +54,18 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int postListCnt(PostVO pvo) {
 		return memberDao.postListCnt(pvo);
+	}
+	
+	//주문 내역 리스트 목록 구현
+	@Override
+	public List<MyorderVO> myorderList(MyorderVO mvo) {
+		List<MyorderVO> list = memberDao.myorderList(mvo);
+		return list;
+	}
+	//주문 내역 리스트 레코드 수 구현
+	@Override
+	public int myorderListCnt(MyorderVO mvo) {
+		return memberDao.myorderListCnt(mvo);
 	}
 
 	

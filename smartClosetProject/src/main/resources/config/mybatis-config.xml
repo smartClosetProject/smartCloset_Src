@@ -6,7 +6,9 @@
 	<typeAliases>
 		<typeAlias type="com.spring.client.member.vo.MemberVO" alias="member" />
 		<typeAlias type="com.spring.client.member.vo.PostVO" alias="post" />
+		<typeAlias type="com.spring.client.member.vo.MyorderVO" alias="myorder" />
 		<typeAlias type="com.spring.client.review.vo.ReviewVO" alias="review" />
+		
 	</typeAliases>
 
 </configuration>
