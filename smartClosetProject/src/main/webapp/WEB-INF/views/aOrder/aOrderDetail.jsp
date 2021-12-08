@@ -100,30 +100,5 @@
 				<input type="button" value="목록">
 			</div>
 		</div>
-		
-		
-		<!-- <p id="order_num">order_num : ${aOrderDetail.order_num}</p>
-		<p>order_totalPayment : ${aOrderDetail.order_totalPayment}</p>
-		<p>order_state : ${aOrderDetail.order_state}</p>
-		<p>order_cancelReason : ${aOrderDetail.order_cancelReason}</p>
-		<p>order_deliverydate : ${aOrderDetail_deliverydate}</p>
-		<p>order_regdate : ${aOrderDetail.order_regdate}</p>
-		<p>m_id : ${aOrderDetail.m_id}</p>
-		
-		<h1>테스트</h1>
-		<c:choose>
-		<c:when test="${not empty aOrderProductDetail }">
-		<c:forEach var="aOrder" items="${aOrderProductDetail }" varStatus="status">
-
-		<p>od_goodsCount : ${aOrder.od_goodsCount}</p>
-		<p>pro_name : ${aOrder.pr_name}</p>
-		<p>pr_price : ${aOrder.pr_price}</p>
-		<p>pro_size : ${aOrder.pro_size}</p>
-		<p>pro_color : ${aOrder.pro_color}</p>
-		<hr>
-		</c:forEach>
-		</c:when>
-		</c:choose>
-		 -->
 	</body>
 </html>
