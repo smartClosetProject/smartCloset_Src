@@ -27,4 +27,24 @@ public class ProductServiceImpl implements ProductService {
 		listSales = productDAO.productListSales(cpvo);
 		return listSales;
 	}
+	@Override
+	public ProductVO productDetail(ProductVO cpvo) {
+		ProductVO detail=null;
+		detail=productDAO.productDetail(cpvo);
+		
+		return detail;
+	}
+	@Override
+	public List<String> listSize(ProductVO cpvo){
+		List<String> listSize = null;
+		listSize = productDAO.listSize(cpvo);
+		return listSize;
+	}
+	@Override
+	public List<String> listColor(ProductVO cpvo){
+		List<String> listColor= null;
+		listColor = productDAO.listColor(cpvo);
+		return listColor;
+	}
+
 }

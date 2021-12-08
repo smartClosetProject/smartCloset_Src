@@ -20,6 +20,7 @@
 		<style type="text/css">
 			input[type=text]{width:100%}
 			input[type=select]{width:100%}
+			.insert{width:900px;}
 		</style>
 		<script type="text/javascript">
 		$(function(){
@@ -88,7 +89,7 @@
 		<h2>상품 입력 페이지</h2>
 			<form id="insertForm">
 				<div class="form-group">
-					<table class="table-bordered">
+					<table class="table-bordered insert">
 						<tr>
 							<th class="col-md-2">상품 번호</th>
 							<td colspan="3" class="col-md-1"><input type="text" name="pr_num" id="pr_num"></td>

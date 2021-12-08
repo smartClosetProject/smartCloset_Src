@@ -10,7 +10,7 @@
 
 		<title>Insert title here</title>
 		
-		<link rel="shortcut icon" href="/resources/image/icon.png"/>
+		<link rel="shortcut ipr_pricecon" href="/resources/image/icon.png"/>
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
@@ -24,12 +24,27 @@
 			img{width:270px; margin-bottom: 15px; margin-top: 30px;}
 			#mainListSales{width:890px; margin-bottom: 40px;}
 			#mainListDate{width:890px; margin-bottom: 25px; margin-top: 10px; padding-bottom: 50px;}
-			.line{width:250px; height:0.2px; background-color: gray; margin-bottom: 15px; margin-top: 15px; }
+			.line{width:267px; height:0.2px; background-color: #D8D8D8; margin-bottom: 15px; margin-top: 15px; }
 			#longline{width:880px; height:2px; background-color: gray; }
 			.longline{width:860px; height:1px; background-color: #BDBDBD;}
 			#best{margin-top: 40px;}
 			a{text-align: right; padding-right: 20px; color: #2E2E2E;}
 		</style>
+		<script type="text/javascript">
+			$(function(){
+				$(".goDetail").click(function(){
+					var pr_num = $(this).attr("data-num");
+					$("#pr_num").val(pr_num);
+					console.log(pr_num);
+					
+					$("#detailProduct").attr({
+						"method":"get",
+						"action":"/product/subPage"
+					})
+					$("#detailProduct").submit();
+				})
+			})
+		</script>
 	</head>
 	<body>
 		<div class="contentContainer container">
@@ -59,7 +74,7 @@
 					<h2 id="best">BEST 6</h2>
 					<div class="longline"> </div>
 					<c:forEach var="ListSales" items="${listSales}" varStatus="status">
-						<div class="product goDetail">
+						<div class="product goDetail" data-num="${ListSales.pr_num}">
 							<c:if test="${not empty ListSales.pr_thumb}">
 								<img src="/uploadStorage/prDetail/thumb/${ListSales.pr_thumb}">
 							</c:if>

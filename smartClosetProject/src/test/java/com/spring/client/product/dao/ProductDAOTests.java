@@ -24,11 +24,18 @@ public class ProductDAOTests {
 	@Test
 	public void testBoardList() {
 		ProductVO cpvo = new ProductVO();
-		
-		List<ProductVO> pvo = productDAO.productListDate(cpvo);
-		for(ProductVO vo : pvo) {
+		cpvo.setPr_num("ii_1010");
+		List<String> pvo = productDAO.listSize(cpvo);
+		for(String vo : pvo) {
 			log.info(vo);
 		}
 	}
-
+//	@Test
+//	public void testsubPage() {
+//		ProductVO detail = new ProductVO();
+//		detail.setPr_num("ii_1010");
+//		detail= productDAO.productDetail(detail);
+//		
+//		log.info(detail);
+//	}
 }	

@@ -19,6 +19,7 @@
 		<style type="text/css">
 			input[type=text]{width:100%}
 			input[type=select]{width:100%}
+			.insert{width:900px;}
 		</style>
 		<script type="text/javascript">
 			$(function() {
@@ -41,7 +42,7 @@
 		<h2>입고 등록 페이지</h2>
 		<form id="insertForm">
 			<div class="form-group">
-				<table class="table-bordered">
+				<table class="table-bordered insert">
 					<tr>
 						<th class="col-md-1">거래처 번호</th>
 						<td class="col-md-2" colspan="3"><input type="text" name="cl_name" id="cl_name"></td>
@@ -85,7 +86,7 @@
 					</tr>
 				</table>
 				<button type="button" class="btn btn-success" id="insertBtn">저장</button>
-					<input type="button" class="btn btn-success" id="warehousingList" value="입고 리스트">
+				<input type="button" class="btn btn-success" id="warehousingList" value="입고 리스트">
 			</div>
 		</form>
 	</div>

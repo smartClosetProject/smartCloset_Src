@@ -19,6 +19,7 @@
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 		<style type="text/css">
 			td{height:150px;}
+			.height-btn{height:100px;}
 		</style>
 		<script type="text/javascript">
 			$(function(){
@@ -69,7 +70,9 @@
 					</c:otherwise>
 				</c:choose>
 			</table>
-			<input type="button" id="prductList" class="btn btn-info btn-default" value="상품 리스트">
+			<div class="height-btn">
+				<input type="button" id="prductList" class="btn btn-info btn-default" value="상품 리스트">
+			</div>
 		</div>
 	</body>
 </html>

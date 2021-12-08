@@ -27,6 +27,7 @@
 			.date input{width:370px; height:25px; margin-right: 30px; margin-top: 5px;}
 			.issale{margin-right: 75px;}
 			#searchData{height:80px;}
+			.height-btn{min-height:100px;}
 		</style>
 		<script type="text/javascript">
 			$(function () {
@@ -224,7 +225,7 @@
 					</c:if>
 				</ul>
 			</div>
-			<div>
+			<div class="height-btn">
 				<input type="button" value="등록" id="insertFormBtn" class="btn btn-info btn-default" />
 			</div>
 		</div>

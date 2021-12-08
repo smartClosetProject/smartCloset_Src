@@ -2,33 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.client.product.dao.ProductDAO">
 	<select id="productListDate" parameterType="productC" resultType="productC">
-		<![CDATA[select  pr_num, pr_name, pr_price, pr_mainimg, pr_thumb, pr_contentimg, 
-		PR_MILE, pr_categoryl, pr_categorys, pr_category ,pr_issale, pr_regdate
+		<![CDATA[select  pr_num, pr_name, pr_price, pr_thumb 
 		from(
-			select/*+index(pr_detail PRODUCT_CLIENT_REGDATE) */
-				rownum as rnum, pr_num, pr_name, pr_price, pr_mainimg, pr_thumb, pr_contentimg, 
-		PR_MILE, pr_categoryl, pr_categorys, (pr_categoryl||' | '||pr_categorys) as pr_category ,pr_issale, pr_regdate
-			from pr_detail order by pr_regdate
-			 ]]>
+			select 
+				rownum as rnum, pr_num, pr_name, pr_price,  pr_thumb
+			from pr_detail where PR_ISSALE='Y' order by pr_regdate desc]]>
 
 			<![CDATA[
- 			)prDetailList
-			where  PR_ISSALE='Y'and rnum<7  order by pr_regdate desc
+ 			)prDetailList where rownum<=6
 			]]>
 	</select>
 	<select id="productListSales" parameterType="productC" resultType="productC">
-		<![CDATA[select  pr_num, pr_name, pr_price, pr_mainimg, pr_thumb, pr_contentimg, 
-		PR_MILE, pr_categoryl, pr_categorys, pr_category ,pr_issale, pr_regdate
+		<![CDATA[select  pr_num, pr_name, pr_price, pr_thumb
 		from(
-			select/*+index(pr_detail PRODUCT_CLIENT_SALES) */
-				rownum as rnum, pr_num, pr_name, pr_price, pr_mainimg, pr_thumb, pr_contentimg, 
-		PR_MILE, pr_categoryl, pr_categorys, (pr_categoryl||' | '||pr_categorys) as pr_category ,pr_issale, pr_regdate
-			from pr_detail order by pr_sales desc
+			select
+				rownum as rnum, pr_num, pr_name, pr_price,  pr_thumb
+			from pr_detail where PR_ISSALE='Y' order by pr_sales desc
 			 ]]>
 
 			<![CDATA[ 
- 			)prDetailList
-			where PR_ISSALE='Y'and rnum<7
+ 			)prDetailList where rownum<=6 
 			]]>
+	</select>
+	<select id="productDetail" parameterType="productC" resultType="productC">
+		select pr_num, pr_name, pr_price, pr_mainimg, pr_contentimg,pr_mile from pr_detail where pr_num=#{pr_num}
+	</select>
+	<select id="listSize" parameterType="productC" resultType="String">
+		select pro_size from product where pr_num=#{pr_num} 
+	</select>
+	<select id="listColor" parameterType="productC" resultType="String">
+		select pro_color from product where pr_num=#{pr_num} 
+	</select>
+	<select id="listPr" parameterType="productC" resultType="productC">
+		select pd.pr_num, pr.pro_num, pr.pro_size, pr.pro_color, pd.pr_price, pd.pr_mile 
+		from product pr inner JOin pr_detail pd on pr.pr_num =pd.pr_num where pr.pr_num=#{pr_num} and pr.pro_size=#{pro_size} and pr.pro_color=#{pro_color}
 	</select>
 </mapper>
