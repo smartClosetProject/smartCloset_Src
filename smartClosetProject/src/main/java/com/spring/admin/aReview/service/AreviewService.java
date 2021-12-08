@@ -6,8 +6,8 @@ import com.spring.admin.aReview.vo.AreviewVO;
 
 public interface AreviewService {
 
-	public List<AreviewVO> reviewList(AreviewVO arvo);
-	public int reviewListCnt(AreviewVO arvo);
-	public void reviewDelete(AreviewVO arvo);
+	public List<AreviewVO> aReviewList(AreviewVO arvo);
+	public int aReviewListCnt(AreviewVO arvo);
+	public void aReviewDelete(AreviewVO arvo);
 
 }

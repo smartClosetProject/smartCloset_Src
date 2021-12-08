@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.admin.aQnA.dao.AqnaDAO">
+<mapper namespace="com.spring.admin.aQna.dao.AqnaDAO">
 	<sql id="aQnaSearch">
 		<if test="search == 'q_title'">
 			<![CDATA[ q_title LIKE '%' || #{keyword} || '%' ]]>
@@ -36,10 +36,15 @@
 			<include refid="aQnaSearch"></include>
 		</trim>
 	</select>
-	<select id="aQnaDetail" parameterMap="aqna" resultType="aqna">
+	<select id="aQnaDetail" parameterType="aqna" resultType="aqna">
 		select q_num, q_title, q_content, to_char(q_regdate, 'YYYY-MM-DD')as q_regdate, q_file, m_id
 		from qna
 		where q_num = #{q_num}
 	</select>
+	
+	<delete id="aQnaDelete" parameterType="aqna">
+		DELETE FROM qna
+		WHERE q_num = #{q_num}
+	</delete>
 
 </mapper>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.admin.aReview.dao.AreviewDAO">
 	
-		<sql id="reviewSearch">
+		<sql id="aReviewSearch">
 			<if test="search == 'r_title'">
 				<![CDATA[ r_title LIKE '%' || #{keyword} || '%' ]]>
 			</if>
@@ -14,7 +14,7 @@
 			</if>
 		</sql>
 	
-	<select id="reviewList" parameterType="areview" resultType="areview">
+	<select id="aReviewList" parameterType="areview" resultType="areview">
 		<![CDATA[
 			SELECT  r_num, r_title, r_content, to_char(r_regdate, 'YYYY-MM-DD') AS r_regdate, m_id 
 			FROM
@@ -23,7 +23,7 @@
 				FROM review
 				WHERE ]]>
 				 <trim prefix="(" suffix=") AND " prefixOverrides="AND">
-						<include refid="reviewSearch"></include>
+						<include refid="aReviewSearch"></include>
 				</trim>
 		<![CDATA[ ROWNUM <= #{pageNum} * #{amount} 
 			) reviewlist
@@ -32,15 +32,15 @@
 	</select>
 	
 	<!-- 전체 레코드 수 조회 -->
-	<select id="reviewListCnt" parameterType="areview" resultType="int">
+	<select id="aReviewListCnt" parameterType="areview" resultType="int">
 		SELECT count(*) FROM review
 		<trim prefix=" WHERE (" suffix=")">
-			<include refid="reviewSearch"></include>
+			<include refid="aReviewSearch"></include>
 		</trim>
 	</select>
 	
 	<!-- 글 삭제 처리 -->
-	<delete id="reviewDelete" parameterType="areview">
+	<delete id="aReviewDelete" parameterType="areview">
 		DELETE FROM review
 		WHERE r_num = #{r_num}
 	</delete>

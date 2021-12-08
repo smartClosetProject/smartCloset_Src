@@ -16,7 +16,7 @@
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript">
-			let replyNum, message = "작성시 입력한 비밀번호를 입력해주세요.",btnKind="";
+			let replyNum,btnKind="";
 			$(function(){
 				let q_num=${detail.q_num};
 				listAll(q_num);
@@ -62,10 +62,9 @@
 				/*댓글 보여주는 함수 */
 				function listAll(q_num){
 					$("#comment_list").html("");
-					let url = "/replies/all/"+q_num;
+					let url = "/aReply/all/"+q_num;
 					
 					$.getJSON(url,function(data){
-						console.log("list count : "+data.length);
 						replyCnt = data.length;
 						$(data).each(function(){
 							var r_num = this.r_num;
@@ -83,7 +82,7 @@
 				
 				//글 입력을 위한 Ajax 연동 처리
 				$("#replyInsert").click(function(){
-					let insertUrl = "/replies/replyInsert";
+					let insertUrl = "/aReply/aReplyInsert";
 					/* Json.stringify(): JavaScript 값이나 객체를 JSON 문자열로 반환 */
 					let value = JSON.stringify({
 						q_num:q_num,
@@ -125,7 +124,7 @@
 					if(!chkData("#content","댓글 내용을")) return;
 					else{
 						$.ajax({
-							url : '/replies/'+r_num,
+							url : '/aReply/'+r_num,
 							type : 'put',
 							headers : {
 								"Content-Type" : "application/json",
@@ -172,9 +171,7 @@
  					conArea.html(conText);
  				});
 				
-				/* "삭제하기" 버튼 클릭 처리 >> 비밀번호체크가 뜨도록*/
-				/* 동적으로 만든 버튼은 onclick을 사용할 수 없음. */
-				/* 그때 쓰는 것 == on("행위","버튼","함수") */
+			
 				$(document).on("click",".delete_btn",function(){
 					$(".reset_btn").click();
 					let currLi = $(this).parents("li");
@@ -226,7 +223,7 @@
 			function deleteBtn(q_num) {
 				if(confirm("선택하신 댓글을 삭제하시겠습니까?")){
 					$.ajax({
-						url : '/replies/' + replyNum,
+						url : '/aReply/' + replyNum,
 						type : 'delete',
 						headers : {
 							"X-HTTP-Method-Override" : "DELETE"

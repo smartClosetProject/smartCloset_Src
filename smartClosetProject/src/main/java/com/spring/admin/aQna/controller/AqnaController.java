@@ -1,4 +1,4 @@
-package com.spring.admin.aQnA.controller;
+package com.spring.admin.aQna.controller;
 
 import java.util.List;
 
@@ -7,16 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.admin.aQnA.service.AqnaService;
-import com.spring.admin.aQnA.vo.AqnaVO;
+import com.spring.admin.aQna.service.AqnaService;
+import com.spring.admin.aQna.vo.AqnaVO;
 import com.spring.common.vo.PageDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping("/aQnA/*")
+@RequestMapping("/aQna/*")
 @Log4j
 @AllArgsConstructor // 생성자 주입
 public class AqnaController {
@@ -39,7 +40,7 @@ public class AqnaController {
 		int count = total - (aqvo.getPageNum()-1) * aqvo.getAmount();
 		model.addAttribute("count",count);
 		
-		return "aQnA/aQnAList";
+		return "aQna/aQnaList";
 	}
 	
 	/****************************************************
@@ -52,7 +53,18 @@ public class AqnaController {
 		AqnaVO detail = aQnaService.aQnaDetail(aqvo);
 		model.addAttribute("detail",detail);
 		
-		return "aQnA/aQnADetail";
+		return "aQna/aQnaDetail";
+	}
+	
+	/****************************************************
+	 * 글 삭제 처리
+	 ****************************************************/
+	@RequestMapping("aQnaDelete")
+	public String aQnaDelete(@ModelAttribute AqnaVO aqvo, RedirectAttributes ras) {
+		aQnaService.aQnaDelete(aqvo);
+		ras.addFlashAttribute("AqnaVO", aqvo);
+		
+		return "redirect:/aQna/aQnaList";
 	}
 
 }

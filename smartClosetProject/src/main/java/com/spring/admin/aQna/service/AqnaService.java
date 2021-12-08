@@ -1,13 +1,14 @@
-package com.spring.admin.aQnA.dao;
+package com.spring.admin.aQna.service;
 
 import java.util.List;
 
-import com.spring.admin.aQnA.vo.AqnaVO;
+import com.spring.admin.aQna.vo.AqnaVO;
 
-public interface AqnaDAO {
+public interface AqnaService {
 
 	public List<AqnaVO> aQnaList(AqnaVO aqvo);
 	public int aQnaListCnt(AqnaVO aqvo);
 	public AqnaVO aQnaDetail(AqnaVO aqvo);
+	public int aQnaDelete(AqnaVO aqvo);
 
 }

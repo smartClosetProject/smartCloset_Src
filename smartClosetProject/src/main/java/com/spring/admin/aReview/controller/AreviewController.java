@@ -40,11 +40,11 @@ public class AreviewController {
 	public String reviewList(@ModelAttribute("data")AreviewVO arvo, Model model) {
 		log.info("reviewList 호출 성공");
 		//전체 레코드 조회
-		List<AreviewVO> reviewList = areviewService.reviewList(arvo);
+		List<AreviewVO> reviewList = areviewService.aReviewList(arvo);
 		model.addAttribute("reviewList",reviewList);
 		
 		// 전체 레코드 수 구현
-		int total = areviewService.reviewListCnt(arvo);
+		int total = areviewService.aReviewListCnt(arvo);
 		// 페이징 처리
 		model.addAttribute("pageMaker", new PageDTO(arvo, total));
 		// 출력되는 글번호 제어
@@ -59,7 +59,7 @@ public class AreviewController {
 	 * ************/
 	@RequestMapping("aReviewDelete")
 	public String reviewDelete(@ModelAttribute("data") AreviewVO arvo) throws Exception{
-		areviewService.reviewDelete(arvo);
+		areviewService.aReviewDelete(arvo);
 		
 		return "redirect:/aReview/aReviewList";
 	}

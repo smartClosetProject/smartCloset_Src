@@ -9,14 +9,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 		
 		<title>Insert title here</title>
-	
-		<!-- 모바일 웹 페이지 설정 -->
-		<link rel="shortcut icon" href="/resources/image/icon.png" />
-		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
-		<!-- 모바일 웹 페이지 설정 끝 -->
-	
-		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
@@ -75,7 +67,7 @@
 					// 상세 페이지로 이동하기 위해 form 추가 (id : detailForm)
 					$("#detailForm").attr({
 						"method" : "get",
-						"action" : "/aQnA/aQnaDetail"
+						"action" : "/aQna/aQnaDetail"
 					});
 					$("#detailForm").submit();
 				});
@@ -95,7 +87,7 @@
 				}
 				$("#f_search").attr({
 					"method" : "get",
-					"action" : "/aQnA/aQnaList"
+					"action" : "/aQna/aQnaList"
 				});
 				$("#f_search").submit();
 			}

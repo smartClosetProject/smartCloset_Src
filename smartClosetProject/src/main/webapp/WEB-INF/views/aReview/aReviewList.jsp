@@ -14,11 +14,7 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
 		<!-- 모바일 웹 페이지 설정 끝 -->
-	
-	
-		<!--[if lt IE 9]>
-		<script src="/resources/js/html5shiv.js"></script>
-		<![endif]-->
+
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<style type="text/css">

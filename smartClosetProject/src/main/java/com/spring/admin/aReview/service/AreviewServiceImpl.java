@@ -17,21 +17,21 @@ public class AreviewServiceImpl implements AreviewService{
 	
 	
 	@Override
-	public List<AreviewVO> reviewList(AreviewVO arvo) {
+	public List<AreviewVO> aReviewList(AreviewVO arvo) {
 		// TODO Auto-generated method stub
-		return areviewDao.reviewList(arvo);
+		return areviewDao.aReviewList(arvo);
 	}
 
 	@Override
-	public int reviewListCnt(AreviewVO arvo) {
+	public int aReviewListCnt(AreviewVO arvo) {
 		// TODO Auto-generated method stub
-		return areviewDao.reviewListCnt(arvo);
+		return areviewDao.aReviewListCnt(arvo);
 	}
 
 	@Override
-	public void reviewDelete(AreviewVO arvo) {
+	public void aReviewDelete(AreviewVO arvo) {
 		// TODO Auto-generated method stub
-		areviewDao.reviewDelete(arvo);
+		areviewDao.aReviewDelete(arvo);
 	}
 
 }

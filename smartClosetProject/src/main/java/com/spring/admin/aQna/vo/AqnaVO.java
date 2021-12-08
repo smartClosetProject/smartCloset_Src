@@ -1,4 +1,4 @@
-package com.spring.admin.aQnA.vo;
+package com.spring.admin.aQna.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 

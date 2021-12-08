@@ -15,10 +15,10 @@
             <li class="active">
             <a href="/nboard/nboardList">공지 관리</a>
             </li>
-            <li><a href="#">주문 관리</a></li>
+            <li><a href="/aOrder/aOrderList">주문 관리</a></li>
             <li><a href="#">상품 관리</a></li>
             <li><a href="/aMember/aMemberList">회원 관리</a></li>
             <li><a href="/aReview/aReviewList">리뷰 게시판 관리</a></li>
-            <li><a href="#">QnA 게시판 관리</a></li>
+            <li><a href="/aQna/aQnaList">QnA 게시판 관리</a></li>
           </ul>
 		</div>

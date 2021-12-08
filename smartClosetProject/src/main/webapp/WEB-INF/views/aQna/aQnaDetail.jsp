@@ -19,17 +19,36 @@
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+			$(function () {
+				$("#QnaDeleteBtn").click(function () {
+					if (confirm("정말 삭제하시겠습니까?")) {
+						goUrl = "/aQna/aQnaDelete";
+						$("#f_data").attr("action", goUrl);
+						$("#f_data").submit();
+					}
+				})
+				
+				$("#goToQnaListBtn").click(function () {
+					location.href="/aQna/aQnaList";
+				})
+			})
+		</script>
+	
 	</head>
 	<body>
 		<div class="container">
 			<div class="text-center"><h3>상세 페이지</h3></div>
 			
-			<%-- 수정, 삭제 시 가져갈 글번호, 원본파일명, 썸네일파일명을 전달하는 폼 테이터 --%>
+			<%-- 수정, 삭제 시 가져갈 글번호, 원본파일명을 전달하는 폼 테이터 --%>
 			<form name="f_data" id="f_data" method="post">
 				<input type="hidden" name="q_num" value="${detail.q_num }">
 				<input type="hidden" name="q_file" value="${detail.q_file }">
 			</form>
-			
+			<div class="text-right contentBtn ">
+				<input type="button" id="QnaDeleteBtn" name="QnaDeleteBtn" value="삭제"/>
+				<input type="button" id="goToQnaListBtn" name="goToQnaListBtn" value="목록"/>
+			</div>
 			<%-- =============== 상세 정보 보여주기 시작 =============== --%>
 			<div class="container">
 				<table class="table table-bordered">
@@ -62,7 +81,7 @@
 				</table>
 			</div>
 			<%-- =============== 상세 정보 보여주기 종료 =============== --%>
-			<!--<jsp:include page="reply.jsp"/> -->
+			<jsp:include page="reply.jsp"/>
 			
 		</div>
 	</body>
