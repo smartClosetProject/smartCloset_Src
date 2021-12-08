@@ -3,7 +3,7 @@
 <mapper namespace="com.spring.client.order.dao.OrderDAO">
 
 	<select id="orderForm" parameterType="order" resultType="order">
-		SELECT m_name, m_addr, m_phone, m_email, m_mile
+		SELECT m_name, m_addr, m_addr2, m_addr3, m_phone, m_email, m_mile
 		FROM member
 		WHERE m_id = #{m_id}
 	</select>

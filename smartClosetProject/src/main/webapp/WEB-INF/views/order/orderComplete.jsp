@@ -134,7 +134,7 @@
 				</tr>
 				<tr>
 					<th class="orderTh oDlabel">주소</th>
-					<td>${orderDetail.m_addr }</td>
+					<td>(${orderDetail.m_addr }) ${orderDetail.m_addr2 } ${orderDetail.m_addr3 }</td>
 				</tr>
 				<tr>
 					<th class="orderTh oDlabel">휴대전화</th>

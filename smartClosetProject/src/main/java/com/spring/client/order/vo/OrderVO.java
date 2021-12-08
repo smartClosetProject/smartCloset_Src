@@ -13,7 +13,9 @@ public class OrderVO {
 	private String m_id = "";				// 회원 아이디
 	
 	private String m_name = "";				// 회원 이름
-	private String m_addr = "";				// 회원 주소
+	private String m_addr = "";				// 우편 번호
+	private String m_addr2 = "";			// 회원 주소
+	private String m_addr3 = "";			// 회원 상세주소
 	private String m_phone = "";			// 휴대폰번호
 	private String m_email = "";			// 회원 이메일
 	private int m_mile = 0;					// 적립금

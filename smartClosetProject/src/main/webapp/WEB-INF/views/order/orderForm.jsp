@@ -18,6 +18,7 @@
 		<script src="/resources/js/html5shiv.js"></script>
 		<![endif]-->
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<style type="text/css">
 			nav span {
 				font-size: 20px;
@@ -122,19 +123,26 @@
 					if (isEqual) {
 						$("#m_name").val("${order.m_name}");
 						$("#m_addr").val("${order.m_addr}");
+						$("#m_addr2").val("${order.m_addr2}");
+						$("#m_addr3").val("${order.m_addr3}");
 						$("#m_phone").val("${order.m_phone}");
 						$("#m_email").val("${order.m_email}");
 						$("#m_name").prop("readonly", true);
 						$("#m_addr").prop("readonly", true);
+						$("#m_addr2").prop("readonly", true);
+						$("#m_addr3").prop("readonly", true);
 						$("#m_phone").prop("readonly", true);
 						$("#m_email").prop("readonly", true);
 					} else {
 						$("#m_name").val("");
 						$("#m_addr").val("");
+						$("#m_addr2").val("");
+						$("#m_addr3").val("");
 						$("#m_phone").val("");
 						$("#m_email").val("");
 						$("#m_name").prop("readonly", false);
 						$("#m_addr").prop("readonly", false);
+						$("#m_addr3").prop("readonly", false);
 						$("#m_phone").prop("readonly", false);
 						$("#m_email").prop("readonly", false);
 					}
@@ -188,7 +196,9 @@
 				$("#goPayment").click(function() {
 					if (!chkData("#m_name", "수령인을")) {
 						return;
-					} else if (!chkData("#m_addr", "주소를")) {
+					} else if (!chkData("#m_addr2", "주소를")) {
+						return;
+					} else if (!chkData("#m_addr3", "나머지 주소를")) {
 						return;
 					} else if (!chkData("#m_phone", "전화번호를")) {
 						return;
@@ -210,6 +220,17 @@
 						$("#orderFrm").submit();
 					}
 				});
+				
+				// 카카오 주소 검색 api
+				document.getElementById("m_addr").addEventListener("click", function(){
+			        new daum.Postcode({
+			            oncomplete: function(data) {
+							document.getElementById("m_addr").value = data.zonecode;
+			                document.getElementById("m_addr2").value = data.address;
+			                document.querySelector("input[name='m_addr3']").focus();
+			            }
+			        }).open();
+			    });
 			});
 			
 			function totalSum() {
@@ -259,9 +280,21 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="m_addr" class="col-sm-2 control-label">주소<span class="star"> *</span></label>
+					<label for="m_addr" class="col-sm-2 control-label">우편번호<span class="star"> *</span></label>
 					<div class="col-sm-8">
  						<input type="text" name="m_addr" id="m_addr" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="m_addr2" class="col-sm-2 control-label">주소<span class="star"> *</span></label>
+					<div class="col-sm-8">
+ 						<input type="text" name="m_addr2" id="m_addr2" class="form-control" readonly="readonly">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="m_addr3" class="col-sm-2 control-label">상세 주소<span class="star"> *</span></label>
+					<div class="col-sm-8">
+ 						<input type="text" name="m_addr3" id="m_addr3" class="form-control">
 					</div>
 				</div>
 				<div class="form-group">
