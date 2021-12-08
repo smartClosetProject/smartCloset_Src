@@ -1,5 +1,7 @@
 package com.spring.client.smartcloset.dao;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ public class SClosetMapperTests {
 	
 	@Setter(onMethod_ = @Autowired)
 	private SmartClosetDAO sClosetDAO;
-	
+//	
 //	@Test
 //	public void testBuyInsertSCloset() {
 //		log.info("testBuyInsertSCloset 호출 성공");
@@ -31,21 +33,35 @@ public class SClosetMapperTests {
 //		sClosetDAO.buyInsertSCloset(ovo);
 //	}
 	
+//	@Test
+//	public void testRegCloset() {
+//		log.info("testRegCloset 호출 성공");
+//		
+//		SmartClosetVO svo = new SmartClosetVO();
+//		svo.setSc_tag1("바지");
+//		svo.setSc_tag2("청바지");
+//		svo.setSc_tag3("봄");
+//		svo.setSc_tag4("가을");
+//		svo.setSc_tag5("2021년");
+//		svo.setSc_isBuy("NO");
+//		svo.setSc_image("sc_jean");
+//		svo.setSc_thumb("thumb_sc_jean");
+//		svo.setM_id("smartmember");
+//		
+//		sClosetDAO.regCloset(svo);
+//	}
+	
 	@Test
-	public void testRegCloset() {
-		log.info("testRegCloset 호출 성공");
+	public void testSmartCloset() {
+		log.info("testSmartCloset 호출 성공");
 		
 		SmartClosetVO svo = new SmartClosetVO();
-		svo.setSc_tag1("바지");
-		svo.setSc_tag2("청바지");
-		svo.setSc_tag3("봄");
-		svo.setSc_tag4("가을");
-		svo.setSc_tag5("2021년");
-		svo.setSc_isBuy("NO");
-		svo.setSc_image("sc_jean");
-		svo.setSc_thumb("thumb_sc_jean");
 		svo.setM_id("smartmember");
+		svo.setKeyword("여");
 		
-		sClosetDAO.regCloset(svo);
+		List<SmartClosetVO> list = sClosetDAO.smartCloset(svo);
+		for (SmartClosetVO i : list) {
+			log.info(i);
+		}
 	}
 }

@@ -279,7 +279,7 @@
 											<input type="checkbox" name="chkBox" class="chkBox" data-cartNum="${cart.cart_num }" 
 												data-prPrice="${cart.pr_price }" data-goodsCount="${cart.cart_goodsCount }" value="${cart.cart_num}">
 										</td>
-										<td class="text-center"><img class="thumbs" src="/uploadStorage/sCloset/thumb/${cart.pro_colorThumb }"></td>
+										<td class="text-center"><img class="thumbs" src="/uploadStorage/sCloset/thumbnail/${cart.pro_colorThumb }"></td>
 										<td class="text-center">
 											<div>${cart.pr_name }</div>
 											<div>[옵션: ${cart.pro_size } / ${cart.pro_color }]</div>

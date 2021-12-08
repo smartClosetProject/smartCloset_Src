@@ -2,10 +2,14 @@ package com.spring.client.smartcloset.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.common.vo.CommonVO;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class SmartClosetVO {
+@EqualsAndHashCode(callSuper = false)
+public class SmartClosetVO extends CommonVO {
 	private int sc_num = 0;			// 스마트옷장 번호
 	private String sc_tag1 = "";	// 커스텀 태그1(구매 - 카테고리.대)
 	private String sc_tag2 = "";	// 커스텀 태그2(구매 - 카테고리.소)

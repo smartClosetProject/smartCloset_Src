@@ -23,8 +23,8 @@ public class SmartClosetServiceImpl implements SmartClosetService {
 	}
 
 	@Override
-	public List<SmartClosetVO> smartCloset(String m_id) {
-		List<SmartClosetVO> closetList = sClosetDao.smartCloset(m_id);
+	public List<SmartClosetVO> smartCloset(SmartClosetVO svo) {
+		List<SmartClosetVO> closetList = sClosetDao.smartCloset(svo);
 		return closetList;
 	}
 

@@ -29,13 +29,14 @@ public class SmartClosetController {
 	private HttpSession session;
 	
 	@GetMapping("sClosetHome")
-	public String sClosetHome(Model model) {
+	public String sClosetHome(@ModelAttribute("data") SmartClosetVO svo,Model model) {
 		log.info("sClosetHome 호출 성공");
 		
 		String m_id = (String) session.getAttribute("m_id");
 		m_id = "smartmember";
+		svo.setM_id(m_id);
 		
-		List<SmartClosetVO> closetList = sClosetService.smartCloset(m_id);
+		List<SmartClosetVO> closetList = sClosetService.smartCloset(svo);
 		model.addAttribute("closetList", closetList);
 		
 		return "smartcloset/sCloset";

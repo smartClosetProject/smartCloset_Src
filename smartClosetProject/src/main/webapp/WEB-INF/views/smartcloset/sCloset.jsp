@@ -84,12 +84,12 @@
 				margin-right: 350px;
 				float: left;
 			}
-			#sC_search {
+			#keyword {
 				width: 150px;
 				border: 0px solid black;
 				border-bottom: 2px solid black;
 			}
-			#sC_search:focus {
+			#keyowrd:focus {
 				outline: none;
 			}
 			.btns {
@@ -188,6 +188,39 @@
 		</style>
 		<script type="text/javascript">
 			$(function() {
+				// 태그 검색 처리
+				$("#keyword").keydown(function(key) {
+	                if (key.keyCode == 13) {
+	                	$("#keywordForm").attr({
+							"method" : "get",
+							"action" : "/sCloset/sClosetHome"
+						});
+						$("#keywordForm").submit();
+	                }
+	            });
+				
+				// 전체, 구매, 등록 셀렉트 처리
+				$("#sC_search").change(function() {
+					$("#keywordForm").attr({
+						"method" : "get",
+						"action" : "/sCloset/sClosetHome"
+					});
+					$("#keywordForm").submit();
+				});
+				
+				// 검색 후 검색 단어 출력
+				let word = "<c:out value='${data.keyword}' />"
+				if (word != "") {
+					$("#keyword").val("<c:out value = '${data.keyword}' />");
+				}	
+				
+				// 셀렉트 후 셀렉트 유지
+				let select = "<c:out value='${data.search}' />"
+				if (select != "") {
+					$("#sC_search").val("<c:out value = '${data.search}' />");
+				}	
+				
+				
 				$(".cloth").data("bor", "none");
 				
 				// 옷 이미지 클릭 시 선택, 선택 취소 효과.
@@ -208,6 +241,11 @@
 						$(this).data("bor", "none");
 						$("#codiSpace img[data-num='" + num + "']").remove();
 					}
+				});
+				
+				// 태그변경 처리
+				$(".tagBtn").click(function() {
+					
 				});
 				
 				// 팝업창 열기
@@ -243,7 +281,6 @@
 					} else if (!chkFile($("#file"))) {
 						return;
 					} else {
-						console.log(1);
 						$("#sC_frm").attr({
 							"method" : "post",
 							"enctype" : "multipart/form-data",
@@ -277,8 +314,7 @@
 		</script>
 	</head>
 	<body>
-		<form id="sC_frm">
-			<input type="hidden" name="sc_isBuy" value="NO">
+		<form id="keywordForm">
 			<div>
 				<br>
 				<h2 class="sCtitle">스마트 옷장</h2><hr>
@@ -286,7 +322,7 @@
 			
 			<div class="sCfloats"> 
 				<div class="sCfloat3">
-					<select id="sC_select" class="form-control">
+					<select id="sC_search" name="search" class="form-control">
 						<option value="all">전체 옷장</option>
 						<option value="buy">구매한 옷장</option>
 						<option value="reg">등록한 옷장</option>
@@ -294,10 +330,13 @@
 				</div> 
 				<div class="sCfloat4"> 
 					<span class="glyphicon glyphicon-search"></span>&nbsp;
-					<input type="text" id="sC_search" name="sC_search" placeholder="&#9;&nbsp;태그 입력">
+					<input type="text" id="keyword" name="keyword" placeholder="&#9;태그 입력">
 				</div>
 			</div>
-			
+		</form>
+		
+		<form id="sC_frm">	
+			<input type="hidden" name="sc_isBuy" value="NO">
 			<div>
 				<div id="sCfloat1">
 					<c:if test="${not empty closetList }">

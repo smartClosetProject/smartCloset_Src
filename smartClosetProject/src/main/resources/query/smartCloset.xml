@@ -11,9 +11,22 @@
 									 WHERE cart_num = #{cart_num})
 	</insert>
 	
-	<select id="smartCloset" parameterType="java.lang.String" resultType="sCloset">
+	<select id="smartCloset" parameterType="sCloset" resultType="sCloset">
 		SELECT DISTINCT sc_image, sc_thumb FROM smart_closet
-		WHERE m_id = #{m_id}
+		<where>
+			m_id = #{m_id}
+			<if test="search == 'buy'">
+				AND sc_isBuy = 'YES'
+			</if>
+			<if test="search == 'reg'">
+				AND sc_isBuy = 'NO'
+			</if>
+			<if test="keyword != ''">
+				<![CDATA[ AND (sc_tag1 || sc_tag2 || sc_tag3 || sc_tag4 || sc_tag5)
+	     		 LIKE '%' || #{keyword} || '%' ]]>
+			</if>
+		</where>
+		
 	</select>
 	
 	<insert id="regCloset" parameterType="sCloset">
