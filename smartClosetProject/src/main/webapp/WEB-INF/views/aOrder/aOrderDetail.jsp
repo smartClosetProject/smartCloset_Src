@@ -19,12 +19,41 @@
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+		let state = "";	
+		$(function () {
+				$("#beforePayStateBtn").click(function () {
+					$("#order_state").val("입금전")
+					$("#detailForm").attr({
+						"method" : "get",
+						"action" : "/aOrder/aOrderchangeState"
+					});
+					$("#detailForm").submit();
+				});
+					
+				
+				$("#").click(function () {
+					
+				});
+				$("#").click(function () {
+					
+				});
+				$("#").click(function () {
+					
+				});
+				$("#").click(function () {
+					
+				});
+				
+			})
 		
+		</script>
 	</head>
 	<body>
-		<div class="contentContainer container">
+		<div class="contentContainer container" style="padding-bottom : 100px">
 			<form id="detailForm">
-				<input type="hidden" id="order_num" name="order_num">
+				<input type="hidden" id="order_num" name="order_num" value="${aOrderDetail.order_num}">
+				<input type="hidden" id="order_state" name="order_state">
 			</form>
 			<div class="container">
 				<table class="table table-bordered">
@@ -54,7 +83,7 @@
 					</tr>
 					<tr>
 						<td>완료 날짜</td>
-						<td colspan="4">${aOrderDetail_deliverydate}</td>
+						<td colspan="4">${aOrderDetail.order_deliverydate}</td>
 					</tr>
 					<tr>
 						<td>환불 사유</td>
@@ -73,7 +102,7 @@
 									<td colspan="2">상품 가격</td>
 								</tr>
 								<tr>
-									<td colspan="2">${aOrder.pr_price} 원</td>
+									<td colspan="2">${aOrder.order_prTotalPrice} 원</td>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -84,20 +113,21 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="button" value="입금 전">
-							<input type="button" value="결제 완료">
-							<input type="button" value="배송 준비 중">
-							<input type="button" value="배송 중">
-							<input type="button" value="배송 완료">
+							<input type="button" value="입금 전" id="beforePayStateBtn" name="beforePayStateBtn"/>
+							<input type="button" value="결제 완료" id="completePayStateBtn" name="completePayStateBtn"/>
+							<input type="button" value="배송 준비 중" id="readyDeliStateBtn" name="readyDeliStateBtn"/>
+							<input type="button" value="배송 중" id="ingDeliStateBtn" name="ingDeliStateBtn" />
+							<input type="button" value="배송 완료" id="completeDeliStateBtn" name="completeDeliStateBtn" />
 						</td>
 						<td colspan="2">${aOrderDetail.order_totalPayment} 원</td>
 					</tr>
 				</table>
 			</div>
 			<div class="text-right">
-				<input type="button" value="선택 반품">
-				<input type="button" value="선택 환불">
-				<input type="button" value="목록">
+				<input type="button" value="선택 반품" id="returnStateBtn" name="returnStateBtn"/>
+				<input type="button" value="선택 환불" id="refundStateBtn" name="refundStateBtn"/>
+				<input type="button" value="목록" id="goToOrderListBtn" name="goToOrderListBtn"/>
+				<div sytle="padding-bottom : 50px;"></div>
 			</div>
 		</div>
 	</body>

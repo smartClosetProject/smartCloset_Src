@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.admin.aOder.service.AorderService;
 import com.spring.admin.aOder.vo.AorderVO;
@@ -50,6 +52,16 @@ public class AorderController {
 		model.addAttribute("aOrderDetail",aOrderDetail);
 		
 		return "aOrder/aOrderDetail";
+		
+	}
+	
+	@GetMapping("aOrderchangeState")
+	public String aOrderchangeState(@ModelAttribute AorderVO aovo, RedirectAttributes ras) {
+		int result = aOrderservice.aOrderChangeState(aovo);
+		ras.addFlashAttribute("data".aovo);
+		
+		return "redirect:/aOrder/aOrderDetail";
+		
 		
 	}
 

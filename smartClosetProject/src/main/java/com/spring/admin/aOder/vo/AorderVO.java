@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AorderVO extends CommonVO{
 	private long order_num =0;				
-	private int order_totalPayment;		
+	private int order_totalPayment;
+	private int order_prTotalPrice;
 	private String order_state;		
 	private String order_phone;	
 	private String order_recipient;

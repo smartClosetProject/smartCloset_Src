@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="aOrderProductDetail" parameterType="aorder" resultType="aorder">
-		SELECT od2.od_goodscount, od2.pro_size, od2.pr_name, od2.pr_price, od2.pro_color
+		SELECT od2.od_goodscount, od2.pro_size, od2.pr_name, od2.pr_price*od2.od_goodscount as order_prTotalPrice, od2.pro_color
 		FROM sc_order o LEFT join (select * from  
             									(SELECT od.od_goodscount, p.pro_size,od.pro_num, p.pro_color,p.pr_num, od.order_num 
             									from sc_order_detail od right join product p on od.pro_num = p.pro_num) p1 
