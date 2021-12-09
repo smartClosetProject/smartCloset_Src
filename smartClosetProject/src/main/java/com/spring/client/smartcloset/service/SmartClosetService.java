@@ -9,7 +9,7 @@ public interface SmartClosetService {
 	void buyInsertSCloset(OrderVO ovo);
 	List<SmartClosetVO> smartCloset(SmartClosetVO svo);
 	void regCloset(SmartClosetVO svo) throws Exception;
-	void deleteCloset(int sc_num);
+	void deleteCloset(SmartClosetVO svo) throws Exception;
 	List<SmartClosetVO> searchTag(int sc_num);
 	void updateTag(SmartClosetVO svo);
 }

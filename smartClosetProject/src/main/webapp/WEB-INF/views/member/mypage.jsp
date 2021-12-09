@@ -46,7 +46,7 @@
 				
 				//장바구니 버튼 클릭시
 				$("#cartBtn").click(function(){
-					location.href = "/cart/cart"
+					location.href = "/cart/cartList"
 				});
 				//게시물 조회 버튼 클릭시
 				$("#boardSerchBtn").click(function(){

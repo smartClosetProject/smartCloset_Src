@@ -9,7 +9,7 @@ public interface SmartClosetDAO {
 	void buyInsertSCloset(OrderVO ovo);
 	List<SmartClosetVO> smartCloset(SmartClosetVO svo);
 	void regCloset(SmartClosetVO svo);
-	void deleteCloset(int sc_num);
+	void deleteCloset(SmartClosetVO svo);
 	List<SmartClosetVO> searchTag(int sc_num);
 	void updateTag(SmartClosetVO svo);
 }

@@ -41,8 +41,14 @@ public class SmartClosetServiceImpl implements SmartClosetService {
 	}
 
 	@Override
-	public void deleteCloset(int sc_num) {
-		sClosetDao.deleteCloset(sc_num);
+	public void deleteCloset(SmartClosetVO svo) throws Exception {
+		if (!svo.getSc_image().isEmpty()) {
+			if (svo.getSc_isBuy().equals("NO")) {
+				FileUploadUtil.fileDelete(svo.getSc_image());
+				FileUploadUtil.fileDelete(svo.getSc_thumb());
+			}
+		}
+		sClosetDao.deleteCloset(svo);
 	}
 
 	@Override
