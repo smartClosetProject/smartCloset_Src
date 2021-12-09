@@ -11,6 +11,5 @@ public interface AorderDAO {
 	public List<AorderVO> aOrderProductDetail(AorderVO aovo);
 	public AorderVO aOrderDetail(AorderVO aovo);
 	public int aOrderChangeState(AorderVO aovo);
-	public void aOrderAllDelete();
 
 }

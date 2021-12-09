@@ -33,11 +33,41 @@
 					});
 					$("#detailForm").submit();
 				} 
-				
 			})
-				
-				
-		})
+			
+			
+			
+			$("#allCheck").click(function () {
+				var chk = $("#allCheck").prop("checked");
+				if(chk){
+					$(".checkProduct").prop("checked", true);
+				} else{
+					$(".checkProduct").prop("checked", false);
+				}
+			})
+			$(".checkProduct").click(function () {
+				$("allCheck").prop("checked", false);
+			})
+			
+			$("#returnStateBtn").click(function () {
+		
+					var chkArr = new Array();
+					
+					$("input[class='checkProduct']:checked").each(function () {
+						chkArr.push($(this).attr("data-odnum"));
+					});
+					$.ajax({
+						url : "/aOrder/returnOrderForm",
+						type : "post",
+						data : { checkProduct : chkArr },
+						success : function () {
+							location.href="aOrder/aOrderList";
+						}
+					});
+			});
+			
+			
+		});// 최종 $ 종료
 		
 		</script>
 	</head>
@@ -87,7 +117,7 @@
 								<tr>
 									<td rowspan="2">상품 정보</td>
 									<td rowspan="2" colspan="2" style="width : 300px;">
-										<p class="text-right"><input type="checkbox" name="checkProduct" value=""/></p>
+										<p class="text-right"><input type="checkbox" class="checkProduct" name="checkProduct" data-odnum="${aOrder.od_num}"/></p>
 										<span style="font-weight : bold; font-size : 120%;">${aOrder.pr_name}</span><br>사이즈 : ${aOrder.pro_size}, 색상 : ${aOrder.pro_color}, 갯수 : ${aOrder.od_goodsCount}
 										
 									</td>
@@ -115,9 +145,12 @@
 					</tr>
 				</table>
 			</div>
+			<div class="allCheck">
+				<input type="checkbox" name="allCheck" id="allCheck"  /><label for="allCheck">전체 선택</label> 
+			</div>
 			<div class="text-right">
-				<input type="button" value="선택 반품" id="returnStateBtn" name="returnStateBtn"/>
-				<input type="button" value="선택 환불" id="refundStateBtn" name="refundStateBtn"/>
+				<input type="button" value="선택 반품" id="returnStateBtn" name="returnStateBtn" data-odnum="${aOrder.od_num}" />
+				<input type="button" value="선택 환불" id="refundStateBtn" name="refundStateBtn" data-odnum="${aOrder.od_num}" />
 				<input type="button" value="목록" id="goToOrderListBtn" name="goToOrderListBtn"/>
 			</div>
 		</div>
