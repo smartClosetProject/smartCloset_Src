@@ -46,9 +46,25 @@
              									left join 
            										(select DISTINCT p.pr_num, pd.pr_name, pd.pr_price from product p left join pr_detail pd on p.pr_num = pd.pr_num) p2
     											on p1.pr_num = p2.pr_num) od2
-		on o.order_num=od2.order_num
+		on o.order_num=od2.order_num  
+
 		where o.order_num = #{order_num}
 		
 	</select>
+	<update id="aOrderChangeState" parameterType="aorder">
+		update sc_order
+		set order_state = #{order_state}
+		<if test='order_state == "배송 완료"'>
+			, order_deliverydate = sysdate
+		</if>
+		<if test='order_state != "배송 완료"'>
+			, order_deliverydate = null, order_cancelreason = null
+		</if>
+		where order_num = #{order_num}
+	</update>
+	
+	<delete id="aOrderAllDelete">
+		DELETE FROM sc_order WHERE order_deliverydate <![CDATA[<]]> to_date(sysdate)-7
+	</delete>
 	
 </mapper>

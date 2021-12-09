@@ -27,7 +27,7 @@
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
-$(function () {
+		$(function () {
 			
 			// 검색 후 검색 대상과 검색 단어 출력
 			let word = "<c:out value='${data.keyword}'/>"
@@ -38,8 +38,8 @@ $(function () {
 				
 				if ($("#search").val() =='m_id'){
 					value = "#list tr td.goDetail";
-				} else if ($("#search").val() =='order_deliverydate'){
-					value = "#list tr td.deliverydate";
+				} else if ($("#search").val() =='order_state'){
+					value = "#list tr td.order_state";
 				} else if ($("#search").val() =='order_num'){
 					value = "#list tr td.num";
 				}
@@ -89,6 +89,12 @@ $(function () {
 				$("#f_search").find("input[name='pageNum']").val($(this).attr("href"));
 				goPage();
 			});
+			
+			$("#exitOrderDeleteBtn").click(function () {
+				if(confirm("주문 완료 후 7일이 지난 주문을 일괄 삭제하시겠습니까?")){
+					location.href = "/aOrder/aOrderAllDelete";
+				}
+			})
 			
 		}); //최상위 $ 종료
 		
@@ -148,8 +154,8 @@ $(function () {
 									<td class="text-center num">${aOrder.order_num}</td>
 									<td class="goDetail text-center">${aOrder.m_id}</td>
 									<td class="text-center">${aOrder.order_totalPayment}</td>
-									<td class="text-center">${aOrder.order_state}</td>
-									<td class="text-center deleverydate">${aOrder.order_deliverydate}</td>
+									<td class="text-center order_state" >${aOrder.order_state}</td>
+									<td class="text-center ">${aOrder.order_deliverydate}</td>
 								</tr>
 							</c:forEach>
 						</c:when>

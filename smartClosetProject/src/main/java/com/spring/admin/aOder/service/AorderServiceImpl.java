@@ -37,8 +37,12 @@ public class AorderServiceImpl implements AorderService{
 
 	@Override
 	public int aOrderChangeState(AorderVO aovo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return aOrderDao.aOrderChangeState(aovo);
+	}
+
+	@Override
+	public void aOrderAllDelete() {
+		aOrderDao.aOrderAllDelete();
 	}
 
 }

@@ -57,12 +57,19 @@ public class AorderController {
 	
 	@GetMapping("aOrderchangeState")
 	public String aOrderchangeState(@ModelAttribute AorderVO aovo, RedirectAttributes ras) {
-		int result = aOrderservice.aOrderChangeState(aovo);
+		aOrderservice.aOrderChangeState(aovo);
 		ras.addFlashAttribute("data",aovo);
 		
 		return "redirect:/aOrder/aOrderDetail";
 		
 		
+	}
+	
+	@RequestMapping("aOrderAllDelete")
+	public String aOrderAllDelete() throws Exception{
+		aOrderservice.aOrderAllDelete();
+		
+		return "redirect:/aOrder/aOrderList";
 	}
 
 }

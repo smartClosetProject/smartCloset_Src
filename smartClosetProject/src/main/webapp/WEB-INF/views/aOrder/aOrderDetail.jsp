@@ -22,30 +22,22 @@
 		<script type="text/javascript">
 		let state = "";	
 		$(function () {
-				$("#beforePayStateBtn").click(function () {
-					$("#order_state").val("입금전")
+			$(".stateBtn").click(function () {
+				if(confirm("상태를 변경하시겠습니까?")){
+					let order_state = $(this).val();
+					console.log($(".stateBtn").val());
+					$("#order_state").val(order_state);
 					$("#detailForm").attr({
 						"method" : "get",
 						"action" : "/aOrder/aOrderchangeState"
 					});
 					$("#detailForm").submit();
-				});
-					
-				
-				$("#").click(function () {
-					
-				});
-				$("#").click(function () {
-					
-				});
-				$("#").click(function () {
-					
-				});
-				$("#").click(function () {
-					
-				});
+				} 
 				
 			})
+				
+				
+		})
 		
 		</script>
 	</head>
@@ -95,7 +87,7 @@
 								<tr>
 									<td rowspan="2">상품 정보</td>
 									<td rowspan="2" colspan="2" style="width : 300px;">
-										<p class="text-right"><input type="checkbox"/></p>
+										<p class="text-right"><input type="checkbox" name="checkProduct" value=""/></p>
 										<span style="font-weight : bold; font-size : 120%;">${aOrder.pr_name}</span><br>사이즈 : ${aOrder.pro_size}, 색상 : ${aOrder.pro_color}, 갯수 : ${aOrder.od_goodsCount}
 										
 									</td>
@@ -113,11 +105,11 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="button" value="입금 전" id="beforePayStateBtn" name="beforePayStateBtn"/>
-							<input type="button" value="결제 완료" id="completePayStateBtn" name="completePayStateBtn"/>
-							<input type="button" value="배송 준비 중" id="readyDeliStateBtn" name="readyDeliStateBtn"/>
-							<input type="button" value="배송 중" id="ingDeliStateBtn" name="ingDeliStateBtn" />
-							<input type="button" value="배송 완료" id="completeDeliStateBtn" name="completeDeliStateBtn" />
+							<input type="button" value="입금 전" id="beforePayStateBtn" name="beforePayStateBtn" class="stateBtn"/>
+							<input type="button" value="결제 완료" id="completePayStateBtn" name="completePayStateBtn" class="stateBtn"/>
+							<input type="button" value="배송 준비 중" id="readyDeliStateBtn" name="readyDeliStateBtn" class="stateBtn"/>
+							<input type="button" value="배송 중" id="ingDeliStateBtn" name="ingDeliStateBtn"  class="stateBtn"/>
+							<input type="button" value="배송 완료" id="completeDeliStateBtn" name="completeDeliStateBtn" class="stateBtn"/>
 						</td>
 						<td colspan="2">${aOrderDetail.order_totalPayment} 원</td>
 					</tr>
@@ -127,7 +119,6 @@
 				<input type="button" value="선택 반품" id="returnStateBtn" name="returnStateBtn"/>
 				<input type="button" value="선택 환불" id="refundStateBtn" name="refundStateBtn"/>
 				<input type="button" value="목록" id="goToOrderListBtn" name="goToOrderListBtn"/>
-				<div sytle="padding-bottom : 50px;"></div>
 			</div>
 		</div>
 	</body>
