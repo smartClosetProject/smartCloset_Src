@@ -11,6 +11,7 @@
 		<title>주문내역조회</title>
 		
 		<!-- 모바일 웹 페이지 설정 -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
 		<!-- 모바일 웹 페이지 설정 끝 -->
@@ -21,13 +22,27 @@
 		<![endif]-->
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
+				//달력 눌러서 기간 검색 버튼 클릭시 
 				$("#orderSearch").click(function(){
-					$("#date").val($("#orderdate1").val()+"~"$("#orderdate2").val())
-					$("")
+						let startDate = $("#startDate").val();
+						let endDate = $("#endDate").val();
+						
 				});
+				//교환 버튼 클릭시
+				$("#orderChange").click(function(){
+					location.href = "/qna/writeQNA"
+				});
+				//반품 버튼 클릭시
+				$("#orderReturn").click(function(){
+					location.href = "/qna/writeQNA"
+				});
+				
 			});
+			
 			
 		</script>
 	</head>
@@ -35,7 +50,7 @@
 		<div class="contentContainer myorderDiv">
 			<form id="r_numForm">
 				<input type="hidden" id="m_id" value="m_id" name="m_id">
-				
+
 			</form>
 			
 			<div style="font-weight: bold;font-size: 30px; text-align:center;">MY ORDER</div>
@@ -46,17 +61,17 @@
 				    	<thead>
 				    		<tr>
 				    			<td>
-				    				<div id ="date">
-								    	<input type="date" id="orderdate1" name="orderdate1"value="2020-01-01"> ~ 
-								    	<input type="date" id="orderdate2" name="orderdate2"value="2021-01-01">
+				    				<div id ="order_regdate">
+								    	<input type="date" id="startDate" name="startDate"value="2020-01-01">~
+								    	<input type="date" id="endDate" name="endDate"value="2021-01-01">
 								    	<input type="button" id="orderSearch" name="orderSearch" value="검색">
 					    			</div>
 				    			</td>
 				    		</tr>
 				    	</thead>
 				    </table>
-					    기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.
-						주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.
+					    기본적으로 최근 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.
+				    <br />
 				    <br />
 				    <table border="1" class="table table-bordered">
 				    	<thead>
@@ -83,9 +98,8 @@
 				    						<td class="text-center">${myorder.order_totalPayment}</td>
 				    						<td class="text-center">${myorder.order_state}</td>
 				    						<td>
-				    							<input type="button" class="btn btn-default btn-sm" value="취소">
-				    							<input type="button" class="btn btn-default btn-sm" value="교환">
-				    							<input type="button" class="btn btn-default btn-sm" value="반품">
+				    							<input type="button" class="btn btn-default btn-sm" id="orderChange" value="교환">
+				    							<input type="button" class="btn btn-default btn-sm" id="orderReturn" value="반품">
 				    						</td>
 				    					</tr>
 				    				</c:forEach>

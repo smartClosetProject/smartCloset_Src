@@ -19,6 +19,8 @@
 			</if>
 	</sql>
 	
+
+	
 	
 	<!-- 회원정보 수정 뷰 -->
 	<select id="updateForm" parameterType="member" resultType="member">
@@ -59,7 +61,7 @@
 		</trim>
 	</select>
 	
-	<!-- 나의 주문내역 조회 -->
+	<!-- 나의 주문내역 조회 리스트 출력 -->
 	<select id="myorderList" parameterType="myorder" resultType="myorder" >
 		SELECT so.order_num, so.order_totalpayment, so.order_state, to_char(so.order_regdate, 'YYYY-MM-DD') AS order_regdate,so.m_id, sd.od_goodscount, sd.pro_num, pro.pr_num, pd.pr_name, pd.pr_thumb
 	    	FROM sc_order so
@@ -78,7 +80,8 @@
 		<trim prefix=" WHERE (" suffix=")">
 			<include refid="postSearch"></include>
 		</trim>
-	</select>	
+	</select>
+
 	
 	
 </mapper>
