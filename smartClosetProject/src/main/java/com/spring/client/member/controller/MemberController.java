@@ -1,5 +1,7 @@
 package com.spring.client.member.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -48,7 +50,7 @@ public class MemberController {
 	/****************
 	 * 회원 정보 수정 화면 구현
 	 *********************/
-	@RequestMapping("updateForm")
+	@RequestMapping("/updateForm")
 	public String updateForm(@ModelAttribute("data") MemberVO mvo, Model model) {
 		log.info("updateForm 호출 성공");
 		
@@ -64,7 +66,7 @@ public class MemberController {
 	/******************************************
 	 * 회원 정보 수정 처리
 	 * **************************************/
-	@PostMapping
+	@PostMapping("/memberUpdate")
 	public String memberUpdate(@ModelAttribute MemberVO mvo, RedirectAttributes ras) {
 		log.info("memberUpdate 호출 성공");
 		
@@ -82,10 +84,17 @@ public class MemberController {
 		}
 		return "redirect:" + url;
 	}
+	/********************************************
+	 * 회원 탈퇴 처리
+	 * *****************************************/
+	
+	
+	
+	
 	/**********************************************
 	 * 게시물 관리 출력
 	 * **************/
-	@GetMapping("postmanagement")
+	@GetMapping("/postmanagement")
 	public String Postmanagement(@ModelAttribute("data")PostVO pvo, Model model) {
 		log.info("postmanagement 호출 성공");
 		//게시판 리스트 조회
@@ -105,9 +114,24 @@ public class MemberController {
 	/*********************************************
 	 * 주문내역 조회 출력
 	 * *******************************************/
-	@GetMapping("myorderList")
+	@GetMapping("/myorderList")
 	public String MyorderList(@ModelAttribute("data") MyorderVO mvo, Model model) {
 		log.info("myorderList 호출 성공");
+		// 추후 세션 처리 후 변경
+		mvo.setM_id("smartmember");
+		
+		if(mvo.getStart_date()=="") {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			// 올해 1.1
+			Calendar time = Calendar.getInstance();
+			String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+			String edate = sdf.format(time.getTime());
+			String sdate = year+"-01-01";
+
+			mvo.setStart_date(sdate);
+			mvo.setEnd_date(edate);
+				
+		}
 		//주문 내역 조회
 		List<MyorderVO> myorderList = memberService.myorderList(mvo);
 		model.addAttribute("myorderList", myorderList);

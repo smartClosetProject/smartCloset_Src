@@ -26,12 +26,18 @@
 		<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
+				$("#start_date").val("${data.start_date}");
+				$("#end_date").val("${data.end_date}");
 				//달력 눌러서 기간 검색 버튼 클릭시 
 				$("#orderSearch").click(function(){
-						let startDate = $("#startDate").val();
-						let endDate = $("#endDate").val();
-						
+					$("#searchForm").attr({
+						"method" : "get",
+						"action" : "/member/myorderList"
+					});
+					$("#searchForm").submit();
 				});
+				
+				
 				//교환 버튼 클릭시
 				$("#orderChange").click(function(){
 					location.href = "/qna/writeQNA"
@@ -41,6 +47,11 @@
 					location.href = "/qna/writeQNA"
 				});
 				
+				//오늘 기간으로 눌럿을때
+				$("#todayYearBtn").click(function(){
+					$("#start_date").val("${data.end_date}");
+					$("#end_date").val("${data.end_date}");
+				});
 			});
 			
 			
@@ -55,21 +66,24 @@
 			
 			<div style="font-weight: bold;font-size: 30px; text-align:center;">MY ORDER</div>
 			
-			<div id="SearchForm">
-				<form>
+			<div>
+				<form id="searchForm" >
+			
 				    <table border="1" class="table table-bordered">
 				    	<thead>
 				    		<tr>
 				    			<td>
 				    				<div id ="order_regdate">
-								    	<input type="date" id="startDate" name="startDate"value="2020-01-01">~
-								    	<input type="date" id="endDate" name="endDate"value="2021-01-01">
+				    					<input type="button" value="오늘" id="todayYearBtn" name="todayYearBtn">
+								    	<input type="date" id="start_date" name="start_date" >~
+								    	<input type="date" id="end_date" name="end_date" >
 								    	<input type="button" id="orderSearch" name="orderSearch" value="검색">
 					    			</div>
 				    			</td>
 				    		</tr>
 				    	</thead>
 				    </table>
+				 </form>	   
 					    기본적으로 최근 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.
 				    <br />
 				    <br />
@@ -106,7 +120,7 @@
 				    			</c:when>
 				    		</c:choose>
 				    </table>
-		   	 	</form>	
+		   	 
 	   	 	</div>
 	   	 	<div class="text-center">
 				<ul class="pagination">
