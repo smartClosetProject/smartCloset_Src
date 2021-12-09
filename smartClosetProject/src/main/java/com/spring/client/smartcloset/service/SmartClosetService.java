@@ -10,4 +10,6 @@ public interface SmartClosetService {
 	List<SmartClosetVO> smartCloset(SmartClosetVO svo);
 	void regCloset(SmartClosetVO svo) throws Exception;
 	void deleteCloset(int sc_num);
+	List<SmartClosetVO> searchTag(int sc_num);
+	void updateTag(SmartClosetVO svo);
 }

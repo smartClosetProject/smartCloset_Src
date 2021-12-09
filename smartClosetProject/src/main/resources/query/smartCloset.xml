@@ -38,4 +38,17 @@
 		DELETE FROM smart_closet
 		WHERE sc_num = #{sc_num}
 	</delete>
+	
+	<select id="searchTag" parameterType="int" resultType="sCloset">
+		SELECT sc_tag1, sc_tag2, sc_tag3, sc_tag4, sc_tag5
+		FROM smart_closet
+		WHERE sc_num = #{sc_num}
+	</select>
+	
+	<update id="updateTag" parameterType="sCloset">
+		UPDATE smart_closet
+		SET sc_tag1 = #{sc_tag1}, sc_tag2 = #{sc_tag2}, sc_tag3 = #{sc_tag3}, sc_tag4 = #{sc_tag4}, sc_tag5 = #{sc_tag5}
+		WHERE sc_num = #{sc_num}
+	</update>
+	
 </mapper>

@@ -44,4 +44,15 @@ public class SmartClosetServiceImpl implements SmartClosetService {
 	public void deleteCloset(int sc_num) {
 		sClosetDao.deleteCloset(sc_num);
 	}
+
+	@Override
+	public List<SmartClosetVO> searchTag(int sc_num) {
+		List<SmartClosetVO> tagList = sClosetDao.searchTag(sc_num);
+		return tagList;
+	}
+
+	@Override
+	public void updateTag(SmartClosetVO svo) {
+		sClosetDao.updateTag(svo);		
+	}
 }

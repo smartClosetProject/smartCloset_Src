@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,4 +70,28 @@ public class SmartClosetController {
 		}
 		return "success";
 	}
+	
+	@PostMapping(value = "searchTag", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public List<SmartClosetVO> searchTag(@RequestParam(value = "sc_num") int sc_num) {
+		log.info("searchTag 호출 성공");
+		
+		List<SmartClosetVO> tagList = sClosetService.searchTag(sc_num);
+		
+		return tagList;
+	}
+	
+	@PostMapping("updateTag")
+	public String updateTag(@ModelAttribute SmartClosetVO svo) {
+		log.info("updateTag 호출 성공");
+		
+		String m_id = (String) session.getAttribute("m_id");
+		m_id = "smartmember";
+		svo.setM_id(m_id);
+		
+		sClosetService.updateTag(svo);
+		
+		return "redirect:/sCloset/sClosetHome";
+	}
+	
 }

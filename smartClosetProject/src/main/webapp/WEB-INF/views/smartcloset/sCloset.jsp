@@ -184,6 +184,9 @@
 			#regBtns {
 				text-align: center;
 			}
+			#UPSection {
+				margin-top: 40px;
+			}
 		</style>
 		<script type="text/javascript">
 			$(function() {
@@ -242,9 +245,55 @@
 					}
 				});
 				
-				// 태그수정 처리
-				$(".tagBtn").click(function() {
+				// 태그수정 클릭 시 수정폼
+				$(".tagBtn").on("click", function(e) {
+					let sc_num = $(this).parent().find("input[type='checkbox']").attr("data-sc_num");
 					
+					$.ajax({
+						url : "/sCloset/searchTag",
+						type : "post",
+						data : {sc_num : sc_num},
+						dataType : "json",
+						success : function(data) {
+							$(data).each(function(){
+								$("#UPsc_tag1").val(this.sc_tag1);
+								$("#UPsc_tag2").val(this.sc_tag2);
+								$("#UPsc_tag3").val(this.sc_tag3);
+								$("#UPsc_tag4").val(this.sc_tag4);
+								$("#UPsc_tag5").val(this.sc_tag5);
+							});
+						}
+					});
+					
+					$('[data-popup="UPCloset"]').fadeIn(350);
+					e.preventDefault();
+				});
+				
+				// 수정 팝업창 - 수정처리
+				$(".tagBtn").click(function() {
+					let sc_num = $(this).parent().find("input[type='checkbox']").attr("data-sc_num");
+					$("input[name='sc_num']").val(sc_num);
+					
+					if ($(".uptags").val() == "") {
+			    		alert("최소 하나의 태그는 등록하셔야 합니다.");
+			    		return;
+			    	} else {
+			    		$("#updateFrm").attr({
+							"method" : "post",
+							"action" : "/sCloset/updateTag"
+						});
+						$("#updateFrm").submit();
+					}
+				});
+				
+				// 수정 팝업창 닫기
+				$('[data-popup-close]').on('click', function(e)  {
+			    	UPExit();
+			    });
+				
+				// 수청 팝업창 취소
+				$("#UPcancelBtn").on("click", function(e) {
+					UPExit()
 				});
 				
 				// 옷 삭제 처리
@@ -273,29 +322,29 @@
 					});
 				});
 				
-				// 팝업창 열기
+				// 등록 팝업창 열기
 			    $('[data-popup-open]').on('click', function(e)  {
 					var targeted_popup_class = $(this).attr('data-popup-open');
 					$('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
 					e.preventDefault();
 			    });
 
-			    // 팝업창 닫기
+			    // 등록 팝업창 닫기
 			    $('[data-popup-close]').on('click', function(e)  {
 			    	regExit();
 			    });
 			    
-				 // 팝업창 - 취소하기 처리
+				 // 등록 팝업창 - 취소하기 처리
 			    $("#cancelBtn").on("click", function(e) {
 			    	regExit();
 				});
 			    
-				 // 첨부파일 이미지 미리보기
+				 // 등록 첨부파일 이미지 미리보기
 			    $("#file").change(function() {
 			    	viewImage(this, '#imageArea');
 				});
 				 
-			    // 팝업창 - 등록하기 처리
+			    // 등록 팝업창 - 등록하기 처리
 			    $("#regBtn").click(function() {
 			    	if ($(".tags").val() == "") {
 			    		alert("최소 하나의 태그는 등록하셔야 합니다.");
@@ -325,6 +374,12 @@
 				$("#file").val("");
 				$(".tags").val("");
 				$("#imageArea").removeAttr("src");
+			}
+			
+			function UPExit() {
+				$('[data-popup="UPCloset"]').fadeOut(350);
+				
+				$(".tags").val("");
 			}
 			
 			function viewImage(input, area) {
@@ -370,7 +425,7 @@
 							<div class="section1 text-center">
 								<div class="section2">
 									<img class="cloth" data-num="${i = i + 1 }" src="/uploadStorage/sCloset/${closet.sc_image }" /> 
-									<input type="checkbox" data-num="${closet.sc_num }" class="checkboxs">
+									<input type="checkbox" data-sc_num="${closet.sc_num }" class="checkboxs">
 								</div>
 								<input type="button" class="btn tagBtn" value="태그수정">
 							</div>	
@@ -446,6 +501,57 @@
 								<input type="button" class="btn" id="regBtn" value="등록하기">
 								<input type="button" class="btn" id="cancelBtn" value="취소">
 							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<form id="updateFrm">
+			<input type="hidden" name="sc_num">
+			<div class="popup" data-popup="UPCloset">
+				<div class="popup-inner">
+					<div class="popup-contents">
+						<span data-popup-close="UPCloset" class="glyphicon glyphicon-remove popup-close"></span>
+						<div id="regPopup">
+							<span>수정하기</span>
+						</div>
+						
+						<div id="UPSection">
+							<div id="regMsg">태그는 기억하기 쉬운 단어로 구성해 보세요^^</div>
+							<div class="form-group inputs">
+								<label for="sc_tag1" class="col-sm-2 control-label inputs">태그1 : </label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control inputs uptags" name="sc_tag1" id="UPsc_tag1" placeholder="ex) 아우터">
+								</div>
+							</div>
+							<div class="form-group inputs">
+								<label for="sc_tag2" class="col-sm-2 control-label inputs">태그2 : </label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control inputs uptags" name="sc_tag2" id="UPsc_tag2" placeholder="ex) 패딩">
+								</div>
+							</div>
+							<div class="form-group inputs">
+								<label for="sc_tag3" class="col-sm-2 control-label inputs">태그3 : </label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control inputs uptags" name="sc_tag3" id="UPsc_tag3" placeholder="ex) 겨울">
+								</div>
+							</div>
+							<div class="form-group inputs">
+								<label for="sc_tag4" class="col-sm-2 control-label inputs">태그4 : </label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control inputs uptags" name="sc_tag4" id="UPsc_tag4" placeholder="ex) 검정색">
+								</div>
+							</div>
+							<div class="form-group inputs">
+								<label for="sc_tag5" class="col-sm-2 control-label inputs">태그5 : </label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control inputs uptags" name="sc_tag5" id="UPsc_tag5" placeholder="ex) 2021년">
+								</div>
+							</div>								
+						</div>
+						<div id="regBtns">
+							<input type="button" class="btn" id="UPBtn" value="수정하기">
+							<input type="button" class="btn" id="UPcancelBtn" value="취소">
 						</div>
 					</div>
 				</div>
