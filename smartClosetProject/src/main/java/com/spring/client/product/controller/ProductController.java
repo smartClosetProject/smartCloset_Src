@@ -58,17 +58,7 @@ public class ProductController {
 		
 		return "product/subPage";
 	}
-	@ResponseBody
-	@RequestMapping(value="/listColor", method=RequestMethod.POST)
-	public List<String> listColor(@ModelAttribute ProductVO cpvo, Model model ){
-		log.info("color 호출 성공");
-		
-		List<String> listColor=null;
-		listColor = productService.listColor(cpvo);
-		
-		model.addAttribute("listColor", listColor);
-		
-		return listColor;
-	}
+	
+
 
 }

@@ -99,4 +99,10 @@ public class PrDetailServiceImpl implements PrDetailService{
 		result1=prDetailDAO.warehousingInsert(pvo);
 		return result1;
 	}
+	@Override
+	public int updateStock(ProductVO pvo) {
+		int result=0;
+		result=updateStock(pvo);
+		return result;
+	}
 }

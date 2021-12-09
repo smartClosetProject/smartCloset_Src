@@ -11,20 +11,20 @@ public class PageDTO {
 	private boolean prev, next; //이전 다음으로 이동한 링크의 표시 여부
 	
 	private int total; //전체 레코드 수
-	private PrCommonVO prvo;
+	private CommonVO cvo;
 	
-	public PageDTO(PrCommonVO prvo, int total) {
-		this.prvo=prvo;
+	public PageDTO(CommonVO cvo, int total) {
+		this.cvo=cvo;
 		this.total=total;
 	
 		//페이지의 끝 번호 구하기
-		this.endPage=(int)(Math.ceil(prvo.getPageNum()/10.0))*10;
+		this.endPage=(int)(Math.ceil(cvo.getPageNum()/10.0))*10;
 		
 		//페이지의 시작번호 구하기
 		this.startPage=this.endPage -9;
 		
 		//끝 페이지 구하기
-		int realEnd = (int)(Math.ceil((total*1.0)/prvo.getAmount()));
+		int realEnd = (int)(Math.ceil((total*1.0)/cvo.getAmount()));
 		
 		if(realEnd<=this.endPage) {
 			this.endPage=realEnd;

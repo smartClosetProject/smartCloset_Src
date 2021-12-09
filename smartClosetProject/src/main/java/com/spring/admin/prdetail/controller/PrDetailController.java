@@ -118,12 +118,13 @@ public class PrDetailController {
 	public String warehousingInsert(ProductVO pvo, Model model)throws Exception{
 		log.info("warehousingInsert 호출 성공");
 		
-		int result=0, result1 =0;
+		int result=0, result1 =0, result2 =0;
 		String url="";
 	
 		result=prDetailService.warehousing(pvo);
 		result1=prDetailService.warehousingInsert(pvo);
-		if(result==1&&result1==1) {
+		result2=prDetailService.updateStock(pvo);
+		if(result==1&&result1==1&&result2==1) {
 			url="/prDetail/warehousingList";
 		}else {
 			url="/prDetail/insertWarehousing";

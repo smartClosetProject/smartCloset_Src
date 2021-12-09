@@ -31,14 +31,21 @@
 			td, th{width:220px; text-align: center;}
 			#content{text-align: center; }
 			#main{min-height:600px;}
-			select{width: 95%; height:30px; margin-bottom: 8px;}
+			select{width: 95%; height:30px; margin-bottom: 8px; font-size: 15px;}
 			option{font-size: 12px;}
 			.longline{width:860px; height:1px; background-color: #BDBDBD; margin-top: 20px; margin-bottom: 20px;}
+			.line{width:400px; height:1px; background-color: #BDBDBD; margin-top: 8px; margin-bottom: 8px;}
 			.content{margin-top: 50px; border: 1px solid #BDBDBD;}
 			.Shipping{margin-top: 15px; margin-bottom: 15px;}
 			a{color:black;}
-			#pr_mile{margin-bottom: 10px; font-size: 13px; color:#5e5e5e;}
-			button{width:100px; margin-right: 5px; background-color: #a0a0a0;}
+			#pr_mile{margin-bottom: 10px; font-size: 13px; color:#5e5e5e; border-style: none;}
+			button{width:130px; margin-right: 5px; background-color: #c9c9c9; height: 50px; boarder:0px; outline: 0px;}
+			ul{list-style: none; margin:0;padding:0;}
+			.sp_name{width:100px;}
+			.pr_ctN{width:100px; text-align: center;}
+			.pr_size{font-size: 10px;color:#a0a0a0; }
+			.pd_price{font-weight: bold;}
+		
 		</style>
 		<script type="text/javascript">
  			$(function(){
@@ -47,53 +54,106 @@
  				let pr_price="${detail.pr_price}"*"${detail.pr_mile}";
  				$("#pr_mile").text(pr_price+"  ( "+pr_mile+" )");
 
-				let pr_num=${detail.pr_num};
+				let pr_num="${detail.pr_num}";
+				let pr_name="${detail.pr_name}";
+				let pd_price="${detail.pr_price}";
+				let total=0;
 				
 				$("#color").change(function(){
-					let insertUrl = "/product/insertList";
-					let value=JSON.stringify({
-						pr_num:pr_num,
-						pro_size="#pro_size".val();
-						pro_color="#pro_color".val();
-					})
+//	                let insertUrl = "/product/insertList";
+//	                let value=JSON.stringify({
+//	                   pr_num:pr_num,
+//	                   pro_size="#pro_size".val();
+//	                   pro_color="#pro_color".val();
+//	                })
+	               
+//	                $.ajax({
+//	                   url:insertUrl,
+//	                   type:"Post",
+//	                   headers:{
+//	                      "content-Type":"application/json"
+//	                   },
+//	                   dataType:"text",
+//	                   data:value,
+//	                   error:function(){
+//	                      alert('시스템 오류입니다. 관리자에게 문의하세요.')
+//	                   },
+//	                   success:function(result){
+//	                      if(result=="success"){
+//	                         listAll(pr_num);
+//	                      }
+//	                   }
+//	                })
+//	                function listAll(pr_num){
+//	                   $("#color").html("");
+//	                   let url=
+//	                }
+
+					let pr_size=$("#size").val()
+					let pr_color=$("#color").val()
+				
+	               let new_li=$("<li>")
+	               new_li.addClass("list")
+	               let new_div=$("<div>")
+	               let line=$("<div>")
+	               line.addClass("line")
+	               new_li.attr("data-num",pr_num)
+	               let table = $("<table>");
+	               let tr1=$("<tr>");
+	               let sp_name=$("<td>");
+	               sp_name.html(pr_name);
+	               sp_name.addClass("bold");
+	               
+	               let td=$("<td>")
+	               let input = $("<input>");
+	               input.attr({"type":"number","value":"1"});
+	               input.attr("min","1");
+	               input.addClass("pr_ctN");
+	               input.attr("style","border:0 solid black");
+	              
+	               let sp_price=$("<td>")
+	               sp_price.html(pd_price);
+	               sp_price.addClass("pd_price");
+	               
+// 	               let td_button=$("<td>");
+// 	               let button=$("<input>");
+// 	               input.attr({"type":"button","value":"X"});
+// 	               input.addClass("deletebtn");
+	               
+	               let tr2=$("<tr>");
+	               let sp_size=$("<td>");
+	               sp_size.html(pr_size+" | "+pr_color);
+	               sp_size.addClass("pr_size");
+	               let td2=$("<td>");
+	               td.append(input);
+	              
+	               tr1.append(sp_name).append(td).append(sp_price);
+	               tr2.append(sp_size).append(td2).append(td2);
+	               table.append(tr1).append(tr2);
+	               new_li.append(new_div).append(table);
 					
-					$.ajax({
-						url:insertUrl,
-						type:"Post",
-						headers:{
-							"content-Type":"application/json"
-						},
-						dataType:"text",
-						data:value,
-						error:function(){
-							alert('시스템 오류입니다. 관리자에게 문의하세요.')
-						},
-						success:function(result){
-							if(result=="success"){
-								listAll(pr_num);
-							}
-						}
+	               $("#listPr").append(new_li).append(line);
+	               update_total();
+	            })
+	            
+	            
+	            function update_total(){
+					$("#listPr").each(function(){
+						let number=$(this).find(".pr_ctN").val();
+						console.log(number);
+						let amount = (number*pd_price)
+						console.log(amount);
+						total +=amount;
+						console.log(total);
+						$(this).find(".pd_price").text(amount);
 					})
-				})
-				function listItem(pr_num){
-						$("#listPr").html("");
-						let url="/product/cartList"+pr_num;
-						$.getJSON(url, function(data){
-							console.log("list count:"data.length);
-							prlistCnt = data.length;
-							$(data).each(function(){
-								let pro_num=this.pro_num;
-								let pr_num=this.pr_num;
-								let pr_name=this.pr_name;
-								let pro_size=this.pro_size;
-								let pro_color = this.pro_color;
-								let pr_price=this.pro_price;
-								addNewList(pro_num, )
-							})
-						})
-					}
+					$("#totalPrice").text(total);
 				}
-			
+	            
+	            $(".pr_ctN").on("change keyup paste",function(){
+	            	
+	            	update_total();
+	            })
 			})
 		</script>
 	</head>
@@ -110,7 +170,7 @@
 						<div class="longline"> </div>
 						<div id="pr_mile"></div>
 						<div id="pro_size">
-							<select id="size" >
+							<select id="size">
 								<option>----선택하세요</option>
 								<c:forEach var="size" items="${listSize}" varStatus="status">
 									<c:if test="${not empty size}">
@@ -129,22 +189,21 @@
 								</c:forEach>
 							</select>
 						</div>
-						<div>
-							<span id="pr_mile" name="pr_mile"></span>
-						</div>
-						<div>
+						<div >
 							<ul id="listPr">
-								
 							</ul>
 						</div>
-					</div>
-					<div id="order">
-						<div id="allPrice">총 합계 금액</div>
-					</div>
-					<div>
-						<button>장바구니 담기</button>
-						<button>구매</button>
-						<button>네이버페이</button>
+						<div id="order">
+							<div id="allPrice">
+							총 합계 금액 : 
+							<span id="totalPrice">0</span>원
+							</div>
+							<div id="button">	
+								<button type="button" id="cartInput">장바구니 담기</button>
+								<button type="button" id="buyInput">구매</button>
+								<button type="button" id="naver">네이버페이</button>
+							</div>
+						</div>
 					</div>
 				</form>
 			</div>

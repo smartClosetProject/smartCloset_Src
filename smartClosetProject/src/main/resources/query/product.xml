@@ -28,10 +28,10 @@
 		select pr_num, pr_name, pr_price, pr_mainimg, pr_contentimg,pr_mile from pr_detail where pr_num=#{pr_num}
 	</select>
 	<select id="listSize" parameterType="productC" resultType="String">
-		select pro_size from product where pr_num=#{pr_num} 
+		select DISTINCT(pro_size) from product where pr_num=#{pr_num} 
 	</select>
 	<select id="listColor" parameterType="productC" resultType="String">
-		select pro_color from product where pr_num=#{pr_num} 
+		select DISTINCT(pro_color) from product where pr_num=#{pr_num} 
 	</select>
 	<select id="listPr" parameterType="productC" resultType="productC">
 		select pd.pr_num, pr.pro_num, pr.pro_size, pr.pro_color, pd.pr_price, pd.pr_mile 
