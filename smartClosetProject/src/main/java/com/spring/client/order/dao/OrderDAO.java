@@ -9,4 +9,5 @@ public interface OrderDAO {
 	void insertOrder(OrderVO ovo);
 	void insertOrderDetail(OrderDetailVO odvo);
 	void updateMile(OrderVO ovo);
+	OrderVO productsInfo(OrderVO ovo);
 }

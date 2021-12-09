@@ -114,6 +114,17 @@
 			#goPayment:hover {
 				font-weight: bold;
 			}
+			#proInfo tr td img{
+				width: 90px;
+				margin-left: 10px;
+				margin-right: 30px;
+			}
+			#proInfo tr td {
+				padding: 10px;
+			}
+			#toggleBtn {
+				margin-left: 700px;
+			}
 		</style>
 		<script type="text/javascript">
 			$(function() {
@@ -231,6 +242,26 @@
 			            }
 			        }).open();
 			    });
+				
+				// 버튼 클릭 시 상품 보이기
+				let i = 0;
+				$("#toggleBtn").click(function() {
+					i = i + 1;
+					$("#toggleBtn").fadeOut(0.000001);
+					
+					if (i % 2 == 1) {
+						$("#toggleBtn").removeClass("glyphicon-menu-up");
+						$("#toggleBtn").addClass("glyphicon-menu-down");
+						$("#toggleBtn").fadeIn(1000);
+						$("#proInfo").toggle();
+					} else {
+						$("#toggleBtn").removeClass("glyphicon-menu-down");
+						$("#toggleBtn").addClass("glyphicon-menu-up");
+						$("#toggleBtn").fadeIn(1000);
+						$("#proInfo").toggle();
+					}
+					
+				});
 			});
 			
 			function totalSum() {
@@ -319,7 +350,26 @@
 					</select>
 					<input type="text" name="shipMessage" id="selectMessage" class="form-control msg" readonly="readonly">
 				</div><br>
-
+			</div>
+			
+			<div class="title">
+				<hr><h3>주문상품<span id="toggleBtn" class="glyphicon glyphicon-menu-up"></span></h3><hr>
+			</div>
+			<div>
+				<table id="proInfo">
+					<c:forEach var="info" items="${productsInfo }">
+						<tr>
+							<td><img src="/uploadStorage/sCloset/thumbnail/${info.pro_colorthumb }"></td>
+							<td>
+								<div>${info.pr_name }</div>
+								<div>[옵션: ${info.pro_size } / ${info.pro_color }]</div>
+								<div>수량: ${info.cart_goodsCount }</div>
+								<div><fmt:formatNumber type="currency" currencySymbol="" maxFractionDigits="0" 
+										value="${info.pr_price * info.cart_goodsCount }" groupingUsed="true" />원</div>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
 			</div>
 			<div class="title">
 				<hr><h3>할인/부가결제</h3><hr>

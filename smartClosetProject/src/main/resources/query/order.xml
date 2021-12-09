@@ -31,4 +31,11 @@
 		SET m_mile = #{m_mile} - #{m_mileApply} + #{m_mileAdd}
 		WHERE m_id = #{m_id}
 	</update>
+	
+	<select id="productsInfo" parameterType="order" resultType="order">
+		SELECT cart_goodsCount, pro_color, pro_size, pro_colorthumb, pr.pr_name, pr.pr_price
+		FROM cart c INNER JOIN product p ON c.pro_num = p.pro_num
+            		INNER JOIN pr_detail pr ON p.pr_num = pr.pr_num
+		WHERE cart_num = #{cart_num} AND m_id = #{m_id} 
+	</select>
 </mapper>

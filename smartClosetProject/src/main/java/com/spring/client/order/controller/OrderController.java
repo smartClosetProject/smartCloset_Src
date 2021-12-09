@@ -39,16 +39,21 @@ public class OrderController {
 	private HttpSession session;
 	
 	@PostMapping("orderForm")
-	public String orderForm(@RequestParam("chkBox") List<Integer> cartNum, @RequestParam("totalPayment") int totalPayment, OrderVO ovo, Model model) {
+	public String orderForm(@RequestParam("chkBox") List<Integer> cartNum, @RequestParam("totalPayment") int totalPayment, OrderVO ovo, ArrayList<OrderVO> productsInfo, Model model) {
 		log.info("OrderForm 호출 성공");
 		
 		String m_id = (String) session.getAttribute("m_id");
 		m_id = "smartmember";
 		ovo.setM_id(m_id);
 		
+		for (Integer i : cartNum) {
+			ovo.setCart_num(i);
+			productsInfo.add(orderService.productsInfo(ovo));
+		}
 		OrderVO vo = orderService.orderForm(ovo);
 		vo.setOrder_totalPayment(totalPayment);
 		model.addAttribute("order", vo);
+		model.addAttribute("productsInfo", productsInfo);
 		session.setAttribute("cart", cartNum);
 		
 		return "order/orderForm";

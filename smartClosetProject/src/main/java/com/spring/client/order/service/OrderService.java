@@ -10,4 +10,5 @@ public interface OrderService {
 	void insertOrderDetail(OrderDetailVO odvo);
 	void deleteSelectCart(int cart_num);
 	void updateMile(OrderVO ovo);
+	OrderVO productsInfo(OrderVO ovo);
 }

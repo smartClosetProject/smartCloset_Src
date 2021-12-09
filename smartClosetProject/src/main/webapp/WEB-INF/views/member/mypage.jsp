@@ -59,7 +59,7 @@
 				
 				//스마트옷장 버튼 클릭시
 				$("#smartClosetBtn").click(function(){
-					location.href = "/closet/closerList"
+					location.href = "/sCloset/sClosetHome"
 				});
 			});
 		</script>
