@@ -8,6 +8,22 @@
 		<typeAlias type="com.spring.client.order.vo.OrderVO" alias="order" />
 		<typeAlias type="com.spring.client.order.vo.OrderDetailVO" alias="orderDetail" />
 		<typeAlias type="com.spring.client.smartcloset.vo.SmartClosetVO" alias="sCloset" />
+	
+		<typeAlias type="com.spring.client.member.vo.MemberVO" alias="member" />
+		<typeAlias type="com.spring.client.member.vo.PostVO" alias="post" />
+		<typeAlias type="com.spring.client.member.vo.MyorderVO" alias="myorder" />
+		<typeAlias type="com.spring.client.review.vo.ReviewVO" alias="review" />
+		
+		<typeAlias type="com.spring.client.qna.vo.QnaVO" alias="qna" />
+		<typeAlias type="com.spring.client.reply.vo.ReplyVO" alias="reply" />
+		
+		<typeAlias type="com.spring.admin.nboard.vo.NboardVO" alias="nboard"/>
+		<typeAlias type="com.spring.admin.admin.vo.AdminVO" alias="admin"/>
+		<typeAlias type="com.spring.admin.aMember.vo.AmemberVO" alias="amember"/>
+		<typeAlias type="com.spring.admin.aReview.vo.AreviewVO" alias="areview"/>
+		<typeAlias type="com.spring.admin.aQna.vo.AqnaVO" alias="aqna"/>
+		<typeAlias type="com.spring.admin.aReply.vo.AreplyVO" alias="areply"/>
+		<typeAlias type="com.spring.admin.aOder.vo.AorderVO" alias="aorder"/>
 	</typeAliases>
 
 </configuration>

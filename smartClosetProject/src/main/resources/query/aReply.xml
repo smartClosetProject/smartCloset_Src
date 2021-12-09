@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.admin.aReply.dao.AreplyDAO">
+
+	<!-- 댓글 전체조회(해당 게시물 번호에 대래) -->
+	<select id="aReplyList" parameterType="areply" resultType="areply">
+		select r_num, q_num, r_name, r_content, to_char(r_regdate,'YYYY-MM-DD HH24:MI:SS') as r_regdate
+		from reply
+		where q_num = #{q_num}
+		order by r_num desc
+	</select>
+	
+	<!-- 댓글 등록 (2가지 방법 있음. Board.xml 참고) -->
+	<insert id="aReplyInsert" parameterType="areply">
+		insert into reply(r_num, q_num, r_name, r_content)
+		values (reply_seq.nextval, #{q_num}, #{r_name}, #{r_content})
+	</insert>
+	<!-- 댓글 수정 -->
+	<update id="aReplyUpdate" parameterType="areply">
+		/* Reply - replyUpdate */
+		update reply
+			set r_content = #{r_content},r_regdate = sysdate
+		where r_num = #{r_num}
+	</update>
+	<!-- 댓글 삭제 -->
+	<delete id="aReplyDelete" parameterType="areply">
+		/* Reply - replyDelete */
+		delete from reply where r_num=#{r_num}
+	</delete>
+</mapper>

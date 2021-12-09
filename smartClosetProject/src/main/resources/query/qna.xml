@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.client.qna.dao.QnaDao">
+
+<!-- 게시판 리스트 
+   <select id="qnaList" parameterType="qna" resultType="qna">
+	SELECT q_num,m_num, q_title,to_char(q_regdate,'YYYY-MM-DD') as q_regdate
+	FROM QNA
+	ORDER BY q_num desc
+	</select> -->
+
+<!--  qna게시물  등록 -->
+  <insert id ="qnaInsert" parameterType="qna">
+		/*QNA - qnaInsert*/
+		<selectKey keyProperty="q_num" resultType="int" order="BEFORE">
+		select qna_seq.nextval from dual	
+		</selectKey>
+		insert into QNA (q_num, m_id, q_title, q_content, q_file)
+		values(#{q_num}, #{m_id}, #{q_title}, #{q_content}, #{q_file})
+	</insert>   
+
+<!-- 게시판 상세페이지 -->
+<select  id="qnaDetail" parameterType="qna" resultType="qna">
+	/*QNA -qnaDetail*/
+	SELECT
+			q_num, m_id, q_title, q_content,q_file,
+			TO_CHAR(q_regdate,'YYYY-MM-DD HH24:MI:SS') AS q_regdate
+			FROM QNA
+			WHERE q_num = #{q_num}
+	</select>
+<!--  게시물 수정 -->
+<update id="qnaUpdate" parameterType="qna">
+/*QNA -qnaUpdate*/
+	UPDATE QNA
+	SET q_title = #{q_title}
+	, q_content = #{q_content}
+	,q_regdate = sysdate
+
+
+	WHERE q_num = #{q_num}
+	</update>
+<delete id="qnaDelete" parameterType="qna">
+/*QNA -qnaDelete*/
+ 		DELETE FROM QNA
+ 		where q_num = #{q_num}
+</delete>
+<sql id="qnaSearch">
+		<if test="search=='q_title'">	
+					<![CDATA[q_title LIKE'%'||#{keyword}||'%']]>
+		</if>
+		<if test="search=='q_content'">	
+					<![CDATA[q_content LIKE'%'||#{keyword}||'%']]>
+		</if>
+		<if test="search=='m_id'">	
+					<![CDATA[m_id LIKE'%'||#{keyword}||'%']]>
+		</if>
+	</sql>
+<!-- 게시판 리스트 조회(페이징처리와 검색처리 ) 및 이지미 파일 추가 설정 -->
+	<select id="qnaList" parameterType="qna" resultType="qna">
+	<![CDATA[
+			SELECT
+				q_num, m_id, q_title,to_char(q_regdate,'YYYY-MM-DD') as q_regdate, q_file
+				FROM (
+				 SELECT /*+ INDEX_DESC(qna qna_pk) */
+				 rownum as rnum, q_num, m_id, q_title, q_regdate, q_file
+				 FROM qna
+				 WHERE]]>
+				 <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+				 	<include refid="qnaSearch"></include>
+				 </trim>
+	<![CDATA[  rownum <= #{pageNum} * #{amount}
+				 ) qnalist
+				 WHERE rnum > (#{pageNum}-1) * #{amount}
+				]]>
+	</select>
+	<!-- 전체 레코드수 조회 -->
+	<select id="qnaListCnt" parameterType="qna" resultType="int">
+		SELECT count(*) FROM QNA
+		<trim prefix=" where (" suffix=")" >
+				<include refid="qnaSearch"></include>
+		</trim>
+	</select>
+</mapper>

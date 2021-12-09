@@ -30,5 +30,43 @@
 	<definition name="order/orderForm" extends="NotApplyTiles">
 		<put-attribute name="content" value="/WEB-INF/views/order/orderForm.jsp"></put-attribute>
     </definition>
+    
+    <definition name="member/*" extends="contentClient">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp" />
+	</definition>
+	
+	<definition name="review/*" extends="contentClient"> 
+		<put-attribute name="title" value="리뷰게시판" />
+		<put-attribute name="body" value="/WEB-INF/views/review/{1}.jsp" /> 
+	</definition>
 
+	<definition name="member/*" extends="contentClient">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp" />
+	</definition>
+	<definition name="qna/*" extends="contentClient">
+		<put-attribute name="title" value="qna게시판" />
+		<put-attribute name="body" value="/WEB-INF/views/qna/{1}.jsp" />
+	</definition>
+
+	<!-- 관리자 -->
+	<definition name="content" template="/WEB-INF/views/template/admin/admin_Layout.jsp">
+		<put-attribute name="title" value="관리자 페이지" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/admin/admin_footer.jsp" />
+		<put-attribute name="navbar" value="/WEB-INF/views/template/admin/admin_navbar.jsp" />
+	</definition>
+	
+	<definition name="*/*" extends="content"> 							
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	
+	<definition name="empty" template ="/WEB-INF/views/template/admin/admin_empty.jsp">
+		<put-attribute name="content" value =""/>
+	</definition>
+					
+    <definition name="admin/adminLoginForm" extends="empty">
+          <put-attribute name="content" value="/WEB-INF/views/admin/adminLoginForm.jsp"></put-attribute>    
+    </definition>	
 </tiles-definitions>

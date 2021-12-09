@@ -50,11 +50,11 @@
 	<ul class="nav navbar-nav navbar-right">
 		<li><a href="/cart/cartList"><span
 				class="glyphicon glyphicon glyphicon-shopping-cart"></span> </a></li>
-		<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+		<li><a href="/member/mypage"><span class="glyphicon glyphicon-user"></span>
 		</a></li>
-		<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
+		<li><a href="/member/loginForm"><span class="glyphicon glyphicon-log-in"></span>
 		</a></li>
-		<li><a href="#"><span class="glyphicon glyphicon-log-out"></span>
+		<li><a href="/member/logout"><span class="glyphicon glyphicon-log-out"></span>
 		</a></li>
 	</ul>
 </div>

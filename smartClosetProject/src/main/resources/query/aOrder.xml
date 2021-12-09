@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.admin.aOder.dao.AorderDAO">
+	<select id="aOrderList" parameterType="aorder" resultType="aorder">
+		<![CDATA[
+		SELECT m_id, order_num, order_totalPayment, order_state, to_char(order_deliveryDate,'YYYY-MM-DD') as order_deliverydate
+		FROM (SELECT /*+ INDEX_DESC(SC_ORDER ORDER_ORDER_NUM_PK) */ 
+				ROWNUM rnum, m_id, order_num, order_totalPayment, order_state, order_deliverydate
+			  FROM SC_ORDER
+			  WHERE ]]>
+			  <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+			  		<include refid="aOrderSearch"></include>
+			  </trim>
+		<![CDATA[ ROWNUM <= #{pageNum} * #{amount} 
+			) aOrderList
+			WHERE rnum > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+		<sql id="aOrderSearch">
+		<if test='search == "order_num"'>
+			<![CDATA[ order_num LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test='search == "m_id"'>
+			<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test='search == "order_state"'>
+			<![CDATA[ order_state LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+	</sql>
+	
+	<select id="aOrderListCnt" parameterType="aorder" resultType="int">
+		SELECT count(*) FROM SC_ORDER
+		<trim prefix=" WHERE (" suffix=")">
+			<include refid="aOrderSearch"></include>
+		</trim>
+	</select>
+	<select id="aOrderDetail" parameterType="aorder" resultType="aorder">
+	 	select * from sc_order where order_num = #{order_num}
+	</select>
+	
+	<select id="aOrderProductDetail" parameterType="aorder" resultType="aorder">
+		SELECT od2.od_goodscount, od2.pro_size, od2.pr_name, od2.pr_price*od2.od_goodscount as order_prTotalPrice, od2.pro_color
+		FROM sc_order o LEFT join (select * from  
+            									(SELECT od.od_goodscount, p.pro_size,od.pro_num, p.pro_color,p.pr_num, od.order_num 
+            									from sc_order_detail od right join product p on od.pro_num = p.pro_num) p1 
+             									left join 
+           										(select DISTINCT p.pr_num, pd.pr_name, pd.pr_price from product p left join pr_detail pd on p.pr_num = pd.pr_num) p2
+    											on p1.pr_num = p2.pr_num) od2
+		on o.order_num=od2.order_num
+		where o.order_num = #{order_num}
+		
+	</select>
+	
+</mapper>
