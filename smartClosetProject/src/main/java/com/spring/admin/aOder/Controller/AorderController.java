@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.admin.aOder.service.AorderService;
@@ -71,5 +73,28 @@ public class AorderController {
 		
 		return "redirect:/aOrder/aOrderList";
 	}
+	
+	@RequestMapping("returnOrder")
+	public List<String> aOrderReturnForm(@RequestParam(value ="checkProduct[]") List<String> checkProduct, AorderVO aovo) throws Exception {
+		log.info("checkProduct : " + checkProduct);
+		
+		
+		return checkProduct;
+	}
+	
+//	@RequestMapping("returnOrder")
+//	public int returnOrder(@RequestParam(value ="checkProduct[]") List<String> checkProduct, AorderVO aovo) throws Exception{
+//		log.info("checkProduct : " + checkProduct);
+//		int result = 0;
+//		int od_num = 0;
+//		for(String i : checkProduct) {
+//			od_num = Integer.parseInt(i);
+//			aovo.setOd_num(od_num);
+//			result = aOrderservice.returnOrder(aovo);
+//		}
+//		
+//		return result;
+//		
+//	}
 
 }

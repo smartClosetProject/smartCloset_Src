@@ -57,11 +57,11 @@
 						chkArr.push($(this).attr("data-odnum"));
 					});
 					$.ajax({
-						url : "/aOrder/returnOrderForm",
+						url : "/aOrder/aOrderReturnForm",
 						type : "post",
 						data : { checkProduct : chkArr },
 						success : function () {
-							location.href="aOrder/aOrderList";
+							location.href="aOrder/aOrderReturnForm";
 						}
 					});
 			});
@@ -117,7 +117,7 @@
 								<tr>
 									<td rowspan="2">상품 정보</td>
 									<td rowspan="2" colspan="2" style="width : 300px;">
-										<p class="text-right"><input type="checkbox" class="checkProduct" name="checkProduct" data-odnum="${aOrder.od_num}"/></p>
+										<p class="text-right"><input type="checkbox" class="checkProduct" name="checkProduct" data-odnum="${aOrder.od_num}"/>${aOrder.od_num}</p>
 										<span style="font-weight : bold; font-size : 120%;">${aOrder.pr_name}</span><br>사이즈 : ${aOrder.pro_size}, 색상 : ${aOrder.pro_color}, 갯수 : ${aOrder.od_goodsCount}
 										
 									</td>
