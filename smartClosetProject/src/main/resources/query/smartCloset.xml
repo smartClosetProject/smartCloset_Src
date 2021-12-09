@@ -34,13 +34,13 @@
 		VALUES(smart_closet_seq.NEXTVAL, #{sc_tag1}, #{sc_tag2}, #{sc_tag3}, #{sc_tag4}, #{sc_tag5}, #{sc_isBuy}, #{sc_image}, #{sc_thumb}, #{m_id})
 	</insert>
 	
-	<delete id="deleteCloset" parameterType="int">
+	<delete id="deleteCloset" parameterType="sCloset">
 		DELETE FROM smart_closet
 		WHERE sc_num = #{sc_num}
 	</delete>
 	
 	<select id="searchTag" parameterType="int" resultType="sCloset">
-		SELECT sc_tag1, sc_tag2, sc_tag3, sc_tag4, sc_tag5
+		SELECT sc_tag1, sc_tag2, sc_tag3, sc_tag4, sc_tag5, sc_image, sc_thumb, sc_isBuy
 		FROM smart_closet
 		WHERE sc_num = #{sc_num}
 	</select>

@@ -60,13 +60,22 @@ public class SmartClosetController {
 	
 	@PostMapping("deleteCloset")
 	@ResponseBody
-	public String deleteCloset(@RequestParam(value = "chkBox[]") List<Integer> chkArr) {
+	public String deleteCloset(@RequestParam(value = "chkBox[]") List<Integer> chkArr, SmartClosetVO svo, SmartClosetVO vo) throws Exception {
 		log.info("deleteCloset 호출 성공");
 		
-		int sc_num = 0;
+		String m_id = (String) session.getAttribute("m_id");
+		m_id = "smartmember";
+		svo.setM_id(m_id);
+		
 		for (Integer i : chkArr) {
-			sc_num = i;
-			sClosetService.deleteCloset(sc_num);
+			svo.setSc_num(i);
+			List<SmartClosetVO> list = sClosetService.searchTag(i);
+			for (SmartClosetVO l : list) {
+				svo.setSc_image(l.getSc_image());
+				svo.setSc_thumb(l.getSc_thumb());
+				svo.setSc_isBuy(l.getSc_isBuy());
+			}
+			sClosetService.deleteCloset(svo);
 		}
 		return "success";
 	}

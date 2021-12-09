@@ -245,9 +245,10 @@
 					}
 				});
 				
-				// 태그수정 클릭 시 수정폼
+				// 태그수정 클릭 시 수정 팝업창
+				let sc_num = 0;
 				$(".tagBtn").on("click", function(e) {
-					let sc_num = $(this).parent().find("input[type='checkbox']").attr("data-sc_num");
+					sc_num = $(this).parent().find("input[type='checkbox']").attr("data-sc_num");
 					
 					$.ajax({
 						url : "/sCloset/searchTag",
@@ -270,15 +271,14 @@
 				});
 				
 				// 수정 팝업창 - 수정처리
-				$(".tagBtn").click(function() {
-					let sc_num = $(this).parent().find("input[type='checkbox']").attr("data-sc_num");
+				$("#UPBtn").click(function() {
 					$("input[name='sc_num']").val(sc_num);
 					
 					if ($(".uptags").val() == "") {
 			    		alert("최소 하나의 태그는 등록하셔야 합니다.");
 			    		return;
-			    	} else {
-			    		$("#updateFrm").attr({
+					} else {
+						$("#updateFrm").attr({
 							"method" : "post",
 							"action" : "/sCloset/updateTag"
 						});
@@ -298,28 +298,38 @@
 				
 				// 옷 삭제 처리
 				$("#deleteCloset").click(function() {
+					if ($(".checkboxs:checked").length <= 0) {
+						alert("삭제할 옷을 선택해 주세요.");
+						return;
+					}
+					
 					let chkArr = new Array();
 					
 					$(".checkboxs:checked").each(function() {
-						chkArr.push($(this).attr("data-num"));
+						chkArr.push($(this).attr("data-sc_num"));
+						console.log($(this));
+						console.log($(this).attr("data-sc_num"));
 					});
 					
-					$.ajax({
-						url : "/sCloset/deleteCloset",
-						type: "post",
-						data : {chkBox : chkArr},
-						dataType : "text",
-						error : function() {
-							alert("시스템 오류입니다. 관리자에 문의하세요.");
-						},
-						success : function(result) {
-							if (result == "success") {
-								location.href = "/sCloset/sClosetHome";
-							} else {
-								alert("삭제에 실패했습니다. 다시 실행해 주세요.");
+					let confirm_del = confirm("정말 삭제하시겠습니까?");
+					if (confirm_del) {
+						$.ajax({
+							url : "/sCloset/deleteCloset",
+							type: "post",
+							data : {chkBox : chkArr},
+							dataType : "text",
+							error : function() {
+								alert("시스템 오류입니다. 관리자에 문의하세요.");
+							},
+							success : function(result) {
+								if (result == "success") {
+									location.href = "/sCloset/sClosetHome";
+								} else {
+									alert("삭제에 실패했습니다. 다시 실행해 주세요.");
+								}
 							}
-						}
-					});
+						});
+					}
 				});
 				
 				// 등록 팝업창 열기
