@@ -121,7 +121,7 @@ private MemberService memberService;
 	public String Postmanagement(@ModelAttribute("data")PostVO pvo, Model model) {
 		log.info("postmanagement 호출 성공");
 
-		
+
 		//게시판 리스트 조회
 		List<PostVO> postList = memberService.postList(pvo);
 		model.addAttribute("postList",postList);
@@ -210,7 +210,7 @@ private MemberService memberService;
 				path = "member/loginForm";
 			} else {
 				session.setAttribute("login", memberVO);
-				path = "qna/qnaList";
+				path = "product/mainPage";
 			}
 			return path;
 		}
@@ -223,7 +223,7 @@ private MemberService memberService;
 
 			session.invalidate();
 			
-			return "qna/qnaLIst";
+			return "redirect:/product/mainPage";
 		}
 
 }

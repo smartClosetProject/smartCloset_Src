@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.client.cart.service.CartService;
 import com.spring.client.cart.vo.CartVO;
+import com.spring.client.member.vo.MemberVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -88,17 +89,18 @@ public class CartController {
 		log.info("cartList 호출 성공");
 		
 		String m_id = "";
-		m_id = (String) session.getAttribute("m_id");
-		m_id = "smartmember"; // 임시 생성
-		cvo.setM_id(m_id);
+		MemberVO login = (MemberVO) session.getAttribute("login");
 		
-		List<CartVO> cartList = cartService.cartList(cvo);
-		model.addAttribute("cartList", cartList);
-		
-		if (!m_id.equals("")) {
-			return "cart/cartList";
+		if (login == null) {
+			return "redirect:/member/loginForm";
 		} else {
-			return "redirect:/member/login"; 
+			m_id = login.getM_id();
+			cvo.setM_id(m_id);
+			
+			List<CartVO> cartList = cartService.cartList(cvo);
+			model.addAttribute("cartList", cartList);
+			
+			return "cart/cartList";
 		}
 	}
 }

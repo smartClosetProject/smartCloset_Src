@@ -52,9 +52,13 @@
 				class="glyphicon glyphicon glyphicon-shopping-cart"></span> </a></li>
 		<li><a href="/member/mypage"><span class="glyphicon glyphicon-user"></span>
 		</a></li>
-		<li><a href="/member/loginForm"><span class="glyphicon glyphicon-log-in"></span>
+		<c:if test="${empty sessionScope.login.m_id }">
+			<li><a href="/member/loginForm"><span class="glyphicon glyphicon-log-in"></span>
 		</a></li>
-		<li><a href="/member/logout"><span class="glyphicon glyphicon-log-out"></span>
+		</c:if>
+		<c:if test="${not empty sessionScope.login.m_id }">
+			<li><a href="/member/logout"><span class="glyphicon glyphicon-log-out"></span>
 		</a></li>
+		</c:if>
 	</ul>
 </div>
