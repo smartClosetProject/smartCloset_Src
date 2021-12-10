@@ -127,6 +127,7 @@
 			<form id="r_numForm">
 				<input type="hidden" id="r_num" value="r_num" name="r_num">
 				<input type="hidden" id="q_num" value="q_num" name="q_num">
+				<input type="hidden" id="m_id" value="m_id" name="m_id">
 				<input type="hidden" id="r_content" value="r_content" name="r_content">
 			</form>
 			<!-- --------------------검색 종료 ---------------------------->

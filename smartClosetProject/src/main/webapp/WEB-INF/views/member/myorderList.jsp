@@ -39,11 +39,11 @@
 				
 				
 				//교환 버튼 클릭시
-				$("#orderChange").click(function(){
+				$(".orderChange").click(function(){
 					location.href = "/qna/writeQNA"
 				});
 				//반품 버튼 클릭시
-				$("#orderReturn").click(function(){
+				$(".orderReturn").click(function(){
 					location.href = "/qna/writeQNA"
 				});
 				
@@ -112,8 +112,8 @@
 				    						<td class="text-center">${myorder.order_totalPayment}</td>
 				    						<td class="text-center">${myorder.order_state}</td>
 				    						<td>
-				    							<input type="button" class="btn btn-default btn-sm" id="orderChange" value="교환">
-				    							<input type="button" class="btn btn-default btn-sm" id="orderReturn" value="반품">
+				    							<input type="button" class="btn btn-default btn-sm orderChange" value="교환">
+				    							<input type="button" class="btn btn-default btn-sm orderReturn"  value="반품">
 				    						</td>
 				    					</tr>
 				    				</c:forEach>
