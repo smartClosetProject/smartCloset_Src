@@ -85,9 +85,8 @@
 	<!-- 로그인 -->
 	<select id="login" parameterType="member" resultType="member">
 		/*Member - memberInsert*/
-		select * from member 
-		 m_id, m_num, m_passwd, m_name, m_email, m_phone, m_addr, m_addr2, m_addr3
-		WHERE #{m_id} and #{m_passwd}
+		select m_id, m_num, m_passwd, m_name, m_email, m_phone, m_addr, m_addr2, m_addr3 from member 
+		WHERE m_id = #{m_id} and m_passwd = #{m_passwd}
 	</select>
 	
 	<!--  회원가입 -->

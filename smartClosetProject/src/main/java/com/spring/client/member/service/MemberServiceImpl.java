@@ -77,8 +77,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberVO login(MemberVO memberVO) {
-		MemberVO mvo = new MemberVO();
-		 mvo = memberDao.login(mvo);
+		MemberVO mvo = memberDao.login(memberVO);
 		return mvo;
 	}
 }

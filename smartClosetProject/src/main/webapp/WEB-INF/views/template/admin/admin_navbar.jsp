@@ -16,7 +16,7 @@
             <a href="/nboard/nboardList">공지 관리</a>
             </li>
             <li><a href="/aOrder/aOrderList">주문 관리</a></li>
-            <li><a href="#">상품 관리</a>
+            <li><a href="/prDetail/prDetailList">상품 관리</a>
             	<ul class="sub_menu">
 					<li><a href="/prDetail/prDetailList" >상품 리스트</a></li>
 					<li><a href="/prDetail/pr_numerical" >통계리스트</a></li>

@@ -32,7 +32,7 @@
 					} else {
 						$("#login").attr({
 							"method" : "GET",
-							"action" : "/member/joinmember"
+							"action" : "/member/login"
 						});
 						$("#login").submit();
 					}
