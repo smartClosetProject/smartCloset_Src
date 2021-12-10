@@ -11,6 +11,7 @@ public interface MemberDAO {
 	public MemberVO memberMypage(MemberVO mvo);//마이페이지
 	public MemberVO updateForm(MemberVO mvo); //회원 정보 수정 폼
 	public int memberUpdate(MemberVO mvo);	  //회원 정보 수정
+	public int memberDelete(MemberVO mvo);	//회원정보 삭제
 	
 	public List<PostVO> postList(PostVO pvo); //게시물 관리 리스트 구현
 	public int postListCnt(PostVO pvo);		  //게시물 관리 리스트 레코드수

@@ -43,11 +43,14 @@ private MemberService memberService;
 	public String MemberMypage(@ModelAttribute("data") MemberVO mvo, Model model) {
 		log.info("mypage 호출 성공");
 		
+		
 		MemberVO mypage = memberService.memberMypage(mvo);
 		model.addAttribute("mypage", mypage);
-		
+
+
 		String m_name = "손흥민";
 		model.addAttribute("name", m_name);
+		
 		return "member/mypage";
 	}
 	/****************
@@ -90,7 +93,24 @@ private MemberService memberService;
 	/********************************************
 	 * 회원 탈퇴 처리
 	 * *****************************************/
-	
+	@GetMapping("/memberDelete")
+	public String memberDelete(@ModelAttribute MemberVO mvo, RedirectAttributes ras) {
+		log.info("memberDelete 호출 성공");
+		
+		int result = 0;
+		String url = "";
+		
+		result = memberService.memberDelete(mvo);
+		ras.addFlashAttribute("data",mvo); 
+		
+		System.out.println(result);
+		if(result == 1) {
+			url="/member/loginForm";
+		} else if(result == 0) {
+			url = "/member/updateForm";
+		}
+		return "redirect:" + url;
+	}
 	
 	
 	
@@ -186,8 +206,8 @@ private MemberService memberService;
 			memberVO = memberService.login(memberVO);
 			
 			if(memberVO == null) {
-				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세여");
-				path = "member/joinmember";
+				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");
+				path = "member/loginForm";
 			} else {
 				session.setAttribute("login", memberVO);
 				path = "product/mainPage";

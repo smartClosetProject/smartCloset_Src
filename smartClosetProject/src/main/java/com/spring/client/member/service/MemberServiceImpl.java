@@ -43,6 +43,12 @@ public class MemberServiceImpl implements MemberService{
 		result = memberDao.memberUpdate(mvo);
 		return result;
 	}
+	@Override
+	public int memberDelete(MemberVO mvo) {
+		int result = 0;
+		result = memberDao.memberDelete(mvo);
+		return result;
+	}
 	
 	//내가쓴 게시판 목록 구현
 	@Override
@@ -81,4 +87,6 @@ public class MemberServiceImpl implements MemberService{
 		MemberVO mvo = memberDao.login(memberVO);
 		return mvo;
 	}
+
+	
 }
