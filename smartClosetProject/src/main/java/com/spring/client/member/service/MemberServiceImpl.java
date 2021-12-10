@@ -59,6 +59,7 @@ public class MemberServiceImpl implements MemberService{
 	//주문 내역 리스트 목록 구현
 	@Override
 	public List<MyorderVO> myorderList(MyorderVO mvo) {
+		System.out.println(mvo.getStart_date() + " / " + mvo.getEnd_date());
 		List<MyorderVO> list = memberDao.myorderList(mvo);
 		return list;
 	}
