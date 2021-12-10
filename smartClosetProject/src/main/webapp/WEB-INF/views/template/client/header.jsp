@@ -8,7 +8,7 @@
 		<a class="navbar-brand" href="/sCloset/sClosetHome">SmartCloset</a>
 	</div>
 	<ul class="nav navbar-nav">
-		<li><a href="#">홈</a></li><!-- class="active" -->
+		<li><a href="/product/mainPage">홈</a></li><!-- class="active" -->
 		<li class="dropdown"><a class="dropdown-toggle"
 			data-toggle="dropdown" href="#">아우터 <span class="caret"></span></a>
 			<ul class="dropdown-menu">
