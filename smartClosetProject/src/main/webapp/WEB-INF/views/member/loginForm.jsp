@@ -53,6 +53,7 @@
 				  <div class="form-group">
 				    <label for="exampleInputPassword1">비밀번호</label>
 				    <input type="password" class="form-control" id="m_passwd" name="m_passwd" placeholder="비밀번호">
+				    
 				  </div>
 				   <div class="right">
 				    <input type="button" value="회원가입" id="joinBtn"/>

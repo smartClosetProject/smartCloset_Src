@@ -34,7 +34,6 @@
 		</style>
 		<script type="text/javascript">
 			$(function(){
-				//검색후 검색 대상과 검색 단어 출력
 				// 검색 후 검색 대상과 검색 단어 출력
 				let word = "<c:out value='${data.keyword}' />"
 				let value = "";
@@ -150,19 +149,12 @@
 					<c:choose>
 						<c:when test="${not empty postList}">
 							<c:forEach var="post" items="${postList}" varStatus="status">
-								<tr class="text-center" data-num="${post.r_num}" data-category="${post.category}"> <!-- ${review.r_num } 실제 글 번호 -->
+								<tr class="text-center" data-num="${post.r_num}" data-category="${post.category}"> 
 									<td>${count - status.index }</td>
 									<td class="text-left">${post.category}</td>
 									<td class="goDetail text-left">${post.r_title}</td>
 									<td class="text-left">${post.m_id}</td>
 									<td class="text-left">${post.r_regdate}</td>
-							
-								<%-- <tr class="text-center" data-num="${post.q_num}">
-									<td>${count - status.index }</td>
-									<td class="goDetail text-left">${post.q_title}</td>
-									<td class="text-left">${post.m_id}</td>
-									<td class="text-left">${post.r_regdate}</td>
-								</tr> --%>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -185,9 +177,7 @@
 					 <div class="form-group">
 						<select id ="re_Search" name="search" class="form-control">
 							<option value="all">전체</option>
-							
 							<option value="r_content">제목</option>
-					
 						</select>
 							<input type="text" id="reviewKeyword" name="keyword" value="검색어 입력" class="form-control">
 							<button type="button" class="btn btn-default" id="reviewSearchBtn" >검색</button>

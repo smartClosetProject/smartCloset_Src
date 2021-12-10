@@ -54,7 +54,9 @@
 		SELECT m_id,r_num, to_char(r_content) r_content,r_title, r_regdate, 'REVIEW' category from review
 		union
 		SELECT m_id,q_num r_num, to_char(q_content) r_content,q_title r_title, q_regdate r_regdate, 'QNA' category from qna
+		
 		order by r_regdate desc
+		
 	</select>
 	
 	
@@ -93,8 +95,8 @@
 
 	<!-- 로그인 -->
 	<select id="login" parameterType="member" resultType="member">
-		/*Member - memberInsert*/
-		select m_id, m_num, m_passwd, m_name, m_email, m_phone, m_addr, m_addr2, m_addr3 from member 
+		/*Member - memberLogin*/
+		select * from member 
 		WHERE m_id = #{m_id} and m_passwd = #{m_passwd}
 	</select>
 	

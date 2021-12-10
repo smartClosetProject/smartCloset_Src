@@ -115,7 +115,7 @@ private MemberService memberService;
 	
 	
 	/**********************************************
-	 * 게시물 관리 출력
+	 * 전체  게시물 관리 출력
 	 * **************/
 	@GetMapping("/postmanagement")
 	public String Postmanagement(@ModelAttribute("data")PostVO pvo, Model model) {
@@ -199,18 +199,26 @@ private MemberService memberService;
 		/*로그인처리*/
 		@RequestMapping(value="/login")
 		public String login(MemberVO memberVO, HttpServletRequest req, Model model) {
-			log.info("로그인성공");
+
 			String path = null;
 			
 			HttpSession session = req.getSession();
 			memberVO = memberService.login(memberVO);
-			
 			if(memberVO == null) {
-				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");
+				log.info("로그인실패");
+				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");	
 				path = "member/loginForm";
 			} else {
-				session.setAttribute("login", memberVO);
-				path = "product/mainPage";
+				if(memberVO.getM_exitdate() == null){
+					session.setAttribute("login", memberVO);
+					log.info("로그인성공");
+					path = "product/mainPage";
+				} else {
+					model.addAttribute("msg", "탈퇴된 회원입니다. 새로운 아이디로 가입해주세요");
+					log.info("로그인실패");
+					path = "member/loginForm";
+				}
+				
 			}
 			return path;
 		}
