@@ -43,11 +43,14 @@ private MemberService memberService;
 	public String MemberMypage(@ModelAttribute("data") MemberVO mvo, Model model) {
 		log.info("mypage 호출 성공");
 		
+		
 		MemberVO mypage = memberService.memberMypage(mvo);
 		model.addAttribute("mypage", mypage);
-		
+
+
 		String m_name = "손흥민";
 		model.addAttribute("name", m_name);
+		
 		return "member/mypage";
 	}
 	/****************
@@ -187,7 +190,7 @@ private MemberService memberService;
 			
 			if(memberVO == null) {
 				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세여");
-				path = "member/joinmember";
+				path = "member/loginForm";
 			} else {
 				session.setAttribute("login", memberVO);
 				path = "qna/qnaList";
