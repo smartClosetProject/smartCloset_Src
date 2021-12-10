@@ -10,4 +10,5 @@ public interface ProductDAO {
 	public ProductVO productDetail(ProductVO cpvo);
 	public List<String> listSize(ProductVO cpvo);
 	public List<String> listColor(ProductVO cpvo);
+	public List<ProductVO> categoryPage(ProductVO pvo);
 }

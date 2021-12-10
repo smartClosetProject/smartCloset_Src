@@ -59,6 +59,16 @@ public class ProductController {
 		return "product/subPage";
 	}
 	
-
-
+	
+	@GetMapping("/cate/{pr_categoryl}")
+	public String categoryPage(@PathVariable("pr_categoryl") String pr_categoryl, ProductVO pvo, Model model ) {
+		log.info("categoryPage 호출 성공");
+		
+		pvo.setPr_categoryl(pr_categoryl);
+		List<ProductVO> listData = productService.categoryPage(pvo);
+		model.addAttribute("listData", listData);
+		
+		return "product/categoryPage";
+	}
+	
 }

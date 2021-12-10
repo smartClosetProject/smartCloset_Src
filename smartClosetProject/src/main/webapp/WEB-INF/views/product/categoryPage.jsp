@@ -49,17 +49,17 @@
 			</form>
 			<div class="main">
 				<div id="mainListDate" >
-					<h2>${카테고리 }</h2>
+					<h2>${listDate[0].pr_categoryl }</h2>
 					<h3></h3>
 					<div class="longline"> </div>
-					<c:forEach var="date" items="${listDate}" varStatus="status">
-						<div class="product goDetail" data-num="${date.pr_num}">
-							<c:if test="${not empty date.pr_thumb}">
-								<img src="/uploadStorage/prDetail/thumb/${date.pr_thumb}">
+					<c:forEach var="data" items="${listData}" varStatus="status">
+						<div class="product goDetail" data-num="${data.pr_num}">
+							<c:if test="${not empty data.pr_thumb}">
+								<img src="/uploadStorage/prDetail/thumb/${data.pr_thumb}">
 							</c:if>
-							<div class="title">${date.pr_name}</div>
+							<div class="title">${data.pr_name}</div>
 							<div class="line"> </div>
-							<div class="price">${date.pr_price} 원</div>
+							<div class="price">${data.pr_price} 원</div>
 						</div>					
 					</c:forEach>
 				</div>

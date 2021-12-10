@@ -33,8 +33,14 @@
 	<select id="listColor" parameterType="productC" resultType="String">
 		select DISTINCT(pro_color) from product where pr_num=#{pr_num} 
 	</select>
-	<select id="listPr" parameterType="productC" resultType="productC">
+	<!-- <select id="listPr" parameterType="productC" resultType="productC">
 		select pd.pr_num, pr.pro_num, pr.pro_size, pr.pro_color, pd.pr_price, pd.pr_mile 
 		from product pr inner JOin pr_detail pd on pr.pr_num =pd.pr_num where pr.pr_num=#{pr_num} and pr.pro_size=#{pro_size} and pr.pro_color=#{pro_color}
+	</select> -->
+	
+	<select id="categoryPage" parameterType="productC" resultType="productC">
+		SELECT pr_categoryl ,pr_num, pr_name, pr_price, pr_thumb
+		FROM pr_detail
+		WHERE pr_categoryl = #{pr_categoryl}
 	</select>
 </mapper>

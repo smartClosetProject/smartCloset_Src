@@ -17,12 +17,12 @@
 	</ul>
 	<br><br><br><br><br><br><br><br><br><br><br><br>
 	<ul class="nav nav-stacked large">
-		<li class=""><a href="/product/mainPage?pr_categoryL=아우터">아우터</a></li>
+		<li class=""><a href="/product/cate/아우터">아우터</a></li>
 		<!-- class="active" -->
-		<li><a href="#section2">상의</a></li>
-		<li><a href="#section3">하의</a></li>
-		<li><a href="#section3">가방&신발</a></li>
-		<li><a href="#section3">악세사리</a></li>
+		<li><a href="/product/cate/상의">상의</a></li>
+		<li><a href="/product/cate/하의">하의</a></li>
+		<li><a href="/product/cate/가방신발">가방&신발</a></li>
+		<li><a href="/product/cate/악세사리">악세사리</a></li>
 		<li>
 			<br><br><br><br><br><br> 
 			<span class="glyphicon glyphicon-search"></span>&nbsp; 
