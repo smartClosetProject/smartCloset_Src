@@ -93,7 +93,24 @@ private MemberService memberService;
 	/********************************************
 	 * 회원 탈퇴 처리
 	 * *****************************************/
-	
+	@GetMapping("/memberDelete")
+	public String memberDelete(@ModelAttribute MemberVO mvo, RedirectAttributes ras) {
+		log.info("memberDelete 호출 성공");
+		
+		int result = 0;
+		String url = "";
+		
+		result = memberService.memberDelete(mvo);
+		ras.addFlashAttribute("data",mvo); 
+		
+		System.out.println(result);
+		if(result == 1) {
+			url="/member/loginForm";
+		} else if(result == 0) {
+			url = "/member/updateForm";
+		}
+		return "redirect:" + url;
+	}
 	
 	
 	
@@ -189,7 +206,7 @@ private MemberService memberService;
 			memberVO = memberService.login(memberVO);
 			
 			if(memberVO == null) {
-				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세여");
+				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");
 				path = "member/loginForm";
 			} else {
 				session.setAttribute("login", memberVO);

@@ -20,9 +20,6 @@
 			</if>
 	</sql>
 	
-
-	
-	
 	<!-- 회원정보 수정 뷰 -->
 	<select id="updateForm" parameterType="member" resultType="member">
 		SELECT m_num,m_id, m_passwd, m_name, m_email, m_phone, m_addr, m_addr2, m_addr3, m_regdate,m_mile,m_acc
@@ -34,6 +31,13 @@
 	<update id="memberUpdate" parameterType="member">
 		UPDATE member
 		SET m_addr = #{m_addr}, m_addr2 = #{m_addr2}, m_addr3 = #{m_addr3}, m_phone = #{m_phone}, m_passwd = #{m_passwd}, m_email = #{m_email}
+		WHERE m_id = #{m_id}
+	</update>
+	
+	<!-- 회원 탈퇴 처리 -->
+	<update id="memberDelete" parameterType="member">
+		UPDATE member
+		SET m_passwd = '회원 탈퇴 했다.', m_exitdate = sysdate
 		WHERE m_id = #{m_id}
 	</update>
 	

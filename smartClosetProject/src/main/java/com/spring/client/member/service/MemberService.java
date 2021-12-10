@@ -10,6 +10,7 @@ public interface MemberService {
 	public MemberVO memberMypage(MemberVO mvo);
 	public MemberVO updateForm(MemberVO mvo);
 	public int memberUpdate(MemberVO mvo);
+	public int memberDelete(MemberVO mvo);
 	
 	public List<PostVO> postList(PostVO pvo); //게시물 관리 리스트 출력
 	public int postListCnt(PostVO pvo);		  //게시물 관리 레코드 수 구현

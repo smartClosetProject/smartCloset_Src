@@ -75,6 +75,11 @@
 					
 				
 				$("#memberExitBtn").click(function(){
+					if(confirm("정말 탈퇴 하시겠습니까?(탈퇴후 5년간 같은 아이디로 가입이 불가능합니다.)")){
+						goUrl = "/member/memberDelete";
+						$("#f_updateForm").attr("action", goUrl);
+						$("#f_updateForm").submit();
+					}
 					
 				});
 			});
