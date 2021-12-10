@@ -93,6 +93,7 @@
 						});
 						$("#r_numForm").submit();
 					} else if(category=="QNA"){
+						$("#q_num").val(r_num);
 						$("#r_numForm").attr({
 							"method" : "get",
 							"action" : "/qna/qnaDetail"

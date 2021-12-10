@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 @Data
 public class ReplyVO {
-	private int r_num   =0;       
+	private int re_num   =0;       
 	private int q_num   =0; 
 	private String r_name  ="";
 	private String r_content ="";

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.reply.dao.ReplyDao">
+<mapper namespace="com.spring.client.reply.dao.ReplyDao">
  <select id="replyList" parameterType="reply" resultType="reply">
-	SELECT q_num, r_num, r_name, r_content, to_char(r_regdate,'YYYY-MM-DD HH24:MI:SS') as r_regdate
+	SELECT q_num, re_num, r_name, r_content, to_char(r_regdate,'YYYY-MM-DD HH24:MI:SS') as r_regdate
 	FROM reply
 	where q_num = #{q_num}
-	ORDER BY r_num desc
+	ORDER BY re_num desc
 </select>
 	<!--  댓글 등록 -->
 	<insert id ="replyInsert" parameterType="reply">
 		/*Reply - replyInsert*/
-		<selectKey keyProperty="r_num" resultType="int" order="BEFORE">
+		<selectKey keyProperty="re_num" resultType="int" order="BEFORE">
 		select reply_seq.nextval from dual	
 		</selectKey>
-		insert into reply(r_num, q_num, r_name, r_content, r_passwd)
-		values(#{r_num}, #{q_num}, #{r_name}, #{r_content}, #{r_passwd})
+		insert into reply(re_num, q_num, r_name, r_content, r_passwd)
+		values(#{re_num}, #{q_num}, #{r_name}, #{r_content}, #{r_passwd})
 	</insert>
 	<!-- 비밀번호 확인 -->
 	<select id="pwdConfirm" parameterType="qna" resultType="int">
 	   /*Reply - pwdConfirm*/
 	SELECT NVL((
 				SELECT 1 FROM reply
-				WHERE r_num = #{r_num} AND r_passwd = #{r_passwd}
+				WHERE re_num = #{re_num} AND r_passwd = #{r_passwd}
 	),0) as state
 	FROM dual
 	</select>
@@ -30,12 +30,12 @@
 			/*Reply - replyUpdate*/
 			update reply
 			set r_content = #{r_content},r_regdate = sysdate
-			 where r_num =#{r_num}
+			 where re_num =#{re_num}
 		 </update>
 	 <!-- 댓글 삭제 -->
 	 <delete id="replyDelete" parameterType="reply">
 	 /*Reply-replyDelete*/
-	 delete from reply where r_num = #{r_num}
+	 delete from reply where re_num = #{re_num}
 	 </delete>
 	
 	

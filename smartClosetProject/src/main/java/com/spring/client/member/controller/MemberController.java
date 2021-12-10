@@ -100,8 +100,7 @@ private MemberService memberService;
 	@GetMapping("/postmanagement")
 	public String Postmanagement(@ModelAttribute("data")PostVO pvo, Model model) {
 		log.info("postmanagement 호출 성공");
-		
-		pvo.setQ_num(pvo.getR_num());
+
 		
 		//게시판 리스트 조회
 		List<PostVO> postList = memberService.postList(pvo);
