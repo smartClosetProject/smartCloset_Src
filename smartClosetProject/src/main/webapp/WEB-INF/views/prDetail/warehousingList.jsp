@@ -72,7 +72,7 @@
 						</li>
 					</c:if>
 					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-						<li class="paginate_button ${pageMaker.prvo.pageNum ==num ? 'active':'' }">
+						<li class="paginate_button ${pageMaker.cvo.pageNum ==num ? 'active':'' }">
 							<a href = "${num}">${num}</a>
 						</li>					
 					</c:forEach>

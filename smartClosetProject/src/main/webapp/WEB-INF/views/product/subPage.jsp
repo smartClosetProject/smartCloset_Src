@@ -13,7 +13,7 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png"/>
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
 		<style type="text/css">
-			.float{width:420px; margin:8px; float: left;height: 500px;}
+			.float{width:420px; margin:8px; float: left;}
 			img{width:410px; padding-bottom: 40px;}
 			#order{float: right; text-align: right; margin-bottom: 40px;}
 			#pr_name{font-size: 20px; text-align: left;margin-bottom: 6px;}
@@ -24,25 +24,29 @@
 			#img{width:750px; padding-left: 100px;}
 			.menu{margin-top: 30px; text-align: center; padding: 10px;}
 			.tableMenu{width:880px; height: 40px;}
-			th{background-color: #c9c9c9; border-bottom: none;}
-			td, th{width:220px; text-align: center;}
+			.tr{width:430px; text-align: center;}
+			.th{background-color: #c9c9c9; border-bottom: none;}
+			.td, .th {width:430px; text-align: center;}
+			.new_div {with:420px;}
 			#content{text-align: center; }
 			#main{min-height:600px;}
-			select{width: 95%; height:30px; margin-bottom: 8px; font-size: 15px;}
+			select{width: 98%; height:30px; margin-bottom: 8px; font-size: 15px; margin-left: 15px;}
 			option{font-size: 12px;}
-			.longline{width:860px; height:1px; background-color: #BDBDBD; margin-top: 20px; margin-bottom: 20px;}
+			.longline{width:440px; height:1px; background-color: #BDBDBD; margin-top: 20px; margin-bottom: 20px;}
 			.line{width:400px; height:1px; background-color: #BDBDBD; margin-top: 8px; margin-bottom: 8px;}
 			.content{margin-top: 50px; border: 1px solid #BDBDBD;}
 			.Shipping{margin-top: 15px; margin-bottom: 15px;}
 			a{color:black;}
 			#pr_mile{margin-bottom: 10px; font-size: 13px; color:#5e5e5e; border-style: none;}
-			button{width:130px; margin-right: 5px; background-color: #c9c9c9; height: 50px; boarder:0px; outline: 0px;}
-			ul{list-style: none; margin:0;padding:0;}
-			.sp_name{width:100px;}
-			.pr_ctN{width:100px; text-align: center;}
-			.pr_size{font-size: 10px;color:#a0a0a0; }
-			.pd_price{font-weight: bold;}
-		
+			button{width:220px; margin-right: 5px; background-color: #c9c9c9; height: 50px; boarder:0px; outline: 0px;}
+			#listPr{list-style: none; margin:0;padding:0; }
+			.sp_name{width:200px;}
+			.pr_cnt{width:40px; text-align: center; margin-right: 0px;}
+			.pro_size, .pro_color{font-size: 10px;color:#a0a0a0; }
+			.pd_price{font-weight: bold;width:100px;}
+			.updatebtn{font-size: 8px; width: 30px; margin-left: 0px; padding-left: 0px;}
+			input[type=checkbox]{width:0px; height:0px;}
+			.tablecl tr td {width:420; margin-left: 8px;}
 		</style>
 		<script type="text/javascript">
  			$(function(){
@@ -55,111 +59,186 @@
 				let pr_name="${detail.pr_name}";
 				let pd_price="${detail.pr_price}";
 				let total=0;
-				
+				let item="";
 				$("#color").change(function(){
-//	                let insertUrl = "/product/insertList";
-//	                let value=JSON.stringify({
-//	                   pr_num:pr_num,
-//	                   pro_size="#pro_size".val();
-//	                   pro_color="#pro_color".val();
-//	                })
-	               
-//	                $.ajax({
-//	                   url:insertUrl,
-//	                   type:"Post",
-//	                   headers:{
-//	                      "content-Type":"application/json"
-//	                   },
-//	                   dataType:"text",
-//	                   data:value,
-//	                   error:function(){
-//	                      alert('시스템 오류입니다. 관리자에게 문의하세요.')
-//	                   },
-//	                   success:function(result){
-//	                      if(result=="success"){
-//	                         listAll(pr_num);
-//	                      }
-//	                   }
-//	                })
-//	                function listAll(pr_num){
-//	                   $("#color").html("");
-//	                   let url=
-//	                }
-
-					let pr_size=$("#size").val()
-					let pr_color=$("#color").val()
-				
-	               let new_li=$("<li>")
-	               new_li.addClass("list")
-	               let new_div=$("<div>")
-	               let line=$("<div>")
-	               line.addClass("line")
-	               new_li.attr("data-num",pr_num)
-	               let table = $("<table>");
-	               let tr1=$("<tr>");
-	               let sp_name=$("<td>");
-	               sp_name.html(pr_name);
-	               sp_name.addClass("bold");
-	               
-	               let td=$("<td>")
-	               let input = $("<input>");
-	               input.attr({"type":"number","value":"1"});
-	               input.attr("min","1");
-	               input.addClass("pr_ctN");
-	               input.attr("style","border:0 solid black");
-	              
-	               let sp_price=$("<td>")
-	               sp_price.html(pd_price);
-	               sp_price.addClass("pd_price");
-	               
-// 	               let td_button=$("<td>");
-// 	               let button=$("<input>");
-// 	               input.attr({"type":"button","value":"X"});
-// 	               input.addClass("deletebtn");
-	               
-	               let tr2=$("<tr>");
-	               let sp_size=$("<td>");
-	               sp_size.html(pr_size+" | "+pr_color);
-	               sp_size.addClass("pr_size");
-	               let td2=$("<td>");
-	               td.append(input);
-	              
-	               tr1.append(sp_name).append(td).append(sp_price);
-	               tr2.append(sp_size).append(td2).append(td2);
-	               table.append(tr1).append(tr2);
-	               new_li.append(new_div).append(table);
+					if ($(".pr_name").attr("data-pr_name") == pr_name) {
+						console.log($('input[type="number"]').val());
+						$('input[type="number"]').val(parseInt($('input[type="number"]').val()) + 1);
+						
+					} else {
 					
-	               $("#listPr").append(new_li).append(line);
-	               update_total();
+						let pro_size=$("#size").val()
+						let pro_color=$("#color").val()
+						if(pro_size=="----선택하세요"){
+							 $(".select").attr("selected",true)
+							alert("사이즈를 선택해주세요.");
+							return false;
+						}else if(pro_color=="----선택하세요"){
+							alert("색상을 선택해주세요.")
+							return false;
+						}
+						
+						$(".select").attr("selected",false);
+	
+		               let new_li=$("<li>")
+		               new_li.addClass("list")
+		               new_li.attr("data-num",pr_num);
+		               let new_div=$("<div>");
+		               new_div.addClass("new_div");
+		               let line=$("<div>");
+		               line.addClass("line");
+		               
+		               let table = $("<table>");
+		               table.addClass("tablecl")
+		               let tr1=$("<tr>");
+		               tr1.addClass("tr");
+		               let td_chk=$("<td>");
+	// 	               td_chk.append("rowspan","2");
+		               let chk=$("<input>");
+		               chk.attr({"type":"checkbox","checked":"checked"});
+		               let sp_name=$("<td>");
+		               sp_name.attr({"value":"pr_name","colspan":"2", "data-pr_name":pr_name});
+		               sp_name.html(pr_name);
+		               sp_name.addClass("pr_name");
+		               let td_number=$("<td>");
+		               td_number.attr("rowspan","2");
+		               let in_number = $("<input>");
+		               in_number.attr({"type":"number","value":"1"});
+		               in_number.attr("min","1");
+		               in_number.addClass("pr_cnt");
+		               in_number.attr("style","border:0 solid black");
+		               
+		               let up_button=$("<td>");
+		               up_button.attr("rowspan","2");
+		               let up_btn=$("<input>");
+		               up_btn.attr({"type":"button","value":"변경"});
+		               up_btn.addClass("updatebtn");
+		
+		               let td_price=$("<td>")
+		               td_price.attr("rowspan","2");
+		               td_price.html(pd_price);
+		               td_price.addClass("pd_price");
+	
+		               let del_button=$("<td>");
+		               del_button.attr("rowspan","2");
+		               let del_btn=$("<input>");
+		               del_btn.attr({"type":"button","value":"X"});
+		               del_btn.addClass("deletebtn");
+		               
+		               let td=$("<td>");
+		               let tr2=$("<tr>");
+		               let td_size=$("<td>");
+		               td_size.html(pro_size);
+		               td_size.addClass("pro_size");
+		               
+		               let td_color=$("<td>");
+		               td_color.html(pro_color);
+		               td_color.addClass("pro_color");
+		               
+		               
+		               td_chk.append(chk);
+		               td_number.append(in_number)
+		               up_button.append(up_btn);
+		               del_button.append(del_btn);
+		               
+		               tr1.append(td_chk).append(sp_name).append(td_number).append(up_button).append(td_price).append(del_button);
+		               tr2.append(td).append(td_size).append(td_color);
+		               table.append(tr1).append(tr2);
+		               new_div.append(table).append(line);
+		               new_li.append(line).append(new_div);
+		               $("#listPr").append(new_li);
+		               update_total();
+						}   
+		               $(".select").attr("selected",true)
 	            })
 	            
 	            
-	            function update_total(){
+	            
+				$(document).on("click",".updatebtn",function(){
+            		update_total();
+            		
+	            })
+	            
+	           $(document).on("keydown",".pr_cnt",function() {
+	            	  if (event.keyCode == 13) {
+	            	    event.preventDefault();
+	            	  };
+	            });
+				
+				$(document).on("click",".deletebtn", function(){
+					$(this).parents("li").remove();
+					 $(".select").attr("selected",true)
+					update_total();
+				});
+				
+				$("#cartInput").click(function() {
+					$("#productDetail").attr({
+						"method":"post",
+						"enctype":"multipart/form-data",
+						"action":"/prDetail/prDetailInsert"
+					})
+					$("#productDetail").submit();
+				})
+				$("#cartInput").click(function() {
+					let confirm_order = confirm("장바구니에 담으시겠습니까??");
+					if (confirm_order) {
+						if ($("input[type='checkbox']:checked").length <= 0) {
+							alert("하나 이상의 상품을 선택해 주세요.");
+							return;
+						}
+						cartSelect();
+					}
+				});
+			})
+			function update_total(){
 					$("#listPr").each(function(){
-						let number=$(this).find(".pr_ctN").val();
-						console.log(number);
+						total=0;
+						let number=$(this).find(".pr_cnt").val();
 						let amount = (number*pd_price)
-						console.log(amount);
 						total +=amount;
-						console.log(total);
 						$(this).find(".pd_price").text(amount);
+						console.log(total);
+						if(isNaN(total)){
+							total=0;
+						}
 					})
 					$("#totalPrice").text(total);
 				}
-	            
-	            $(".pr_ctN").on("change keyup paste",function(){
-	            	update_total();
-	            })
-			})
+			function cartSelect() {
+				let pr_num = 0;
+				let pr_cnt = 0;
+				let pr_size = 0;
+				let pr_color = 0;
+				
+				$("input[type='checkbox']:checked").each(function() {
+					selectPrice = parseInt($(this).attr("data-prPrice"));
+					selectCount = parseInt($(this).attr("data-goodsCount"));
+					if (!isNaN(selectPrice) && !isNaN(selectCount)) {
+						selectTotalPrice += selectPrice * selectCount;
+					}
+				});
+				
+				if (selectTotalPrice > 0 && selectTotalPrice < 50000 ) {
+					selectShipCharge = 2500;
+				}
+				
+				selectTotalPayment = selectTotalPrice + selectShipCharge;
+				$("#totalPayment").val(selectTotalPayment);
+				
+				$("#cartFrm").attr({
+					"method" : "post",
+					"action" : "/order/orderForm"
+				});
+				$("#cartFrm").submit();
 		</script>
 	</head>
 	<body>
 		<div id="subPage">
 			<div id="main">
+				<div class="float">
+					<img src="/uploadStorage/prDetail/${detail.pr_mainimg}">
+				</div>
 				<form id="productDetail">
-					<div class="float">
-						<img src="/uploadStorage/prDetail/${detail.pr_mainimg}">
-					</div>
 					<div class="float">
 						<div id="pr_name">${detail.pr_name}</div>
 						<div id="pr_price">${detail.pr_price} 원</div>
@@ -167,7 +246,7 @@
 						<div id="pr_mile"></div>
 						<div id="pro_size">
 							<select id="size">
-								<option>----선택하세요</option>
+								<option class="select">----선택하세요</option>
 								<c:forEach var="size" items="${listSize}" varStatus="status">
 									<c:if test="${not empty size}">
 										<option data-proNum="${size}" value="${size}">${size}</option>
@@ -177,7 +256,7 @@
 						</div>
 						<div id="pro_color">
 							<select id=color >
-								<option>----선택하세요</option>
+								<option class="select" >----선택하세요</option>
 								<c:forEach var="color" items="${listColor}" varStatus="status">
 									<c:if test="${not empty color}">
 										<option data-proNum="${color}" value="${color}">${color}</option>
@@ -185,32 +264,31 @@
 								</c:forEach>
 							</select>
 						</div>
-						<div >
+					</div>
+					<div id="order">
+						<div>
 							<ul id="listPr">
+						
 							</ul>
 						</div>
-						<div id="order">
-							<div id="allPrice">
+						<div id="allPrice">
 							총 합계 금액 : 
-							<span id="totalPrice">0</span>원
-							</div>
-							<div id="button">	
-								<button type="button" id="cartInput">장바구니 담기</button>
-								<button type="button" id="buyInput">구매</button>
+						<span id="totalPrice">0</span>원
+						</div>
+						<div id="button">	
+							<button type="button" id="cartInput">장바구니 담기</button>
 								<button type="button" id="naver">네이버페이</button>
 							</div>
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 			<div id="content">
 				<div class="menu">
 					<table class="table-bordered tableMenu">
 						<tr>
-							<th> <a id="Detail" >디테일</a></th>
-							<td><a href="#Shipping"> 배송문의</a></td>
-							<td><a href="#QnA">문의</a></td>
-							<td><a href="#Review">리뷰</a></td>
+							<th class="th"> <a id="Detail" >디테일</a></th>
+							<td class="td"><a href="#Shipping"> 배송문의</a></td>	
 						</tr>					
 					</table>
 				</div>
@@ -220,18 +298,21 @@
 				<div class="menu">
 					<table class="table-bordered tableMenu">
 						<tr>
-							<td><a href="#Detail">디테일</a></td>
-							<th><a id="Shipping" >배송문의</a></th>
-							<td><a href="#QnA">문의</a></td>
-							<td><a href="#Review">리뷰</a></td>
+							<td class="td"><a href="#Detail">디테일</a></td>
+							<th class="th"><a id="Shipping" >배송문의</a></th>
 						</tr>					
 					</table>
 				</div>
 				<div class="content">
 					<div class="Shipping">
-						배송안내<br>
-						7만원 이상 구매 시 무료배송, 7만원 미만의 경우 2,500원의 배송비가 추가됩니다.<br>
-						(제주도 : 7만원 이상 구매 시 배송비 2,500원 할인되며, 7만원 미만의 경우 6,000원입니다)<br>
+						<table>
+							<tr>
+								<th>배송안내</th>
+							</tr>
+						</table>
+						
+						5만원 이상 구매 시 무료배송, 7만원 미만의 경우 2,500원의 배송비가 추가됩니다.<br>
+						(제주도 : 5만원 이상 구매 시 배송비 2,500원 할인되며, 7만원 미만의 경우 6,000원입니다)<br>
 						CJ 택배로 발송되며, CJ택배로 발송시 배송기간은 2-3일(주말, 공휴일 제외) 소요될 수 있습니다.<br>
 						<br>
 						<br>
@@ -245,27 +326,20 @@
 						- 택배 발송 시 알림톡을 통해 운송장번호가 발송됩니다. (알림톡 미발송시 문자발송)<br>
 					</div>
 				</div>
-				<div class="menu">
-					<table class="table-bordered tableMenu">
-						<tr>
-							<td><a href="#Detail">디테일</a></td>
-							<td><a href="#Shipping"> 배송문의</a></td>
-							<th><a id="QnA">문의</a></th>
-							<td><a href="#Review">리뷰</a></td>
-						</tr>					
-					</table>
-				</div>
-				<div class="menu">
-					<table class="table-bordered tableMenu">
-						<tr>
-							<td><a href="#Detail">디테일</a></td>
-							<td><a href="#Shipping"> 배송문의</a></td>
-							<td><a href="#QnA">문의</a></td>
-							<th><a id="Review">리뷰</a></th>
-						</tr>					
-					</table>
-				</div>
 			</div>
-		</div>
+			<table>
+				<tr>
+					<td rowspan="2"><input type="checkbox" checked="checked"></td>
+					<td colspan="2">물품 이름</td>
+					<td rowspan="2"><input type="number"></td>
+					<td rowspan="2"><input type="button"></td>
+					<td rowspan="2">가격</td>
+					<td rowspan="2"><input type="button"></td>
+				</tr>
+				<tr>
+					<td>사이즈</td>
+					<td>색상</td>
+				</tr>
+			</table>
 	</body>
 </html>

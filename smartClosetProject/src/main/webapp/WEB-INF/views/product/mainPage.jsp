@@ -25,6 +25,7 @@
 			#longline{width:880px; height:2px; background-color: gray; }
 			.longline{width:860px; height:1px; background-color: #BDBDBD;}
 			#best{margin-top: 40px;}
+			.more{margin-right: 20px; color:#515151;}
 		</style>
 		<script type="text/javascript">
 			$(function(){
@@ -62,7 +63,7 @@
 						</div>					
 					</c:forEach>
 					<div class="datemore">
-						<a href="#">[more]</a>
+						<a href="#" class="more">[more]</a>
 					</div>
 				</div>
 				<div id="longline"> </div>
@@ -80,7 +81,7 @@
 						</div>
 					</c:forEach>
 					<div class="salesmore">
-							<a href="#">[more]</a>
+							<a href="#" class="more">[more]</a>
 					</div>
 				</div>
 			</div>
