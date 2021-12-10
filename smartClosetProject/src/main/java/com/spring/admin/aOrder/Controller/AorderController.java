@@ -1,18 +1,18 @@
-package com.spring.admin.aOder.Controller;
+package com.spring.admin.aOrder.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.spring.admin.aOder.service.AorderService;
-import com.spring.admin.aOder.vo.AorderVO;
+import com.spring.admin.aOrder.service.AorderService;
+import com.spring.admin.aOrder.vo.AorderVO;
 import com.spring.common.vo.PageDTO;
 
 import lombok.AllArgsConstructor;
@@ -74,12 +74,30 @@ public class AorderController {
 		return "redirect:/aOrder/aOrderList";
 	}
 	
-	@RequestMapping("returnOrder")
-	public List<String> aOrderReturnForm(@RequestParam(value ="checkProduct[]") List<String> checkProduct, AorderVO aovo) throws Exception {
+	@RequestMapping("aOrderReturnForm")
+	public String aOrderReturnForm(@RequestParam(value ="checkProduct") List<Integer> checkProduct, Model model) throws Exception {
 		log.info("checkProduct : " + checkProduct);
+		model.addAttribute("checkProduct",checkProduct);
+		List<AorderVO> returnProduct = new ArrayList<AorderVO>();
+		for(int i:checkProduct) {
+			AorderVO a1 = new AorderVO();
+			a1.setOd_num(i);
+			returnProduct.add(aOrderservice.aOrderReturnDetail(a1));
+			log.info(returnProduct);
+			model.addAttribute("returnProduct",returnProduct);
+		}
+
+	
+		return "aOrder/aOrderReturnForm";
+	}
+	
+	@RequestMapping("returnProDetailForm")
+	public String returnProDetailForm(@ModelAttribute("data") AorderVO aovo, Model model) {
+		log.info("returnProDetailForm  실행완료");
 		
+		model.addAttribute("detail", aovo);
 		
-		return checkProduct;
+		return "aOrder/returnProDetailForm";
 	}
 	
 //	@RequestMapping("returnOrder")

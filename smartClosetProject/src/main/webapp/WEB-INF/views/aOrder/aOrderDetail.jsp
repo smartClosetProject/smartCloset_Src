@@ -56,14 +56,15 @@
 					$("input[class='checkProduct']:checked").each(function () {
 						chkArr.push($(this).attr("data-odnum"));
 					});
-					$.ajax({
-						url : "/aOrder/aOrderReturnForm",
-						type : "post",
-						data : { checkProduct : chkArr },
-						success : function () {
-							location.href="aOrder/aOrderReturnForm";
-						}
+					$("#checkProduct").val(chkArr);
+					
+					console.log($("#checkProduct").val(chkArr));
+					
+					$("#detailForm1").attr({
+						"method" : "get",
+						"action" : "/aOrder/aOrderReturnForm"
 					});
+					$("#detailForm1").submit();
 			});
 			
 			
@@ -73,6 +74,10 @@
 	</head>
 	<body>
 		<div class="contentContainer container" style="padding-bottom : 100px">
+			<form id="detailForm1">
+				<input type="hidden" id="checkProduct" name="checkProduct">
+				<!--  <input type="hidden" id="od_num" name="od_num" value="${aOrder.od_num}"> -->
+			</form>
 			<form id="detailForm">
 				<input type="hidden" id="order_num" name="order_num" value="${aOrderDetail.order_num}">
 				<input type="hidden" id="order_state" name="order_state">

@@ -1,12 +1,13 @@
-package com.spring.admin.aOder.service;
+package com.spring.admin.aOrder.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.admin.aOder.dao.AorderDAO;
-import com.spring.admin.aOder.vo.AorderVO;
+import com.spring.admin.aOrder.dao.AorderDAO;
+import com.spring.admin.aOrder.vo.AorderDetailVO;
+import com.spring.admin.aOrder.vo.AorderVO;
 
 import lombok.Setter;
 
@@ -48,6 +49,16 @@ public class AorderServiceImpl implements AorderService{
 	@Override
 	public int returnOrder(AorderVO aovo) {
 		return aOrderDao.returnOrder(aovo);
+	}
+
+	@Override
+	public AorderVO aOrderReturnDetail(AorderVO aovo) {
+		return aOrderDao.aOrderReturnDetail(aovo);
+	}
+
+	@Override
+	public List<String> aGetProColor(AorderDetailVO advo) {
+		return aOrderDao.aGetProColor(advo);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.spring.admin.aOder.vo;
+package com.spring.admin.aOrder.vo;
 
 import com.spring.common.vo.CommonVO;
 
@@ -13,6 +13,7 @@ public class AorderVO extends CommonVO{
 	private long order_num =0;				
 	private int order_totalPayment;
 	private int order_prTotalPrice;
+	private int od_totalPayment;
 	private String order_state;		
 	private String order_phone;	
 	private String order_recipient;
