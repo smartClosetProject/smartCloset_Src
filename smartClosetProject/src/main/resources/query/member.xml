@@ -63,15 +63,19 @@
 	
 	<!-- 나의 주문내역 조회 리스트 출력 -->
 	<select id="myorderList" parameterType="myorder" resultType="myorder" >
-		SELECT so.order_num, so.order_totalpayment, so.order_state, to_char(so.order_regdate, 'YYYY-MM-DD') AS order_regdate,so.m_id, sd.od_goodscount, sd.pro_num, pro.pr_num, pd.pr_name, pd.pr_thumb
-	    	FROM sc_order so
+		SELECT so.order_num,pro.pr_price * sd.od_goodscount AS order_totalPayment, so.order_state, so.order_regdate,so.m_id, sd.od_goodscount, sd.pro_num, pro.pr_num, pd.pr_name, pd.pr_thumb
+	   		FROM sc_order so
 		INNER JOIN sc_order_detail sd
 	   		on so.order_num = sd.order_num
 		INNER JOIN product pro
 	    	on sd.pro_num = pro.pro_num
 		INNER JOIN pr_detail pd
 	    	on pro.pr_num = pd.pr_num
-		WHERE so.m_id = #{m_id}
+		WHERE 
+		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+		<![CDATA[ order_regdate >= #{start_date} and order_regdate < #{end_date} ]]>	
+		</trim>
+		so.m_id = #{m_id}
 	</select>
 	
 	<!-- 게시판 목록 레코드 수 조회 -->
