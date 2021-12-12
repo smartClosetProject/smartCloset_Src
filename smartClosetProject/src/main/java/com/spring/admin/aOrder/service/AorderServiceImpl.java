@@ -47,8 +47,8 @@ public class AorderServiceImpl implements AorderService{
 	}
 
 	@Override
-	public int returnOrder(AorderVO aovo) {
-		return aOrderDao.returnOrder(aovo);
+	public int aOrderOptionChange(AorderVO aovo) {
+		return aOrderDao.aOrderOptionChange(aovo);
 	}
 
 	@Override
@@ -57,8 +57,13 @@ public class AorderServiceImpl implements AorderService{
 	}
 
 	@Override
-	public List<String> aGetProColor(AorderDetailVO advo) {
+	public List<String> aGetProColor(AorderVO advo) {
 		return aOrderDao.aGetProColor(advo);
+	}
+
+	@Override
+	public List<String> aGetProSize(AorderVO advo) {
+		return aOrderDao.aGetProSize(advo);
 	}
 
 }

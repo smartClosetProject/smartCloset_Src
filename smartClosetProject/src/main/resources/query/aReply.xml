@@ -15,13 +15,6 @@
 		insert into reply(r_num, q_num, r_name, r_content)
 		values (reply_seq.nextval, #{q_num}, #{r_name}, #{r_content})
 	</insert>
-	<!-- 댓글 수정 -->
-	<update id="aReplyUpdate" parameterType="areply">
-		/* Reply - replyUpdate */
-		update reply
-			set r_content = #{r_content},r_regdate = sysdate
-		where r_num = #{r_num}
-	</update>
 	<!-- 댓글 삭제 -->
 	<delete id="aReplyDelete" parameterType="areply">
 		/* Reply - replyDelete */

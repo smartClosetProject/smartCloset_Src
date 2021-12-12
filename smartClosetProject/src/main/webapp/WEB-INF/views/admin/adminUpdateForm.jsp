@@ -13,6 +13,9 @@
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
+		
 		<!-- 모바일 웹 페이지 설정 끝 -->
 	
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -50,6 +53,8 @@
 		<div>
 			<form name="f_adUpdateData" id="f_adUpdateData" method="post">
 				<input type="hidden" name="ad_id" value="${adminUpdateInfo.ad_id}">
+				<h2 style="color : #1A5276;"><strong>관리자 정보</strong></h2>
+				<br>
 				<table class="table table-bordered">
 					<tr>
 						<td>관리자 번호</td>
@@ -80,11 +85,14 @@
 						<td colspan="3"><input class="form-control" type="text" name="ad_addr" id="ad_addr" value="${adminUpdateInfo.ad_addr}"/></td>
 					</tr>
 				</table>
-			
+				</form>
+			</div>
+			<div class="text-right">
 				<input type="button" class="btn btn-default text-right btn-sm" id="changeInfoBtn" name="changeInfoBtn" value="변경"/>
 				<input type="button" class="btn btn-default text-right btn-sm" id="resetBtn" name="resetBtn" value="초기화"/>
 				<input type="button" class="btn btn-default text-right btn-sm" id="goToAdminInfofBtn" name="goToAdminInfofBtn" value="이전으로"/>
 			</div>
-		</form>
+			
+		
 	</body>
 </html>

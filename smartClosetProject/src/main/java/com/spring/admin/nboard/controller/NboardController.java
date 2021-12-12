@@ -41,6 +41,9 @@ public class NboardController {
 		List<NboardVO> nboardList = nboardService.nboardList(nvo);
 		model.addAttribute("nboardList",nboardList);
 		
+		List<NboardVO> nboardImportantList = nboardService.nboardImportantList(nvo);
+		model.addAttribute("nboardImportantList",nboardImportantList);
+		
 		// 전체 레코드 수 구현
 		int total = nboardService.nboardListCnt(nvo);
 		

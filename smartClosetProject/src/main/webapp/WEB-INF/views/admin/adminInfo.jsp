@@ -13,6 +13,9 @@
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
+		
 		<!-- 모바일 웹 페이지 설정 끝 -->
 	
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -25,9 +28,9 @@
 					$("#f_adData").attr("action", goUrl);
 					$("#f_adData").submit();
 				})
-				//메인 페이지로 가는 길 만들어 줘야함
+				
 				$("#toGoMainBtn").click(function () {
-					location.href = "/admin/adminTest";
+					location.href = "/nboard/nboardTest";
 				})
 				
 				$("#adminLogoutBtn").click(function () {
@@ -46,6 +49,8 @@
 			<form name="f_adData" id="f_adData" method="post">
 				<input type="hidden" name="ad_id" value="${adminInfo.ad_id}">
 			</form>
+			<h2 style="color : #1A5276;"><strong>관리자 정보</strong></h2>
+			<br>
 			<table class="table table-bordered">
 				<tr>
 					<td>관리자 번호</td>
@@ -72,7 +77,8 @@
 					<td colspan="3">${adminInfo.ad_addr}</td>
 				</tr>
 			</table>
-		
+		</div>
+		<div class="text-right">
 			<input type="button" class="btn btn-default text-right btn-sm" id="changeInfoBtn" name="changeInfoBtn" value="관리자정보 변경"/>
 			<input type="button" class="btn btn-default text-right btn-sm" id="toGoMainBtn" name="toGoMainBtn" value="메인으로"/>
 			<input type="button" class="btn btn-default text-right btn-sm" id="adminLogoutBtn" name="adminLogoutBtn" value="로그아웃"/>

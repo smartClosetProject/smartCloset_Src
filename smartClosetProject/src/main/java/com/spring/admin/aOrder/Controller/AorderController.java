@@ -66,6 +66,15 @@ public class AorderController {
 		
 		
 	}
+	@GetMapping("aOrderchangeRefundState")
+	public String aOrderchangeRefundState(@ModelAttribute AorderVO aovo, RedirectAttributes ras) {
+		aOrderservice.aOrderChangeState(aovo);
+		ras.addFlashAttribute("data",aovo);
+		
+		return "redirect:/aOrder/aOrderList";
+		
+		
+	}
 	
 	@RequestMapping("aOrderAllDelete")
 	public String aOrderAllDelete() throws Exception{
@@ -92,13 +101,38 @@ public class AorderController {
 	}
 	
 	@RequestMapping("returnProDetailForm")
-	public String returnProDetailForm(@ModelAttribute("data") AorderVO aovo, Model model) {
+	public String returnProDetailForm(@RequestParam(value ="od_num") int od_num, Model model) {
 		log.info("returnProDetailForm  실행완료");
+		log.info(od_num);
+		AorderVO aovo = new AorderVO();
+		aovo.setOd_num(od_num);
+		AorderVO a1 = aOrderservice.aOrderReturnDetail(aovo);
+		log.info(a1);
+		model.addAttribute("detail", a1);
 		
-		model.addAttribute("detail", aovo);
+		List<String> color = new ArrayList<String>();
+		color = aOrderservice.aGetProColor(a1);
+		
+		model.addAttribute("color",color);
+		
+		List<String> size = new ArrayList<String>();
+		size = aOrderservice.aGetProSize(a1);
+		
+		model.addAttribute("size",size);
 		
 		return "aOrder/returnProDetailForm";
 	}
+	
+	@RequestMapping("aOrderOptionChange")
+	public String aOrderOptionChange(@ModelAttribute AorderVO aovo, RedirectAttributes ras) {
+		aOrderservice.aOrderOptionChange(aovo);
+		ras.addFlashAttribute("data",aovo);
+		
+		return "aOrder/aOrderReturnForm";
+	}
+	
+	
+	
 	
 //	@RequestMapping("returnOrder")
 //	public int returnOrder(@RequestParam(value ="checkProduct[]") List<String> checkProduct, AorderVO aovo) throws Exception{

@@ -13,6 +13,8 @@
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
 		<!-- 모바일 웹 페이지 설정 끝 -->
 		<style type="text/css">
 			.col-sm-9{
@@ -74,14 +76,7 @@
 			<form name="f_data" id="f_data" method="post">
 				<input type="hidden" name="n_num" value="${detail.n_num}">
 			</form>
-			<%-- =================== 버튼 출력 시작 =================== --%>
-			<div class="text-right contentBtn" style="margin-bottom : 20px">
-				<input type="button" class="btn btn-default btn-sm" id="insertFormBtn" value="작성"/>
-				<input type="button" class="btn btn-default btn-sm" id="updateFormBtn" value="수정"/>
-				<input type="button" class="btn btn-default btn-sm" id="boardDeleteBtn" value="삭제"/>
-				<input type="button" class="btn btn-default btn-sm" id="boardListBtn" value="목록"/>
-			</div>
-			<%-- =================== 버튼 출력 종료 =================== --%>
+			<h2 style="color : #1A5276;"><strong>공지 관리</strong></h2><br>
 		
 			<%-- =============== 상세 페이지 보여주기 시작 =============== --%>
 			<table class="table table-bordered">
@@ -110,6 +105,14 @@
 				</tr>
 			</table>
 			<%-- =============== 상세 페이지 보여주기 종료 =============== --%>
+			<%-- =================== 버튼 출력 시작 =================== --%>
+			<div class="text-right contentBtn" style="margin-bottom : 20px">
+				<input type="button" class="btn btn-default btn-sm" id="insertFormBtn" value="작성"/>
+				<input type="button" class="btn btn-default btn-sm" id="updateFormBtn" value="수정"/>
+				<input type="button" class="btn btn-default btn-sm" id="boardDeleteBtn" value="삭제"/>
+				<input type="button" class="btn btn-default btn-sm" id="boardListBtn" value="목록"/>
+			</div>
+			<%-- =================== 버튼 출력 종료 =================== --%>
 		</div>
 	</body>
 </html>

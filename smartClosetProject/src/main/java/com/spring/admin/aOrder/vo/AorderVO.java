@@ -25,9 +25,11 @@ public class AorderVO extends CommonVO{
 	private String m_id;				
 
 	private int od_num;			
-	private int od_goodsCount;	
+	private int od_goodscount;	
 	private String pr_name;
 	private int pr_price;
 	private String pro_size;
 	private String pro_color;
+	private String pro_num;
+	private String pr_num;
 }

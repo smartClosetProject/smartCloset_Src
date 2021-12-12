@@ -3,26 +3,28 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<style type="text/css">
+	.navbar-brand:hover {
+		color : #163B6A;
+	}
+	
+	.navbar-brand:visited{
+	color : white;}
 
-<div class="container-fluid">
+	.mini_icon{
+		width : 40px;
+		height: 40px;
+		margin : 40px;
+		color : white;
+	}
+</style>
+
+<div class="container-fluid" style="margin-top : 0px !important; height : 120px;">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
+          <a class="navbar-brand" href="/nboard/nboardTest"><h2>SMART CLOSET</h2></a><p style="padding-top : 80px; color : white;"><strong>관리자 페이지</strong></p>
+         </div>
+        <p class="text-right">
+       	 <a href="/admin/adminInfo"><img alt="설정" src="/resources/image/user_icon.png" class="mini_icon" /></a>
+        </p>
+        
+</div>

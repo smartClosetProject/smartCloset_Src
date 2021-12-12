@@ -68,7 +68,7 @@
 			<div class="container">
 				<form id="f_updateForm" class="f_updateForm">
 					<input type="hidden" id="n_num" name="n_num" value="${updateData.n_num}"/>
-					<h3 class="text-left">공지 수정</h3><br>
+					<h3 class="text-left" style="color : #1A5276;"><strong>공지 수정</strong></h3><br>
 					<div class="form-group" style="font-weight : bold">
 						<p>글 번호 | ${updateData.n_num}
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

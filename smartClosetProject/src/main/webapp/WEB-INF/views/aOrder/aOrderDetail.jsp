@@ -35,6 +35,18 @@
 				} 
 			})
 			
+			$("#refundStateBtn").click(function () {
+				if(confirm("환불을 하시겠습니까?")){
+					let order_state = $(this).val();
+					$("#order_state").val(order_state);
+					$("#detailForm").attr({
+						"method" : "get",
+						"action" : "/aOrder/aOrderchangeRefundState"
+					});
+					$("#detailForm").submit();
+					alert("환불이 완료되었습니다.")
+				} 
+			})
 			
 			
 			$("#allCheck").click(function () {
@@ -73,7 +85,7 @@
 		</script>
 	</head>
 	<body>
-		<div class="contentContainer container" style="padding-bottom : 100px">
+		<div class="contentContainer" style="padding-bottom : 100px">
 			<form id="detailForm1">
 				<input type="hidden" id="checkProduct" name="checkProduct">
 				<!--  <input type="hidden" id="od_num" name="od_num" value="${aOrder.od_num}"> -->
@@ -82,6 +94,8 @@
 				<input type="hidden" id="order_num" name="order_num" value="${aOrderDetail.order_num}">
 				<input type="hidden" id="order_state" name="order_state">
 			</form>
+			<h2 style="color : #1A5276;"><strong>주문 관리</strong></h2>
+			<br>
 			<div class="container">
 				<table class="table table-bordered">
 					<tr>
@@ -122,14 +136,14 @@
 								<tr>
 									<td rowspan="2">상품 정보</td>
 									<td rowspan="2" colspan="2" style="width : 300px;">
-										<p class="text-right"><input type="checkbox" class="checkProduct" name="checkProduct" data-odnum="${aOrder.od_num}"/>${aOrder.od_num}</p>
-										<span style="font-weight : bold; font-size : 120%;">${aOrder.pr_name}</span><br>사이즈 : ${aOrder.pro_size}, 색상 : ${aOrder.pro_color}, 갯수 : ${aOrder.od_goodsCount}
+										<p class="text-right"><input type="checkbox" class="checkProduct" name="checkProduct" data-odnum="${aOrder.od_num}"/></p>
+										<span style="font-weight : bold; font-size : 120%;">${aOrder.pr_name}</span><br>사이즈 : ${aOrder.pro_size}, 색상 : ${aOrder.pro_color}, 갯수 : ${aOrder.od_goodscount}
 										
 									</td>
 									<td colspan="2">상품 가격</td>
 								</tr>
 								<tr>
-									<td colspan="2">${aOrder.order_prTotalPrice} 원</td>
+									<td colspan="2">${aOrder.pr_price*aOrder.od_goodscount} 원</td>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -140,23 +154,23 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="button" value="입금 전" id="beforePayStateBtn" name="beforePayStateBtn" class="stateBtn"/>
-							<input type="button" value="결제 완료" id="completePayStateBtn" name="completePayStateBtn" class="stateBtn"/>
-							<input type="button" value="배송 준비 중" id="readyDeliStateBtn" name="readyDeliStateBtn" class="stateBtn"/>
-							<input type="button" value="배송 중" id="ingDeliStateBtn" name="ingDeliStateBtn"  class="stateBtn"/>
-							<input type="button" value="배송 완료" id="completeDeliStateBtn" name="completeDeliStateBtn" class="stateBtn"/>
+							<input type="button" value="입금 전" id="beforePayStateBtn" name="beforePayStateBtn" class="stateBtn btn btn-default"/>
+							<input type="button" value="결제 완료" id="completePayStateBtn" name="completePayStateBtn" class="stateBtn btn btn-default"/>
+							<input type="button" value="배송 준비 중" id="readyDeliStateBtn" name="readyDeliStateBtn" class="stateBtn btn btn-default"/>
+							<input type="button" value="배송 중" id="ingDeliStateBtn" name="ingDeliStateBtn"  class="stateBtn btn btn-default"/>
+							<input type="button" value="배송 완료" id="completeDeliStateBtn" name="completeDeliStateBtn" class="stateBtn btn btn-default"/>
 						</td>
 						<td colspan="2">${aOrderDetail.order_totalPayment} 원</td>
 					</tr>
 				</table>
 			</div>
-			<div class="allCheck">
-				<input type="checkbox" name="allCheck" id="allCheck"  /><label for="allCheck">전체 선택</label> 
+			<div class="allCheck text-right">
+				<input type="checkbox" name="allCheck" id="allCheck"  /><label style="margin-right : 160px;" for="allCheck">전체 선택</label> 
 			</div>
 			<div class="text-right">
-				<input type="button" value="선택 반품" id="returnStateBtn" name="returnStateBtn" data-odnum="${aOrder.od_num}" />
-				<input type="button" value="선택 환불" id="refundStateBtn" name="refundStateBtn" data-odnum="${aOrder.od_num}" />
-				<input type="button" value="목록" id="goToOrderListBtn" name="goToOrderListBtn"/>
+				<input type="button" value="선택 반품" id="returnStateBtn" name="returnStateBtn" class="btn btn-default" data-odnum="${aOrder.od_num}" />
+				<input type="button" value="전체 환불" id="refundStateBtn" name="refundStateBtn" class="btn btn-default" value="환불" data-odnum="${aOrder.od_num}" />
+				<input type="button" value="목록" id="goToOrderListBtn" name="goToOrderListBtn" class="btn btn-default"/>
 			</div>
 		</div>
 	</body>

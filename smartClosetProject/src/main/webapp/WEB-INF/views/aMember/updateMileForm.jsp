@@ -30,8 +30,7 @@
 	<div>
 		<form id="f_mile" name="f_mile">
 			<input type="hidden" id="m_id" name="m_id" value="${nowMile.m_id}">
-			<input type="hidden" id="m_mile" name="m_mile">
-		</form>
+		
 			<table>
 				<tbody>
 					<tr>
@@ -40,10 +39,11 @@
 					</tr>
 					<tr>
 						<td>변경할 포인트</td>
-						<td><input type="text" id="m_mile" name="m_mile"/> 점</td>
+						<td><input type="text" id="m_mile" name="m_mile" /> 점</td>
 					</tr>
 				</tbody>
 			</table>
+			</form>
 			<input type="button" id="updateMileBtn" name="updateMileBtn" value="변경하기"/>
 		
 	</div>

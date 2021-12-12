@@ -57,9 +57,19 @@
 			padding-left: 20px !important;
 		}
 		
-		.container1{
-			margin-left: 200px !important;
+		.container-fluid{
+			margin : 0px;
+			margin-top : 80px;
 		}
+		
+		.container{
+			width : 80% !important;
+			margin-left : 9% !important;
+		}
+		.table-height{
+			min-height: 470px;
+		}
+		
    </style>
    
   </head>
@@ -70,15 +80,12 @@
 			<nav class="navbar navbar-fixed-top">
 				<tiles:insertAttribute name="header" ignore="true"/>
 			</nav>
-			<div>
+			<div class="active">
 				<tiles:insertAttribute name="navbar" ignore="true"/>
 			</div>
 			
 			<div class="container-fluid">
-				 <div class="page-header">
-				        <h2><tiles:getAsString name="title" /></h2>
-				      </div>
-				<div class="col-sm-9 page">
+				<div class="page">
 					<tiles:insertAttribute name="body" ignore="true"/>
 				</div>
 			</div>

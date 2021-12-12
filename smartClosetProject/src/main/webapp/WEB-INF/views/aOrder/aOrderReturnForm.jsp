@@ -17,24 +17,28 @@
 
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
-		<style type="text/css">
-			.col-sm-9{
-				width: 100%;
-			}
-		</style>
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 		$(function () {
-			$("#returnProduct").click(function () {
-				var childWin = window.open("/aOrder/returnProDetailForm", "childWin", "width = 500, height = 500, top = 100, left = 200, location = no");
+			$(".returnProduct").click(function () {
+				var od_num = $("#od_num").val($(this).data("num"));
 				
-				childWin.document.od_num = $("#od_num");
+				var pop = window.open("/aOrder/returnProDetailForm?od_num="+$("#od_num").val(), "childWin", "width = 500, height = 500, top = 100, left = 200, location = no , resize= no");
+				$("#test").val(od_num);
+				console.log(od_num);
+				console.log($("#od_num").val());
+
 			});
 			$("#returnProductBtn").click(function () {
-				
+				$("#returnProInfo").attr({
+					"method" : "get",
+					"action" : "/aOrder/aOrderOptionChange"
+				});
+				$("#returnProInfo").submit();
+				alert("적용 완료");
 			});
 			$("#goToProDetailBtn").click(function () {
 				location.href="/aOrder/aOrderDetail";
@@ -45,28 +49,28 @@
 		</script>
 </head>
 <body>
-<form id="returnPro" name="returnPro" method="get" action="/aOrder/returnProDetailForm" target="subWin">
-	<input type="hidden" id="od_num" name="od_num" />
+<form id="returnPro" name="returnPro">
+	<input type="hidden" id="od_num" name="od_num"/>
 	<input type="hidden" id="pr_num" name="pr_num" />
-	
 </form>
+<h2 style="color : #1A5276;"><strong>상품 관리</strong></h2>
+<br>
 <div>
 
 	<table class="table table-bordered">
 	<c:choose>
 		<c:when test="${not empty checkProduct}">
 			<c:forEach var="returnPro" items="${returnProduct}" varStatus="status">
-				<tr>
-					<td rowspan="2">상품 정보</td>
-					<td rowspan="2" colspan="2" style="width : 300px;">
-						<p class="text-right"><input type="button" id="returnProduct" name="returnProduct" value="옵션 변경"/></p>
-						<span style="font-weight : bold; font-size : 120%;">${returnPro.pr_name}</span><br>사이즈 : ${returnPro.pro_size}, 색상 : ${returnPro.pro_color}, 갯수 : ${returnPro.od_goodsCount}
-										
+				<tr data-num="${returnPro.od_num}" >
+					<td rowspan="2">상품 정보 ${returnPro.order_num}</td>
+					<td rowspan="2" colspan="2" style="width : 300px;" >
+						<span style="font-weight : bold; font-size : 120%;">${returnPro.pr_name}</span><br>사이즈 : ${returnPro.pro_size}, 색상 : ${returnPro.pro_color}, 갯수 : ${returnPro.od_goodscount}
+						<p class="text-right"><input type="button" id="returnProduct" name="returnProduct" class="returnProduct btn btn-default btn-sm" value="옵션 변경" data-num="${returnPro.od_num}"/></p>				
 					</td>
 					<td colspan="2">상품 가격</td>
 				</tr>
 				<tr>
-					<td colspan="2">${returnPro.od_totalPayment*returnPro.od_goodsCount} 원</td>
+					<td colspan="2">${returnPro.pr_price*returnPro.od_goodscount} 원</td>
 				</tr>
 			</c:forEach>
 		</c:when>
@@ -74,8 +78,8 @@
 	</table>
 </div>
 <div>
- <input type="button" id="returnProductBtn" name="returnProductBtn" value="반품하기"/>
- <input type="button" id="goToProDetailBtn" name="goToProDetailBtn" value="취소"/>
+ <input type="button" id="returnProductBtn" name="returnProductBtn" class="btn btn-default" value="반품하기"/>
+ <input type="button" id="goToProDetailBtn" name="goToProDetailBtn" class="btn btn-default" value="취소"/>
 </div>
 </body>
 </html>

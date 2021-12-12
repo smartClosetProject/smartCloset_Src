@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="aOrderProductDetail" parameterType="aorder" resultType="aorder">
-		SELECT od2.od_goodscount, od2.pro_size, od2.pr_name, od2.pr_price*od2.od_goodscount as order_prTotalPrice, od2.pro_color, od2.od_num
+		SELECT od2.od_goodscount, od2.pro_size, od2.pr_name, od2.pr_price, od2.pro_color, od2.od_num
 		FROM sc_order o LEFT join (select * from  
             									(SELECT od.od_goodscount, p.pro_size,od.pro_num, p.pro_color,p.pr_num, od.order_num, od.od_num
             									from sc_order_detail od right join product p on od.pro_num = p.pro_num) p1 
@@ -54,12 +54,15 @@
 	<update id="aOrderChangeState" parameterType="aorder">
 		update sc_order
 		set order_state = #{order_state}
-		<if test='order_state == "배송 완료"'>
-			, order_deliverydate = sysdate
-		</if>
-		<if test='order_state != "배송 완료"'>
-			, order_deliverydate = null, order_cancelreason = null
-		</if>
+		<choose>
+		<when test='order_state == "배송 완료" or order_state == "전체 환불"'>
+		 	, order_deliverydate = sysdate
+		</when>
+		<otherwise>
+			 , order_deliverydate = null, order_cancelreason = null
+		</otherwise>
+		</choose>
+
 		where order_num = #{order_num}
 	</update>
 	
@@ -67,40 +70,35 @@
 		DELETE FROM sc_order WHERE order_deliverydate <![CDATA[<]]> to_date(sysdate)-7
 	</delete>
 	
-	<update id="returnOrder">
+	<update id="aOrderOptionChange">
 	update sc_order_detail
 	set pro_num = (select DISTINCT p2.pro_num
 	              from product od inner join (select p.pro_num, p.pro_size, p.pro_color, pr.pr_num, pr.pr_price,pr.pr_name from product p join pr_detail pr on p.pr_num = pr.pr_num) p2
-	              on p2.pro_color=#{pro_color} and p2.pro_size=#{pro_size} and od.pr_num=p2.pr_num)
-	where od_num = #{od_num};
+	              on p2.pro_color=#{pro_color} and p2.pro_size=#{pro_size} and od.pr_num=p2.pr_num),
+	    od_goodscount = #{od_goodscount}
+	where od_num = #{od_num}
 	</update>
 	
 	<select id="aOrderReturnDetail" parameterType="aorder" resultType="aorder">
-		select od.od_num, od.od_totalpayment, od.od_goodscount, od.pro_num, p.pro_size, p.pro_color, p.pr_name
+		select od.od_num, p.pr_price, od.od_goodscount, od.pro_num, p.pro_size, p.pr_num, p.pro_color, p.pr_name
 		from sc_order_detail od
 		join
-			(select * from product p1 join pr_detail p2 on p1.pr_num=p2.pr_num) p
+			(select p1.pro_num, p1.pro_size, p1.pr_num, p1.pro_color, p2.pr_name, p2.pr_price from product p1 join pr_detail p2 on p1.pr_num=p2.pr_num) p
 		on od.pro_num = p.pro_num
 		where od_num = #{od_num}
 	</select>
 	
-<!-- 	<select id="aOrderReturnDetail" parameterType="aorderDetail" resultType="aorderDetail">
-			select od.od_num, od.od_goodscount, p.pro_num, p.pro_size, p.pro_color, p.pr_name, p.pr_price, p.pr_num
-			from 
-			    sc_order_detail od 
-			join 
-			    (select p1.pro_num, p1.pro_size, p1.pro_color, p1.pr_num, p2.pr_name, p2.pr_price from product p1 join pr_detail p2 on p1.pr_num = p2.pr_num) p
-			on od.pro_num = p.pro_num
-			where od.od_num = #{od_num}
-	</select>
-	 -->
-	<select id="aGetProColor" parameterType="aorderDetail" resultType="String">
+	<select id="aGetProColor" parameterType="aorder" resultType="String">
 		select DISTINCT pro_color
 		from product p join pr_detail pd
 		on p.pr_num = pd.pr_num
 		where p.pr_num=#{pr_num} and pd.pr_issale='Y'
 	</select>
 	
-
-	
+		<select id="aGetProSize" parameterType="aorder" resultType="String">
+		select DISTINCT pro_size
+		from product p join pr_detail pd
+		on p.pr_num = pd.pr_num
+		where p.pr_num=#{pr_num} and pd.pr_issale='Y'
+	</select>	
 </mapper>

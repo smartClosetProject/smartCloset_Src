@@ -12,6 +12,9 @@
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
+		
 		<!-- 모바일 웹 페이지 설정 끝 -->
 	
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -53,15 +56,8 @@
 			<form name="f_data" id="f_data" method="post">
 				<input type="hidden" name="m_id" id="m_id" value="${aMemberDetail.m_id}">
 			</form>
-			<%-- =================== 버튼 출력 시작 =================== --%>
-			<div class="text-right contentBtn" style="margin-bottom : 20px">
-				<input type="button" class="btn btn-default btn-sm" id="updateMileBtn" value="포인트 변경"/>
-				<input type="button" class="btn btn-default btn-sm" id="updateExitDateBtn" value="탈퇴"/>
-				<input type="button" class="btn btn-default btn-sm" id="cancleExitDateBtn" value="탈퇴 취소"/>
-				<input type="button" class="btn btn-default btn-sm" id="aMemberListBtn" value="목록"/>
-			</div>
-			<%-- =================== 버튼 출력 종료 =================== --%>
-		
+			<h2 style="color : #1A5276;"><strong>회원 관리</strong></h2><br>
+			
 			<%-- =============== 상세 페이지 보여주기 시작 =============== --%>
 			<table class="table table-bordered">
 				<tr>
@@ -84,6 +80,15 @@
 				</tr>
 			</table>
 			<%-- =============== 상세 페이지 보여주기 종료 =============== --%>
+			<%-- =================== 버튼 출력 시작 =================== --%>
+			<div class="text-right contentBtn" style="margin-bottom : 20px">
+				<input type="button" class="btn btn-default btn-sm" id="updateMileBtn" value="포인트 변경"/>
+				<input type="button" class="btn btn-default btn-sm" id="updateExitDateBtn" value="탈퇴"/>
+				<input type="button" class="btn btn-default btn-sm" id="cancleExitDateBtn" value="탈퇴 취소"/>
+				<input type="button" class="btn btn-default btn-sm" id="aMemberListBtn" value="목록"/>
+			</div>
+			<%-- =================== 버튼 출력 종료 =================== --%>
+		
 		</div>
 	</body>
 </html>

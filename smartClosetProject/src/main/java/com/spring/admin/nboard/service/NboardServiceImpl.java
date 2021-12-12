@@ -62,4 +62,9 @@ public class NboardServiceImpl implements NboardService{
 		return nboardDao.nboardListCnt(nvo);
 	}
 
+	@Override
+	public List<NboardVO> nboardImportantList(NboardVO nvo) {
+		return nboardDao.nboardImportantList(nvo);
+	}
+
 }

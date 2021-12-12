@@ -10,9 +10,12 @@
 		
 		<title>Insert title here</title>
 		
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
+		
 		<script type="text/javascript">
 			$(function() {
 				// 검색 후 검색 대상과 검색 단어 출력
@@ -98,10 +101,11 @@
 		<![endif]-->
 	</head>
 	<body>
-		<div class="contentContainer container">
+		<div>
 			<form id="detailForm">
 				<input type="hidden" id="q_num" name="q_num">
 			</form>
+			<h2 style="color : #1A5276;"><strong>QnA 게시판 관리</strong></h2><br>
 			
 			<%-- =================== 검색 시작 =================== --%>
 			<div id="boardSearch" class="text-left"  style="margin-bottom : 20px">
@@ -125,7 +129,7 @@
 			
 			<%-- =================== 리스트 시작 =================== --%>
 			<div id="aQnaList" class="table-height">
-				<table summary="게시판 리스트" class="table table-striped">
+				<table summary="게시판 리스트" class="table table-hover">
 					<thead>
 						<tr>
 							<th class="order text-center col-md-1">글번호</th>

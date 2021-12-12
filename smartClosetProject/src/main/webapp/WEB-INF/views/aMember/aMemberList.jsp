@@ -58,6 +58,7 @@
 		<form id="aMemberListForm">
 			<input type="hidden" id="m_id" name="m_id" value="${aMember.m_id}"/>
 		</form>
+		<h2 style="color : #1A5276;"><strong>회원 관리</strong></h2><br>
 	
 		<%-- ================= 검색 시작 ================== --%>
 		<div id="aMemberSearch" class="text-left" style="margin-bottom : 20px">
@@ -79,8 +80,8 @@
 		<%-- =================== 검색 종료 ==================== --%>
 	
 		<%-- ==================== 리스트 시작 ==================== --%>
-		<div id="aMemberList">
-			<table class="table table-striped">
+		<div id="aMemberList" class="table-height">
+			<table class="table table-hover" >
 				<thead>
 					<tr>
 						<th class=" text-center ">회원 id</th>

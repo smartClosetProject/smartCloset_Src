@@ -13,6 +13,8 @@
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
 		<!-- 모바일 웹 페이지 설정 끝 -->
 
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -110,13 +112,14 @@
 		</script>
 	</head>
 	<body>
-		<div class="contentContainer container">
+		<div>
 			<form id="r_numForm">
 				<input type="hidden" id="r_num" value="r_num" name="r_num">
 			</form>
-						<%-- =================== 검색 버튼 =================== --%>
+			<h2 style="color : #1A5276;"><strong>리뷰 게시판 관리</strong></h2><br>
+			<%-- =================== 검색 버튼 =================== --%>
 			<div id="reviewSearch" class="text-left">
-				<form id="r_search" name="r_search" class="form-inline">
+				<form id="r_search" name="r_search" class="form-inline" style="margin-bottom : 20px">
 					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum }">
 					<input type="hidden" name="amount" value="${pageMaker.cvo.amount }">
 						<span class="glyphicon glyphicon-search"></span>&nbsp;
@@ -142,11 +145,11 @@
 							<table class="table table-bordered">
 								<tbody id="list" class="table-striped">
 										<tr class="text-center" data-num="${review.r_num}">
-											<td>글 번호</td>
+											<td >글 번호</td>
 											<td class="text-left">${count - status.index }</td>
 											<td>작성자 id</td>
 											<td class="text-left">${review.m_id}</td>
-											<td class="text-left" rowspan="3"><input type="button" id="reviewDeleteBtn" name="reviewDeleteBtn" class="deleteProc" value="삭제"/></td>
+											<td class="text-left" rowspan="3"><input type="button" id="reviewDeleteBtn" name="reviewDeleteBtn" class="deleteProc btn btn-default" value="삭제"/></td>
 										</tr>
 										<tr class="text-center">
 											<td>글 제목</td>

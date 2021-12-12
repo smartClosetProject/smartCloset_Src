@@ -19,9 +19,53 @@
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+		$(function () {
+			var od_num = opener.$("#od_num").val();
+			$("#test").val(od_num);
+			console.log(od_num); //5
+			console.log($("#test").val(od_num))
+			
+			$("#returnBtn").click(function () {
+				$("#returnProInfo").attr({
+					"method" : "get",
+					"action" : "/aOrder/aOrderOptionChange"
+				});
+				$("#returnProInfo").submit();
+				alert("적용 완료");
+				//window.open("about:blank","_self").close();
+			})
+		})
+		</script>
 	</head>
 	<body>
-		<h1>test</h1>
-		<h2>${detail.od_num}</h2>
+		<div>
+			<form id="returnProInfo" name="returnProInfo">
+				<input type="hidden" id="od_num" name="od_num" value="${detail.od_num}"/>
+					<h3>상품명 : ${detail.pr_name}</h3>
+					<select name="pro_color">
+						<c:choose>
+							<c:when test="${not empty color}">
+								<c:forEach var="proColor" items="${color}" varStatus="status">
+									<option value="${proColor}">${proColor}</option>
+								</c:forEach>
+							</c:when>
+						</c:choose>
+					</select>
+					<select name="pro_size">
+						<c:choose>
+						<c:when test="${not empty size}">
+							<c:forEach var="proSize" items="${size}" varStatus="status">
+								<option value="${proSize}">${proSize}</option>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+					</select>
+					<input type="text" id="od_goodscount" name="od_goodscount" />		
+			</form>
+		</div>
+		<div>
+			<input type="button" id="returnBtn" value="옵션 변경"/>
+		</div>
 	</body>
 </html>

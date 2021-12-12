@@ -37,18 +37,14 @@
 	
 	</head>
 	<body>
-		<div class="container">
-			<div class="text-center"><h3>상세 페이지</h3></div>
+		<div>
+			<h2 style="color : #1A5276;"><strong>QnA 게시판 관리</strong></h2><br>
 			
 			<%-- 수정, 삭제 시 가져갈 글번호, 원본파일명을 전달하는 폼 테이터 --%>
 			<form name="f_data" id="f_data" method="post">
 				<input type="hidden" name="q_num" value="${detail.q_num }">
 				<input type="hidden" name="q_file" value="${detail.q_file }">
 			</form>
-			<div class="text-right contentBtn ">
-				<input type="button" id="QnaDeleteBtn" name="QnaDeleteBtn" value="삭제"/>
-				<input type="button" id="goToQnaListBtn" name="goToQnaListBtn" value="목록"/>
-			</div>
 			<%-- =============== 상세 정보 보여주기 시작 =============== --%>
 			<div class="container">
 				<table class="table table-bordered">
@@ -74,13 +70,18 @@
 		 				<tr>
 		 					<td class="col-md-4">이미지</td>
 		 					<td colspan="3" class="col-md-8 text-left">
-		 						<img src="/uploadStorage/QnA/${detail.q_file }">
+		 						<img style="max-width : 500px; max-height:500px;" src="/uploadStorage/QnA/${detail.q_file }">
 		 					</td>
 		 				</tr>
 		 			</c:if>
 				</table>
 			</div>
 			<%-- =============== 상세 정보 보여주기 종료 =============== --%>
+			<div class="text-right contentBtn ">
+				<input type="button" id="QnaDeleteBtn" name="QnaDeleteBtn" class="btn btn-default btn-sm" value="삭제"/>
+				<input type="button" id="goToQnaListBtn" name="goToQnaListBtn" class="btn btn-default btn-sm" value="목록"/>
+				<hr>
+			</div>
 			<jsp:include page="reply.jsp"/>
 			
 		</div>

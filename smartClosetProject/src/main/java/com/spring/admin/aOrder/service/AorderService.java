@@ -13,8 +13,9 @@ public interface AorderService {
 	public AorderVO aOrderDetail(AorderVO aovo);
 	public int aOrderChangeState(AorderVO aovo);
 	public void aOrderAllDelete();
-	public int returnOrder(AorderVO aovo);
+	public int aOrderOptionChange(AorderVO aovo);
 	public AorderVO aOrderReturnDetail(AorderVO aovo);
-	public List<String> aGetProColor(AorderDetailVO advo);
-
+	public List<String> aGetProColor(AorderVO advo);
+	public List<String> aGetProSize(AorderVO advo);
+	
 }
