@@ -49,6 +49,7 @@ public class PrDetailServiceImpl implements PrDetailService{
 		return result;
 	}
 	
+	
 	//상세 페이지 구현
 	@Override
 	public List<ProductVO> productDetail(ProductVO pvo) {
@@ -70,7 +71,10 @@ public class PrDetailServiceImpl implements PrDetailService{
 	public int prNumericalListCnt(ProductVO pvo) {
 		return prDetailDAO.prDetailListCnt(pvo);
 	}
-	
+	@Override
+	public int productCnt(PrDetailVO prvo) {
+		return prDetailDAO.productCnt(prvo);
+	}
 	//상품 입고 페이지 구현
 	@Override
 	public List<ProductVO> warehousingList(ProductVO pvo){
@@ -87,7 +91,7 @@ public class PrDetailServiceImpl implements PrDetailService{
 	@Override
 	public int warehousingInsert(ProductVO pvo) throws Exception {
 		int result1=0;
-		pvo.setAd_num(1);
+		//pvo.setAd_num(1);
 		pvo.setPro_color(pvo.getColorKo()+" / "+pvo.getColorEn());
 		if(pvo.getFile().getSize()>0) {
 			String fileName=PrFileUploadUtil.fileUpload(pvo.getFile(),"warehousing");
@@ -102,7 +106,64 @@ public class PrDetailServiceImpl implements PrDetailService{
 	@Override
 	public int updateStock(ProductVO pvo) {
 		int result=0;
-		result=updateStock(pvo);
+		result=prDetailDAO.updateStock(pvo);
+		return result;
+	}
+	@Override
+	public int updateAllStock(ProductVO pvo) {
+		int result1=0;
+		result1=prDetailDAO.updateAllStock(pvo);
+		return result1;
+	}
+	@Override
+	public int issale(PrDetailVO prvo) {
+		int result=0;
+		result=prDetailDAO.issale(prvo);
+		return result;
+	}
+	@Override
+	public int productDelete(ProductVO pvo) {
+		int result=0;
+		result=prDetailDAO.productDelete(pvo);
+		return result;
+	}
+	@Override
+	public int prdetailDelete(ProductVO pvo) {
+		int result=0;
+		result=prDetailDAO.prdetailDelete(pvo);
+		return result;
+	}
+	@Override
+	public ProductVO listUpdate(ProductVO pvo) {
+		ProductVO detail=null;
+		detail=prDetailDAO.listUpdate(pvo);
+		return detail;
+	}
+	@Override
+	public int updateForm(PrDetailVO prvo) throws Exception{
+		if(!prvo.getFile().isEmpty()) {
+			String fileName=PrFileUploadUtil.fileUpload(prvo.getFile(), "prDetail");
+			prvo.setPr_mainimg(fileName);
+			
+			String thumb = PrFileUploadUtil.makeThumb(fileName, 400);
+			prvo.setPr_thumb(thumb);
+		}
+		if(!prvo.getFile1().isEmpty()) {
+			String fileName1=PrFileUploadUtil.fileUpload(prvo.getFile1(), "prDetail");
+			prvo.setPr_contentimg(fileName1);
+		}
+		int result=prDetailDAO.updateForm(prvo);
+		return result;
+	}
+	@Override
+	public int updatePr(PrDetailVO prvo) {
+		int result=prDetailDAO.updatePr(prvo);
+		return result;
+	}
+	@Override
+	public int prnumCheck(PrDetailVO prvo) {
+		int result=0;
+		result=prDetailDAO.prnumCheck(prvo);
 		return result;
 	}
 }

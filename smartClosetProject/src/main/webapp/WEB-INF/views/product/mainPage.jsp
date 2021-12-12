@@ -62,8 +62,8 @@
 							<div class="price">${date.pr_price} 원</div>
 						</div>					
 					</c:forEach>
-					<div class="datemore">
-						<a href="#" class="more">[more]</a>
+					<div >
+						<a href="/product/order/pr_regdate" class="more">[more]</a>
 					</div>
 				</div>
 				<div id="longline"> </div>
@@ -80,8 +80,8 @@
 							<div class="price">${ListSales.pr_price} 원</div>
 						</div>
 					</c:forEach>
-					<div class="salesmore">
-							<a href="#" class="more">[more]</a>
+					<div >
+						<a href="/product/order/pr_sales" class="more">[more]</a>
 					</div>
 				</div>
 			</div>

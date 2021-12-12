@@ -29,6 +29,7 @@ public class PrDetailVO extends CommonVO{
 	
 	private MultipartFile file;
 	private MultipartFile file1;
+	private MultipartFile file2;
 	private String colorKo;
 	private String colorEn;
 }

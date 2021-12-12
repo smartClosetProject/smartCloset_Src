@@ -28,13 +28,41 @@
 		select pr_num, pr_name, pr_price, pr_mainimg, pr_contentimg,pr_mile from pr_detail where pr_num=#{pr_num}
 	</select>
 	<select id="listSize" parameterType="productC" resultType="String">
-		select DISTINCT(pro_size) from product where pr_num=#{pr_num} 
+		select DISTINCT(pro_size) from product where pr_num=#{pr_num} order by pro_size
 	</select>
 	<select id="listColor" parameterType="productC" resultType="String">
-		select DISTINCT(pro_color) from product where pr_num=#{pr_num} 
+		select DISTINCT(pro_color) from product where pr_num=#{pr_num} order by pro_color
 	</select>
 	<select id="listPr" parameterType="productC" resultType="productC">
 		select pd.pr_num, pr.pro_num, pr.pro_size, pr.pro_color, pd.pr_price, pd.pr_mile 
 		from product pr inner JOin pr_detail pd on pr.pr_num =pd.pr_num where pr.pr_num=#{pr_num} and pr.pro_size=#{pro_size} and pr.pro_color=#{pro_color}
+	</select>
+	<select id="categoryPage" parameterType="productC" resultType="productC">
+		SELECT pr_categoryl ,pr_num, pr_name, pr_price, pr_thumb
+		FROM pr_detail
+		WHERE pr_categoryl = #{pr_categoryl} and PR_ISSALE='Y'
+	</select>
+	<select id="orderPage" parameterType="productC" resultType="productC">
+		<![CDATA[SELECT pr_categoryl ,pr_num, pr_name, pr_price, pr_thumb
+		FROM pr_detail
+		WHERE PR_ISSALE='Y' order by #{order} desc
+			]]>
+	</select>
+	<select id="listPage" parameterType="productC" resultType="productC">
+		<![CDATA[select  pr_num, pr_name, pr_price, pr_thumb
+		from(
+			select
+				rownum as rnum, pr_num, pr_name, pr_price,  pr_thumb
+			from pr_detail where PR_ISSALE='Y' and pr_name like '%'||#{pro_keyword}||'%' and
+			]]>
+			<![CDATA[ rownum <=#{pageNum}*#{amount}
+ 			)listPage
+			where rnum >(#{pageNum} -1)*#{amount}
+			]]>
+	</select>
+	<select id="categorysPage" parameterType="productC" resultType="productC">
+		SELECT pr_categoryl ,pr_categorys, pr_num, pr_name, pr_price, pr_thumb
+		FROM pr_detail
+		WHERE pr_categoryl = #{pr_categoryl} and pr_categorys = #{pr_categorys} and PR_ISSALE='Y'
 	</select>
 </mapper>

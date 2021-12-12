@@ -12,17 +12,19 @@
 	</ul>
 	<br><br><br><br><br><br><br><br><br><br><br><br>
 	<ul class="nav nav-stacked large">
-		<li class=""><a href="#section1">아우터</a></li>
+		<li class=""><a href="/product/cate/아우터">아우터</a></li>
 		<!-- class="active" -->
-		<li><a href="#section2">상의</a></li>
-		<li><a href="#section3">하의</a></li>
-		<li><a href="#section3">가방&신발</a></li>
-		<li><a href="#section3">악세사리</a></li>
+		<li><a href="/product/cate/상의">상의</a></li>
+		<li><a href="/product/cate/하의">하의</a></li>
+		<li><a href="/product/cate/가방신발">가방&신발</a></li>
+		<li><a href="/product/cate/악세사리">악세사리</a></li>
 		<li>
 			<br><br><br><br><br><br> 
 			<span class="glyphicon glyphicon-search"></span>&nbsp; 
-			<input type="text" name="pro_search" id="pro_search" size="10" placeholder="검색어 입력">
-			<input type="button" name="searchBtn" id="searchBtn" value="검색">
+			<form id="pro_search">
+				<input type="text" name="pro_keyword" id="pro_keyword" size="10" placeholder="검색어 입력">
+				<input type="button" name="searchBtn" id="searchBtn" value="검색">
+			</form>
 		</li>
 	</ul>
 </nav>

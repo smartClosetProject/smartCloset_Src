@@ -58,7 +58,46 @@ public class ProductController {
 		
 		return "product/subPage";
 	}
-	
-
+	@GetMapping("/order/{order}")
+	public String orderPage(@PathVariable("order") String order, ProductVO pvo, Model model ) {
+		log.info("orderPage 호출 성공");
+		
+		pvo.setOrder(order);
+		List<ProductVO> listData = productService.orderPage(pvo);
+		pvo.setOrder(order);
+		model.addAttribute("listData", listData);
+		
+		return "product/orderPage";
+	}
+	@GetMapping("/cate/{pr_categoryl}")
+	public String categoryPage(@PathVariable("pr_categoryl") String pr_categoryl, ProductVO pvo, Model model ) {
+		log.info("categoryPage 호출 성공");
+		
+		pvo.setPr_categoryl(pr_categoryl);
+		List<ProductVO> listData = productService.categoryPage(pvo);
+		model.addAttribute("listData", listData);
+		
+		return "product/categoryPage";
+	}
+	@GetMapping("/cate/{pr_categoryl}/{pr_categorys}")
+	public String categorysPage(@PathVariable("pr_categorys") String pr_categorys,@PathVariable("pr_categoryl") String pr_categoryl, ProductVO pvo, Model model ) {
+		log.info("categoryPage 호출 성공");
+		
+		pvo.setPr_categoryl(pr_categoryl);
+		pvo.setPr_categorys(pr_categorys);
+		List<ProductVO> listData = productService.categorysPage(pvo);
+		model.addAttribute("listData", listData);
+		
+		return "product/categoryPage";
+	}
+	@RequestMapping(value="listPage", method=RequestMethod.GET)
+	public String listPage(@ModelAttribute("data") ProductVO cpvo, Model model) {
+		log.info("ListPage 호출성공");
+		
+		List<ProductVO> listPage = productService.listPage(cpvo);
+		model.addAttribute("listPage",listPage);
+				
+		return "product/listPage";
+	}
 
 }

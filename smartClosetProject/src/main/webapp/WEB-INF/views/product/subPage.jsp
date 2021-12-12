@@ -18,7 +18,7 @@
 			#order{float: right; text-align: right; margin-bottom: 40px;}
 			#pr_name{font-size: 20px; text-align: left;margin-bottom: 6px;}
 			#pr_price{font-size: 20px;text-align: left; font-weight: bold; margin-bottom: 8px;}
-			#size, #color{font-size: 8px; text-align: left;}
+			#pro_size, #pro_color{font-size: 8px; text-align: left;}
 			#allPrice{font-size: 20px; font-weight: bold;}
 			#imgdiv{text-align: center; margin-top: 100px;}
 			#img{width:750px; padding-left: 100px;}
@@ -55,20 +55,18 @@
  				let pr_price="${detail.pr_price}"*"${detail.pr_mile}";
  				$("#pr_mile").text(pr_price+"  ( "+pr_mile+" )");
 
+				
 				let pr_num="${detail.pr_num}";
 				let pr_name="${detail.pr_name}";
 				let pd_price="${detail.pr_price}";
 				let total=0;
 				let item="";
-				$("#color").change(function(){
-					if ($(".pr_name").attr("data-pr_name") == pr_name) {
-						console.log($('input[type="number"]').val());
-						$('input[type="number"]').val(parseInt($('input[type="number"]').val()) + 1);
+				$("#pr_color").change(function(){
+					$(".select").attr("selected",false)
 						
-					} else {
-					
-						let pro_size=$("#size").val()
-						let pro_color=$("#color").val()
+						
+						let pro_size=$("#pro_size").val()
+						let pro_color=$("#pro_color").val()
 						if(pro_size=="----선택하세요"){
 							 $(".select").attr("selected",true)
 							alert("사이즈를 선택해주세요.");
@@ -77,108 +75,142 @@
 							alert("색상을 선택해주세요.")
 							return false;
 						}
+// 						if ($(".pro_size").attr("data-pro_size") == pro_size && $(".pro_color").attr("data-pro_color") == pro_color) {							
+					
+// 							let number=$(this).parents("tr").parents("table").find(".td_number").find(".pr_cnt").val();
+// 							console.log(number);
+// // 							(parseInt($('input[type="number"]').val()) + 1);
+							$(".select").attr("selected",true)
+							
+// 						}
 						
-						$(".select").attr("selected",false);
-	
-		               let new_li=$("<li>")
-		               new_li.addClass("list")
-		               new_li.attr("data-num",pr_num);
-		               let new_div=$("<div>");
-		               new_div.addClass("new_div");
-		               let line=$("<div>");
-		               line.addClass("line");
-		               
-		               let table = $("<table>");
-		               table.addClass("tablecl")
-		               let tr1=$("<tr>");
-		               tr1.addClass("tr");
-		               let td_chk=$("<td>");
-	// 	               td_chk.append("rowspan","2");
-		               let chk=$("<input>");
-		               chk.attr({"type":"checkbox","checked":"checked"});
-		               let sp_name=$("<td>");
-		               sp_name.attr({"value":"pr_name","colspan":"2", "data-pr_name":pr_name});
-		               sp_name.html(pr_name);
-		               sp_name.addClass("pr_name");
-		               let td_number=$("<td>");
-		               td_number.attr("rowspan","2");
-		               let in_number = $("<input>");
-		               in_number.attr({"type":"number","value":"1"});
-		               in_number.attr("min","1");
-		               in_number.addClass("pr_cnt");
-		               in_number.attr("style","border:0 solid black");
-		               
-		               let up_button=$("<td>");
-		               up_button.attr("rowspan","2");
-		               let up_btn=$("<input>");
-		               up_btn.attr({"type":"button","value":"변경"});
-		               up_btn.addClass("updatebtn");
+						   let new_li=$("<li>")
+			               new_li.addClass("list")
+			               new_li.attr("data-num",pr_num);
+			               let new_div=$("<div>");
+			               new_div.addClass("new_div");
+			               let line=$("<div>");
+			               line.addClass("line");
+			               
+			               let table = $("<table>");
+			               table.addClass("tablecl")
+			               let tr1=$("<tr>");
+			               tr1.addClass("tr");
+			               let td_chk=$("<td>");
+		// 	               td_chk.append("rowspan","2");
+			               let chk=$("<input>");
+			               chk.attr({"type":"checkbox","checked":"checked"});
+			               let sp_name=$("<td>");
+			               sp_name.attr({"value":"pr_name","colspan":"2", "data-pr_name":pr_name});
+			               sp_name.html(pr_name);
+			               sp_name.addClass("pr_name");
+			               let td_number=$("<td>");
+			               td_number.attr("rowspan","2");
+			               td_number.addClass("td_number");
+			               let in_number = $("<input>");
+			               in_number.attr({"type":"number","value":"1"});
+			               in_number.attr("min","1");
+			               in_number.addClass("pr_cnt");
+			               in_number.attr("style","border:0 solid black");
+			               
+			               let up_button=$("<td>");
+			               up_button.attr("rowspan","2");
+			               let up_btn=$("<input>");
+			               up_btn.attr({"type":"button","value":"변경"});
+			               up_btn.addClass("updatebtn");
+			
+			               let td_price=$("<td>")
+			               td_price.attr("rowspan","2");
+			               td_price.html(pd_price);
+			               addComma(pd_price);
+			               td_price.addClass("pd_price");
 		
-		               let td_price=$("<td>")
-		               td_price.attr("rowspan","2");
-		               td_price.html(pd_price);
-		               td_price.addClass("pd_price");
-	
-		               let del_button=$("<td>");
-		               del_button.attr("rowspan","2");
-		               let del_btn=$("<input>");
-		               del_btn.attr({"type":"button","value":"X"});
-		               del_btn.addClass("deletebtn");
-		               
-		               let td=$("<td>");
-		               let tr2=$("<tr>");
-		               let td_size=$("<td>");
-		               td_size.html(pro_size);
-		               td_size.addClass("pro_size");
-		               
-		               let td_color=$("<td>");
-		               td_color.html(pro_color);
-		               td_color.addClass("pro_color");
-		               
-		               
-		               td_chk.append(chk);
-		               td_number.append(in_number)
-		               up_button.append(up_btn);
-		               del_button.append(del_btn);
-		               
-		               tr1.append(td_chk).append(sp_name).append(td_number).append(up_button).append(td_price).append(del_button);
-		               tr2.append(td).append(td_size).append(td_color);
-		               table.append(tr1).append(tr2);
-		               new_div.append(table).append(line);
-		               new_li.append(line).append(new_div);
-		               $("#listPr").append(new_li);
-		               update_total();
-						}   
-		               $(".select").attr("selected",true)
+			               let del_button=$("<td>");
+			               del_button.attr("rowspan","2");
+			               let del_btn=$("<input>");
+			               del_btn.attr({"type":"button","value":"X"});
+			               del_btn.addClass("deletebtn");
+			               
+			               let td=$("<td>");
+			               let tr2=$("<tr>");
+			               tr2.addClass("tr2")
+			               let td_size=$("<td>");
+			               td_size.html(pro_size);
+			       		   td_size.attr("data-pro_size",pro_size);
+			               td_size.addClass("pro_size");
+			             
+			               
+			               let td_color=$("<td>");
+			               td_color.html(pro_color);
+			               td_color.attr("data-pro_color",pro_color);
+			               td_color.addClass("pro_color");
+			               //check();
+			              
+			               td_chk.append(chk);
+			               td_number.append(in_number)
+			               up_button.append(up_btn);
+			               del_button.append(del_btn);
+			               
+			               tr1.append(td_chk).append(sp_name).append(td_number).append(up_button).append(td_price).append(del_button);
+			               tr2.append(td).append(td_size).append(td_color);
+			               table.append(tr1).append(tr2);
+			               new_div.append(table).append(line);
+			               new_li.append(line).append(new_div);
+			               $("#listPr").append(new_li);
+			               update_total();
+				
+			               $(".select").attr("selected",true)
+			               function update_total(){
+								$("#listPr").each(function(){
+									total=0;
+									let number=$(this).find(".pr_cnt").val();
+									console.log(number);
+									let amount = (number*pd_price)
+									addComma(amount);
+									console.log(amount);
+									total +=amount;
+									console.log(total);
+									$(this).find(".pd_price").text(amount);
+									if(isNaN(total)){
+			   							total=0;
+			   						}else{
+			   							addComma(total);
+			   						}
+								})
+								$("#totalPrice").text(total);
+							}
+			        
+			           	$(document).on("click",".updatebtn",function(){
+		            		update_total();
+		            		
+			            })
+			            $(document).on("click",".deletebtn", function(){
+							$(this).parents("li").remove();
+							 $(".select").attr("selected",true)
+							update_total();
+						});
+			           	$(document).on("keydown",".pr_cnt",function() {
+			            	  if (event.keyCode == 13) {
+			            	    event.preventDefault();
+			            	  };
+			            });
+			           	function check(){
+			           		$("#listPr").each(function(){
+			           			let size=$(this).find(".pro_size").attr("data-pro_size");
+			           			let color=$(this).find(".pro_color").attr("data-pro_color");
+			           			let number=$(this).find(".pr_cnt").val();    			
+			           			if(pro_size==size){
+			           				if(pro_color==color){
+			           					number+=1;
+			           				}
+			           			}
+			           			$(this).find(".pr_cnt").val(number);
+			           		})
+			           	}
 	            })
 	            
-	            
-	            
-				$(document).on("click",".updatebtn",function(){
-            		update_total();
-            		
-	            })
-	            
-	           $(document).on("keydown",".pr_cnt",function() {
-	            	  if (event.keyCode == 13) {
-	            	    event.preventDefault();
-	            	  };
-	            });
+					
 				
-				$(document).on("click",".deletebtn", function(){
-					$(this).parents("li").remove();
-					 $(".select").attr("selected",true)
-					update_total();
-				});
-				
-				$("#cartInput").click(function() {
-					$("#productDetail").attr({
-						"method":"post",
-						"enctype":"multipart/form-data",
-						"action":"/prDetail/prDetailInsert"
-					})
-					$("#productDetail").submit();
-				})
 				$("#cartInput").click(function() {
 					let confirm_order = confirm("장바구니에 담으시겠습니까??");
 					if (confirm_order) {
@@ -186,50 +218,23 @@
 							alert("하나 이상의 상품을 선택해 주세요.");
 							return;
 						}
-						cartSelect();
+						$(".chkBox").prop("checked",true);
+						cartSelect;
 					}
 				});
+				function cartSelect() {		
+	 				console.log("카트")
+					$("#productDetail").attr({
+						"method" : "post",
+						"action" : "/cart/cartInsert"
+					});
+					$("#productDetail").submit();
+				}
+				function addComma(value){
+	           		value = value.replace(/(\b)(?=(\d\d\d)+(?!\d))/g, "$1,");
+	           		return value;
+	           	}
 			})
-			function update_total(){
-					$("#listPr").each(function(){
-						total=0;
-						let number=$(this).find(".pr_cnt").val();
-						let amount = (number*pd_price)
-						total +=amount;
-						$(this).find(".pd_price").text(amount);
-						console.log(total);
-						if(isNaN(total)){
-							total=0;
-						}
-					})
-					$("#totalPrice").text(total);
-				}
-			function cartSelect() {
-				let pr_num = 0;
-				let pr_cnt = 0;
-				let pr_size = 0;
-				let pr_color = 0;
-				
-				$("input[type='checkbox']:checked").each(function() {
-					selectPrice = parseInt($(this).attr("data-prPrice"));
-					selectCount = parseInt($(this).attr("data-goodsCount"));
-					if (!isNaN(selectPrice) && !isNaN(selectCount)) {
-						selectTotalPrice += selectPrice * selectCount;
-					}
-				});
-				
-				if (selectTotalPrice > 0 && selectTotalPrice < 50000 ) {
-					selectShipCharge = 2500;
-				}
-				
-				selectTotalPayment = selectTotalPrice + selectShipCharge;
-				$("#totalPayment").val(selectTotalPayment);
-				
-				$("#cartFrm").attr({
-					"method" : "post",
-					"action" : "/order/orderForm"
-				});
-				$("#cartFrm").submit();
 		</script>
 	</head>
 	<body>
@@ -244,8 +249,8 @@
 						<div id="pr_price">${detail.pr_price} 원</div>
 						<div class="longline"> </div>
 						<div id="pr_mile"></div>
-						<div id="pro_size">
-							<select id="size">
+						<div id="pr_size">
+							<select id="pro_size">
 								<option class="select">----선택하세요</option>
 								<c:forEach var="size" items="${listSize}" varStatus="status">
 									<c:if test="${not empty size}">
@@ -254,8 +259,8 @@
 								</c:forEach>
 							</select>
 						</div>
-						<div id="pro_color">
-							<select id=color >
+						<div id="pr_color">
+							<select id="pro_color">
 								<option class="select" >----선택하세요</option>
 								<c:forEach var="color" items="${listColor}" varStatus="status">
 									<c:if test="${not empty color}">
@@ -327,19 +332,5 @@
 					</div>
 				</div>
 			</div>
-			<table>
-				<tr>
-					<td rowspan="2"><input type="checkbox" checked="checked"></td>
-					<td colspan="2">물품 이름</td>
-					<td rowspan="2"><input type="number"></td>
-					<td rowspan="2"><input type="button"></td>
-					<td rowspan="2">가격</td>
-					<td rowspan="2"><input type="button"></td>
-				</tr>
-				<tr>
-					<td>사이즈</td>
-					<td>색상</td>
-				</tr>
-			</table>
 	</body>
 </html>

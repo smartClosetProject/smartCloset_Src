@@ -44,15 +44,14 @@
 						<c:forEach var="product" items="${productDetail}" varStatus="status">
 							<tr>
 								<td class="col-md-2">${product.pro_num}</td>
-								<td class="col-md-1">${product.pro_colorImg}</td>
+								<td class="col-md-1">
+									<c:if test="${not empty product.pro_colorImg}">
+										<img src="/uploadStorage/prDetail/thumb/${product.pro_colorImg}">
+									</c:if></td>
 								<td class="col-md-2">${product.pro_color}</td>
 								<td class="col-md-2">${product.pro_size}</td>
 								<td class="col-md-1">${product.pro_stock}</td>
-								<td class="col-md-1">
-									<c:if test="${not empty board.b_thumb}">
-										<img src="/uploadStorage/prDetail/thumb/${product.pr_thumb}">
-									</c:if>
-								</td>
+								<td class="col-md-1">${product.pro_sales}</td>
 							</tr>
 						</c:forEach>
 					</c:when>
