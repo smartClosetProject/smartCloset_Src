@@ -204,12 +204,13 @@ private MemberService memberService;
 			
 			HttpSession session = req.getSession();
 			memberVO = memberService.login(memberVO);
+			String m_id = memberVO.getM_id();
 			
-			if(memberVO == null) {
+			if(m_id == null) {
 				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");
 				path = "member/loginForm";
 			} else {
-				session.setAttribute("login", memberVO);
+				session.setAttribute("m_id", m_id);
 				path = "product/mainPage";
 			}
 			return path;

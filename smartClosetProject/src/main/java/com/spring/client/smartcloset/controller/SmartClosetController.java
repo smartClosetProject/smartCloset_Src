@@ -36,7 +36,6 @@ public class SmartClosetController {
 		log.info("sClosetHome 호출 성공");
 		
 		String m_id = (String) session.getAttribute("m_id");
-		m_id = "smartmember";
 		svo.setM_id(m_id);
 		
 		List<SmartClosetVO> closetList = sClosetService.smartCloset(svo);
@@ -50,7 +49,6 @@ public class SmartClosetController {
 		log.info("regCloset 호출 성공");
 		
 		String m_id = (String) session.getAttribute("m_id");
-		m_id = "smartmember";
 		svo.setM_id(m_id);
 		
 		sClosetService.regCloset(svo);
@@ -64,7 +62,6 @@ public class SmartClosetController {
 		log.info("deleteCloset 호출 성공");
 		
 		String m_id = (String) session.getAttribute("m_id");
-		m_id = "smartmember";
 		svo.setM_id(m_id);
 		
 		for (Integer i : chkArr) {
@@ -95,7 +92,6 @@ public class SmartClosetController {
 		log.info("updateTag 호출 성공");
 		
 		String m_id = (String) session.getAttribute("m_id");
-		m_id = "smartmember";
 		svo.setM_id(m_id);
 		
 		sClosetService.updateTag(svo);
