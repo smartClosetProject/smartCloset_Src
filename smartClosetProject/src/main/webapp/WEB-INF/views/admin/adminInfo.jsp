@@ -17,6 +17,11 @@
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
 		
 		<!-- 모바일 웹 페이지 설정 끝 -->
+		<style type="text/css">
+		.highlight1{
+			width:100px;background-color:#A4AFBC; color : white;
+		}
+		</style>
 	
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
@@ -51,34 +56,34 @@
 			</form>
 			<h2 style="color : #1A5276;"><strong>관리자 정보</strong></h2>
 			<br>
-			<table class="table table-bordered">
-				<tr>
-					<td>관리자 번호</td>
+			<table class="table table-bordered" style="width : 50%">
+				<tr >
+					<td class="highlight1">관리자 번호</td>
 					<td colspan="3">${adminInfo.ad_num}</td>
 				</tr>
 				<tr>
-					<td>관리자 ID</td>
-					<td>${adminInfo.ad_id}</td>
-					<td>가입일</td>
-					<td>${adminInfo.ad_regdate}</td>
+					<td class="highlight1">관리자 ID</td>
+					<td >${adminInfo.ad_id}</td>
+					<td class="highlight1">가입일</td>
+					<td >${adminInfo.ad_regdate}</td>
 				</tr>
 				<tr>
-					<td>관리자 이름</td>
+					<td class="highlight1">관리자 이름</td>
 					<td>${adminInfo.ad_name}</td>
-					<td>전화번호</td>
+					<td class="highlight1">전화번호</td>
 					<td>${adminInfo.ad_phone}</td>
 				</tr>
 				<tr>
-					<td>이메일</td>
+					<td class="highlight1">이메일</td>
 					<td colspan="3">${adminInfo.ad_email}</td>
 				</tr>
 				<tr>
-					<td>주소</td>
+					<td class="highlight1">주소</td>
 					<td colspan="3">${adminInfo.ad_addr}</td>
 				</tr>
 			</table>
 		</div>
-		<div class="text-right">
+		<div class="text-left">
 			<input type="button" class="btn btn-default text-right btn-sm" id="changeInfoBtn" name="changeInfoBtn" value="관리자정보 변경"/>
 			<input type="button" class="btn btn-default text-right btn-sm" id="toGoMainBtn" name="toGoMainBtn" value="메인으로"/>
 			<input type="button" class="btn btn-default text-right btn-sm" id="adminLogoutBtn" name="adminLogoutBtn" value="로그아웃"/>

@@ -32,6 +32,9 @@
 			.container-fluid{
 				padding-bottom: 50px !important;
 			}
+			.highlight1{
+			width:100px;background-color:#A4AFBC; color : white;
+		}
 		</style>
 		<script type="text/javascript">
 			$(function(){
@@ -145,26 +148,28 @@
 							<table class="table table-bordered">
 								<tbody id="list" class="table-striped">
 										<tr class="text-center" data-num="${review.r_num}">
-											<td >글 번호</td>
-											<td class="text-left">${count - status.index }</td>
-											<td>작성자 id</td>
-											<td class="text-left">${review.m_id}</td>
-											<td class="text-left" rowspan="3"><input type="button" id="reviewDeleteBtn" name="reviewDeleteBtn" class="deleteProc btn btn-default" value="삭제"/></td>
+											<td class="highlight1 col-md-1">글 번호</td>
+											<td class="text-left col-md-4">${count - status.index }</td>
+											<td class="highlight1 col-md-1">작성자 id</td>
+											<td class="text-left col-md-4">${review.m_id}</td>
+											<td class="text-center col-md-1" rowspan="3"><input type="button" id="reviewDeleteBtn" name="reviewDeleteBtn" class="deleteProc btn btn-default" value="삭제"/></td>
 										</tr>
 										<tr class="text-center">
-											<td>글 제목</td>
-											<td class="text-left">${review.r_title}</td>
+											<td class="highlight1 col-md-1">글 제목</td>
+											<td class="text-left col-md-4">${review.r_title}</td>
 											
-											<td>작성일</td>
-											<td class="text-left">${review.r_regdate}</td>
+											<td class="highlight1 col-md-1">작성일</td>
+											<td class="text-left col-md-4">${review.r_regdate}</td>
 											
 										</tr>
 										<tr class="text-center">
-											<td>글 내용</td>
-											<td class="text-left" colspan="3">${review.r_content}</td>
+											<td class="highlight1 col-md-1">글 내용</td>
+											<td class="text-left col-md-4" colspan="3">${review.r_content}</td>
 										</tr>
 									</tbody>
 								</table>
+								
+								<hr>
 							</c:forEach>
 						</c:when>
 					<c:otherwise>
