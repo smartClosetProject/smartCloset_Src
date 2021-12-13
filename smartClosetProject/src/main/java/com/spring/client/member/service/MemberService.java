@@ -8,6 +8,7 @@ import com.spring.client.member.vo.PostVO;
 
 public interface MemberService {
 	public MemberVO memberMypage(MemberVO mvo);
+	public int memberMypageCnt(MyorderVO ovo);
 	public MemberVO updateForm(MemberVO mvo);
 	public int memberUpdate(MemberVO mvo);
 	public int memberDelete(MemberVO mvo);

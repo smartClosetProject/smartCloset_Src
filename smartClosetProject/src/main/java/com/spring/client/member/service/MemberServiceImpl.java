@@ -28,6 +28,11 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return member;
 	}
+	//마이페이지 주문내역 수 확인
+	@Override
+	public int memberMypageCnt(MyorderVO ovo) {
+		return memberDao.memberMypageCnt(ovo);
+	}
 
 	//회원정보 수정 페이지 구현
 	@Override
@@ -87,6 +92,8 @@ public class MemberServiceImpl implements MemberService{
 		MemberVO mvo = memberDao.login(memberVO);
 		return mvo;
 	}
+
+	
 
 	
 }

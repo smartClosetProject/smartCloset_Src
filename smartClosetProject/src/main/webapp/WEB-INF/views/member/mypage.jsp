@@ -39,7 +39,6 @@
 					});
 					$("#memberList").submit();
 				});
-				});
 				//주문내역조회 버튼 클릭시
 				$("#serchBtn").click(function(){
 					$("#memberList").attr({
@@ -75,7 +74,7 @@
 		<input type="hidden" name="m_id" id="m_id" value="${mypage.m_id}">
 		<div style="font-weight: bold;font-size: 36px; text-align:center;">MY PAGE</div>
 		<div>
-			<label>${name}회원님</label>
+			<label>${data.m_id}회원님</label>
 			<hr>
 		</div>
 		<div>
@@ -83,22 +82,28 @@
 			<hr>
 			<ul>
 				<li>
-					<strong>배송준비중</strong>
-					<span>
-						<span id="money">0</span>
-					</span>
+					<a href = "/member/myorderList" class="count" >
+						<strong id="order_state">배송준비중</strong>
+						<span >
+							<span id="myorderCount">0</span>
+						</span>
+					</a>
 				</li>
 				<li>
-					<strong>배송중</strong>
-					<span>
-						<span id="">0</span>
-					</span>
+					<a href = "/member/myorderList" class="count" >
+						<strong id="order_state">배송중</strong>
+						<span>
+							<span id="myorderCount">${memberMypageCnt}</span>
+						</span>
+					</a>
 				</li>
 				<li>
-					<strong>배송완료</strong>
-					<span>
-						<span id="">0</span>
-					</span>
+					<a href = "/member/myorderList" class="count" >
+						<strong id="order_state">배송완료</strong>
+						<span>
+							<span id="myorderCount">0</span>
+						</span>
+					</a>
 				</li>
 					
 			</ul>

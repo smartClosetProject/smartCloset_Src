@@ -9,6 +9,7 @@ import com.spring.client.member.vo.PostVO;
 
 public interface MemberDAO {
 	public MemberVO memberMypage(MemberVO mvo);//마이페이지
+	public int memberMypageCnt(MyorderVO ovo);
 	public MemberVO updateForm(MemberVO mvo); //회원 정보 수정 폼
 	public int memberUpdate(MemberVO mvo);	  //회원 정보 수정
 	public int memberDelete(MemberVO mvo);	//회원정보 삭제

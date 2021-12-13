@@ -40,16 +40,17 @@ private MemberService memberService;
 	 * 마이페이지 구현하기
 	 * *************/
 	@RequestMapping(value = "/mypage", method = { RequestMethod.GET, RequestMethod.POST})
-	public String MemberMypage(@ModelAttribute("data") MemberVO mvo, Model model) {
+	public String MemberMypage(@ModelAttribute("data") MemberVO mvo,MyorderVO ovo, Model model) {
 		log.info("mypage 호출 성공");
 		
 		
 		MemberVO mypage = memberService.memberMypage(mvo);
 		model.addAttribute("mypage", mypage);
 
-
-		String m_name = "손흥민";
-		model.addAttribute("name", m_name);
+		int memberMypageCnt = memberService.memberMypageCnt(ovo);
+		model.addAttribute("memberMypageCnt",memberMypageCnt );
+		
+		mvo.setM_id("smartmember");
 		
 		return "member/mypage";
 	}
