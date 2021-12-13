@@ -143,7 +143,7 @@
 									<td colspan="2">상품 가격</td>
 								</tr>
 								<tr>
-									<td colspan="2">${aOrder.pr_price*aOrder.od_goodscount} 원</td>
+									<td colspan="2">${aOrder.pr_totalprice} 원</td>
 								</tr>
 							</c:forEach>
 						</c:when>

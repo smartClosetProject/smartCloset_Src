@@ -66,4 +66,14 @@ public class AorderServiceImpl implements AorderService{
 		return aOrderDao.aGetProSize(advo);
 	}
 
+	@Override
+	public int aOrderTotalPayChange(AorderVO aovo) {
+		return aOrderDao.aOrderTotalPayChange(aovo);
+	}
+
+	@Override
+	public int aOdTotalPayChange(AorderVO aovo) {
+		return aOrderDao.aOdTotalPayChange(aovo);
+	}
+
 }

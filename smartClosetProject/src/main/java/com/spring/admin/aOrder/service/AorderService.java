@@ -17,5 +17,6 @@ public interface AorderService {
 	public AorderVO aOrderReturnDetail(AorderVO aovo);
 	public List<String> aGetProColor(AorderVO advo);
 	public List<String> aGetProSize(AorderVO advo);
-	
+	public int aOrderTotalPayChange(AorderVO aovo);
+	public int aOdTotalPayChange(AorderVO aovo);
 }
