@@ -90,14 +90,15 @@
 		 						<img src="/uploadStorage/review/${detail.r_file }">
 		 					</td>
 		 				</tr>
+		 			</c:if>	
 		 				<tr>
-		 					<td>
-		 						<button type="button" class="btn btn-success text-right btn-sm" id="updateFormBtn">수정</button>
-								<button type="button" class="btn btn-success text-right btn-sm" id="reviewDeleteBtn">삭제</button>
+		 					<td><c:if test="${login.m_id == detail.m_id}">
+			 						<button type="button" class="btn btn-success text-right btn-sm" id="updateFormBtn">수정</button>
+									<button type="button" class="btn btn-success text-right btn-sm" id="reviewDeleteBtn">삭제</button>
+								</c:if>
 								<button type="button" class="btn btn-success text-right btn-sm" id="reviewListBtn">목록</button>
 							</td>
 						</tr>
-		 			</c:if>
 				</table>
 			</div>
 			<%-- =============== 상세 정보 보여주기 종료 =============== --%>

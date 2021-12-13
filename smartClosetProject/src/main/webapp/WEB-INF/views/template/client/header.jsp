@@ -52,11 +52,11 @@
 				class="glyphicon glyphicon glyphicon-shopping-cart"></span> </a></li>
 		<li><a href="/member/mypage"><span class="glyphicon glyphicon-user"></span>
 		</a></li>
-		<c:if test="${empty sessionScope.m_id }">
+		<c:if test="${empty login.m_id }">
 			<li><a href="/member/loginForm"><span class="glyphicon glyphicon-log-in"></span>
 		</a></li>
 		</c:if>
-		<c:if test="${not empty sessionScope.m_id }">
+		<c:if test="${not empty login.m_id }">
 			<li><a href="/member/logout"><span class="glyphicon glyphicon-log-out"></span>
 		</a></li>
 		</c:if>

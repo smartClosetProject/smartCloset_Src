@@ -51,11 +51,11 @@
 	<body>
 	<div>
 			<form id="r_writeForm">
-			<input type="hidden" id="m_id" value="smartmember" name="m_id">
+			<input type="hidden" id="m_id" value="${login.m_id}" name="m_id">
 				<div style="font-weight: bold;font-size: 36px; text-align:center;">REVIEW</div>
 				<div class="form-group">
 					<label for="m_id">작성자</label> 
-					${m_id}
+						<h4>${login.m_id}</h4>
 				</div>
 				<div class="form-group">
 					<label for="r_title">글제목</label> 

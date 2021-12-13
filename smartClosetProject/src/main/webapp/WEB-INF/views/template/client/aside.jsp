@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="col-sm-3 sidenav">
 	<ul class="nav navbar-nav small">
-		<c:if test="${empty sessionScope.m_id }">
+		<c:if test="${empty login.m_id }">
 			<li class="mainLi"><a href="/member/loginForm">로그인</a></li>
 		</c:if>
-		<c:if test="${not empty sessionScope.m_id }">
+		<c:if test="${not empty login.m_id }">
 			<li class="mainLi"><a href="/member/logout">로그아웃</a></li>
 		</c:if>
 		<li class="mainLi"><a href="/member/joinmember">회원가입</a></li>

@@ -31,6 +31,10 @@
 			.contentBtn {
 				min-height: 100px;
 			}
+			img{
+				width:120px !important; 
+				height: 150px !important; 
+			}
 		</style>
 		<script type="text/javascript">
 			$(function(){
@@ -121,6 +125,7 @@
 	<body>
 		<div class="contentContainer reviewDiv">
 			<form id="r_numForm">
+				<input type="hidden" id="m_id" value="m_id" name="m_id">
 				<input type="hidden" id="r_num" value="r_num" name="r_num">
 			</form>
 			<!-- --------------------검색 종료 ---------------------------->
@@ -143,7 +148,7 @@
 							<c:forEach var="review" items="${reviewList}" varStatus="status">
 								<tr class="text-center" data-num="${review.r_num}"> <!-- ${review.r_num } 실제 글 번호 -->
 									<td>${count - status.index }</td>
-									<td class="text-left"><img src="/uploadStorage/review/thumbnail/${review.r_thumb }"></td>
+									<td class="text-left" ><img src="/uploadStorage/review/thumbnail/${review.r_thumb }"></td>
 									<td class="goDetail text-left">${review.r_title}</td>
 									<td class="text-left">${review.m_id}</td>
 								</tr>
@@ -177,9 +182,11 @@
 					</div>
 				</form> 
 			</div>
-			<div class="contentBtn text-right">
-				<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-success">
-			</div>
+			<c:if test="${not empty login}">
+				<div class="contentBtn text-right">
+					<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-success">
+				</div>
+			</c:if>
 			<!-- ---------------------검색 종료 ------------------------------>
 			
 			<!------------------------ 페이징 출력 ---------------------------->
