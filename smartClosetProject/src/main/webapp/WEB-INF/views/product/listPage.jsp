@@ -10,9 +10,9 @@
 
 		<title>Insert title here</title>
 		
-		<link rel="shortcut ipr_pricecon" href="/resources/image/icon.png"/>
+		<link rel="shortcut icon" href="/resources/image/icon.png"/>
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
-		<style type="text/css">
+	<style type="text/css">
 			.main{width:900px; text-align: center;  }
 			.product{width:280px; float: left; margin: 5px; padding-bottom: 15px; text-align: center;}
 			.title{font-size: 15px; font-weight: bold; text-align: left; padding-left: 18px;}
@@ -99,14 +99,14 @@
 						</tr>	
 					</table>
 					<div class="longline"> </div>
-					<c:forEach var="data" items="${listData}" varStatus="status">
-						<div class="product goDetail" data-num="${data.pr_num}">
-							<c:if test="${not empty data.pr_thumb}">
-								<img src="/uploadStorage/prDetail/thumb/${data.pr_thumb}">
+					<c:forEach var="list" items="${listPage}" varStatus="status">
+						<div class="product goDetail" data-num="${list.pr_num}">
+							<c:if test="${not empty list.pr_thumb}">
+								<img src="/uploadStorage/prDetail/thumb/${list.pr_thumb}">
 							</c:if>
-							<div class="title">${data.pr_name}</div>
+							<div class="title">${list.pr_name}</div>
 							<div class="line"> </div>
-							<div class="price">${data.pr_price} 원</div>
+							<div class="price">${list.pr_price} 원</div>
 						</div>					
 					</c:forEach>
 				</div>

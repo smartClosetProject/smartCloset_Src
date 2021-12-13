@@ -79,7 +79,20 @@
 		    }
   		</style>
 		<script type="text/javascript">
-			
+			$(function(){
+				$("#searchBtn").click(function(){
+					if(!chkData("#pro_keyword","검색어를"))return false;
+					console.log($("#pro_keyword").val())
+					goPage();
+				})
+				function goPage(){
+					$("#pro_search").attr({
+						"method":"get",
+						"action":"/product/listPage"
+					});
+					$("#pro_search").submit();
+				}
+			})
 		</script>
 	</head>
 	<body>

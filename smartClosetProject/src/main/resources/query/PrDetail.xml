@@ -2,21 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.admin.prdetail.dao.PrDetailDAO">
 
-<!-- 		<sql id="prDetailSearch"> -->
-		
-<!-- 		</sql> -->
+		<sql id="prdetailSearch">
+			<if test="search== 'pr_num'">
+				<![CDATA[pr_num like '%'||#{keyword}||'%']]>
+			</if>
+			<if test="search== 'pr_name'">
+				<![CDATA[pr_name like '%'||#{keyword}||'%']]>
+			</if>
+			<if test="search== 'categoryl'">
+				<![CDATA[pr_categoryl like '%'||#{keyword}||'%']]>
+			</if>
+			<if test="search== 'categorys'">
+				<![CDATA[pr_categorys like '%'||#{keyword}||'%']]>
+			</if>
+		</sql>
 	<!-- 상품 리스트 기본 조회 -->
 		<select id="prDetailList" parameterType="prDetail" resultType="prDetail">
-		<![CDATA[select upper(pr_num) as pr_num, pr_name, (pr_categoryl||' > '||pr_categorys) as category, 
+		<![CDATA[select pr_num as pr_num, pr_name, (pr_categoryl||' > '||pr_categorys) as category, 
 			pr_issale, pr_price
 			from(
 				select/*+index_desc(pr_detail PR_DETAIL_PR_NUM_PK) */
 				rownum as rnum, pr_num, pr_name, pr_categoryl,pr_categorys, pr_issale, pr_price, pr_regdate 
 			from pr_detail
 			where ]]>
-<!-- 			<trim prefix="(" suffix=") AND" prefixOverrides="AND"> -->
-<!-- 				<include refid="prDetailSearch"></include> -->
-<!-- 			</trim> -->
+			<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+				<include refid="prdetailSearch"></include>
+			</trim>
+			
 			<![CDATA[ rownum <=#{pageNum}*#{amount}
  			)prDetailList
 			where rnum >(#{pageNum} -1)*#{amount}
@@ -36,38 +48,55 @@
 			select pro_num, pro_colorImg, pro_color, pro_size, pro_stock, pro_sales
 			from product where pr_num=#{pr_num}
 		</select>
+		<select id="productCnt" parameterType="prDetail" resultType="int">
+			select count(*) from product
+		</select>
 	<!-- 통계 리스트 조회 -->
+	<sql id="orderby">
+		<if test="orderOp=='date'">
+			<![CDATA[order by pr_regdate]]>
+		</if>
+		<if test="orderOp=='sales'">
+			<![CDATA[order by pro_sales]]>
+		</if>
+	</sql>
 	<select id="prNumericalList" parameterType="product" resultType="product">
-		<![CDATA[select upper(pro_num) as pro_num, pr_name, upper(pr_num) as pr_num, pro_size, pro_color, pro_stock, pro_sales 
+		<![CDATA[select pro_num, pr_name, pr_num, pro_size, pro_color, pro_stock, pro_sales ,pr_regdate
 			from(
 				select/*+index_desc(product PRoduct_PRo_NUM_PK) */
-				rownum as rnum, pr.pro_num, pd.pr_name, pr.pr_num, pr.pro_size,pr.pro_color, pr.pro_stock, pr.pro_sales 
+				rownum as rnum, pr.pro_num, pd.pr_name, pr.pr_num, pr.pro_size,pr.pro_color, pr.pro_stock, pr.pro_sales, pr_regdate
 			from product pr inner JOin pr_detail pd on pr.pr_num =pd.pr_num
-			where ]]>
-<!-- 			<trim prefix="(" suffix=") AND" prefixOverrides="AND"> -->
-<!-- 				<include refid="prDetailSearch"></include> -->
-<!-- 			</trim> -->
-			<![CDATA[ rownum <=#{pageNum}*#{amount}
- 			)prNumericalList
+			where  rownum <=#{pageNum}*#{amount}]]>
+			<trim prefix=" " suffix=" ">
+				<include refid="orderby"></include>
+			</trim>
+			
+ 			<![CDATA[)productCnt
 			where rnum >(#{pageNum} -1)*#{amount}
 			]]>
 		</select>
-		<select id="prNumericalListCnt" parameterType="product" resultType="int">
-			select count(*) from product
-		</select>
+		
+		<sql id="wareSeach">
+			<if test="search=='pro_num'">
+				<![CDATA[pr.pro_num like '%'||#{keyword}||'%']]>
+			</if>
+			<if test="search=='cl_name'">
+				<![CDATA[cl.cl_name like '%'||#{keyword}||'%']]>
+			</if>
+		</sql>
 		<!-- 입고 리스트 조회 -->
 		<select id="warehousingList" parameterType="product" resultType="product">
-		<![CDATA[select upper(cl_name) as cl_name, upper(pro_num) as pro_num, cl_price, cl_amount, cl_allPrice, cl_regdate 
+		<![CDATA[select cl_name as cl_name, pro_num as pro_num, cl_price, cl_amount, cl_allPrice, cl_regdate 
 			from(
 				select/*+index_desc(product PRoduct_PRo_NUM_PK) */
 				rownum as rnum, cl.cl_name, pr.pro_num, cl.cl_price, cl.cl_amount, (cl.cl_amount*cl.cl_price) as cl_allPrice, cl.cl_regdate 
 			from product pr inner JOin client cl on cl.cl_num =pr.cl_num
 			where ]]>
-<!-- 			<trim prefix="(" suffix=") AND" prefixOverrides="AND"> -->
-<!-- 				<include refid="prDetailSearch"></include> -->
-<!-- 			</trim> -->
+			<trim prefix="(" suffix=") AND" prefixOverrides="AND">
+				<include refid="wareSeach"></include>
+			</trim>
 			<![CDATA[ rownum <=#{pageNum}*#{amount}
- 			)WarehousingList
+ 			)productCnt
 			where rnum >(#{pageNum} -1)*#{amount}
 			]]>
 		</select>
@@ -79,7 +108,47 @@
 					select #{pro_num},#{pro_size},#{pro_color}, #{pr_num}, #{pro_colorImg}, #{pro_colorthumb}, client_seq.currval, #{ad_num},pr_categoryl,pr_categorys, pr_season,pr_price 
 					from pr_detail where pr_num = #{pr_num}
 		</insert>
-		<update id="updateStock" parameterType="product">
-			update pr_detail set PRO_STOCK=PRO_STOCK+#{cl_amount} where pro_num=#{pro_num}
+		<!--재고 업데이트-->
+		<update id="updateStock">
+			update product set pro_stock=#{pro_stock},pro_sales=#{pro_sales} where pro_num=#{pro_num}
 		</update>
+		<!-- 총 판매량 업데이트 -->
+		<update id="updateAllStock">
+			update pr_detail pd set pr_sales =(select sum(pro_sales) from product pr where pr.pr_num = pd.pr_num) where pr_num=#{pr_num}
+		</update>
+		<update id="issale">
+			update pr_detail pd set pr_issale ='N' where (select sum(pro_stock) from product pr where pr.pr_num = pd.pr_num)=0
+		</update>
+		<update id="updateProStock" parameterType="product">
+			update product set pr_sales =#{cl_amount} where pro_num=#{pro_num}
+		</update>
+		<!-- 삭제 -->
+		<delete id="productDelete" parameterType="product">
+			delete from product where pr_num=#{pr_num}
+		</delete>
+		<delete id="prdetailDelete" parameterType="product">
+			delete from pr_detail where pr_num=#{pr_num}
+		</delete>
+		<select id="listUpdate" parameterType="product" resultType="product">
+			select pr_num, pr_name, pr_thumb, pr_mainimg, pr_contentimg, pr_categoryl, pr_categorys, 
+			pr_season, pr_issale, pr_price 
+			from pr_detail where pr_num=#{pr_num}
+		</select>
+		<!-- 게시물 수정 -->
+		<update id="updateForm" parameterType="prDetail">
+			update pr_detail set  pr_name=#{pr_name}, pr_categoryl=#{pr_categoryl}, pr_categorys=#{pr_categorys},
+			pr_season=#{pr_season},pr_issale=#{pr_issale},pr_price=#{pr_price}
+			<if test="pr_mainimg !=''">,pr_mainimg=#{pr_mainimg}</if>
+			<if test="pr_thumb !=''">,pr_thumb=#{pr_thumb}</if>
+			<if test="pr_contentimg !=''">,pr_contentimg=#{pr_contentimg}</if>
+			where pr_num = #{pr_num}
+		</update>
+		<update id="updatePr"  parameterType="prDetail">
+			update product set pr_categoryl=#{pr_categoryl}, pr_categorys=#{pr_categorys}, pr_season=#{pr_season}, pr_price=#{pr_price}
+			where pr_num = #{pr_num}
+		</update>
+		<!-- 아이디 중복 확인 -->
+		<select id="prnumCheck" parameterType="product" resultType="int">
+			SELECT NVL((select 1 from pr_detail where pr_num = #{pr_num}), 0) as state from dual
+		</select>
 </mapper>

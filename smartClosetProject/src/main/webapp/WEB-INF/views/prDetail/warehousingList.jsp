@@ -12,23 +12,78 @@
 		
 		<link rel="shortcut icon" href="/resources/image/icon.png"/>
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
+		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<style type="text/css">
 			.table-height{min-height:450px;  width:1600px;}
 			.category select{width:150px; float: left; margin-right:30px;}
 			.date input{width:370px; height:25px; margin-right: 30px; margin-top: 5px;}
 			.issale{margin-right: 75px;}
-			#searchData{height:80px;}
+			#searchData{height:35px;}
+			#search{width:150px; margin-right: 30px; height:30px; margin-left: 20px;}
+			#keyword{width:400px; margin-right: 30px; height:30px;}
 		</style>
 		<script type="text/javascript">
 			$(function(){
-				$("#insertWarBtn").click(function(){
-					location.href="/prDetail/insertWarehousing";
+				$("#keyword").click(function(){
+					$("#keyword").val("");
 				})
-			})
+				$("#search").change(function(){
+					if($("#search").val()=="all"){
+						$("#keyword").val("전체 데이터를 조회합니다.");
+					}else if($("#search").val()!="all"){			
+						$("#keyword").val("");
+						$("#keyword").focus();
+					}
+				});
+				$("#searchData").click(function(){
+					console.log($("#search").val())
+					if($("#search").val()!="all"){
+						if(!chkData("#keyword","검색어를"))return false;
+					}
+					$("#keyword").val($("#keyword").val().toUpperCase());
+						goPage();
+					
+				})
+				$(".paginate_button a").click(function(e){
+					e.preventDefault();
+					$("#pr_search").find("input[name='pageNum']").val($(this).attr("href"));
+					$("#pr_search").attr({
+						"method":"get",
+						"action":"/prDetail/warehousingList"
+					});
+					$("#pr_search").submit();
+				})
+			});
+			function goPage(){
+				if($("#search").val()=="all"){
+					$("#keyword").val("");
+				}
+				$("#pr_search").attr({
+					"method":"get",
+					"action":"/prDetail/warehousingList"
+				});
+				$("#pr_search").submit();
+			}
 		</script>
 	</head>
 	<body>
 		<div id="prDetailList" class="table-height">
+			<div id="detailsearch" class="text-right">
+				<form id="pr_search">
+					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
+					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
+						<div class="form-group">
+							<label>검색 조건</label>
+							<select id="search" name="search" >
+								<option value="all">전체</option>
+								<option value="pro_num">상품 상세 번호</option>
+								<option value="cl_name">거래처 번호</option>
+							</select>
+							<input type="text" id="keyword" name="keyword" value="검색어를 입력하세요" style="text-transform: uppercase;">
+							<button type="button" class="btn btn-info btn-default" id="searchData">검색</button>
+						</div>
+				</form>
+			</div>
 			<table class="table">
 				<thead>
 					<tr>
@@ -72,7 +127,7 @@
 						</li>
 					</c:if>
 					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-						<li class="paginate_button ${pageMaker.prvo.pageNum ==num ? 'active':'' }">
+						<li class="paginate_button ${pageMaker.cvo.pageNum ==num ? 'active':'' }">
 							<a href = "${num}">${num}</a>
 						</li>					
 					</c:forEach>
@@ -82,9 +137,6 @@
 						</li>
 					</c:if>
 				</ul>
-			</div>
-			<div>
-				<input type="button" value="등록" id="insertWarBtn" class="btn btn-info btn-default" />
 			</div>
 		</div>
 	</body>
