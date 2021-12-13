@@ -40,16 +40,17 @@ private MemberService memberService;
 	 * 마이페이지 구현하기
 	 * *************/
 	@RequestMapping(value = "/mypage", method = { RequestMethod.GET, RequestMethod.POST})
-	public String MemberMypage(@ModelAttribute("data") MemberVO mvo, Model model) {
+	public String MemberMypage(@ModelAttribute("data") MemberVO mvo,MyorderVO ovo, Model model) {
 		log.info("mypage 호출 성공");
 		
 		
 		MemberVO mypage = memberService.memberMypage(mvo);
 		model.addAttribute("mypage", mypage);
 
-
-		String m_name = "손흥민";
-		model.addAttribute("name", m_name);
+		int memberMypageCnt = memberService.memberMypageCnt(ovo);
+		model.addAttribute("memberMypageCnt",memberMypageCnt );
+		
+		mvo.setM_id("smartmember");
 		
 		return "member/mypage";
 	}
@@ -213,13 +214,13 @@ private MemberService memberService;
 				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");
 				path = "member/loginForm";
 			} else {
-				if(memberVO.getM_exitdate() == null){
+				if(memberVO.getM_exitdate() == null) {
 					session.setAttribute("login", memberVO);
-					log.info("로그인성공");
+					log.info("로그인 성공");
 					path = "product/mainPage";
-				} else {
-					model.addAttribute("msg", "탈퇴된 회원입니다. 새로운 아이디로 가입해주세요");
-					log.info("로그인실패");
+				}else {
+					model.addAttribute("msg", "탈퇴된 회원입니다.새로운 아이디로 가입해주세요");
+					log.info("로그인 실패");
 					path = "member/loginForm";
 				}
 				session.setAttribute("m_id", m_id);

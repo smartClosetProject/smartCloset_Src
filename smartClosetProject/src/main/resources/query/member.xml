@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.client.member.dao.MemberDAO">
+
+	<!-- 마이페이지 뷰 출력 -->
 	<select id="memberMypage" parameterType="member" resultType="member">
 		SELECT m_id, m_passwd, m_name, m_email, m_phone, m_addr,m_addr2,m_addr3, m_regdate,m_mile,m_acc
 		FROM member
 		WHERE m_id = #{m_id} 
+	</select>
+	
+	<!-- 마이페이지 출력시 주문배송조회 숫자 카운트 -->
+	<select id="memberMypageCnt" parameterType="myorder" resultType="int">
+		SELECT COUNT(*)  FROM myorderview
+          where order_state = '결제완료' and m_id = 'smartmember'
 	</select>
 	
 	<!-- 검색 중복 소스 사용 -->
@@ -15,8 +23,8 @@
 			<!-- <if test="search == 'r_content'">
 				<![CDATA[ r_content LIKE '%' || #{keyword} || '%' ]]>
 			</if> -->
-			<if test="search == 'm_id'">
-				<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
+			<if test="search == 'r_content'">
+				<![CDATA[ r_content LIKE '%' || #{keyword} || '%' ]]>
 			</if>
 	</sql>
 	
@@ -51,18 +59,27 @@
 	
 	<!--   게시판 목록 뷰 --> 
 	<select id="postList" parameterType="post" resultType="post">
-		SELECT m_id,r_num, to_char(r_content) r_content,r_title, r_regdate, 'REVIEW' category from review
-		union
-		SELECT m_id,q_num r_num, to_char(q_content) r_content,q_title r_title, q_regdate r_regdate, 'QNA' category from qna
-		
-		order by r_regdate desc
+		 
+		 SELECT ROWNUM as rnum, m_id, r_num, r_content, r_title, r_regdate, category 
+			FROM 
+				(select ROWNUM as rnum, m_id, r_num, r_content, r_title, r_regdate, category 
+                 from reviewandqna
+				  WHERE 
+				  <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+					<include refid="postSearch"></include>
+				  </trim>
+		<![CDATA[ ROWNUM <= #{pageNum} * #{amount} 
+		) list
+			WHERE rnum > (#{pageNum} - 1) * #{amount}
+		]]>
 		
 	</select>
 	
 	
 	<!-- 게시판 목록 레코드 수 조회 -->
 	<select id="postListCnt" parameterType="post" resultType="int">
-		SELECT COUNT(*)  FROM ( SELECT  review.m_id FROM review  UNION ALL SELECT  qna.m_id FROM qna)
+		
+		SELECT COUNT(*)  FROM reviewandqna
 		<trim prefix=" WHERE (" suffix=")">
 			<include refid="postSearch"></include>
 		</trim>
@@ -70,24 +87,17 @@
 	
 	<!-- 나의 주문내역 조회 리스트 출력 -->
 	<select id="myorderList" parameterType="myorder" resultType="myorder" >
-		SELECT so.order_num,pro.pr_price * sd.od_goodscount AS order_totalPayment, so.order_state, so.order_regdate,so.m_id, sd.od_goodscount, sd.pro_num, pro.pr_num, pd.pr_name, pd.pr_thumb
-	   		FROM sc_order so
-		INNER JOIN sc_order_detail sd
-	   		on so.order_num = sd.order_num
-		INNER JOIN product pro
-	    	on sd.pro_num = pro.pro_num
-		INNER JOIN pr_detail pd
-	    	on pro.pr_num = pd.pr_num
+		select * from myorderview
 		WHERE 
 		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
 		<![CDATA[ order_regdate >= #{start_date} and order_regdate < #{end_date} ]]>	
 		</trim>
-		so.m_id = #{m_id}
+		m_id = #{m_id}
 	</select>
 	
-	<!-- 게시판 목록 레코드 수 조회 -->
+	<!-- 주문내역조회 목록 레코드 수 조회 -->
 	<select id="myorderListCnt" parameterType="myorder" resultType="int">
-		SELECT COUNT(*)  FROM sc_order
+		SELECT COUNT(*)  FROM myorderview
 		<trim prefix=" WHERE (" suffix=")">
 			<include refid="postSearch"></include>
 		</trim>
