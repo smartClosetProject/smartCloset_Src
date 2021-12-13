@@ -33,15 +33,20 @@
 			$(function(){
 				//회원 정보 수정 버튼 클릭시
 				$("#updateBtn").click(function(){
-					location.href = "/member/updateForm";
+					$("#memberList").attr({
+						"method" : "get",
+						"action" : "/member/updateForm"
+					});
+					$("#memberList").submit();
+				});
 				});
 				//주문내역조회 버튼 클릭시
 				$("#serchBtn").click(function(){
-					$("#boardList").attr({
+					$("#memberList").attr({
 						"method" : "get",
 						"action" : "/member/myorderList"
 					});
-					$("#boardList").submit();
+					$("#memberList").submit();
 				});
 				
 				//장바구니 버튼 클릭시
@@ -50,11 +55,11 @@
 				});
 				//게시물 조회 버튼 클릭시
 				$("#boardSerchBtn").click(function(){
-					$("#boardList").attr({
+					$("#memberList").attr({
 						"method" : "get",
 						"action" : "/member/postmanagement"
 					});
-					$("#boardList").submit();
+					$("#memberList").submit();
 				});
 				
 				//스마트옷장 버튼 클릭시
@@ -66,7 +71,7 @@
 		
 	</head>
 	<body>
-	<form id="boardList">
+	<form id="memberList">
 		<input type="hidden" name="m_id" id="m_id" value="${mypage.m_id}">
 		<div style="font-weight: bold;font-size: 36px; text-align:center;">MY PAGE</div>
 		<div>

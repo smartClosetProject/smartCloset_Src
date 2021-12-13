@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.client.member.dao.MemberDAO">
+	<!-- 마이페이지 뷰 출력 -->
 	<select id="memberMypage" parameterType="member" resultType="member">
 		SELECT m_id, m_passwd, m_name, m_email, m_phone, m_addr,m_addr2,m_addr3, m_regdate,m_mile,m_acc
 		FROM member
@@ -15,8 +16,8 @@
 			<!-- <if test="search == 'r_content'">
 				<![CDATA[ r_content LIKE '%' || #{keyword} || '%' ]]>
 			</if> -->
-			<if test="search == 'm_id'">
-				<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
+			<if test="search == 'r_content'">
+				<![CDATA[ r_content LIKE '%' || #{keyword} || '%' ]]>
 			</if>
 	</sql>
 	
@@ -51,18 +52,27 @@
 	
 	<!--   게시판 목록 뷰 --> 
 	<select id="postList" parameterType="post" resultType="post">
-		SELECT m_id,r_num, to_char(r_content) r_content,r_title, r_regdate, 'REVIEW' category from review
-		union
-		SELECT m_id,q_num r_num, to_char(q_content) r_content,q_title r_title, q_regdate r_regdate, 'QNA' category from qna
-		
-		order by r_regdate desc
+		 
+		 SELECT ROWNUM as rnum, m_id, r_num, r_content, r_title, r_regdate, category 
+			FROM 
+				(select ROWNUM as rnum, m_id, r_num, r_content, r_title, r_regdate, category 
+                 from reviewandqna
+				  WHERE 
+				  <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+					<include refid="postSearch"></include>
+				  </trim>
+		<![CDATA[ ROWNUM <= #{pageNum} * #{amount} 
+		) list
+			WHERE rnum > (#{pageNum} - 1) * #{amount}
+		]]>
 		
 	</select>
 	
 	
 	<!-- 게시판 목록 레코드 수 조회 -->
 	<select id="postListCnt" parameterType="post" resultType="int">
-		SELECT COUNT(*)  FROM ( SELECT  review.m_id FROM review  UNION ALL SELECT  qna.m_id FROM qna)
+		
+		SELECT COUNT(*)  FROM reviewandqna
 		<trim prefix=" WHERE (" suffix=")">
 			<include refid="postSearch"></include>
 		</trim>

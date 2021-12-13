@@ -207,24 +207,21 @@ private MemberService memberService;
 			String m_id = memberVO.getM_id();
 
 			if(memberVO == null) {
-				log.info("로그인실패");
-				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");	
-			if(m_id == null) {
-				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");
+				log.info("로그인 실패");
+				model.addAttribute("msg","정보가 일치하지 않습니다. 다시 입력해주세요");
+			}else if(m_id == null){
+				model.addAttribute("msg","정보가 일치하지 않습니다. 다시 입력해주세요");
 				path = "member/loginForm";
 			} else {
-
-				if(memberVO.getM_exitdate() == null){
+				if(memberVO.getM_exitdate() == null) {
 					session.setAttribute("login", memberVO);
-					log.info("로그인성공");
+					log.info("로그인 성공");
 					path = "product/mainPage";
-				} else {
-					model.addAttribute("msg", "탈퇴된 회원입니다. 새로운 아이디로 가입해주세요");
-					log.info("로그인실패");
+				}else {
+					model.addAttribute("msg", "탈퇴된 회원입니다.새로운 아이디로 가입해주세요");
+					log.info("로그인 실패");
 					path = "member/loginForm";
 				}
-				
-
 				session.setAttribute("m_id", m_id);
 				path = "product/mainPage";
 			}
