@@ -209,8 +209,6 @@ private MemberService memberService;
 			if(memberVO == null) {
 				log.info("로그인실패");
 				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");	
-				String m_id = memberVO.getM_id();
-			
 			if(m_id == null) {
 				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");
 				path = "member/loginForm";
