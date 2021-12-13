@@ -25,6 +25,12 @@
 				width: 100%;
 				padding-bottom: 15px;
 			}
+			
+			.highlight1{
+				width:150px;
+				background-color:#A4AFBC; 
+				color : white;
+			}
 		</style>
 	
 		<!--[if lt IE 9]>
@@ -81,26 +87,26 @@
 			<%-- =============== 상세 페이지 보여주기 시작 =============== --%>
 			<table class="table table-bordered">
 				<tr>
-					<td>글 번호</td>
+					<td class="highlight1">글 번호</td>
 					<td colspan="3">${detail.n_num}</td>
 				</tr>
 				<tr>
-					<td>작성자</td>
+					<td class="highlight1">작성자</td>
 					<td>${detail.n_author}</td>
-					<td>작성일</td>
+					<td class="highlight1">작성일</td>
 					<td>${detail.n_writedate}</td>
 				</tr>
 				<tr>
-					<td>글 제목</td>
+					<td class="highlight1">글 제목</td>
 					<td>${detail.n_title}</td>
-					<td>중요 여부</td>
+					<td class="highlight1">중요 여부</td>
 					<c:choose>
-					<c:when test="${detail.n_important eq '1'}"><td>O</td></c:when>
-					<c:otherwise><td>X</td></c:otherwise>
+					<c:when test="${detail.n_important eq '1'}"><td><img alt="" src="/resources/image/megaphone.png" style="width : 15px; height : 15px;"> </td></c:when>
+					<c:otherwise><td></td></c:otherwise>
 					</c:choose>
 				</tr>
 				<tr class="table-height" style="height : 400px">
-					<td>글 내용</td>
+					<td class="highlight1">글 내용</td>
 					<td colspan="3">${detail.n_content}</td>
 				</tr>
 			</table>

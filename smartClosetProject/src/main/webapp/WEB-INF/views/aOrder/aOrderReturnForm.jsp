@@ -17,6 +17,14 @@
 
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
+		<style type="text/css">
+			.highlight1{
+				width:150px;
+				background-color:#F3F4F6; 
+				color : black;
+			}
+		</style>
+				
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
@@ -27,7 +35,7 @@
 				var od_num = $("#od_num").val($(this).data("num"));
 				var order_num = $("#order_num").val();
 				
-				var pop = window.open("/aOrder/returnProDetailForm?od_num="+$("#od_num").val(), "childWin", "width = 500, height = 500, top = 100, left = 200, location = no , resize= no");
+				var pop = window.open("/aOrder/returnProDetailForm?od_num="+$("#od_num").val(), "childWin", "width = 500, height = 370, top = 100, left = 200, location = no , resizable=no");
 				$("#test").val(od_num);
 				console.log(od_num);
 				console.log($("#od_num").val());
@@ -47,7 +55,7 @@
 				alert("반품이 완료되었습니다.");
 			});
 			$("#goToProDetailBtn").click(function () {
-				location.href="/aOrder/aOrderDetail";
+				history.back();
 			});
 
 		})
@@ -76,12 +84,12 @@
 				<input type="hidden" id="order_state" name="order_state"/>
 			</form>
 				<tr data-num="${returnPro.od_num}">
-					<td rowspan="2">상품 정보 ${returnPro.order_num}</td>
+					<td rowspan="2" class="highlight1">상품 정보</td>
 					<td rowspan="2" colspan="2" style="width : 300px;" >
 						<span style="font-weight : bold; font-size : 120%;">${returnPro.pr_name}</span><br>사이즈 : ${returnPro.pro_size}, 색상 : ${returnPro.pro_color}, 갯수 : ${returnPro.od_goodscount}
 						<p class="text-right"><input type="button" id="returnProduct" name="returnProduct" class="returnProduct btn btn-default btn-sm" value="옵션 변경" data-num="${returnPro.od_num}"/></p>				
 					</td>
-					<td colspan="2">상품 가격</td>
+					<td colspan="2" class="highlight1">상품 가격</td>
 				</tr>
 				<tr>
 					<td colspan="2">${returnPro.pr_price*returnPro.od_goodscount} 원</td>
@@ -91,7 +99,7 @@
 	</c:choose>
 	</table>
 </div>
-<div>
+<div class="text-right">
  <input type="button" id="returnProductBtn" name="returnProductBtn" class="btn btn-default" value="반품" />
  <input type="button" id="goToProDetailBtn" name="goToProDetailBtn" class="btn btn-default" value="취소"/>
 </div>

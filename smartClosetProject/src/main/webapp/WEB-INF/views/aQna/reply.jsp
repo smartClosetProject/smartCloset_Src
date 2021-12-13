@@ -11,8 +11,20 @@
 		
 		<link rel="shortcut icon" href="/resources/image/icon.png"/>
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
-		<link rel="shortcut icon" href="/resources/image/icon.png"/>
-		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
+		<style type="text/css">
+			span{
+				color : #1A5276;
+				font-size: 15px;
+				font-weight: bold;
+			}
+			.content{
+				margin-bottom: 50px;
+			}
+			
+		</style>
+		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript">
@@ -33,7 +45,7 @@
 					
 					//작성자 정보의 이름
 					let name_span =$("<span>");
-					name_span.html(r_name+"님");
+					name_span.html(r_name+" 님");
 					
 					//작성일시
 					let date_span = $("<span>");
@@ -43,11 +55,12 @@
 					//삭제하기 버튼
 					let del_input=$("<input>");
 					del_input.attr({"type":"button","value":"삭제하기"});
-					del_input.addClass("delete_btn");
+					del_input.addClass("delete_btn btn btn-default btn-sm");
 					
 					//내용
 					var content_p = $("<p>");
 					content_p.html(r_content);
+					content_p.addClass("content")
 					
 					//조립하기
 					writer_p.append(name_span).append(date_span).append(del_input)
@@ -163,21 +176,23 @@
 	<body>
 		<div id="replyContainer">
 			<div id="comment_write">
-				<form id="comment_form">
-				<div id="comment">
-					<label for="r_name" class="tac">작성자</label>
-					<input type="text" name="r_name" id="r_name">
-					<input type="button" id="replyInsert" name="replyInsert" value="저장하기">
+				<form id="comment_form" class="form-inline">
+				<div id="comment" class="form-group" style="margin-bottom : 20px;">
+					<label for="r_name" class="tac" style="width : 70px;">작성자</label>
+					<input type="text" class="form-control" name="r_name" id="r_name"/>
 				</div>
-				<div>
-					<label>덧글 내용</label>
-					<textarea style="resize: none;" id="r_content" name="r_content"></textarea>
+				<br>
+				<div class="form-inline">
+					<label for="r_content" style="width : 70px;">덧글 내용</label>
+					<textarea style="resize: none; width : 200px;" class="form-control" id="r_content" name="r_content"></textarea>
+					<input type="button"  id="replyInsert" name="replyInsert" class="btn btn-default btn-sm" value="저장하기">
 				</div>
 				</form>
 			</div>
-			<ul id="comment_list">
+			<hr>
+			<ul id="comment_list" style="margin-bottom : 20px;">
 				<!-- 동적 생성 요소 추가 -->
-			</ul>
+			</ul>			
 		</div>
 	</body>
 </html>

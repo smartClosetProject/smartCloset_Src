@@ -15,6 +15,18 @@
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
+		<style type="text/css">
+			h3{
+				color : #1A5276;
+				font-weight: bold;
+				
+			}
+			select{
+				height: 27px;
+				width : 100px;
+			}
+		
+		</style>
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
@@ -55,19 +67,6 @@
 				})
 			});
 				
-		<%-- 		
-				$("#returnProInfo").attr({
-					"method" : "get",
-					"action" : "/aOrder/aOrderOptionChange"
-				});
-				$("#returnProInfo").submit();
-				alert("옵션이 변경되었습니다.");
-				
-				$("#changeColor").html(color);
-				$("#changeSize").html(size);
-				$("#changeCount").html(count);
-				
-			})	--%>
 			$("#returnOrderBtn").click(function () {
 				opener.parent.location.reload();
 				window.close();
@@ -77,37 +76,44 @@
 		</script>
 	</head>
 	<body>
-		<div>
-			<form id="returnProInfo" name="returnProInfo">
-				<input type="hidden" id="od_num" name="od_num" value="${detail.od_num}"/>
-				<input type="hidden" id="pr_num" name="pr_num" value="${detail.pr_num}"/>
-					<h3>상품명 : ${detail.pr_name}</h3>
-					<h3>변경 전 옵션 : ${detail.pro_color}, ${detail.pro_size}, ${detail.od_goodscount} </h3>
-					<select id="pro_color" name="pro_color">
-						<c:choose>
-							<c:when test="${not empty color}">
-								<c:forEach var="proColor" items="${color}" varStatus="status">
-									<option value="${proColor}">${proColor}</option>
+		<div class="container">
+			<div>
+				<form id="returnProInfo" name="returnProInfo" class="form-inline">
+					<input type="hidden" id="od_num" name="od_num" value="${detail.od_num}"/>
+					<input type="hidden" id="pr_num" name="pr_num" value="${detail.pr_num}"/>
+						<h3>${detail.pr_name}</h3>
+						<hr>
+						<h4><strong>변경 전 옵션</strong> </h4><h5> 색상 : ${detail.pro_color}, 사이즈 : ${detail.pro_size}, 수량 : ${detail.od_goodscount} </h5>
+						<div class="form-group">
+						<br>
+						<h4><strong>변경할 옵션</strong> </h4>
+						<select id="pro_color" name="pro_color" >
+							<c:choose>
+								<c:when test="${not empty color}">
+									<c:forEach var="proColor" items="${color}" varStatus="status">
+										<option value="${proColor}">${proColor}</option>
+									</c:forEach>
+								</c:when>
+							</c:choose>
+						</select>
+						<select id="pro_size" name="pro_size">
+							<c:choose>
+							<c:when test="${not empty size}">
+								<c:forEach var="proSize" items="${size}" varStatus="status">
+									<option value="${proSize}">${proSize}</option>
 								</c:forEach>
 							</c:when>
 						</c:choose>
-					</select>
-					<select id="pro_size" name="pro_size">
-						<c:choose>
-						<c:when test="${not empty size}">
-							<c:forEach var="proSize" items="${size}" varStatus="status">
-								<option value="${proSize}">${proSize}</option>
-							</c:forEach>
-						</c:when>
-					</c:choose>
-					</select>
-					<input type="text" id="od_goodscount" name="od_goodscount" />		
-			</form>
-		</div>
-		<div>
-			<p id="msg" name="msg">${msg}</p>
-			<input type="button" id="returnCheckBtn" value="옵션 변경"/>
-			<input type="button" id="returnOrderBtn" value="옵션 적용"/>
+						</select>
+						<input type="text"  style="width : 100px;" id="od_goodscount" name="od_goodscount" placeholder="수량"> 개</input>		
+					</div>
+				</form>
+			</div>
+			<br>
+			<div class="text-left">
+				<input type="button" class="btn btn-default" id="returnCheckBtn" value="옵션 변경"/>
+				<input type="button" class="btn btn-default" id="returnOrderBtn" value="옵션 적용"/>
+			</div>
 		</div>
 	</body>
 </html>

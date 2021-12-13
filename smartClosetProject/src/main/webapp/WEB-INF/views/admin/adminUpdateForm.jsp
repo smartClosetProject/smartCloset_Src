@@ -16,6 +16,13 @@
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
 		
+		<style type="text/css">
+		.highlight1{
+			width:150px;
+			background-color:#A4AFBC; 
+			color : white;
+		}
+		</style>
 		<!-- 모바일 웹 페이지 설정 끝 -->
 	
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -57,31 +64,31 @@
 				<br>
 				<table class="table table-bordered">
 					<tr>
-						<td>관리자 번호</td>
+						<td class="highlight1 col-md-4">관리자 번호</td>
 						<td colspan="3">${adminUpdateInfo.ad_num}</td>
 					</tr>
 					<tr>
-						<td>관리자 ID</td>
+						<td class="highlight1 col-md-4">관리자 ID</td>
 						<td>${adminUpdateInfo.ad_id}</td>
-						<td>가입일</td>
+						<td class="highlight1 col-md-4">가입일</td>
 						<td>${adminUpdateInfo.ad_regdate}</td>
 					</tr>
 					<tr>
-						<td>변경할 비밀번호</td>
+						<td class="highlight1 col-md-4">변경할 비밀번호</td>
 						<td colspan="3"><input class="form-control" type="text" name="ad_passwd" id="ad_passwd" value="${adminUpdateInfo.ad_passwd}"/></td>
 					</tr>
 					<tr>
-						<td>관리자 이름</td>
+						<td class="highlight1 col-md-4">관리자 이름</td>
 						<td><input class="form-control" type="text" name="ad_name" id="ad_name" value="${adminUpdateInfo.ad_name}"/></td>
-						<td>전화번호</td>
+						<td class="highlight1 col-md-4">전화번호</td>
 						<td><input class="form-control" type="text" name="ad_phone" id="ad_phone" value="${adminUpdateInfo.ad_phone}"/></td>
 					</tr>
 					<tr>
-						<td>이메일</td>
+						<td class="highlight1 col-md-4">이메일</td>
 						<td colspan="3"><input class="form-control" type="text" name="ad_email" id="ad_email" value="${adminUpdateInfo.ad_email}"/></td>
 					</tr>
 					<tr>
-						<td>주소</td>
+						<td class="highlight1 col-md-4">주소</td>
 						<td colspan="3"><input class="form-control" type="text" name="ad_addr" id="ad_addr" value="${adminUpdateInfo.ad_addr}"/></td>
 					</tr>
 				</table>

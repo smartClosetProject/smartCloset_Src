@@ -55,8 +55,12 @@
 		update sc_order
 		set order_state = #{order_state}
 		<choose>
-		<when test='order_state == "배송 완료" or order_state == "전체 환불"'>
+		<when test='order_state == "배송 완료"'>
 		 	, order_deliverydate = sysdate
+		</when>
+			
+		<when test='order_state == "전체 환불"'>
+			, order_deliverydate = sysdate, order_cancelReason = #{order_cancelReason}
 		</when>
 		<otherwise>
 			 , order_deliverydate = null, order_cancelreason = null
@@ -78,17 +82,18 @@
 	    od_goodscount = #{od_goodscount}
 	where od_num = #{od_num}
 	</update>
+	
 	<update id="aOrderTotalPayChange" parameterType="aorder">
 	    update sc_order 
         set order_totalpayment = (select sum(o2.od_totalpayment) from sc_order o1 join sc_order_detail o2 on o1.order_num=o2.order_num where o1.order_num=${order_num})
         where order_num=${order_num}
-        </update>
-        <update id="aOdTotalPayChange" parameterType="aorder">
+    </update>
+        
+    <update id="aOdTotalPayChange" parameterType="aorder">
         update sc_order_detail
         set od_totalpayment = (select sum(o2.pr_price) from sc_order_detail o1 join product o2 on o1.pro_num=o2.pro_num where o1.od_num=#{od_num})*#{od_goodscount}
         where od_num=#{od_num}
-        </update>
-
+    </update>
 	
 	<select id="aOrderReturnDetail" parameterType="aorder" resultType="aorder">
 		select od.od_num, od.order_state, od.order_num, p.pr_price, od.od_goodscount, od.pro_num, p.pro_size, p.pr_num, p.pro_color, p.pr_name

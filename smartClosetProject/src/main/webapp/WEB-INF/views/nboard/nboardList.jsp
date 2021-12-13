@@ -161,7 +161,7 @@
 								<c:forEach var="nboardImportant" items="${nboardImportantList }" varStatus="status">
 									<c:if test="${nboardImportant.n_important eq 1}">
 										<tr style="background-color: #E2E9F1 !important;"  class="text-center imp_notice" data-num="${nboardImportant.n_num }">
-											<td>중요</td> 
+											<td><img alt="" src="/resources/image/megaphone.png" style="width : 15px; height : 15px;"> </td> 
 											<td class="goDetail text-left">${nboardImportant.n_title}</td>
 											<td class="text-left">${nboardImportant.n_writedate }</td>
 											<td class="author">${nboardImportant.n_author }</td>
