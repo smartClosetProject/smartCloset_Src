@@ -91,7 +91,6 @@ public class PrDetailServiceImpl implements PrDetailService{
 	@Override
 	public int warehousingInsert(ProductVO pvo) throws Exception {
 		int result1=0;
-		pvo.setAd_num(1);
 		pvo.setPro_color(pvo.getColorKo()+" / "+pvo.getColorEn());
 		if(pvo.getFile().getSize()>0) {
 			String fileName=PrFileUploadUtil.fileUpload(pvo.getFile(),"warehousing");
