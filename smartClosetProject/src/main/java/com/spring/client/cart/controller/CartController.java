@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.client.cart.service.CartService;
 import com.spring.client.cart.vo.CartVO;
-import com.spring.client.member.vo.MemberVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -35,6 +34,9 @@ public class CartController {
 	@ResponseBody
 	public String InsertCart(@ModelAttribute CartVO cvo) {
 		log.info("InsertCart 호출 성공");
+		
+		String m_id = (String) session.getAttribute("m_id");
+		cvo.setM_id(m_id);
 		
 		int isExist = 0;
 		isExist = cartService.isExist(cvo);
@@ -63,9 +65,7 @@ public class CartController {
 	public String deleteAllCart(@ModelAttribute CartVO cvo) {
 		log.info("deleteAllCart 호출 성공");
 		
-		String m_id = "";
-		m_id = (String) session.getAttribute("m_id");
-		m_id = "smartmember";
+		String m_id = (String) session.getAttribute("m_id");
 		
 		cartService.deleteAllCart(m_id);
 		return "redirect:/cart/cartList";
@@ -75,6 +75,9 @@ public class CartController {
 	@PostMapping("modifyCount")
 	public String modifyCount(@ModelAttribute CartVO cvo) {
 		log.info("modifyCount 호출 성공");
+		
+		String m_id = (String) session.getAttribute("m_id");
+		cvo.setM_id(m_id);
 		
 		int result = cartService.modifyCount(cvo);
 		if (result == 1) {
@@ -88,19 +91,12 @@ public class CartController {
 	public String cartList(@ModelAttribute CartVO cvo, Model model) {
 		log.info("cartList 호출 성공");
 		
-		String m_id = "";
-		MemberVO login = (MemberVO) session.getAttribute("login");
+		String m_id = (String) session.getAttribute("m_id");
+		cvo.setM_id(m_id);
 		
-		if (login == null) {
-			return "redirect:/member/loginForm";
-		} else {
-			m_id = login.getM_id();
-			cvo.setM_id(m_id);
-			
-			List<CartVO> cartList = cartService.cartList(cvo);
-			model.addAttribute("cartList", cartList);
-			
-			return "cart/cartList";
-		}
+		List<CartVO> cartList = cartService.cartList(cvo);
+		model.addAttribute("cartList", cartList);
+		
+		return "cart/cartList";
 	}
 }

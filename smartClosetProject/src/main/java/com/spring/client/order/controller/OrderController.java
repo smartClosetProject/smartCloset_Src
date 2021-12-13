@@ -43,7 +43,6 @@ public class OrderController {
 		log.info("OrderForm 호출 성공");
 		
 		String m_id = (String) session.getAttribute("m_id");
-		m_id = "smartmember";
 		ovo.setM_id(m_id);
 		
 		for (Integer i : cartNum) {
@@ -71,7 +70,6 @@ public class OrderController {
 		log.info("OrderComplete 호출 성공");
 		
 		String m_id = (String) session.getAttribute("m_id");
-		m_id = "smartmember";
 		ovo.setM_id(m_id);
 		
 		Calendar cal = Calendar.getInstance();
