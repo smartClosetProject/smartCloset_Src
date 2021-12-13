@@ -25,8 +25,8 @@
 		<li><a href="/product/cate/악세사리">악세사리</a></li>
 		<li>
 			<br><br><br><br><br><br> 
-			<span class="glyphicon glyphicon-search"></span>&nbsp; 
 			<form id="pro_search">
+				<span class="glyphicon glyphicon-search"></span>&nbsp; 
 				<input type="text" name="pro_keyword" id="pro_keyword" size="10" placeholder="검색어 입력">
 				<input type="button" name="searchBtn" id="searchBtn" value="검색">
 			</form>
