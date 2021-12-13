@@ -36,7 +36,7 @@ public class PrDetailController {
 	public String prDetailList(@ModelAttribute("data") PrDetailVO prvo, Model model) {
 		
 		 log.info("prDetailList 출력 성공");
-		 int result=prDetailService.issale(prvo);
+		 prDetailService.issale(prvo);
 		 List<PrDetailVO> prDetailList = prDetailService.prDetailList(prvo);
 		 model.addAttribute("prDetailList",prDetailList);
 		 
@@ -59,6 +59,16 @@ public class PrDetailController {
 		
 		int result=0;
 		String url="";
+		String pr_num="";
+		for(int i=1;i<=2;i++) {
+			pr_num+=(char)((Math.random()*26)+65);
+		}
+		pr_num+="_";
+		for(int i=1;i<=4;i++) {
+			pr_num+=(char)((Math.random()*26)+65);
+		}
+		log.info(pr_num);
+		prvo.setPr_num(pr_num);
 		result=prDetailService.prDetailInsert(prvo);
 		if(result==1) {
 			url="/prDetail/prDetailList";
@@ -114,9 +124,10 @@ public class PrDetailController {
 		 return "prDetail/warehousingList";
 	}
 	@RequestMapping(value="/insertWarehousing")
-	public String insertWarehousing() {
+	public String insertWarehousing(ProductVO pvo, Model model) {
 		log.info("insertWarehousing 호출 성공");
-		
+		ProductVO updateData=prDetailService.listUpdate(pvo);
+		model.addAttribute("updateData", updateData);
 		return "prDetail/insertWarehousing";
 	}
 	@RequestMapping(value="/warehousingInsert", method=RequestMethod.POST)
@@ -125,10 +136,11 @@ public class PrDetailController {
 		
 		int result=0, result1 =0;
 		String url="";
-		int ad_num = (Integer) session.getAttribute("ad_num");
-		pvo.setAd_num(ad_num);
+//		int ad_num = (Integer) session.getAttribute("ad_num");
+//		pvo.setAd_num(ad_num);
 		result=prDetailService.warehousing(pvo);
 		result1=prDetailService.warehousingInsert(pvo);
+		prDetailService.updateProStock(pvo);
 		if(result==1&&result1==1) {
 			url="/prDetail/warehousingList";
 		}else {

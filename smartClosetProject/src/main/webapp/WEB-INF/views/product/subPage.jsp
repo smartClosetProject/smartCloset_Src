@@ -46,7 +46,8 @@
 			.pd_price{font-weight: bold;width:100px;}
 			.updatebtn{font-size: 8px; width: 30px; margin-left: 0px; padding-left: 0px;}
 			input[type=checkbox]{width:0px; height:0px;}
-			.tablecl tr td {width:420; margin-left: 8px;}
+			.tablecl {width:420; margin-left: 8px;}
+			.list{width: 420px;}
 		</style>
 		<script type="text/javascript">
  			$(function(){
@@ -59,126 +60,96 @@
 				let pr_num="${detail.pr_num}";
 				let pr_name="${detail.pr_name}";
 				let pd_price="${detail.pr_price}";
+				
 				let total=0;
-				let item="";
-				$("#pr_color").change(function(){
-					$(".select").attr("selected",false)
+// 				let item="";
+				$("#pro_color").change(function(){
 						
-						
+					
 						let pro_size=$("#pro_size").val()
 						let pro_color=$("#pro_color").val()
+						
 						if(pro_size=="----선택하세요"){
 							 $(".select").attr("selected",true)
 							alert("사이즈를 선택해주세요.");
 							return false;
-						}else if(pro_color=="----선택하세요"){
-							alert("색상을 선택해주세요.")
-							return false;
 						}
-// 						if ($(".pro_size").attr("data-pro_size") == pro_size && $(".pro_color").attr("data-pro_color") == pro_color) {							
-					
-// 							let number=$(this).parents("tr").parents("table").find(".td_number").find(".pr_cnt").val();
-// 							console.log(number);
-// // 							(parseInt($('input[type="number"]').val()) + 1);
-							$(".select").attr("selected",true)
-							
-// 						}
 						
-						   let new_li=$("<li>")
-			               new_li.addClass("list")
-			               new_li.attr("data-num",pr_num);
-			               let new_div=$("<div>");
-			               new_div.addClass("new_div");
-			               let line=$("<div>");
-			               line.addClass("line");
-			               
-			               let table = $("<table>");
-			               table.addClass("tablecl")
-			               let tr1=$("<tr>");
-			               tr1.addClass("tr");
-			               let td_chk=$("<td>");
-		// 	               td_chk.append("rowspan","2");
-			               let chk=$("<input>");
-			               chk.attr({"type":"checkbox","checked":"checked"});
-			               let sp_name=$("<td>");
-			               sp_name.attr({"value":"pr_name","colspan":"2", "data-pr_name":pr_name});
-			               sp_name.html(pr_name);
-			               sp_name.addClass("pr_name");
-			               let td_number=$("<td>");
-			               td_number.attr("rowspan","2");
-			               td_number.addClass("td_number");
-			               let in_number = $("<input>");
-			               in_number.attr({"type":"number","value":"1"});
-			               in_number.attr("min","1");
-			               in_number.addClass("pr_cnt");
-			               in_number.attr("style","border:0 solid black");
-			               
-			               let up_button=$("<td>");
-			               up_button.attr("rowspan","2");
-			               let up_btn=$("<input>");
-			               up_btn.attr({"type":"button","value":"변경"});
-			               up_btn.addClass("updatebtn");
-			
-			               let td_price=$("<td>")
-			               td_price.attr("rowspan","2");
-			               td_price.html(pd_price);
-			               addComma(pd_price);
-			               td_price.addClass("pd_price");
+						$(".select").attr("selected",false);
+	
+		               let new_li=$("<li>")
+		               new_li.addClass("list")
+		               new_li.attr("data-num",pr_num);
+		               let new_div=$("<div>");
+		               new_div.addClass("new_div");
+		               let line=$("<div>");
+		               line.addClass("line");
+		               
+		               let table = $("<table>");
+		               table.addClass("tablecl")
+		               let tr1=$("<tr>");
+		               tr1.addClass("tr");
+		               let td_chk=$("<td>");
+		               let chk=$("<input>");
+		               chk.attr({"type":"checkbox","checked":"checked"});
+		               let sp_name=$("<td>");
+		               sp_name.attr({"value":"pr_name","colspan":"2"});
+		               sp_name.html(pr_name);
+		               sp_name.addClass("pr_name");
+		               let td_number=$("<td>");
+		               td_number.attr("rowspan","2");
+		               let in_number = $("<input>");
+		               in_number.attr({"type":"number","value":"1"});
+		               in_number.attr("min","1");
+		               in_number.addClass("pr_cnt");
+		               in_number.attr("style","border:0 solid black");
+		               
+		               let up_button=$("<td>");
+		               up_button.attr("rowspan","2");
+		               let up_btn=$("<input>");
+		               up_btn.attr({"type":"button","value":"변경"});
+		               up_btn.addClass("updatebtn");
 		
-			               let del_button=$("<td>");
-			               del_button.attr("rowspan","2");
-			               let del_btn=$("<input>");
-			               del_btn.attr({"type":"button","value":"X"});
-			               del_btn.addClass("deletebtn");
-			               
-			               let td=$("<td>");
-			               let tr2=$("<tr>");
-			               tr2.addClass("tr2")
-			               let td_size=$("<td>");
-			               td_size.html(pro_size);
-			       		   td_size.attr("data-pro_size",pro_size);
-			               td_size.addClass("pro_size");
-			             
-			               
-			               let td_color=$("<td>");
-			               td_color.html(pro_color);
-			               td_color.attr("data-pro_color",pro_color);
-			               td_color.addClass("pro_color");
-			               //check();
-			              
-			               td_chk.append(chk);
-			               td_number.append(in_number)
-			               up_button.append(up_btn);
-			               del_button.append(del_btn);
-			               
-			               tr1.append(td_chk).append(sp_name).append(td_number).append(up_button).append(td_price).append(del_button);
-			               tr2.append(td).append(td_size).append(td_color);
-			               table.append(tr1).append(tr2);
-			               new_div.append(table).append(line);
-			               new_li.append(line).append(new_div);
-			               $("#listPr").append(new_li);
-			               update_total();
-				
-			               $(".select").attr("selected",true)
-			               function update_total(){
-								$("#listPr").each(function(){
-									total=0;
-									let number=$(this).find(".pr_cnt").val();
-									console.log(number);
-									let amount = (number*pd_price)
-									addComma(amount);
-									console.log(amount);
-									total +=amount;
-									console.log(total);
-									$(this).find(".pd_price").text(amount);
-									if(isNaN(total)){
-			   							total=0;
-			   						}else{
-			   							addComma(total);
-			   						}
-								})
-								$("#totalPrice").text(total);
-							}
+		               let td_price=$("<td>")
+		               td_price.attr("rowspan","2");
+		               td_price.html(pd_price);
+		               td_price.addClass("pd_price");
+	
+		               let del_button=$("<td>");
+		               del_button.attr("rowspan","2");
+		               let del_btn=$("<input>");
+		               del_btn.attr({"type":"button","value":"X"});
+		               del_btn.addClass("deletebtn");
+		               
+		               let td=$("<td>");
+		               let tr2=$("<tr>");
+		               let td_size=$("<td>");
+		               td_size.html(pro_size);
+		               td_size.addClass("pro_size");
+		               td_size.attr("data-pro_size",pro_size);
+		               
+		               let td_color=$("<td>");
+		               td_color.html(pro_color);
+		               td_color.attr("data-pro_color",pro_color);
+		               td_color.addClass("pro_color");
+		               
+		               check()
+		               td_chk.append(chk);
+		               td_number.append(in_number)
+		               up_button.append(up_btn);
+		               del_button.append(del_btn);
+		               
+		               tr1.append(td_chk).append(sp_name).append(td_number).append(up_button).append(td_price).append(del_button);
+		               tr2.append(td).append(td_size).append(td_color);
+		               table.append(tr1).append(tr2);
+		               new_div.append(table).append(line);
+		               new_li.append(line).append(new_div);
+		               $("#listPr").append(new_li);
+		              
+		               update_total();
+				 
+		               $(".select").attr("selected",true)
+		               
 			        
 			           	$(document).on("click",".updatebtn",function(){
 		            		update_total();
@@ -195,18 +166,37 @@
 			            	  };
 			            });
 			           	function check(){
-			           		$("#listPr").each(function(){
+			           		$(".list").each(function(){
 			           			let size=$(this).find(".pro_size").attr("data-pro_size");
 			           			let color=$(this).find(".pro_color").attr("data-pro_color");
-			           			let number=$(this).find(".pr_cnt").val();    			
-			           			if(pro_size==size){
-			           				if(pro_color==color){
-			           					number+=1;
+			           			let number=$(this).find(".pr_cnt").val();    		
+			           			
+			           			console.log(size);
+			           			console.log(color);
+			           			console.log(number);
+			           			if(size==pro_size){
+			           				if(color==pro_color){
+			           					$(this).remove();
 			           				}
 			           			}
-			           			$(this).find(".pr_cnt").val(number);
+			           			
+								update_total();
 			           		})
 			           	}
+			            function update_total(){
+			            		total=0;
+ 							$(".list").each(function(){
+								
+								let number=$(this).find(".pr_cnt").val();
+								let amount = (number*pd_price)
+								total += amount;
+								$(this).find(".pd_price").text(amount);
+								if(isNaN(total)){
+		   							total=0;
+		   						}
+ 							})
+							$("#totalPrice").text(total);
+						}
 	            })
 	            
 					
@@ -230,10 +220,7 @@
 					});
 					$("#productDetail").submit();
 				}
-				function addComma(value){
-	           		value = value.replace(/(\b)(?=(\d\d\d)+(?!\d))/g, "$1,");
-	           		return value;
-	           	}
+				
 			})
 		</script>
 	</head>
@@ -273,7 +260,7 @@
 					<div id="order">
 						<div>
 							<ul id="listPr">
-						
+								
 							</ul>
 						</div>
 						<div id="allPrice">

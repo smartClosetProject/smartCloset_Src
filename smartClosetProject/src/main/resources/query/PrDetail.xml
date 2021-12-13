@@ -119,6 +119,9 @@
 		<update id="issale">
 			update pr_detail pd set pr_issale ='N' where (select sum(pro_stock) from product pr where pr.pr_num = pd.pr_num)=0
 		</update>
+		<update id="updateProStock" parameterType="product">
+			update product set pr_sales =#{cl_amount} where pro_num=#{pro_num}
+		</update>
 		<!-- 삭제 -->
 		<delete id="productDelete" parameterType="product">
 			delete from product where pr_num=#{pr_num}

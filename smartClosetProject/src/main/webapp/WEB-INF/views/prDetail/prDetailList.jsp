@@ -145,7 +145,15 @@
 						"action":"/prDetail/prDetailList"
 					});
 					$("#pr_search").submit();
-					
+				})
+				$(".insert").click(function(){
+					let pr_num=$(this).parents("tr").attr("data-num");
+					$(".pr_num").val(pr_num);
+					$("#detailProduct").attr({
+						"method":"post",
+						"action":"/prDetail/insertWarehousing"
+					})
+					$("#detailProduct").submit();
 				})
 			})
 		</script>
@@ -200,6 +208,11 @@
 									<td>${prDetail.pr_issale}</td>
 									<td>${prDetail.pr_price}</td>
 									<td>
+										<button class="insert" name="insert">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
+ 											 <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+											</svg>
+										</button>
 										<button class="update" name="update">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 											  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>

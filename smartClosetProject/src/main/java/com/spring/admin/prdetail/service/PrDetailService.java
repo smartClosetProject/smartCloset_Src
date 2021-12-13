@@ -27,4 +27,5 @@ public interface PrDetailService {
 	public int updateForm(PrDetailVO prvo) throws Exception;
 	public int updatePr(PrDetailVO prvo);
 	public int prnumCheck(PrDetailVO prvo);
+	public int updateProStock(ProductVO pvo);
 }

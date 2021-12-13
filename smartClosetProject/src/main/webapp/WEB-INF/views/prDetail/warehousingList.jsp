@@ -24,9 +24,6 @@
 		</style>
 		<script type="text/javascript">
 			$(function(){
-				$("#insertWarBtn").click(function(){
-					location.href="/prDetail/insertWarehousing";
-				})
 				$("#keyword").click(function(){
 					$("#keyword").val("");
 				})
@@ -140,9 +137,6 @@
 						</li>
 					</c:if>
 				</ul>
-			</div>
-			<div>
-				<input type="button" value="등록" id="insertWarBtn" class="btn btn-info btn-default" />
 			</div>
 		</div>
 	</body>

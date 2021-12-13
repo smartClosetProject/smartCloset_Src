@@ -17,7 +17,7 @@
 		<li><a href="/product/cate/상의">상의</a></li>
 		<li><a href="/product/cate/하의">하의</a></li>
 		<li><a href="/product/cate/가방신발">가방&신발</a></li>
-		<li><a href="/product/cate/악세사리">악세사리</a></li>
+		<li><a href="/product/cate/액세서리">액세서리</a></li>
 		<li>
 			<br><br><br><br><br><br> 
 			<span class="glyphicon glyphicon-search"></span>&nbsp; 

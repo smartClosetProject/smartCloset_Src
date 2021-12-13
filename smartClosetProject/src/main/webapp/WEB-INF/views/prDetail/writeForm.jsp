@@ -68,13 +68,11 @@
 				}
 			})
 			$("#insertBtn").click(function() {
-				if(!chkData("#pr_num","상품번호를"))return false;
 				if(!chkData("#pr_price","판매가를"))return false;
 				if(!chkData("#pr_name","상품명을"))return false;
 				if(!chkData("#file","대표 이미지를"))return false;
 				if(!chkData("#file1","내용이미지를"))return false;
 				
-				$("#pr_num").val($("#pr_num").val().toUpperCase());
 				$("#insertForm").attr({
 					"method":"post",
 					"enctype":"multipart/form-data",
@@ -84,29 +82,6 @@
 			})	
 			$("#prductList").click(function(){
 				location.href="/prDetail/prDetailList" ;
-			})
-			$("#check").click(function(){
-				if(!chkData("#pr_num","상품번호를"))return false;
-				else{
-					$.ajax({
-						url:"/prdetail/prnumCheck",
-						type:"post",
-						data:$("#insertForm").serialize(),
-						dataType:"text",
-						error:function(){
-							alert('시스템 오류입니다. 관리자에게 문의하세요.')
-						},
-						success : function(resultData){
-							if(resultData=="실패"){
-								$("#msg").text("사용 가능한 상품번호입니다.")
-								$("#pr_num").attr("readonly","readonly");
-							}else if(resultData=="성공"){
-								$("#msg").text("사용 불가능한 상품번호입니다.")
-								$("#pr_num").val("");
-							}
-						}
-					})
-				}
 			})
 		})
 		
@@ -118,13 +93,7 @@
 			<form id="insertForm">
 				<div class="form-group" id="text">
 					<table class="table-bordered insert">
-						<tr>
-							<th class="col-md-1 width">상품 번호</th>
-							<td colspan="3" class="col-md-1">
-								<div ><input type="text" name="pr_num" id="pr_num" style="text-transform: uppercase;">
-								<div class="text-right float"><span id="msg"></span><input type="button" id="check" value="중복확인"></div></div>
-							</td>
-						</tr>
+						
 						<tr>
 							<th class="col-md-1 width">판매가</th>
 							<td class="col-md-2"><input type="text" name="pr_price" id="pr_price"></td>

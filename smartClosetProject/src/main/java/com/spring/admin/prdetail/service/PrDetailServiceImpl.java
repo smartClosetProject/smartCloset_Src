@@ -58,7 +58,7 @@ public class PrDetailServiceImpl implements PrDetailService{
 		return prList;
 	}
 	
-	//상품 통게 페이지 구현
+	//상품 통계 페이지 구현
 	@Override
 	public List<ProductVO> prNumericalList(ProductVO pvo){
 		List<ProductVO> list=null;
@@ -91,7 +91,7 @@ public class PrDetailServiceImpl implements PrDetailService{
 	@Override
 	public int warehousingInsert(ProductVO pvo) throws Exception {
 		int result1=0;
-		//pvo.setAd_num(1);
+		pvo.setAd_num(1);
 		pvo.setPro_color(pvo.getColorKo()+" / "+pvo.getColorEn());
 		if(pvo.getFile().getSize()>0) {
 			String fileName=PrFileUploadUtil.fileUpload(pvo.getFile(),"warehousing");
@@ -164,6 +164,12 @@ public class PrDetailServiceImpl implements PrDetailService{
 	public int prnumCheck(PrDetailVO prvo) {
 		int result=0;
 		result=prDetailDAO.prnumCheck(prvo);
+		return result;
+	}
+	@Override
+	public int updateProStock(ProductVO pvo) {
+		int result=0;
+		result=prDetailDAO.prnumCheck(pvo);
 		return result;
 	}
 }

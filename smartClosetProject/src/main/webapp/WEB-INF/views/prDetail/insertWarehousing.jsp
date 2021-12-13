@@ -21,7 +21,6 @@
 			$(function() {
 				$("#insertBtn").click(function() {
 					if(!chkData("#cl_name","거래처번호를"))return false;
-					if(!chkData("#pr_num","상품번호를"))return false;
 					if(!chkData("#pro_num","상품 상세 번호를 "))return false;
 					if(!chkData("#file","색상 이미지를"))return false;
 					if(!chkData("#colorKo","색상의 한국어를"))return false;
@@ -29,8 +28,8 @@
 					if(!chkData("#cl_price","원가를"))return false;
 					if(!chkData("#cl_amount","입고량을"))return false;
 					$("#cl_name").val($("#cl_name").val().toUpperCase());
-					$("#pr_num").val($("#pr_num").val().toUpperCase());
 					$("#pro_num").val($("#pro_num").val().toUpperCase());
+					
 					$("#insertForm").attr({
 						"method":"post",
 						"enctype":"multipart/form-data",
@@ -56,11 +55,11 @@
 					</tr>
 					<tr>
 						<th class="col-md-1">상품 번호</th>
-						<td class="col-md-2" colspan="3"><input type="text" name="pr_num" id="pr_num" style="text-transform: uppercase;"></td>
+						<td class="col-md-2" colspan="3" ><input type="text" id="pr_num" name="pr_num" value="${updateData.pr_num}" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<th class="col-md-1">상품 상세 번호</th>
-						<td class="col-md-2" colspan="3"><input type="text" name="pro_num" id="pro_num" style="text-transform: uppercase;"></td>
+						<td class="col-md-2" colspan="3"><input type="text" name="pro_num" id="pro_num" style="text-transform: uppercase;" value="${updateData.pr_num}"></td>
 					</tr>
 					<tr>
 						<th class="col-md-1">색상 이미지</th>

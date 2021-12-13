@@ -27,4 +27,5 @@ public interface PrDetailDAO {
 	public int updateForm(PrDetailVO prvo);
 	public int updatePr(PrDetailVO prvo);
 	public int prnumCheck(PrDetailVO prvo);
+	public int updateProStock(ProductVO pvo);
 }
