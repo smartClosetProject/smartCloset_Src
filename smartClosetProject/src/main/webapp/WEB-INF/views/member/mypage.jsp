@@ -80,10 +80,11 @@
 		<div>
 			<h3>나의 주문 처리 현황</h3>
 			<hr>
-			<ul>
-				<li>
+			<ol class="list-group list-group-numbered">
+				  <li class="list-group-item d-flex justify-content-between align-items-start">
 					<a href = "/member/myorderList" class="count" >
 						<strong id="order_state">입금전</strong>
+						
 						<span >
 							<span id="myorderCount">${order_state.bd}</span>
 						</span>
@@ -122,7 +123,7 @@
 					</a>
 				</li>
 					
-			</ul>
+			</ol>
 		</div>	
 			<div style="position: absolute; top: 424px; left:20px; width: 143px; height: 126px;">
 				<input type="button"  class="button button4" id="updateBtn" name="updateBtn" value="회원정보 수정">
