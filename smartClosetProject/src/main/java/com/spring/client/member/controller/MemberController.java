@@ -209,11 +209,10 @@ private MemberService memberService;
 			if(memberVO == null) {
 				log.info("로그인실패");
 				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");	
-			if(m_id == null) {
+			} if(m_id == null) {
 				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");
 				path = "member/loginForm";
 			} else {
-
 				if(memberVO.getM_exitdate() == null){
 					session.setAttribute("login", memberVO);
 					log.info("로그인성공");
@@ -223,8 +222,6 @@ private MemberService memberService;
 					log.info("로그인실패");
 					path = "member/loginForm";
 				}
-				
-
 				session.setAttribute("m_id", m_id);
 				path = "product/mainPage";
 			}
