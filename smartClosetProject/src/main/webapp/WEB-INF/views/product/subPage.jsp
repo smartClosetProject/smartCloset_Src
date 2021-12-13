@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -45,8 +46,8 @@
 			.pro_size, .pro_color{font-size: 10px;color:#a0a0a0; }
 			.pd_price{font-weight: bold;width:100px;}
 			.updatebtn{font-size: 8px; width: 30px; margin-left: 0px; padding-left: 0px;}
-			input[type=checkbox]{width:0px; height:0px;}
-			.tablecl {width:420; margin-left: 8px;}
+ 			input[type=checkbox]{width:0px; height:0px;} */
+			.tablecl {width:420px; margin-left: 8px;}
 			.list{width: 420px;}
 		</style>
 		<script type="text/javascript">
@@ -233,7 +234,8 @@
 				<form id="productDetail">
 					<div class="float">
 						<div id="pr_name">${detail.pr_name}</div>
-						<div id="pr_price">${detail.pr_price} 원</div>
+						<div id="pr_price"><fmt:formatNumber type="currency" currencySymbol="" maxFractionDigits="0" 
+					value="${detail.pr_price}" groupingUsed="true" /> 원</div>
 						<div class="longline"> </div>
 						<div id="pr_mile"></div>
 						<div id="pr_size">
@@ -297,25 +299,58 @@
 				</div>
 				<div class="content">
 					<div class="Shipping">
-						<table>
-							<tr>
-								<th>배송안내</th>
-							</tr>
-						</table>
-						
-						5만원 이상 구매 시 무료배송, 7만원 미만의 경우 2,500원의 배송비가 추가됩니다.<br>
-						(제주도 : 5만원 이상 구매 시 배송비 2,500원 할인되며, 7만원 미만의 경우 6,000원입니다)<br>
-						CJ 택배로 발송되며, CJ택배로 발송시 배송기간은 2-3일(주말, 공휴일 제외) 소요될 수 있습니다.<br>
-						<br>
-						<br>
-						<br>
-
-
-						택배발송<br>
-						- 평일 PM 19:00 까지 결제 완료된 주문건에 한하여 거래처에 입고요청되어 입고 완료시 정상 발송됩니다.<br>
-						- 택배발송 업무시간은 평일 PM 18:00 마감됩니다.<br>
-						- 주문 후 평균적으로 2~3일정도 상품 입고기간이 소요됩니다.<br>
-						- 택배 발송 시 알림톡을 통해 운송장번호가 발송됩니다. (알림톡 미발송시 문자발송)<br>
+						<div>
+							<div id="title">배송안내</div>
+							<div class="longline"></div>
+							<div class="board">배송안내</div>
+							<div class="content">
+								7만원 이상 구매 시 무료배송, 7만원 미만의 경우 2,500원의 배송비가 추가됩니다.<br />
+								(제주도 : 7만원 이상 구매 시 배송비 2,500원 할인되며, 7만원 미만의 경우 6,000원입니다)<br />
+								CJ 택배로 발송되며, CJ택배로 발송시 배송기간은 2-3일(주말, 공휴일 제외) 소요될 수 있습니다.<br />
+							</div>
+							<div class="board">택배발송</div>
+							<div class="content">
+								- 평일 PM 19:00 까지 결제 완료된 주문건에 한하여 거래처에 입고요청되어 입고 완료시 정상 발송됩니다.<br />
+								- 택배발송 업무시간은 평일 PM 18:00 마감됩니다.<br />
+								- 주문 후 평균적으로 2~3일정도 상품 입고기간이 소요됩니다.<br />
+							</div>
+						</div>
+						<div>
+							<div id="title">교환 및 반품안내</div>
+							<div class="longline"></div>
+							<div class="board">교환 및 반품주소</div>
+							<div class="content">
+								- 경기도 수원시 팔달구 인계동 1031-2 성지빌딩 701호 모던이프<br />
+							</div>
+							<div class="board">교환 및 반품안내</div>
+							<div class="content">
+								- 상품 수령 후 7일 이내 모던이프 Q&A 또는 고객센터(1522-4953) 로 접수<br />
+								- 타택배(편의점, 우체국, 로젠 등) 이용 시 선불로 발송<br />
+								- 모던이프와 계약된 CJ택배가 아닌 타택배(편의점, 우체국, 로젠 등)로 발송된 상품이 분실된 경우 책임을 지지 않습니다<br />
+							</div>
+							<div class="board">교환 및 반품이 불가능한 경우</div>
+							<div class="content">
+								- 반품 및 교환 접수 기간(수령일로부터 7일) 이 경과한 경우<br />
+								- 고객의 부주의로 인한 제품의 변형이나 훼손, 오염, 파손으로 인해 재화의 가치가 떨어진 경우<br />
+								- 제품착용 흔적이 있을 경우 (향수, 스킨, 바디로션, 탈취제 등 그외 향취)<br />
+								- 인위적인 수선이나 세탁된 제품<br />
+								- 받았던 상태가 아닌 포장 비닐 없이 발송되어 상품이 훼손된 경우<br />
+								- 주문제작으로만 판매가 이루어지는 수제화 등의 상품의 경우<br />
+								- 불량상품 또는 모던이프 실수로 오배송된 상품을 착용하거나 오염 및 훼손한 경우<br />
+							</div>
+							<div class="board">불량사유에 포함되지 않는 항목</div>
+							<div class="content">
+								- 배송시 발생한 상품의 구김<br />
+								- 재봉실밥 일부 정리가 안된 경우<br />
+								- 단추가 다소 허술하게 마감된 경우<br />
+								- 원단 특유의 냄새<br />
+								- 원단 자체의 잡실이나 스크래치 / 패턴위치차이 / 빈티지함을 위한 디테일 차이<br />
+								- 사이즈 측정방법에 따라 표기된 사이즈 오차범위 (±1~2cm)<br />
+								- 모니터 해상도의 미세한 차이로 인한 색상&이미지 차이<br />
+								
+								사소한 부분들은 불량사유가 될 수 없는 부분 안내드리겠습니다.<br />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
