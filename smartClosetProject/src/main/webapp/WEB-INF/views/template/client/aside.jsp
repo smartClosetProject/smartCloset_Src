@@ -12,6 +12,9 @@
 		<c:if test="${empty sessionScope.login.m_id }">
 			<li class="mainLi"><a href="/member/joinmember">회원가입</a></li>
 		</c:if>
+		<c:if test="${not empty sessionScope.login.m_id }">
+			<li class="mainLi"><a href="/member/updateForm">정보수정</a></li>
+		</c:if>
 		<li class="mainLi"><a href="/member/mypage">마이페이지</a></li>
 		<li class="mainLi"><a href="/review/reviewList">리뷰게시판</a></li>
 		<li class="mainLi"><a href="/qna/qnaList">QnA게시판</a></li>

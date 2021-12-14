@@ -179,12 +179,24 @@
 				
 				// 적립금 적용과 최종 결제가 처리
 				$("#m_mileApply").focusout(function() {
-					totalSum();
+					if ($("#m_mileApply").val() < 0) {
+						alert("0이하의 적립금은 사용할 수 없습니다.");
+						$("#m_mileApply").val("");
+						return;
+					} else {
+						totalSum();
+					}
 				});
 				
 				$("#m_mileApply").keydown(function(key) {
-	                if (key.keyCode == 13) {
-	                	totalSum();
+					if ($("#m_mileApply").val() < 0) {
+						alert("0이하의 적립금은 사용할 수 없습니다.");
+						$("#m_mileApply").val("");
+						return;
+					} else {
+						if (key.keyCode == 13) {
+							totalSum();
+						}
 	                }
 	            });
 
@@ -311,14 +323,14 @@
 					applyMile = m_mile;
 				}
 				$("#applyMile2").html(applyMile.toLocaleString() + "원");
-				$("#applyShipCharge").html("-" + applyMile.toLocaleString() + "원");
+				$("#useMile").html("-" + applyMile.toLocaleString() + "원");
 				
 				let totalSum = (${order.order_totalPayment} - applyMile).toLocaleString();
 				$(".totalSum").html(totalSum);
 				
 				$("input[name='m_mile']").val(${order.m_mile });
 				$("input[name='m_mileApply']").val(applyMile);
-				$("input[name='m_mileAdd']").val(Math.floor((${order.order_totalPayment} - applyMile) * 0.02));
+				$("input[name='m_mileAdd']").val(Math.floor((${order.order_totalPayment} - applyMile) * 0.025 ));
 				$("input[name='order_totalPayment']").val(${order.order_totalPayment} - applyMile);
 			}
 		</script>
@@ -417,7 +429,7 @@
 					value="${order.m_mile }" groupingUsed="true" />원)</span>
 			</div>
 			<div>
-				<input type="number" id="m_mileApply" class="form-control">
+				<input type="number" id="m_mileApply" class="form-control" min="0">
 			</div>
 			<div class="mileApply">
 				<span class="applyMile1">적용금액</span>
@@ -442,7 +454,8 @@
 			</div>
 			<div>
 				<label class="n">할인/부가결제</label>
-				<label class="v" id="applyShipCharge">원</label>
+				<label class="v" id="useMile">
+				원</label>
 			</div>
 			<div>
 				<label class="n">배송비</label>
