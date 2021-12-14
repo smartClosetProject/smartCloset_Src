@@ -2,6 +2,9 @@ package com.spring.admin.aReply.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import com.spring.admin.aReply.service.AreplyService;
 import com.spring.admin.aReply.vo.AreplyVO;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @RestController
@@ -27,6 +31,10 @@ import lombok.extern.log4j.Log4j;
 public class AreplyController {
 
 	private AreplyService replyService;
+	
+	@Setter(onMethod_ = @Autowired)
+	private HttpSession session;
+	
 	
 	@GetMapping(value = "/all/{q_num}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<AreplyVO>> replyList(@PathVariable("q_num") Integer q_num){ 
@@ -44,11 +52,15 @@ public class AreplyController {
 	@PostMapping(value = "/aReplyInsert", consumes = "application/json",
 			produces = {MediaType.TEXT_PLAIN_VALUE })
 	public String replyInsert(@RequestBody AreplyVO rvo) {
-		log.info("aReplyInsert 호출 성공");
-		int result = 0;
-		
-		result = replyService.aReplyInsert(rvo);
-		return (result==1) ? "SUCCESS" : "FAILURE";
+		if(session.getAttribute("ad_id")!=null) {
+	
+			log.info("aReplyInsert 호출 성공");
+			int result = 0;
+			
+			result = replyService.aReplyInsert(rvo);
+			return (result==1) ? "SUCCESS" : "FAILURE";
+		} else return "error";
+
 	}
 
 
@@ -57,6 +69,7 @@ public class AreplyController {
 	public ResponseEntity<String> aReplyUpdate(@PathVariable("r_num") Integer r_num,
 			@RequestBody AreplyVO rvo){
 		log.info("aReplyUpdate 호출 성공");
+		
 		
 		rvo.setR_num(r_num);
 		int result = replyService.aReplyUpdate(rvo);

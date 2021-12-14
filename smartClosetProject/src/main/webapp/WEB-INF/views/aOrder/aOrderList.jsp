@@ -116,8 +116,10 @@
 		<form id="detailForm">
 			<input type="hidden" id="order_num" name="order_num" />
 		</form>
+		<h2 style="color : #1A5276;"><strong>주문 관리</strong></h2>
+		<br>
 	
-		<div id="aOrderSearch" class="text-left" style="margin-bottom : 20px">
+		<div id="aOrderSearch" class="text-left"  style="margin-bottom : 20px">
 			<form id="f_search" name="f_search" class="form-inline">
 				<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum }">
 				<input type="hidden" name="amount" value="${pageMaker.cvo.amount }">
@@ -135,8 +137,8 @@
 			</form>
 		</div>
 		<%-- ==================== 리스트 시작 ==================== --%>
-		<div id="aOrderList">
-			<table class="table table-striped">
+		<div id="aOrderList" class="table-height">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th class=" text-center ">주문 번호</th>

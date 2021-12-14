@@ -24,7 +24,8 @@
 		<typeAlias type="com.spring.admin.aReview.vo.AreviewVO" alias="areview"/>
 		<typeAlias type="com.spring.admin.aQna.vo.AqnaVO" alias="aqna"/>
 		<typeAlias type="com.spring.admin.aReply.vo.AreplyVO" alias="areply"/>
-		<typeAlias type="com.spring.admin.aOder.vo.AorderVO" alias="aorder"/>
+		<typeAlias type="com.spring.admin.aOrder.vo.AorderVO" alias="aorder"/>
+		<typeAlias type="com.spring.admin.aOrder.vo.AorderDetailVO" alias="aorderDetail"/>
 		
 		<typeAlias type="com.spring.admin.prdetail.vo.PrDetailVO" alias="prDetail" />
 		<typeAlias type="com.spring.admin.prdetail.vo.ProductVO" alias="product" />

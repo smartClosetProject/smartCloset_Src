@@ -21,8 +21,8 @@
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
 		<style type="text/css">
-			.col-sm-9{
-				width: 100%;
+			.imp_notice:hover{
+				background-color: #C3CAD2;
 			}
 		</style>
 		
@@ -120,6 +120,8 @@
 		<form id="detailForm">
 			<input type="hidden" id="n_num" name="n_num">
 		</form>
+		<h2 style="color : #1A5276;"><strong>공지 관리</strong></h2>
+		<br>
 		
 	<%-- ================= 검색 시작 ================== --%>
 		<div id="nboardSearch" class="text-left" style="margin-bottom : 20px">
@@ -143,7 +145,7 @@
 	
 	<%-- =================== 리스트 시작 =================== --%>
 			<div id="boardList" class="table-height">
-				<table summary="게시판 리스트" class="table table-striped">
+				<table summary="게시판 리스트" class="table table-hover">
 					<thead>
 						<tr>
 							<th class="order text-center col-md-1">글번호</th>
@@ -152,17 +154,30 @@
 							<th class="text-center col-md-2">작성자</th>
 						</tr>
 					</thead>
-					<tbody id="list" class="table-striped">
+					<tbody id="list" >
 						<!-- 데이터 출력 -->
 						<c:choose>
 							<c:when test="${not empty nboardList }">
-								<c:forEach var="nboard" items="${nboardList }" varStatus="status">
-									<tr class="text-center" data-num="${nboard.n_num }"> 
-										<td>${count - status.index }</td> 
-										<td class="goDetail text-left">${nboard.n_title }</td>
-										<td class="text-left">${nboard.n_writedate }</td>
-										<td class="author">${nboard.n_author }</td>
-									</tr>
+								<c:forEach var="nboardImportant" items="${nboardImportantList }" varStatus="status">
+									<c:if test="${nboardImportant.n_important eq 1}">
+										<tr style="background-color: #E2E9F1 !important;"  class="text-center imp_notice" data-num="${nboardImportant.n_num }">
+											<td><img alt="" src="/resources/image/megaphone.png" style="width : 15px; height : 15px;"> </td> 
+											<td class="goDetail text-left">${nboardImportant.n_title}</td>
+											<td class="text-left">${nboardImportant.n_writedate }</td>
+											<td class="author">${nboardImportant.n_author }</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+
+									<c:forEach var="nboard" items="${nboardList }" varStatus="status">
+
+										<tr class="text-center" data-num="${nboard.n_num }"> 
+											<td>${count - status.index }</td> 
+											<td class="goDetail text-left">${nboard.n_title}</td>
+											<td class="text-left">${nboard.n_writedate }</td>
+											<td class="author">${nboard.n_author }</td>
+										</tr>
+									
 								</c:forEach>
 							</c:when>
 							<c:otherwise>

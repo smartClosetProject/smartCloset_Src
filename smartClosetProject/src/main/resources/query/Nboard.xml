@@ -3,12 +3,18 @@
 <mapper namespace="com.spring.admin.nboard.dao.NboardDAO">
 
 	<!-- 게시판 리스트 기본 조회 -->
+	<select id="nboardImportantList" parameterType="nboard" resultType="nboard">
+		SELECT n_num, n_author, n_title, TO_CHAR(n_writedate, 'YYYY-MM-DD') AS n_writedate, n_important
+		from notice
+		where n_important = 1
+		
+	</select>
 	
 	<select id="nboardList" parameterType="nboard" resultType="nboard">
 		<![CDATA[
-		SELECT n_num, n_author, n_title, TO_CHAR(n_writedate, 'YYYY-MM-DD') AS n_writedate
+		SELECT n_num, n_author, n_title, TO_CHAR(n_writedate, 'YYYY-MM-DD') AS n_writedate, n_important
 		FROM (SELECT /*+ INDEX_DESC(notice notice_pk) */ 
-				ROWNUM rnum, n_num, n_author, n_title, n_writedate
+				ROWNUM rnum, n_num, n_author, n_title, n_writedate, n_important
 			  FROM notice
 			  WHERE ]]>
 			  <trim prefix="(" suffix=") AND " prefixOverrides="AND">

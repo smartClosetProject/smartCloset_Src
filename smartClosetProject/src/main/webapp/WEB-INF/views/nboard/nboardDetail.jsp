@@ -13,6 +13,8 @@
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
 		<!-- 모바일 웹 페이지 설정 끝 -->
 		<style type="text/css">
 			.col-sm-9{
@@ -22,6 +24,12 @@
 			.col-sm-9{
 				width: 100%;
 				padding-bottom: 15px;
+			}
+			
+			.highlight1{
+				width:150px;
+				background-color:#A4AFBC; 
+				color : white;
 			}
 		</style>
 	
@@ -74,6 +82,35 @@
 			<form name="f_data" id="f_data" method="post">
 				<input type="hidden" name="n_num" value="${detail.n_num}">
 			</form>
+			<h2 style="color : #1A5276;"><strong>공지 관리</strong></h2><br>
+		
+			<%-- =============== 상세 페이지 보여주기 시작 =============== --%>
+			<table class="table table-bordered">
+				<tr>
+					<td class="highlight1">글 번호</td>
+					<td colspan="3">${detail.n_num}</td>
+				</tr>
+				<tr>
+					<td class="highlight1">작성자</td>
+					<td>${detail.n_author}</td>
+					<td class="highlight1">작성일</td>
+					<td>${detail.n_writedate}</td>
+				</tr>
+				<tr>
+					<td class="highlight1">글 제목</td>
+					<td>${detail.n_title}</td>
+					<td class="highlight1">중요 여부</td>
+					<c:choose>
+					<c:when test="${detail.n_important eq '1'}"><td><img alt="" src="/resources/image/megaphone.png" style="width : 15px; height : 15px;"> </td></c:when>
+					<c:otherwise><td></td></c:otherwise>
+					</c:choose>
+				</tr>
+				<tr class="table-height" style="height : 400px">
+					<td class="highlight1">글 내용</td>
+					<td colspan="3">${detail.n_content}</td>
+				</tr>
+			</table>
+			<%-- =============== 상세 페이지 보여주기 종료 =============== --%>
 			<%-- =================== 버튼 출력 시작 =================== --%>
 			<div class="text-right contentBtn" style="margin-bottom : 20px">
 				<input type="button" class="btn btn-default btn-sm" id="insertFormBtn" value="작성"/>
@@ -82,34 +119,6 @@
 				<input type="button" class="btn btn-default btn-sm" id="boardListBtn" value="목록"/>
 			</div>
 			<%-- =================== 버튼 출력 종료 =================== --%>
-		
-			<%-- =============== 상세 페이지 보여주기 시작 =============== --%>
-			<table class="table table-bordered">
-				<tr>
-					<td>글 번호</td>
-					<td colspan="3">${detail.n_num}</td>
-				</tr>
-				<tr>
-					<td>작성자</td>
-					<td>${detail.n_author}</td>
-					<td>작성일</td>
-					<td>${detail.n_writedate}</td>
-				</tr>
-				<tr>
-					<td>글 제목</td>
-					<td>${detail.n_title}</td>
-					<td>중요 여부</td>
-					<c:choose>
-					<c:when test="${detail.n_important eq '1'}"><td>O</td></c:when>
-					<c:otherwise><td>X</td></c:otherwise>
-					</c:choose>
-				</tr>
-				<tr class="table-height" style="height : 400px">
-					<td>글 내용</td>
-					<td colspan="3">${detail.n_content}</td>
-				</tr>
-			</table>
-			<%-- =============== 상세 페이지 보여주기 종료 =============== --%>
 		</div>
 	</body>
 </html>

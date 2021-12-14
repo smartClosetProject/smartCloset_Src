@@ -12,6 +12,9 @@
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
+		
 		<!-- 모바일 웹 페이지 설정 끝 -->
 	
 	
@@ -53,7 +56,7 @@
 	<body>
 		<div class="container">
 			<form id="f_writeForm">
-				<h3 class="text-left">공지 작성</h3><br>
+				<h3 class="text-left" style="color : #1A5276;"><strong>공지 작성</strong></h3><br>
 				<div class="form-group">
 					<label for="n_author">작성자</label> 
 					<input type="text" class="form-control" name="n_author" id="n_author"

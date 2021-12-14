@@ -12,6 +12,13 @@
 		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
+		<style type="text/css">
+		.highlight1{
+			width:140px;background-color:#A4AFBC; color : white;
+		}
+		</style>
 		<!-- 모바일 웹 페이지 설정 끝 -->
 	
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -53,8 +60,32 @@
 			<form name="f_data" id="f_data" method="post">
 				<input type="hidden" name="m_id" id="m_id" value="${aMemberDetail.m_id}">
 			</form>
+			<h2 style="color : #1A5276;"><strong>회원 관리</strong></h2><br>
+			
+			<%-- =============== 상세 페이지 보여주기 시작 =============== --%>
+			<table class="table table-bordered" style="width : 820px;">
+				<tr>
+					<td class="highlight1">회원 아이디</td>
+					<td style="width:270px;">${aMemberDetail.m_id}</td>
+					<td class="highlight1">회원 이름</td>
+					<td>${aMemberDetail.m_name}</td>
+				</tr>
+				<tr>
+					<td class="highlight1">가입일</td>
+					<td>${aMemberDetail.m_regdate}</td>
+					<td class="highlight1">탈퇴일</td>
+					<td>${aMemberDetail.m_exitdate}</td>
+				</tr>
+				<tr>
+					<td class="highlight1">포인트</td>
+					<td>${aMemberDetail.m_mile} 점</td>
+					<td class="highlight1">누적 구매액</td>
+					<td>${aMemberDetail.m_acc} 원</td>
+				</tr>
+			</table>
+			<%-- =============== 상세 페이지 보여주기 종료 =============== --%>
 			<%-- =================== 버튼 출력 시작 =================== --%>
-			<div class="text-right contentBtn" style="margin-bottom : 20px">
+			<div class="text-left contentBtn" style="margin-bottom : 20px">
 				<input type="button" class="btn btn-default btn-sm" id="updateMileBtn" value="포인트 변경"/>
 				<input type="button" class="btn btn-default btn-sm" id="updateExitDateBtn" value="탈퇴"/>
 				<input type="button" class="btn btn-default btn-sm" id="cancleExitDateBtn" value="탈퇴 취소"/>
@@ -62,28 +93,6 @@
 			</div>
 			<%-- =================== 버튼 출력 종료 =================== --%>
 		
-			<%-- =============== 상세 페이지 보여주기 시작 =============== --%>
-			<table class="table table-bordered">
-				<tr>
-					<td>회원 아이디</td>
-					<td>${aMemberDetail.m_id}</td>
-					<td>회원 이름</td>
-					<td>${aMemberDetail.m_name}</td>
-				</tr>
-				<tr>
-					<td>가입일</td>
-					<td>${aMemberDetail.m_regdate}</td>
-					<td>탈퇴일</td>
-					<td>${aMemberDetail.m_exitdate}</td>
-				</tr>
-				<tr>
-					<td>포인트</td>
-					<td>${aMemberDetail.m_mile}</td>
-					<td>누적 구매액</td>
-					<td>${aMemberDetail.m_acc}</td>
-				</tr>
-			</table>
-			<%-- =============== 상세 페이지 보여주기 종료 =============== --%>
 		</div>
 	</body>
 </html>
