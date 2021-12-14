@@ -31,7 +31,7 @@ public class SmartClosetServiceImpl implements SmartClosetService {
 	@Override
 	public void regCloset(SmartClosetVO svo) throws Exception {
 		if (svo.getFile().getSize() > 0) {
-			String fileName = FileUploadUtil.fileUpload(svo.getFile(), "sCloset");
+			String fileName = FileUploadUtil.fileUpload(svo.getFile(), "warehousing");
 			svo.setSc_image(fileName);
 			
 			String thumbName = FileUploadUtil.makeThumbnail(fileName);

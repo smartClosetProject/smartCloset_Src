@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="container-fluid">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="/sCloset/sClosetHome">SmartCloset</a>
+		<a class="navbar-brand" href="/sCloset/sClosetHome"><img id="SClogo" src="/resources/image/SClogo.png"></a>
 	</div>
 	<ul class="nav navbar-nav">
 		<li><a href="/product/mainPage">홈</a></li><!-- class="active" -->

@@ -32,34 +32,34 @@ public class CartMapperTests {
 //	}
 	
 	@Test
-	   public void testInsertCart() {
-	      CartVO cvo = new CartVO();
-	      cvo.setCart_goodsCount(1);
-	      cvo.setM_id("smartmember");
-	      cvo.setPro_num("RG_IVUR_S_W");
-	      
-	      int result = cartDao.insertCart(cvo);
-	      
-	      cvo.setCart_goodsCount(2);
-	      cvo.setM_id("smartmember");
-	      cvo.setPro_num("RG_IVUR_S_G");
-	      
-	      result = cartDao.insertCart(cvo);
-	      
-	      cvo.setCart_goodsCount(3);
-	      cvo.setM_id("smartmember");
-	      cvo.setPro_num("RG_IVUR_S_B");
-	      
-	      result = cartDao.insertCart(cvo);
-	      
-	      cvo.setCart_goodsCount(4);
-	      cvo.setM_id("smartmember");
-	      cvo.setPro_num("ZT_QNLT_S_B");
-	      
-	      result = cartDao.insertCart(cvo);
-	      
-	      log.info("result : " + result);
-	   }
+	public void testInsertCart() {
+		CartVO cvo = new CartVO();
+		cvo.setCart_goodsCount(1);
+		cvo.setM_id("smartmember");
+		cvo.setPro_num("RG_IVUR_S_W");
+		
+		int result = cartDao.insertCart(cvo);
+		
+		cvo.setCart_goodsCount(2);
+		cvo.setM_id("smartmember");
+		cvo.setPro_num("RG_IVUR_S_G");
+		
+		result = cartDao.insertCart(cvo);
+		
+		cvo.setCart_goodsCount(3);
+		cvo.setM_id("smartmember");
+		cvo.setPro_num("RG_IVUR_S_B");
+		
+		result = cartDao.insertCart(cvo);
+		
+		cvo.setCart_goodsCount(4);
+		cvo.setM_id("smartmember");
+		cvo.setPro_num("ZT_QNLT_S_B");
+		
+		result = cartDao.insertCart(cvo);
+		
+		log.info("result : " + result);
+	}
 	
 //	@Test
 //	public void testDeleteEachCart() {
