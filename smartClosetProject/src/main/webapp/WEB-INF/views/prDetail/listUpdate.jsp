@@ -25,11 +25,11 @@
 		$(function(){
 			let outer=['자켓','코트','패딩','야상','집업'];
 			let top = ['반팔','긴팔','셔츠','니트','맨투맨','후드티'];
-			let pants=['반바지','긴바지','청바지','면바지','슬랙스'];
+			let pants=['반바지','청바지','면바지','슬랙스'];
 			let bag = ['가방','신발'];
 			let acc = ['벨트'	,'스카프'];
 			
-			$("#pr_categoryl").change(function(){
+			$("#pr_categoryl").click(function(){
 				$("#pr_categorys").empty();
 				if($(this).val()=="아우터"){
 					for(i=0;i<outer.length;i++){
@@ -79,6 +79,8 @@
 			$("#prductList").click(function(){
 				location.href="/prDetail/prDetailList" ;
 			})
+			$("#pr_season").val("${updateData.pr_season}").prop("selected",true);
+			$("#pr_categoryl").val("${updateData.pr_categoryl}").prop("selected",true);
 		})
 		
 		</script>

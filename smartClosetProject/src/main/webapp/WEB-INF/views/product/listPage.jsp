@@ -44,7 +44,7 @@
 				})
 				let outer=['자켓','코트','패딩','야상','집업'];
 				let top = ['반팔','긴팔','셔츠','니트','맨투맨','후드티'];
-				let pants=['반바지','긴바지','청바지','면바지','슬랙스'];
+				let pants=['반바지','청바지','면바지','슬랙스'];
 				let bag = ['가방','신발'];
 				let acc = ['벨트'	,'스카프'];
 				let td="";
@@ -110,6 +110,26 @@
 						</div>					
 					</c:forEach>
 				</div>
+			</div>
+		</div>
+		<div class="text-center">
+				<ul class="pagination">
+					<c:if test="${pageMaker.prev}">
+						<li class="paginate_button previous">
+							<a href="${pageMaker.startPage -1}">Previous</a>
+						</li>
+					</c:if>
+					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+						<li class="paginate_button ${pageMaker.cvo.pageNum ==num ? 'active':'' }">
+							<a href = "${num}">${num}</a>
+						</li>					
+					</c:forEach>
+					<c:if test="${pageMaker.next}">
+						<li class="paginate_button next">
+							<a href ="${pageMaker.endPage+1}">next</a>
+						</li>
+					</c:if>
+				</ul>
 			</div>
 		</div>
 	</body>

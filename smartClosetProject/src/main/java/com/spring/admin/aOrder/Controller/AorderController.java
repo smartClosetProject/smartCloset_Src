@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.admin.aOrder.service.AorderService;
@@ -78,6 +77,9 @@ public class AorderController {
 		if(session.getAttribute("ad_id")!=null) {
 			aOrderservice.aOrderChangeState(aovo);
 			ras.addFlashAttribute("data",aovo);
+			if(aovo.getOrder_state()=="결제 완료") {
+				aOrderservice.aOrderChangeStock(aovo);
+			}
 			
 			return "redirect:/aOrder/aOrderDetail";
 		}

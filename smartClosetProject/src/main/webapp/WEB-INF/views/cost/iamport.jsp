@@ -16,10 +16,10 @@
 			$(".btn_payment").click(function() {
 				  //class가 btn_payment인 태그를 선택했을 때 작동한다.
 					
-				  	IMP.init(/*'가맹점 식별코드'*/);
+				  	IMP.init('iamport');
 				  	//결제시 전달되는 정보
 					IMP.request_pay({
-							    pg : 'inicis', 
+							    pg : 'html5_inicis', 
 							    pay_method : 'card',
 							    merchant_uid : 'merchant_' + new Date().getTime(),
 							    name : '주문명:결제테스트'/*상품명*/,
@@ -30,7 +30,6 @@
 							    buyer_addr : '서울특별시 강남구 삼성동'/*구매자 주소*/,
 							    buyer_postcode : '123-456'/*구매자 우편번호*/
 							}, function(rsp) {
-								var result = '';
 							    if ( rsp.success ) {
 							        var msg = '결제가 완료되었습니다.';
 							        msg += '고유ID : ' + rsp.imp_uid;
@@ -43,6 +42,25 @@
 							        msg += '에러내용 : ' + rsp.error_msg;
 							        result ='1';
 							    }
+// 							    function (rsp) { // callback
+// 							        if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+// 							          // jQuery로 HTTP 요청
+// 							          jQuery.ajax({
+// 							              url: "{서버의 결제 정보를 받는 endpoint}", // 예: https://www.myservice.com/payments/complete
+// 							              method: "POST",
+// 							              headers: { "Content-Type": "application/json" },
+// 							              data: {
+// 							                  imp_uid: rsp.imp_uid,
+// 							                  merchant_uid: rsp.merchant_uid
+// 							              }
+// 							          }).done(function (data) {
+// 							            // 가맹점 서버 결제 API 성공시 로직
+// 							          })
+// 							        } else {
+// 							          alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+// 							        }
+// 							      });
+							    
 							    if(result=='0') {
 							    	location.href= $.getContextPath()+"/Cart/Success";
 							    }

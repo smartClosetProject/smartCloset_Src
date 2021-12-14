@@ -15,7 +15,6 @@
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<style type="text/css">
 			.table-height{min-height:450px;  width:1600px;}
-			.category select{width:150px; float: left; margin-right:30px;}
 			.date input{width:370px; height:25px; margin-right: 30px; margin-top: 5px;}
 			.issale{margin-right: 75px;}
 			#searchData{height:35px;}

@@ -59,13 +59,6 @@ public class OrderController {
 		return "order/orderForm";
 	}
 	
-	@PostMapping("orderPayment")
-	@ResponseBody
-	public String orderPayment() {
-		// 결제 ajax
-		return "success";
-	}
-	
 	@PostMapping("orderComplete")
 	public String orderComplete(@ModelAttribute OrderVO ovo, OrderDetailVO odvo) {
 		log.info("OrderComplete 호출 성공");

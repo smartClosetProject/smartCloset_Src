@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.admin.aOrder.dao.AorderDAO;
-import com.spring.admin.aOrder.vo.AorderDetailVO;
 import com.spring.admin.aOrder.vo.AorderVO;
 
 import lombok.Setter;
@@ -44,6 +43,11 @@ public class AorderServiceImpl implements AorderService{
 	@Override
 	public void aOrderAllDelete() {
 		aOrderDao.aOrderAllDelete();
+	}
+	
+	@Override
+	public int aOrderChangeStock(AorderVO aovo) {
+		return aOrderDao.aOrderChangeStock(aovo);
 	}
 
 	@Override
