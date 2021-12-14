@@ -12,5 +12,5 @@ public interface AorderService {
 	public AorderVO aOrderDetail(AorderVO aovo);
 	public int aOrderChangeState(AorderVO aovo);
 	public void aOrderAllDelete();
-
+	public int aOrderChangeStock(AorderVO aovo);
 }

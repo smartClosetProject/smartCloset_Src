@@ -44,5 +44,8 @@ public class AorderServiceImpl implements AorderService{
 	public void aOrderAllDelete() {
 		aOrderDao.aOrderAllDelete();
 	}
-
-}
+	@Override
+	public int aOrderChangeStock(AorderVO aovo) {
+		return aOrderDao.aOrderChangeStock(aovo);
+	}
+}	

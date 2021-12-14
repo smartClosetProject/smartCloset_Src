@@ -29,7 +29,7 @@
 			let bag = ['가방','신발'];
 			let acc = ['벨트'	,'스카프'];
 			
-			$("#pr_categoryl").change(function(){
+			$("#pr_categoryl").click(function(){
 				$("#pr_categorys").empty();
 				if($(this).val()=="아우터"){
 					for(i=0;i<outer.length;i++){
@@ -79,6 +79,8 @@
 			$("#prductList").click(function(){
 				location.href="/prDetail/prDetailList" ;
 			})
+			$("#pr_season").val("${updateData.pr_season}").prop("selected",true);
+			$("#pr_categoryl").val("${updateData.pr_categoryl}").prop("selected",true);
 		})
 		
 		</script>

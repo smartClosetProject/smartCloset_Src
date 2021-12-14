@@ -269,30 +269,31 @@
 				  	let addr=$("#m_addr2").val();
 				  	addr+=" ";
 				  	addr+=$("#m_addr3").val();
+				  	let amount= ${order.order_totalPayment};
+				  	let email= $("#m_email").val();
+				  	let name=${order.m_mile}
+				  	let tel=${order.m_phone}
+				  	let postcode=$("#m_addr").val();
 					IMP.request_pay({
 							    pg : 'html5_inicis', 
 							    pay_method : 'card',
 							    merchant_uid : 'merchant_'+ new Date().getTime(), ,
 							    name : '주문명:결제테스트'/*상품명*/,
-							    amount : ${order.order_totalPayment}/*상품 가격*/, 
-							    buyer_email : $("#m_email").val();/*구매자 이메일*/,
-							    buyer_name : ${order.m_mile},
-							    buyer_tel : ${order.m_phone }/*구매자 연락처*/,
+							    amount : amount/*상품 가격*/, 
+							    buyer_email : eamil/*구매자 이메일*/,
+							    buyer_name : name,
+							    buyer_tel : tel/*구매자 연락처*/,
 							    buyer_addr : addr /*구매자 주소*/,
-							    buyer_postcode : $("#m_addr").val();/*구매자 우편번호*/
+							    buyer_postcode : postcode/*구매자 우편번호*/
 							}, function (rsp) { // callback
 							      if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
 							          // jQuery로 HTTP 요청
 							          jQuery.ajax({
-							              url: "/order/orderPayment", // 예: https://www.myservice.com/payments/complete
+							              url: "/order/orderComplete", // 예: https://www.myservice.com/payments/complete
 							              method: "POST",
-							              headers: { "Content-Type": "application/json" },
 							              data: {
-							                  imp_uid: rsp.imp_uid,
-							                  merchant_uid: rsp.merchant_uid
+							                  "complete":success;
 							              }
-							          }).done(function (data) {
-							            // 가맹점 서버 결제 API 성공시 로직
 							          })
 							        } else {
 							          alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);

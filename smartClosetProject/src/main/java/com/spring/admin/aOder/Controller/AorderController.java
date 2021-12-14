@@ -59,10 +59,10 @@ public class AorderController {
 	public String aOrderchangeState(@ModelAttribute AorderVO aovo, RedirectAttributes ras) {
 		aOrderservice.aOrderChangeState(aovo);
 		ras.addFlashAttribute("data",aovo);
-		
+		if(aovo.getOrder_state()=="결제 완료") {
+			aOrderservice.aOrderChangeStock(aovo);
+		}
 		return "redirect:/aOrder/aOrderDetail";
-		
-		
 	}
 	
 	@RequestMapping("aOrderAllDelete")
