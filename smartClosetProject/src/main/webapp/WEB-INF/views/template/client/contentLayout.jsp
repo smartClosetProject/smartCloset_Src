@@ -77,6 +77,9 @@
 		    	width: 90px;
 		    	text-align: center;
 		    }
+		    #SClogo {
+		    	height: 34px;
+		    }
   		</style>
 		<script type="text/javascript">
 			$(function(){
