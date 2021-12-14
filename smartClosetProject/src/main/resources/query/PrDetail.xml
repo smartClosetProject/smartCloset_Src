@@ -45,7 +45,7 @@
 		</insert>
 		
 		<select id="productDetail" parameterType="product" resultType="product">
-			select pro_num, pro_colorImg, pro_color, pro_size, pro_stock, pro_sales
+			select pro_num, pro_colorImg, pro_colorImg, pro_color, pro_size, pro_stock, pro_sales,pro_colorthumb
 			from product where pr_num=#{pr_num}
 		</select>
 		<select id="productCnt" parameterType="prDetail" resultType="int">
@@ -108,6 +108,9 @@
 					select #{pro_num},#{pro_size},#{pro_color}, #{pr_num}, #{pro_colorImg}, #{pro_colorthumb}, client_seq.currval, #{ad_num},pr_categoryl,pr_categorys, pr_season,pr_price 
 					from pr_detail where pr_num = #{pr_num}
 		</insert>
+		<update id="stockInsert" parameterType="product">
+			update product set pro_stock=pro_stock+#{cl_amount} where pro_num=#{pro_num}
+		</update>
 		<!--재고 업데이트-->
 		<update id="updateStock">
 			update product set pro_stock=#{pro_stock},pro_sales=#{pro_sales} where pro_num=#{pro_num}
@@ -133,6 +136,8 @@
 			select pr_num, pr_name, pr_thumb, pr_mainimg, pr_contentimg, pr_categoryl, pr_categorys, 
 			pr_season, pr_issale, pr_price 
 			from pr_detail where pr_num=#{pr_num}
+<!-- 			 sum(pr.pr_sales) as pr_sales -->
+<!-- 			from pr_detail pd inner join product pr on on pr.pr_num =pd.pr_num where pr_num=#{pr_num} -->
 		</select>
 		<!-- 게시물 수정 -->
 		<update id="updateForm" parameterType="prDetail">

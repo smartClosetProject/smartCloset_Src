@@ -18,7 +18,7 @@
 			.title{font-size: 15px; font-weight: bold; text-align: left; padding-left: 18px;}
 			.price{font-size: 13px; text-align: left; margin-right: 15px; padding-left: 18px;padding-top: 3px;}
 			.line{ width: 240px; background: darkgray; color: darkgray; margin-left: 5px; margin-right: 5px;}
-			img{width:270px; margin-bottom: 15px; margin-top: 30px;}
+			.orimg{width:270px; margin-bottom: 15px; margin-top: 30px;}
 			.line{width:267px; height:0.2px; background-color: #D8D8D8; margin-bottom: 15px; margin-top: 15px; }
 			#longline{width:880px; height:2px; background-color: gray; }
 			.longline{width:860px; height:1px; background-color: #BDBDBD;}
@@ -53,7 +53,7 @@
 					<c:forEach var="list" items="${listData}" varStatus="status">
 						<div class="product goDetail" data-num="${list.pr_num}">
 							<c:if test="${not empty list.pr_thumb}">
-								<img src="/uploadStorage/prDetail/thumb/${list.pr_thumb}">
+								<img class="orimg"src="/uploadStorage/prDetail/thumb/${list.pr_thumb}">
 							</c:if>
 							<div class="title">${list.pr_name}</div>
 							<div class="line"> </div>

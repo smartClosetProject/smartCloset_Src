@@ -45,9 +45,8 @@
 							<tr>
 								<td class="col-md-2">${product.pro_num}</td>
 								<td class="col-md-1">
-									<c:if test="${not empty product.pro_colorImg}">
-										<img src="/uploadStorage/prDetail/thumb/${product.pro_colorImg}">
-									</c:if></td>
+									<img src="/uploadStorage/warehousing/thumb/${product.pro_colorthumb}">
+								</td>
 								<td class="col-md-2">${product.pro_color}</td>
 								<td class="col-md-2">${product.pro_size}</td>
 								<td class="col-md-1">${product.pro_stock}</td>
