@@ -82,8 +82,8 @@ public class AorderServiceImpl implements AorderService{
 	}
 
 	@Override
-	public AorderVO getProCount(AorderVO aovo) {
-		return aOrderDao.getProCount(aovo);
+	public int aOrderProCountReset(AorderVO aovo) {
+		return aOrderDao.aOrderProCountReset(aovo);
 	}
 
 }

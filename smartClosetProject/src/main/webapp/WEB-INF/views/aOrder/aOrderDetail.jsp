@@ -30,6 +30,9 @@
 		let state = "";	
 		$(function () {
 			$(".stateBtn").click(function () {
+				if($("#order_state").val()=="전체 환불"){
+				alert("환불된 주문의 상태는 변경할 수 없습니다.");
+					}else{
 				if(confirm("상태를 변경하시겠습니까?")){
 					let order_state = $(this).val();
 					console.log($(".stateBtn").val());
@@ -40,6 +43,7 @@
 					});
 					$("#detailForm").submit();
 				} 
+			}
 			})
 			
 			$("#refundStateBtn").click(function () {
@@ -49,12 +53,14 @@
 					$("#order_state").val(order_state);
 					$("#order_cancelReason").val(order_cancelreason);
 					console.log(order_cancelreason);
-					console.log($("#order_cancelReason").val());
-					$("#detailForm").attr({
+					console.log("pro_num : "+$("#pro_num").val());
+					console.log("od_num : "+$("#od_num").val());
+					$("#detailForm2").attr({
 						"method" : "get",
 						"action" : "/aOrder/aOrderchangeRefundState"
 					});
-					$("#detailForm").submit();
+					$("#detailForm2").submit();
+					
 					alert("환불이 완료되었습니다.")
 				} 
 			})
@@ -113,9 +119,7 @@
 				<!--  <input type="hidden" id="od_num" name="od_num" value="${aOrder.od_num}"> -->
 			</form>
 			<form id="detailForm">
-				<input type="hidden" id="order_num" name="order_num" value="${aOrderDetail.order_num}">
-				<input type="hidden" id="order_state" name="order_state">
-				<input type="hidden" id="order_cancelReason" name="order_cancelReason">
+				
 			</form>
 			<h2 style="color : #1A5276;"><strong>주문 관리</strong></h2>
 			<br>
@@ -156,11 +160,22 @@
 					<c:choose>
 						<c:when test="${not empty aOrderProductDetail }">
 							<c:forEach var="aOrder" items="${aOrderProductDetail }" varStatus="status">
+								<form id="detailForm2">
+									<input type="hidden" id="order_num" name="order_num" value="${aOrderDetail.order_num}">
+									<input type="hidden" id="order_state" name="order_state" value="${aOrderDetail.order_state}">
+									<input type="hidden" id="order_cancelReason" name="order_cancelReason">
+									<input type="hidden" id="pro_num" name="pro_num" data-pronum="${aOrder.pro_num}"/>
+									<input type="hidden" id="od_num" name="od_num" value="${aOrder.od_num}"/>
+								</form>
+								<script type="text/javascript">
+								
+								
+								</script>
 								<tr>
 									<td rowspan="2" class="highlight1">상품 정보</td>
 									<td rowspan="2" colspan="2" style="width : 300px;">
 										<p class="text-right"><input type="checkbox" class="checkProduct" name="checkProduct" data-odnum="${aOrder.od_num}"/></p>
-										<span style="font-weight : bold; font-size : 120%;">${aOrder.pr_name}</span><br>사이즈 : ${aOrder.pro_size}, 색상 : ${aOrder.pro_color}, 갯수 : ${aOrder.od_goodscount}
+										<span style="font-weight : bold; font-size : 120%;">${aOrder.pr_name}</span><br>사이즈 : ${aOrder.pro_size}, 색상 : ${aOrder.pro_color}, 갯수 : ${aOrder.od_goodscount} 
 										
 									</td>
 									<td colspan="2" class="highlight1">상품 가격</td>

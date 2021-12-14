@@ -21,7 +21,7 @@
 
 <div class="container-fluid" style="margin-top : 0px !important; height : 120px;">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/nboard/nboardTest"><img alt="설정" src="/resources/image/logo_6.png" style="height : 90px; margin : 0px !important; padding : 0px !important;"/></a><%-- <p style="padding-top : 85px; padding-left : 220px;  color : white;"><strong>관리자 페이지</strong></p> --%>
+          <a class="navbar-brand" href="/nboard/nboardTest"><img alt="설정" src="/resources/image/logo_6_admin.png" style="height : 90px; margin : 0px !important; padding : 0px !important;"/></a><%-- <p style="padding-top : 85px; padding-left : 220px;  color : white;"><strong>관리자 페이지</strong></p> --%>
          </div>
         <p class="text-right">
        	 <a href="/admin/adminInfo"><img alt="설정" src="/resources/image/user_icon.png" class="mini_icon" /></a>

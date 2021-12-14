@@ -20,5 +20,6 @@ public interface AorderDAO {
 	public int aOrderTotalPayChange(AorderVO aovo);
 	public int aOdTotalPayChange(AorderVO aovo);
 	public int aOrderProCountChange(AorderVO aovo);
-	public AorderVO getProCount(AorderVO aovo);
+	public int aOrderProCountReset(AorderVO aovo);
+	
 }

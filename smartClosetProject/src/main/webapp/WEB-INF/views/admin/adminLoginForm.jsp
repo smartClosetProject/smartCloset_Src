@@ -84,15 +84,17 @@
 		<![endif]-->
 	</head>
 	<body>
-		<div class="container">
+		<div class="container text-center">
 			<form id="f_loginAdmin" name="f_loginAdmin">
-				 <h2 class="form-signin-heading text-center" style="margin-bottom : 40px !important">SmartCloset 관리자 로그인</h2>
+				<img alt="설정" src="/resources/image/logo_navy_admin.png" style="width : 350px; margin-bottom : 30px;"/>
+				<p class="text-center" style="padding-botton : 40px;color : #1a5276;">${msg}</p>
+				 
 				 <label for="ad_id" class="sr-only">아이디</label>
 				 <input type="text" name="ad_id" id="ad_id" class="form-control" placeholder="아이디" required autofocus style="margin : 20px auto; width : 50%; height : 40px">
 				  <label for="ad_passwd" class="sr-only">비밀번호</label>
 				 <input type="password" name="ad_passwd" id="ad_passwd" class="form-control" placeholder="비밀번호" required style="margin : 20px auto; width : 50%; height : 40px">
-        		<button id="loginAdminBtn" class="btn btn-primary btn-block" style="margin : auto; width:200px !important; margin-top : 40px !important" type="submit">로그인</button>
-        		<a>${msg}</a>
+        		<button id="loginAdminBtn" class="btn btn-primary btn-block" style="margin : auto; width:200px !important; margin-top : 40px !important; margin-botton : 40px !important;" type="submit">로그인</button>
+        		
 			</form>
 		</div>
 	</body>

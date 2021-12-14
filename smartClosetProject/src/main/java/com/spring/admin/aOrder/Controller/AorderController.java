@@ -90,7 +90,13 @@ public class AorderController {
 			aOrderservice.aOrderChangeState(aovo);
 			ras.addFlashAttribute("data",aovo);
 			aOrderservice.aOrderTotalPayChange(aovo);
-			
+			log.info(aovo.getOrder_state());
+			if(aovo.getOrder_state().equals("전체 환불")) {
+				aOrderservice.aOrderProCountReset(aovo);
+			}
+			else {
+				aOrderservice.aOrderProCountChange(aovo);
+			}
 			return "redirect:/aOrder/aOrderList";
 		}
 		else return "error";
@@ -131,6 +137,7 @@ public class AorderController {
 			aovo.setOd_num(od_num);
 			AorderVO a1 = aOrderservice.aOrderReturnDetail(aovo);
 			log.info(a1);
+			//aOrderservice.aOrderProCountReset(a1);
 			model.addAttribute("detail", a1);
 			
 			List<String> color = new ArrayList<String>();
@@ -151,15 +158,15 @@ public class AorderController {
 	@RequestMapping("aOrderOptionChange")
 	public String aOrderOptionChange(@RequestBody AorderVO aovo, RedirectAttributes ras, Model model) throws SQLException {
 		if(session.getAttribute("ad_id")!=null) {
+			log.info("aOrderOptionChange  실행완료");
 			log.info(aovo);
-	
-				aOrderservice.aOrderOptionChange(aovo);
-			
-				ras.addFlashAttribute("data",aovo);
-				log.info(ras.getFlashAttributes());
-					
-				return "redirect:/aOrder/returnProDetailForm?od_num="+aovo.getOd_num();
-
+			log.info(aovo.getPro_num());
+			aOrderservice.aOrderProCountReset(aovo);
+			aOrderservice.aOrderOptionChange(aovo);
+			ras.addFlashAttribute("data",aovo);
+			log.info(ras.getFlashAttributes());
+						
+			return "redirect:/aOrder/returnProDetailForm?od_num="+aovo.getOd_num();
 		}
 			
 		else return "error";

@@ -39,9 +39,9 @@
 	</select>
 	
 	<select id="aOrderProductDetail" parameterType="aorder" resultType="aorder">
-		SELECT od2.od_goodscount, od2.pr_price*od2.od_goodscount as od_totalPayment, od2.pro_size, od2.pr_name, od2.pr_price, od2.pro_color, od2.od_num
+		SELECT od2.od_goodscount, od2.pr_price*od2.od_goodscount as od_totalPayment, od2.pro_size, od2.pr_name, od2.pr_price, od2.pro_color, od2.od_num, od2.pro_num ,od2.pro_num, od2.pro_stock, od2.pro_sales
 		FROM sc_order o LEFT join (select * from  
-            									(SELECT od.od_goodscount, p.pro_size,od.pro_num, p.pro_color,p.pr_num, od.order_num, od.od_num
+            									(SELECT od.od_goodscount, p.pro_size,od.pro_num, p.pro_color,p.pr_num, od.order_num, od.od_num,  p.pro_stock, p.pro_sales
             									from sc_order_detail od right join product p on od.pro_num = p.pro_num) p1 
              									left join 
            										(select DISTINCT p.pr_num, pd.pr_name, pd.pr_price from product p left join pr_detail pd on p.pr_num = pd.pr_num) p2
@@ -80,21 +80,19 @@
 	              from product od inner join (select p.pro_num, p.pro_size, p.pro_color, pr.pr_num, pr.pr_price,pr.pr_name from product p join pr_detail pr on p.pr_num = pr.pr_num) p2
 	              on p2.pro_color=#{pro_color} and p2.pro_size=#{pro_size} and od.pr_num=p2.pr_num),
 	    od_goodscount = #{od_goodscount}
-	    
 	where od_num = #{od_num}
 	</update>
-	
-	<select id="getProCount" parameterType="aorder" resultType="aorder">
-		SELECT pro_stock, pro_sales
-		from sc_order_detail o join product p
-		on o.pro_num = p.pro_num
-		where o.od_num = #{od_num}
-	</select>
 	
 	<update id="aOrderProCountChange">
 	UPDATE product
 	set pro_stock = pro_stock - (select od_goodscount from sc_order_detail o1 join product o2 on o1.pro_num= o2.pro_num where o1.od_num=#{od_num}),
 	    pro_sales = pro_sales + (select od_goodscount from sc_order_detail o1 join product o2 on o1.pro_num= o2.pro_num where o1.od_num=#{od_num})
+	where pro_num = #{pro_num}
+	</update>
+	<update id="aOrderProCountReset">
+	UPDATE product
+	set pro_stock = pro_stock + (select od_goodscount from sc_order_detail o1 join product o2 on o1.pro_num= o2.pro_num where o1.od_num=#{od_num}),
+	    pro_sales = pro_sales - (select od_goodscount from sc_order_detail o1 join product o2 on o1.pro_num= o2.pro_num where o1.od_num=#{od_num})
 	where pro_num = #{pro_num}
 	</update>
 	
@@ -112,10 +110,10 @@
         
 	
 	<select id="aOrderReturnDetail" parameterType="aorder" resultType="aorder">
-		select od.od_num, od.order_state, od.order_num, p.pr_price, od.od_goodscount, od.pro_num, p.pro_size, p.pr_num, p.pro_color, p.pr_name
+		select od.od_num, od.order_state, od.order_num, p.pr_price, od.od_goodscount, od.pro_num, p.pro_size, p.pr_num, p.pro_color, p.pr_name, p.pro_stock, p.pro_sales
 		from (select o1.order_num, o2.od_num, o1.order_state, o2.pro_num, o2.od_goodscount from sc_order o1 join sc_order_detail o2 on o1.order_num=o2.order_num) od
 		join
-			(select p1.pro_num, p1.pro_size, p1.pr_num, p1.pro_color, p2.pr_name, p2.pr_price from product p1 join pr_detail p2 on p1.pr_num=p2.pr_num) p
+			(select p1.pro_num, p1.pro_size, p1.pr_num, p1.pro_color, p2.pr_name, p2.pr_price, p1.pro_stock, p1.pro_sales from product p1 join pr_detail p2 on p1.pr_num=p2.pr_num) p
 		on od.pro_num = p.pro_num
 		where od_num = #{od_num}
 	</select>
