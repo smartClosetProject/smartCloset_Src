@@ -54,9 +54,9 @@ public class MemberController {
 		MemberVO mypage = memberService.memberMypage(mvo);
 		model.addAttribute("mypage", mypage);
 		
-
-		int memberMypageCnt = memberService.memberMypageCnt(ovo);
-		ovo.setM_id(vo.getM_id());
+		ovo.setM_id(mvo.getM_id());
+		MyorderVO memberMypageCnt = memberService.memberMypageCnt(ovo);
+		
 		
 		model.addAttribute("memberMypageCnt",memberMypageCnt );
 		

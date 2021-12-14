@@ -21,7 +21,6 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter{
 	@Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        //String m_id = (String) session.getAttribute("m_id");
         MemberVO login = (MemberVO) session.getAttribute("login");
         
         String requestUrl = request.getRequestURL().toString();

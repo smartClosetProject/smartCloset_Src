@@ -46,7 +46,7 @@
 						if ($("#re_Search").val() == 'r_content') {
 							value = "#po_list tr td.goDetail";
 						} else if ($("#re_Search").val() == 'm_id') {
-							value = "#po_list tr td.name";
+							value = "#po_list tr td.m_id";
 						}
 						console.log($(value + ":contains('" + word + "')").html());
 						
@@ -169,15 +169,17 @@
 			</table>
 			</div>			
 			<%-- =================== 검색 버튼 =================== --%>
-			<div id="reviewSearch" class="text-left">
+			<div id="postSearch" class="text-left">
 				<form id="r_search" name="r_search" class="form-inline">
 					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum }">
 					<input type="hidden" name="amount" value="${pageMaker.cvo.amount }">
+					<input type="hidden" id="m_id" value="${login.m_id}" name="m_id">
 						<span class="glyphicon glyphicon-search"></span>&nbsp;
 					 <div class="form-group">
 						<select id ="re_Search" name="search" class="form-control">
 							<option value="all">전체</option>
-							<option value="r_content">제목</option>
+							<option value="r_title">제목</option>
+							<option value="r_content">내용</option>
 						</select>
 							<input type="text" id="reviewKeyword" name="keyword" value="검색어 입력" class="form-control">
 							<button type="button" class="btn btn-default" id="reviewSearchBtn" >검색</button>

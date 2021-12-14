@@ -10,7 +10,7 @@
 	</select>
 	
 	<!-- 마이페이지 출력시 주문배송조회 숫자 카운트 -->
-	<select id="memberMypageCnt" parameterType="myorder" resultType="int">
+	<select id="memberMypageCnt" parameterType="myorder" resultType="myorder">
 	SELECT
 	    COUNT(CASE WHEN order_state='입금 전' THEN 1 END) AS bd,
 	    COUNT(CASE WHEN order_state='결제완료' THEN 1 END) AS bd1,
@@ -23,12 +23,12 @@
 	
 	<!-- 검색 중복 소스 사용 -->
 	<sql id="postSearch">
-			<!-- <if test="search == 'r_title'">
+			<if test="search == 'r_title'">
 				<![CDATA[ r_title LIKE '%' || #{keyword} || '%' ]]>
-			</if> -->
-			<!-- <if test="search == 'r_content'">
-				<![CDATA[ r_content LIKE '%' || #{keyword} || '%' ]]>
-			</if> -->
+			</if> 
+			 <if test="search == 'm_id'">
+				<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
+			</if> 
 			<if test="search == 'r_content'">
 				<![CDATA[ r_content LIKE '%' || #{keyword} || '%' ]]>
 			</if>
@@ -65,12 +65,12 @@
 	
 	<!--   게시판 목록 뷰 --> 
 	<select id="postList" parameterType="post" resultType="post">
-		 
+		 <![CDATA[
 		 SELECT ROWNUM as rnum, m_id, r_num, r_content, r_title, r_regdate, category 
 			FROM 
 				(select ROWNUM as rnum, m_id, r_num, r_content, r_title, r_regdate, category 
                  from reviewandqna
-				  WHERE 
+				  WHERE  ]]>
 				  <trim prefix="(" suffix=") AND " prefixOverrides="AND">
 					<include refid="postSearch"></include>
 				  </trim>
