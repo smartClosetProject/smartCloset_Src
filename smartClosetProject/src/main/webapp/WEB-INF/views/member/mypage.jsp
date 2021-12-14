@@ -27,6 +27,14 @@
 		   border: 2px solid #e7e7e7;
 		}
 		.button4:hover {background-color: #e7e7e7;}
+		.button {
+			boder : 0;
+			outline : 0;
+		}
+		#oreders{
+			width: 78%;
+		}
+		
 		
 		</style>
 		<script type="text/javascript">
@@ -77,52 +85,54 @@
 			<label>${login.m_name}회원님</label>
 			<hr>
 		</div>
-		<div>
-			<h3>나의 주문 처리 현황</h3>
-			<hr>
-			<ol class="list-group list-group-numbered">
-				  <li class="list-group-item d-flex justify-content-between align-items-start">
-					<a href = "/member/myorderList" class="count" >
-						<strong id="order_state">입금전</strong>
-						<span >
-							<span id="myorderCount">${memberMypageCnt.bd}</span>
-						</span>
-					</a>
-				</li>
-				<li>
-					<a href = "/member/myorderList" class="count" >
-						<strong id="order_state">결제 완료</strong>
-						<span>
-							<span id="myorderCount">${memberMypageCnt.bd1}</span>
-						</span>
-					</a>
-				</li>
-				<li>
-					<a href = "/member/myorderList" class="count" >
-						<strong id="order_state">배송준비중</strong>
-						<span>
-							<span id="myorderCount">${memberMypageCnt.bd2}</span>
-						</span>
-					</a>
-				</li>
-				<li>
-					<a href = "/member/myorderList" class="count" >
-						<strong id="order_state">배송중</strong>
-						<span>
-							<span id="myorderCount">${memberMypageCnt.bd3}</span>
-						</span>
-					</a>
-				</li>
-				<li>
-					<a href = "/member/myorderList" class="count" >
-						<strong id="order_state">배송완료</strong>
-						<span>
-							<span id="myorderCount">${memberMypageCnt.bd4}</span>
-						</span>
-					</a>
-				</li>
-					
-			</ol>
+		<div class="container">
+			<div class="row" id="oreders">
+				<h4>나의 주문 처리 현황</h4>
+				<hr>
+				  <ul class="list-group" >
+					  <li class="list-group-item d-flex justify-content-between align-items-center">
+						<a href = "/member/myorderList" class="count" >
+							<strong id="order_state">입금전</strong>
+							 <span class="badge badge-primary">
+								<span id="myorderCount">${memberMypageCnt.bd}</span>
+							</span>
+						</a>
+						</li>
+					 <li class="list-group-item d-flex justify-content-between align-items-center">
+						<a href = "/member/myorderList" class="count" >
+							<strong id="order_state">결제 완료</strong>
+							<span class="badge badge-primary">
+								<span id="myorderCount">${memberMypageCnt.bd1}</span>
+							</span>
+						</a>
+					</li>
+					 <li class="list-group-item d-flex justify-content-between align-items-center">
+						<a href = "/member/myorderList" class="count" >
+							<strong id="order_state">배송준비중</strong>
+							<span class="badge badge-primary">
+								<span id="myorderCount">${memberMypageCnt.bd2}</span>
+							</span>
+						</a>
+					</li>
+					 <li class="list-group-item d-flex justify-content-between align-items-center">
+						<a href = "/member/myorderList" class="count" >
+							<strong id="order_state">배송중</strong>
+							<span class="badge badge-primary">
+								<span id="myorderCount">${memberMypageCnt.bd3}</span>
+							</span>
+						</a>
+					</li>
+					 <li class="list-group-item d-flex justify-content-between align-items-center">
+						<a href = "/member/myorderList" class="count" >
+							<strong id="order_state">배송완료</strong>
+							<span class="badge badge-primary">
+								<span id="myorderCount">${memberMypageCnt.bd4}</span>
+							</span>
+						</a>
+					</li>
+						
+				</ul>
+			</div>
 		</div>	
 			<div style="position: absolute; top: 424px; left:20px; width: 143px; height: 126px;">
 				<input type="button"  class="button button4" id="updateBtn" name="updateBtn" value="회원정보 수정">
@@ -139,10 +149,6 @@
 			<div style="position: absolute; top: 424px; left:740px; width: 143px; height: 126px;">
 				<input type="button" class="button button4" id="smartClosetBtn" name="smartClosetBtn" value="스마트옷장">					
 			</div>
-				
-				
-						
-			</form>	
-	
+	</form>
 	</body>
 </html>
