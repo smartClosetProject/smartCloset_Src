@@ -74,6 +74,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/cart/**" />
 			<mvc:mapping path="/member/mypage" />
+			<mvc:mapping path="/member/myorderList" />
 			<mvc:mapping path="/order/**" />
 			<mvc:mapping path="/sCloset/**" />
 			<beans:bean id="authLoginInterceptor" class="com.spring.common.AuthLoginInterceptor" />

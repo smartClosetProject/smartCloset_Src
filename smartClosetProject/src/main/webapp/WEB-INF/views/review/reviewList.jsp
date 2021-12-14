@@ -126,6 +126,7 @@
 		<div class="contentContainer reviewDiv">
 			<form id="r_numForm">
 				<input type="hidden" id="m_id" value="m_id" name="m_id">
+				<input type="hidden" id="m_name" value="m_name" name="m_name">
 				<input type="hidden" id="r_num" value="r_num" name="r_num">
 			</form>
 			<!-- --------------------검색 종료 ---------------------------->
@@ -150,7 +151,7 @@
 									<td>${count - status.index }</td>
 									<td class="text-left" ><img src="/uploadStorage/review/thumbnail/${review.r_thumb }"></td>
 									<td class="goDetail text-left">${review.r_title}</td>
-									<td class="text-left">${review.m_id}</td>
+									<td class="text-left">${review.m_name}</td>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -184,7 +185,7 @@
 			</div>
 			<c:if test="${not empty login}">
 				<div class="contentBtn text-right">
-					<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-success">
+					<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-default">
 				</div>
 			</c:if>
 			<!-- ---------------------검색 종료 ------------------------------>

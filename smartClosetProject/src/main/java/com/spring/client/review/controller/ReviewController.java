@@ -63,7 +63,7 @@ public class ReviewController {
 		
 		MemberVO vo= (MemberVO) session.getAttribute("login");
 		mvo.setM_id(vo.getM_id());
-		
+		mvo.setM_name(vo.getM_name());
 		
 		model.addAttribute("writeForm",vo);
 		

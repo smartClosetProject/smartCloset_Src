@@ -165,13 +165,13 @@ $(function(){
 		<c:choose>
 		<c:when test="${not empty qnaList}">
 			<c:forEach var="qna" items="${qnaList }" varStatus="status">
-			<tr class="text-center" data-num="${qna.q_num} ">
-				<td>${count - status.index}</td>
-				<td class="goDetail text-left">${qna.q_title}</td>
-				<td class="goCate text-center">${qna.q_category}</td>
-				<td class="text-left" >${qna.q_regdate}</td>
-				<td class="name" >${qna.m_id}</td>
-		   </tr>
+				<tr class="text-center" data-num="${qna.q_num} ">
+					<td>${count - status.index}</td>
+					<td class="goDetail text-left">${qna.q_title}</td>
+					<td class="goCate text-center">${qna.q_category}</td>
+					<td class="text-left" >${qna.q_regdate}</td>
+					<td class="name" >${qna.m_id}</td>
+			   </tr>
 		</c:forEach>
 		</c:when>
 	<c:otherwise>

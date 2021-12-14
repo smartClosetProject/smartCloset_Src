@@ -9,7 +9,7 @@ public interface ReplyDao {
 	public int replyInsert(ReplyVO rvo);
 	public int pwdConfirm(ReplyVO rvo);
 	public int replyUpdate(ReplyVO rvo);
-	public int replyDelete(Integer re_num);
+	public int replyDelete(Integer r_num);
 	
 	
 }

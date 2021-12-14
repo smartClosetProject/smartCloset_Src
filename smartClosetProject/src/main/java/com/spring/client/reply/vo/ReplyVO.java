@@ -16,4 +16,5 @@ public class ReplyVO {
 	private String r_content ="";
 	private String r_passwd ="";
 	private String r_regdate="";
+	private String m_name = ""; //회원 아이디
 }

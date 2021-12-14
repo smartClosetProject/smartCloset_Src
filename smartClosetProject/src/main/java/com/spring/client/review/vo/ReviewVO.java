@@ -25,5 +25,6 @@ public class ReviewVO extends CommonVO {
 	private String r_regdate = ""; //등록일
 	private String m_id = "" ; //회원 아이디
 	private String r_file = "";
+	private String m_name = ""; //회원 이름
 	
 }

@@ -126,13 +126,13 @@ public class ReplyController {
 	  * 일부의 데이터를 수정하는 경우에는 patch를 이용
 	  * 현재 요청 url : http://localhost:8080/replies/댓글번호
 	  */
-	 @RequestMapping(value="/{re_num}", method= {RequestMethod.PUT, RequestMethod.PATCH},
+	 @RequestMapping(value="/{r_num}", method= {RequestMethod.PUT, RequestMethod.PATCH},
 			 consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
-	 	public ResponseEntity<String>replyUpdate(@PathVariable("re_num")Integer re_num,
+	 	public ResponseEntity<String>replyUpdate(@PathVariable("r_num")Integer r_num,
 	 			@RequestBody ReplyVO rvo){
 		 	log.info("replyUpdate 호출 성공");
 		 	
-		 	rvo.setR_num(re_num);
+		 	rvo.setR_num(r_num);
 		 	int result = replyService.replyUpdate(rvo);
 		 	return result ==1 ? new ResponseEntity<String>("SUCCESS", HttpStatus.OK):
 		 		new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -145,12 +145,12 @@ public class ReplyController {
 	  * 현재 요청 url : http:// localhost:8080/replies/댓글번호
 	  */
 	 
-	 @DeleteMapping(value = "/{re_num}", produces = {MediaType.TEXT_PLAIN_VALUE})
-	 public ResponseEntity<String> replyDelete(@PathVariable("re_num") Integer re_num) {
+	 @DeleteMapping(value = "/{r_num}", produces = {MediaType.TEXT_PLAIN_VALUE})
+	 public ResponseEntity<String> replyDelete(@PathVariable("r_num") Integer r_num) {
 		 log.info("replyDelete 호출 성공");
-		 log.info("re_num ="+re_num);
+		 log.info("r_num ="+r_num);
 		 
-		 int result = replyService.replyDelete(re_num);
+		 int result = replyService.replyDelete(r_num);
 		 return result ==1? new ResponseEntity<String>("SUCCESS", HttpStatus.OK):
 			 new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	 }

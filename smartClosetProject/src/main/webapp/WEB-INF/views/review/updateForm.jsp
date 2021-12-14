@@ -80,7 +80,7 @@
 		 			</tr>
 		 			<tr>
 		 				<td>작성자</td>
-		 				<td colspan="3">${updateData.m_id}</td>
+		 				<td colspan="3">${updateData.m_name}</td>
 		 			</tr>
 		 			<tr class="table-height">
 		 				<td>글내용</td>

@@ -58,6 +58,7 @@
 			<form name="f_data" id="f_data" method="post">
 				<input type="hidden" name="r_num" value="${detail.r_num}">
 				<input type="hidden" name="m_id" value="${detail.m_id}">
+				<input type="hidden" name="m_id" value="${detail.m_name}">
 				<input type="hidden" name="r_file" value="${detail.r_file }">
 				<input type="hidden" name="r_thumb" value="${detail.r_thumb }">
 			</form>
@@ -76,7 +77,7 @@
 		 			</tr>
 		 			<tr>
 		 				<td>작성자</td>
-		 				<td colspan="3">${detail.m_id}</td>
+		 				<td colspan="3">${detail.m_name}</td>
 		 			</tr>
 		 			<tr class="table-height">
 		 				<td>글내용</td>
