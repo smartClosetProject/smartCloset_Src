@@ -1,5 +1,7 @@
 package com.spring.client.product.vo;
 
+import com.spring.common.vo.CommonVO;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductVO {
+public class ProductVO extends CommonVO{
 	public String pr_num;
 	public String pr_name;
 	public int pr_price;
@@ -23,4 +25,6 @@ public class ProductVO {
 	public String pro_size;
 	public String pro_color;
 	public String pro_num;
+	public String pro_keyword;
+	public String order;
 }

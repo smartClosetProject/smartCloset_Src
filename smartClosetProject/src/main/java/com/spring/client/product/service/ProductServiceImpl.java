@@ -47,9 +47,23 @@ public class ProductServiceImpl implements ProductService {
 		return listColor;
 	}
 	@Override
+	public List<ProductVO> orderPage(ProductVO pvo){
+		List<ProductVO> listData = productDAO.orderPage(pvo);
+		return listData;
+	}
+	@Override
 	public List<ProductVO> categoryPage(ProductVO pvo) {
 		List<ProductVO> listData = productDAO.categoryPage(pvo);
 		return listData;
 	}
-
+	@Override
+	public List<ProductVO> categorysPage(ProductVO pvo){
+		List<ProductVO> listData = productDAO.categorysPage(pvo);
+		return listData;
+	}
+	@Override
+	public List<ProductVO> listPage(ProductVO pvo){
+		List<ProductVO> listData = productDAO.listPage(pvo);
+		return listData;
+	}
 }

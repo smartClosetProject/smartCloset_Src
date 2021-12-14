@@ -11,4 +11,7 @@ public interface ProductService {
 	public List<String> listSize(ProductVO cpvo);
 	public List<String> listColor(ProductVO cpvo);
 	public List<ProductVO> categoryPage(ProductVO pvo);
+	public List<ProductVO> listPage(ProductVO pvo);
+	public List<ProductVO> categorysPage(ProductVO pvo);
+	public List<ProductVO> orderPage(ProductVO pvo);
 }
