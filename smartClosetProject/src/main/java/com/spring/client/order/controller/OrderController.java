@@ -87,7 +87,6 @@ public class OrderController {
 		List<Integer> cartNums = (ArrayList<Integer>) session.getAttribute("cart");
 		odvo.setOrder_num(order_num);
 		
-		//String pro_num = 
 		for (Integer i : cartNums) {
 			odvo.setCart_num(i);
 			ovo.setCart_num(i);
@@ -102,7 +101,6 @@ public class OrderController {
 		String dateFormat = sdf.format(cal.getTime());
 		ovo.setOrder_regdate(dateFormat);
 
-		// 새로고침 시 주문이 계속 insert 되는 현상을 방지하기 위해 session과 redirect 활용
 		session.setAttribute("order", ovo);
 		
 		return "redirect:/order/orderComplete";
