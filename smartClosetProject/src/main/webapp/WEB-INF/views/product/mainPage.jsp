@@ -56,7 +56,7 @@
 					<c:forEach var="date" items="${listDate}" varStatus="status">
 						<div class="product goDetail" data-num="${date.pr_num}">
 							<c:if test="${not empty date.pr_thumb}">
-								<img src="/uploadStorage/prDetail/thumb/${date.pr_thumb}">
+								<img class="primg" src="/uploadStorage/prDetail/thumb/${date.pr_thumb}">
 							</c:if>
 							<div class="title">${date.pr_name}</div>
 							<div class="line"> </div>

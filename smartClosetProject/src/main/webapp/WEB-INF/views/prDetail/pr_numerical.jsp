@@ -13,8 +13,10 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png"/>
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
 		<style type="text/css">
-			.table-height{min-height:450px;  width:1600px;}
-			input[type=number]{width:60px;}
+			.table-height{min-height:450px;  width:100%;}
+			#odSelect{width:150px;; height: 25px;}
+			#prnumberST, #prnumberSA{width:60px;}
+			
 		</style>
 		<script type="text/javascript">
 			$(function(){
@@ -46,7 +48,7 @@
 					$("#updateNum").submit();
 				})
 				$("#lineup").click(function(){
-					let order=$("#order").val();
+					let order=$("#odSelect").val();
 					$("#orderOp").val(order);
 					$("#orderby").attr({
 						"method":"get",
@@ -65,8 +67,8 @@
 				<input type="hidden" name="pr_num" class="pr_num">
 				<input type="hidden" name="orderOp" id="orderOp">
 			</form>
-				<div class="contentTit page-header text-right">
-					<select id="order" name="order">
+				<div class="contentTit page-header text-right numdiv">
+					<select id="odSelect" name="order">
 						<option value="date">등록일</option>
 						<option value="sales">판매량</option>
 					</select>
@@ -103,8 +105,8 @@
 										<td class="text-center" >${prNumerical.pr_num}</td>
 										<td class="text-center">${prNumerical.pro_size}</td>
 										<td class="text-center">${prNumerical.pro_color}</td>
-										<td class="text-center"><input type="number" class="pro_stock" name="pro_stock" value="${prNumerical.pro_stock}"></td>
-										<td class="text-center"><input type="number" class="pro_sales" name="pro_sales" value="${prNumerical.pro_sales}"></td>
+										<td class="text-center"><input type="number" class="pro_stock" name="pro_stock" id="prnumberST" value="${prNumerical.pro_stock}"></td>
+										<td class="text-center"><input type="number" class="pro_sales" name="pro_sales" id="prnumberSA" value="${prNumerical.pro_sales}"></td>
 										<td>
 											<button class="save">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" fill="currentColor" class="bi bi-file-earmark-check-fill" viewBox="0 0 16 16">
