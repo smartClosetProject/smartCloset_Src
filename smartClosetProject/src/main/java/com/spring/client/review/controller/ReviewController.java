@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.client.member.vo.MemberVO;
 import com.spring.client.review.service.ReviewService;
 import com.spring.client.review.vo.ReviewVO;
 import com.spring.common.vo.PageDTO;
@@ -54,16 +55,17 @@ public class ReviewController {
 	}
 	
 	/**************************************************
-	 * 글쓰기 폼 출력
+	 * 글쓰기 폼 출력 -- 수정 버튼 클릭시 아이디가 같지않으면 다시 뒤로 돌려보내는거 해야함
 	 * *************************************************/
 	@RequestMapping(value="/writeForm")
-	public String writeForm(Model model) {
+	public String writeForm(MemberVO mvo,Model model) {
 		log.info("write 호출 성공");
 		
-		String m_id = (String) session.getAttribute("m_id");
-		m_id = "smartmember";
+		MemberVO vo= (MemberVO) session.getAttribute("login");
+		mvo.setM_id(vo.getM_id());
 		
-		model.addAttribute("m_id", m_id);
+		
+		model.addAttribute("writeForm",vo);
 		
 		return "review/writeForm";
 	}
@@ -94,6 +96,8 @@ public class ReviewController {
 	@RequestMapping(value="/reviewDetail", method = RequestMethod.GET)
 	public String reviewDetail(@ModelAttribute("data") ReviewVO rvo, Model model) {
 		log.info("reviewDetail 호출 성공");
+		
+
 		
 		ReviewVO detail = reviewService.reviewDetail(rvo);
 		model.addAttribute("detail",detail);

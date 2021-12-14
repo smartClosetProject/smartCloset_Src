@@ -71,21 +71,38 @@
 	</head>
 	<body>
 	<form id="memberList">
-		<input type="hidden" name="m_id" id="m_id" value="${mypage.m_id}">
+		<input type="hidden" name="m_id" id="m_id" value="${login.m_id}">
 		<div style="font-weight: bold;font-size: 36px; text-align:center;">MY PAGE</div>
 		<div>
-			<label>${data.m_id}회원님</label>
+			<label>${login.m_name}회원님</label>
 			<hr>
 		</div>
 		<div>
 			<h3>나의 주문 처리 현황</h3>
 			<hr>
-			<ul>
+			<ol class="list-group list-group-numbered">
+				  <li class="list-group-item d-flex justify-content-between align-items-start">
+					<a href = "/member/myorderList" class="count" >
+						<strong id="order_state">입금전</strong>
+						
+						<span >
+							<span id="myorderCount">${order_state.bd}</span>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href = "/member/myorderList" class="count" >
+						<strong id="order_state">결제 완료</strong>
+						<span>
+							<span id="myorderCount">${order_state.bd1}</span>
+						</span>
+					</a>
+				</li>
 				<li>
 					<a href = "/member/myorderList" class="count" >
 						<strong id="order_state">배송준비중</strong>
-						<span >
-							<span id="myorderCount">0</span>
+						<span>
+							<span id="myorderCount">${order_state.bd2}</span>
 						</span>
 					</a>
 				</li>
@@ -93,7 +110,7 @@
 					<a href = "/member/myorderList" class="count" >
 						<strong id="order_state">배송중</strong>
 						<span>
-							<span id="myorderCount">${memberMypageCnt}</span>
+							<span id="myorderCount">${order_state.bd3}</span>
 						</span>
 					</a>
 				</li>
@@ -101,12 +118,12 @@
 					<a href = "/member/myorderList" class="count" >
 						<strong id="order_state">배송완료</strong>
 						<span>
-							<span id="myorderCount">0</span>
+							<span id="myorderCount">${order_state}</span>
 						</span>
 					</a>
 				</li>
 					
-			</ul>
+			</ol>
 		</div>	
 			<div style="position: absolute; top: 424px; left:20px; width: 143px; height: 126px;">
 				<input type="button"  class="button button4" id="updateBtn" name="updateBtn" value="회원정보 수정">

@@ -11,8 +11,14 @@
 	
 	<!-- 마이페이지 출력시 주문배송조회 숫자 카운트 -->
 	<select id="memberMypageCnt" parameterType="myorder" resultType="int">
-		SELECT COUNT(*)  FROM myorderview
-          where order_state = '결제완료' and m_id = 'smartmember'
+	SELECT
+	    COUNT(CASE WHEN order_state='입금 전' THEN 1 END) AS bd,
+	    COUNT(CASE WHEN order_state='결제완료' THEN 1 END) AS bd1,
+	    COUNT(CASE WHEN order_state='배송 준비 중' THEN 1 END) AS bd2,
+	    COUNT(CASE WHEN order_state='배송 중' THEN 1 END) AS bd3,
+	    COUNT(CASE WHEN order_state='배송 완료' THEN 1 END) AS bd4
+	FROM myorderview 
+	WHERE m_id = #{m_id} 
 	</select>
 	
 	<!-- 검색 중복 소스 사용 -->
@@ -68,7 +74,7 @@
 				  <trim prefix="(" suffix=") AND " prefixOverrides="AND">
 					<include refid="postSearch"></include>
 				  </trim>
-		<![CDATA[ ROWNUM <= #{pageNum} * #{amount} 
+		<![CDATA[ ROWNUM <= #{pageNum} * #{amount}  and m_id = #{m_id}
 		) list
 			WHERE rnum > (#{pageNum} - 1) * #{amount}
 		]]>
@@ -78,7 +84,6 @@
 	
 	<!-- 게시판 목록 레코드 수 조회 -->
 	<select id="postListCnt" parameterType="post" resultType="int">
-		
 		SELECT COUNT(*)  FROM reviewandqna
 		<trim prefix=" WHERE (" suffix=")">
 			<include refid="postSearch"></include>
@@ -106,7 +111,8 @@
 	<!-- 로그인 -->
 	<select id="login" parameterType="member" resultType="member">
 		/*Member - memberLogin*/
-		select * from member 
+		select m_num, m_id, m_name, m_email, m_phone, m_addr, m_exitDate, m_mile, m_acc, m_addr2, m_addr3
+		from member 
 		WHERE m_id = #{m_id} and m_passwd = #{m_passwd}
 	</select>
 	

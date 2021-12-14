@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ import com.spring.client.member.vo.PostVO;
 import com.spring.common.vo.PageDTO;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 
@@ -34,7 +36,10 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class MemberController {
 	
-private MemberService memberService;
+	@Setter(onMethod_= @Autowired)
+	private MemberService memberService;
+	@Setter(onMethod_ = @Autowired)
+	private HttpSession session;
 	
 	/**************
 	 * 마이페이지 구현하기
@@ -43,14 +48,19 @@ private MemberService memberService;
 	public String MemberMypage(@ModelAttribute("data") MemberVO mvo,MyorderVO ovo, Model model) {
 		log.info("mypage 호출 성공");
 		
+		MemberVO vo= (MemberVO) session.getAttribute("login");
+		mvo.setM_id(vo.getM_id());
 		
 		MemberVO mypage = memberService.memberMypage(mvo);
 		model.addAttribute("mypage", mypage);
+		
 
 		int memberMypageCnt = memberService.memberMypageCnt(ovo);
+		ovo.setM_id(vo.getM_id());
+		
 		model.addAttribute("memberMypageCnt",memberMypageCnt );
 		
-		mvo.setM_id("smartmember");
+		
 		
 		return "member/mypage";
 	}
@@ -61,7 +71,9 @@ private MemberService memberService;
 	public String updateForm(@ModelAttribute("data") MemberVO mvo, Model model) {
 		log.info("updateForm 호출 성공");
 		
-		mvo.setM_id("smartmember");
+		MemberVO vo= (MemberVO) session.getAttribute("login");
+		mvo.setM_id(vo.getM_id());
+		
 		MemberVO updateData = memberService.updateForm(mvo);
 		model.addAttribute("updateData", updateData);
 		
@@ -79,6 +91,7 @@ private MemberService memberService;
 		
 		int result = 0;
 		String url = "";
+		
 		
 		result = memberService.memberUpdate(mvo);
 		ras.addFlashAttribute("data", mvo);
@@ -100,6 +113,9 @@ private MemberService memberService;
 		
 		int result = 0;
 		String url = "";
+		
+		MemberVO vo= (MemberVO) session.getAttribute("login");
+		mvo.setM_id(vo.getM_id());
 		
 		result = memberService.memberDelete(mvo);
 		ras.addFlashAttribute("data",mvo); 
@@ -123,6 +139,7 @@ private MemberService memberService;
 		log.info("postmanagement 호출 성공");
 
 
+		
 		//게시판 리스트 조회
 		List<PostVO> postList = memberService.postList(pvo);
 		model.addAttribute("postList",postList);
@@ -143,8 +160,9 @@ private MemberService memberService;
 	@GetMapping("/myorderList")
 	public String MyorderList(@ModelAttribute("data") MyorderVO mvo, Model model) {
 		log.info("myorderList 호출 성공");
-		// 추후 세션 처리 후 변경
-		mvo.setM_id("smartmember");
+		
+		MemberVO vo= (MemberVO) session.getAttribute("login");
+		mvo.setM_id(vo.getM_id());
 		
 		if(mvo.getStart_date()=="") {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -200,30 +218,23 @@ private MemberService memberService;
 		/*로그인처리*/
 		@RequestMapping(value="/login")
 		public String login(MemberVO memberVO, HttpServletRequest req, Model model) {
-
+			log.info("로그인성공");
 			String path = null;
 			
 			HttpSession session = req.getSession();
 			memberVO = memberService.login(memberVO);
 			String m_id = memberVO.getM_id();
-
-			if(memberVO == null) {
-				log.info("로그인실패");
-				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");	
-			} if(m_id == null) {
+			
+			if(m_id == null) {
 				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");
 				path = "member/loginForm";
+			} else if(memberVO.getM_exitdate() == null){
+				session.setAttribute("login", memberVO);
+				path = "product/mainPage";
+			} else if(memberVO.getM_exitdate() != null){
+				path = "member/joinmember";
 			} else {
-				if(memberVO.getM_exitdate() == null) {
-					session.setAttribute("login", memberVO);
-					log.info("로그인 성공");
-					path = "product/mainPage";
-				}else {
-					model.addAttribute("msg", "탈퇴된 회원입니다.새로운 아이디로 가입해주세요");
-					log.info("로그인 실패");
-					path = "member/loginForm";
-				}
-				session.setAttribute("m_id", m_id);
+				session.setAttribute("login", memberVO);
 				path = "product/mainPage";
 			}
 			return path;

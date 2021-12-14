@@ -70,7 +70,7 @@
 			<if test="r_file != ''">
 				, r_file = #{r_file}
 			</if>
-		WHERE r_num = #{r_num}
+		WHERE m_id = #{m_id}
 	</insert>
 	
 	<!-- 글 삭제 처리 -->
