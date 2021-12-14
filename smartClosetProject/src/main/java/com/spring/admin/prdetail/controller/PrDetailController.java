@@ -136,8 +136,6 @@ public class PrDetailController {
 		
 		int result=0, result1 =0;
 		String url="";
-		int ad_num = (Integer) session.getAttribute("ad_num");
-		pvo.setAd_num(ad_num);
 		result=prDetailService.warehousing(pvo);
 		result1=prDetailService.warehousingInsert(pvo);
 		prDetailService.updateProStock(pvo);

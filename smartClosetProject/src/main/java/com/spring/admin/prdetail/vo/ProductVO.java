@@ -26,6 +26,6 @@ public class ProductVO extends PrDetailVO {
 	private int cl_amount;
 	private int cl_allPrice;
 	
-	private int ad_num;
+	private int ad_num = 1;
 	private String orderOp;
 }

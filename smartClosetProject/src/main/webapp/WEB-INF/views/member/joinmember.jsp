@@ -21,9 +21,17 @@
       <![endif]-->
 <style>
 #formbtn{
-margin-left : 700px;
+margin-left :690px;
 }
-
+.button4 {
+         background-color: white;
+         color: black;
+         border: 2px solid #e7e7e7;
+}
+.button4:hover {
+background-color: #e7e7e7;
+opactiy: ;
+}
 
 </style>
       <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -144,23 +152,23 @@ margin-left : 700px;
             <tr>
                <th>아이디＊
                </th>
-                 <td><input type="text" id="m_id" name="m_id"></td>
+                 <td><input type="text" id="m_id" name="m_id" style="height:22px;"></td>
            </tr>
             <tr>
                <th>비밀번호＊
                </th>
-               <td><input type="password" id="m_passwd" class="pw" name="m_passwd" maxlength="8"> (8자까지 가능합니다.)</td>
+               <td><input type="password" id="m_passwd" class="pw" name="m_passwd" maxlength="12" style="height:22px;"> (12자까지 가능합니다.)</td>
             </tr>
             <tr>
                <th>비밀번호확인＊
                </th>
-               <td><input type="password" id="m_passwd2" class="pw" name="m_passwd2">
+               <td><input type="password" id="m_passwd2" class="pw" name="m_passwd2" maxlength="12" style="height:22px;">
                   <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
                    <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
                </td>
             <tr>
                <td style="font-weight:bold">이름＊</td>
-               	<td><input type="text" id="m_name" name="m_name" ></td>
+               	<td><input type="text" id="m_name" name="m_name" style="height:22px;"></td>
             </tr>
             <tr>
                <th>휴대전화＊
@@ -175,8 +183,8 @@ margin-left : 700px;
                         <option value="010">018</option>
                         <option value="010">019</option>
                      </select>
-                     - <input type="text" id ="m_phone2" maxlength="4" name="m_phone2" >
-                     - <input type="text" id ="m_phone3" maxlength="4" name="m_phone3">
+                     - <input type="text" id ="m_phone2" maxlength="4" name="m_phone2" style="width:53px;height:19px;">
+                     - <input type="text" id ="m_phone3" maxlength="4" name="m_phone3" style="width:53px;height:19px;">
                   </div>
                </td>
             </tr>
@@ -185,7 +193,7 @@ margin-left : 700px;
                </th>
                <td>
                <div>
-                 <input type="text" id ="m_email1" maxlength="20" name="m_email1">
+                 <input type="text" id ="m_email1" maxlength="20" name="m_email1" style="height:22px;"> @ 
                  <select id ="m_email2" name="m_email2">
                         <option value="naver.com">naver.com</option>
                         <option value="daum.net">daum.net</option>
@@ -213,8 +221,8 @@ margin-left : 700px;
     </form>
      <form name="formbtn" id="formbtn">
          <div class="ec-base-button justify-content:flex-end">
-           <button type="button" id="memberresetBtn" class="btn btn-default btn-lg active">뒤로가기</button>
-           <button type="button" id="membersubmitBtn"  class="btn btn-default btn-lg active" >회원가입</button>
+           <button type="button" id="memberresetBtn" class="button button4" style="width:100px;height:40px; font-size:15px;background:white;" >뒤로가기</button>
+           <button type="button" id="membersubmitBtn"  class="button button4" style="width:100px;height:40px;font-size:15px;background:white;">회원가입</button>
          </div>
     </form>
    </body>
