@@ -42,8 +42,14 @@
 	<select id="orderPage" parameterType="productC" resultType="productC">
 		<![CDATA[SELECT pr_categoryl ,pr_num, pr_name, pr_price, pr_thumb
 		FROM pr_detail
-		WHERE PR_ISSALE='Y' order by #{order} desc
-			]]>
+		WHERE PR_ISSALE='Y' order by 
+		]]>
+		<if test="order=='pr_regdate'">
+			pr_regdate desc
+		</if>
+		<if test="order=='pr_sales'">
+			pr_sales desc
+		</if>
 	</select>
 	<select id="listPage" parameterType="productC" resultType="productC">
 		<![CDATA[select  pr_num, pr_name, pr_price, pr_thumb
