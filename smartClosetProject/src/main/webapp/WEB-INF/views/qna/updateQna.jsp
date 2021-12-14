@@ -77,6 +77,14 @@ $(function(){
 						</td>
 					</tr>
 					<tr>
+						<td>카테고리</td>
+						<td colspan="3" class="text-left">  
+						<select id ="q_category" name="q_category" class="cate">
+					                     <option value="교환">상품</option>
+					                     <option value="환불">환불</option>
+					                     <option value="기타">기타</option>
+					    </select>            
+					<tr>
 						<td>파일첨부</td>
 						<td colspan="3" class="text-left"><input type="file" name="file" id="file" ></td>
 					</tr>

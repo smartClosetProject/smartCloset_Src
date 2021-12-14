@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +64,8 @@ $(function(){
       });
 
 	/**수정하기 버튼 클릭시 수정폼 출력*/
-$(document).on("click", ".update_form", function() {
+
+	$(document).on("click", ".update_form", function() {
 			//$(".reset_btn").click();
 			let currLi = $(this).parents("li");
 			replyNum = currLi.attr("data-num");
@@ -83,13 +85,13 @@ $(document).on("click", ".update_form", function() {
 	});
 	/*수정화면에서 수정완료 버튼 클릭시 수정을 위한 ajax 연동처리*/
 	$(document).on("click",".update_btn", function(){
-		let re_num = $(this).parents("li").attr("data-num");
+		let r_num = $(this).parents("li").attr("data-num");
 		let r_content = $("#content").val();
 		
 		if(!chkData("#content","댓글 내용을")) return;
 		else {
 			$.ajax({
-				url:'/replies/'+re_num,
+				url:'/replies/'+r_num,
 				type:'put',
 				headers : {
 				"Content-Type" : "application/json",
@@ -144,7 +146,7 @@ $(document).on("click", ".update_form", function() {
 			let form = $(this).parents("form");
 			let pwd = form.find(".passwd");
 			let msg = form.find(".msg");
-			let re_num = $(this).parents("li").attr("data-num");
+			let r_num = $(this).parents("li").attr("data-num");
 			let result = 0;
 
 			if (!formCheck(pwd, msg, "비밀번호를"))
@@ -153,7 +155,7 @@ $(document).on("click", ".update_form", function() {
 				$.ajax({
 					url : "/replies/pwdConfirm",
 					type : "POST",
-					data : "re_num=" + replyNum + "&r_passwd=" + pwd.val(),
+					data : "r_num=" + replyNum + "&r_passwd=" + pwd.val(),
 					dataType : "text",
 					error : function() {
 						alert('시스템 오류 입니다. 관리자에게 문의 하세요');
@@ -171,7 +173,7 @@ $(document).on("click", ".update_form", function() {
 									updateForm(li);
 								}
 								else if(btnKind=="delBtn"){
-									deleteBtn(re_num);
+									deleteBtn(r_num);
 								}
 									btnKind= "";
 						}
@@ -182,20 +184,20 @@ $(document).on("click", ".update_form", function() {
 	});
 //최상위$종료
 	/** 댓글 목록 보여주는 함수*/
-	function listAll(re_num) {
+	function listAll(r_num) {
 		$("#comment_list").html("");
-		let url = "/replies/all/" + re_num;
+		let url = "/replies/all/" + r_num;
 
 		$.getJSON(url, function(data) {
 			console.log("list count:" + data.length);
 			replyCnt = data.length;
 			$(data).each(function() {
-				let re_num = this.re_num;
+				let r_num = this.r_num;
 				let r_name = this.r_name;
 				let r_content = this.r_content;
 				let r_date = this.r_date;
 				r_content = r_content.replace(/(\r\n|\r|\n)/g, "<br />");
-				addNewItem(re_num, r_name, r_content, r_date);
+				addNewItem(r_num, r_name, r_content, r_date);
 
 			});
 		}).fail(function() {
@@ -203,9 +205,9 @@ $(document).on("click", ".update_form", function() {
 		});
 	}
 	/**새로운 글을 화면에 추가하기(보여주기) 위한 함수*/
-	function addNewItem(re_num, r_name, r_content, r_date) {
+	function addNewItem(r_num, r_name, r_content, r_date) {
 		let new_li = $("<li>");
-		new_li.attr("data-num", re_num);
+		new_li.attr("data-num", r_num);
 		//new_li.addClass("comment_item"); //css 디자인 요소부여
 		// 작성자 정보가 지정될<p>태그
 		let writer_p = $("<p>");
@@ -221,6 +223,7 @@ $(document).on("click", ".update_form", function() {
 		date_span.html("/" + r_date + " ");
 
 		//수정하기 버튼
+		
 		let up_input = $("<input>");
 		up_input.attr({
 			"type" : "button",
@@ -234,6 +237,7 @@ $(document).on("click", ".update_form", function() {
 			"type" : "button",
 			"value" : "삭제하기"
 		});
+		
 		del_input.addClass("delete_btn");
 
 		//내용
@@ -339,7 +343,7 @@ $(document).on("click", ".update_form", function() {
 		$(target).parents("li").find(".pwdArea").html("");
 	}
 	/* 글삭제를 위한 ajax 연동처리*/
-	function deleteBtn(re_num){
+	function deleteBtn(r_num){
 		if(confirm("선택하신 댓글을 삭제하시겠습니까?")){
 			$.ajax({
 				url : '/replies/' + replyNum,
@@ -352,7 +356,7 @@ $(document).on("click", ".update_form", function() {
 					console.log("result: "+result);
 					if (result == 'SUCCESS') {
 						alert("삭제 되었습니다.");
-						listAll(re_num);
+						listAll(r_num);
 					}
 				}
 			});
@@ -365,18 +369,21 @@ $(document).on("click", ".update_form", function() {
 <div id="replyContainer">
 	<div id="comment_write">
 		<!-- 입력화면 구현 -->
-	<form class="form-inline">
-  	<div class="form-group">
-    		<label for="exampleInputName2">작성자</label>
-    		<input type="text" class="form-control" id="r_name" name="r_name">
- 	 </div>
- 	 <div class="form-group">
-  		  <label for="exampleInputEmail2">비밀번호</label>
-  		  <input type="text" class="form-control" id="r_passwd" name="r_passwd">
-  	</div>
- 		 <button type="button"  id="replyInsert" class="btn btn-default">저장하기</button>
-			<label>댓글내용</label>
-			<textarea class="form-control" rows="3" id="r_content" name="r_content"></textarea>
+		
+<form class="form-inline">
+	<c:if test="${not empty login}">
+			<div class="form-group">
+		    		<label for="exampleInputName2">작성자</label>
+		    		<input type="text" class="form-control" id="r_name" name="r_name" value="${login.m_id}">
+		 	 </div>
+		 	 <div class="form-group">
+		  		  <label for="exampleInputEmail2">비밀번호</label>
+		  		  <input type="text" class="form-control" id="r_passwd" name="r_passwd">
+		  	</div>
+		 		 <button type="button"  id="replyInsert" class="btn btn-default">저장하기</button>
+					<label>댓글내용</label>
+					<textarea class="form-control" rows="8" id="r_content" name="r_content"></textarea>
+	</c:if>
 	</form>
 	</div>
 	<ul id="comment_list">

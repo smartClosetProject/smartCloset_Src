@@ -18,20 +18,41 @@
 <!--[if lt IE 9]>
 	<script src="../js/html5shiv.js"></script>
 	<![endif]-->
+<style>
+.form-group{
+font-family : nanum pen;
+text-align: center;
+}
+.form-control{
+text-align: center;
+}
+#m_id{
+   margin-left : 300px;
+}
+#m_passwd{
+	margin-left: 300px;
+}
 
+#joinBtn{
+margin-left: 380px;
+}
+</style>
 <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
-
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
 <script type="text/javascript">
-			$(function(){
-				$("#loginBtn").click(function () {
+$(function(){
+	var msg = "${msg}";
+	if (msg != "") {
+		alert(msg);
+	}
+	$("#loginBtn").click(function () {
 					if (!chkData("#m_id", "아이디를")) {
 						return;
 					} else if (!chkData("#m_passwd", "비밀번호를")) {
-						return;
-					} else {
+					    return;
+					}  else {
 						$("#login").attr({
-							"method" : "GET",
+							"method" : "post",
 							"action" : "/member/login"
 						});
 						$("#login").submit();
@@ -45,20 +66,21 @@
 	</head>
 	<body>
 <h2>로그인화면</h2>
+<hr />
 	<form id ="login">
-				  <div class="form-group">
+			   <div class="form-group">
 				    <label for="exampleInputEmail1">아이디</label>
-				    <input type="text" class="form-control" id="m_id" name="m_id" placeholder="아이디">
-				  </div>
-				  <div class="form-group">
+				    <input type="text" class="form-control" id="m_id" name="m_id" placeholder="MemberID" style="width:300px;font-size:20px;border:1px solid#808080">
+			  </div>
+			  <div class="form-group">
 				    <label for="exampleInputPassword1">비밀번호</label>
-				    <input type="password" class="form-control" id="m_passwd" name="m_passwd" placeholder="비밀번호">
+				    <input type="password" class="form-control" id="m_passwd" name="m_passwd" placeholder="MemberPWD" style="width:300px;font-size:20px;border:1px solid#808080">
 				    
-				  </div>
-				   <div class="right">
-				    <input type="button" value="회원가입" id="joinBtn"/>
-					<input type="button" value="로그인" id="loginBtn"/>
-				   </div> 
-		</form>
-	</body>
+		     </div>
+		     <div class="right">
+				<input type="button" value="회원가입" id="joinBtn"/>
+				<input type="button" value="로그인" id="loginBtn"/>
+			 </div> 
+			</form>
+		</body>
 </html>

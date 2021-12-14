@@ -52,6 +52,10 @@
 	<definition name="product/*" extends="contentClient">
 		<put-attribute name="body" value="/WEB-INF/views/product/{1}.jsp" />
 	</definition>
+	<definition name="notice/*" extends="contentClient">
+		<put-attribute name="body" value="/WEB-INF/views/notice/{1}.jsp" />
+	</definition>
+	
 
 	<!-- 관리자 -->
 	<definition name="content" template="/WEB-INF/views/template/admin/admin_Layout.jsp">

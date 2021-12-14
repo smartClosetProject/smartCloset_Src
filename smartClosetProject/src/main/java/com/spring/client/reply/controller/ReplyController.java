@@ -132,7 +132,7 @@ public class ReplyController {
 	 			@RequestBody ReplyVO rvo){
 		 	log.info("replyUpdate 호출 성공");
 		 	
-		 	rvo.setRe_num(re_num);
+		 	rvo.setR_num(re_num);
 		 	int result = replyService.replyUpdate(rvo);
 		 	return result ==1 ? new ResponseEntity<String>("SUCCESS", HttpStatus.OK):
 		 		new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);

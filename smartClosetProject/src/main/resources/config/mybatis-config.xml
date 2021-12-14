@@ -16,6 +16,7 @@
 		
 		<typeAlias type="com.spring.client.qna.vo.QnaVO" alias="qna" />
 		<typeAlias type="com.spring.client.reply.vo.ReplyVO" alias="reply" />
+		<typeAlias type="com.spring.client.notice.vo.NoticeVO" alias="notice" />
 		
 		<typeAlias type="com.spring.admin.nboard.vo.NboardVO" alias="nboard"/>
 		<typeAlias type="com.spring.admin.admin.vo.AdminVO" alias="admin"/>

@@ -192,7 +192,7 @@ public class MemberController {
 	}
 
 	
-	/*------------------ 최태준 영역 ------------------*/
+/*------------------ 최태준 영역 ------------------*/
 	
 	//회원가입페이지이동
 		@RequestMapping(value="/joinmember", method=RequestMethod.GET)
@@ -217,28 +217,24 @@ public class MemberController {
 		}
 		/*로그인처리*/
 		@RequestMapping(value="/login")
-		public String login(MemberVO memberVO, HttpServletRequest req, Model model) {
+		public String login(MemberVO mvo, HttpServletRequest req, Model model) {
 			log.info("로그인성공");
 			String path = null;
 			
 			HttpSession session = req.getSession();
-			memberVO = memberService.login(memberVO);
-			String m_id = memberVO.getM_id();
+			MemberVO vo = memberService.login(mvo);
+			//String m_id = mvo.getM_id();
 			
-			if(m_id == null) {
-				model.addAttribute("msg", "정보가 일치하지 않습니다. 다시 입력해주세요");
+			if(vo == null) {
+				model.addAttribute("msg", "아이디또는 비밀번호가 일치하지 않습니다. 다시 입력해주세요");
 				path = "member/loginForm";
-			} else if(memberVO.getM_exitdate() == null){
-				session.setAttribute("login", memberVO);
-				path = "product/mainPage";
-			} else if(memberVO.getM_exitdate() != null){
-				path = "member/joinmember";
 			} else {
-				session.setAttribute("login", memberVO);
+				session.setAttribute("login", vo);
 				path = "product/mainPage";
 			}
 			return path;
 		}
+		
 		/*로그아웃*/
 		@RequestMapping(value = "/logout", method = RequestMethod.GET)
 		public String logout(HttpServletRequest request) {

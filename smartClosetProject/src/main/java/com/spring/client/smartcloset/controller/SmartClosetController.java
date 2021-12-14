@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.client.member.vo.MemberVO;
 import com.spring.client.smartcloset.service.SmartClosetService;
 import com.spring.client.smartcloset.vo.SmartClosetVO;
 
@@ -35,8 +36,8 @@ public class SmartClosetController {
 	public String sClosetHome(@ModelAttribute("data") SmartClosetVO svo, Model model) {
 		log.info("sClosetHome 호출 성공");
 		
-		String m_id = (String) session.getAttribute("m_id");
-		svo.setM_id(m_id);
+		MemberVO login = (MemberVO) session.getAttribute("login");
+		svo.setM_id(login.getM_id());
 		
 		List<SmartClosetVO> closetList = sClosetService.smartCloset(svo);
 		model.addAttribute("closetList", closetList);
@@ -48,8 +49,8 @@ public class SmartClosetController {
 	public String regCloset(@ModelAttribute SmartClosetVO svo) throws Exception {
 		log.info("regCloset 호출 성공");
 		
-		String m_id = (String) session.getAttribute("m_id");
-		svo.setM_id(m_id);
+		MemberVO login = (MemberVO) session.getAttribute("login");
+		svo.setM_id(login.getM_id());
 		
 		sClosetService.regCloset(svo);
 		
@@ -61,8 +62,8 @@ public class SmartClosetController {
 	public String deleteCloset(@RequestParam(value = "chkBox[]") List<Integer> chkArr, SmartClosetVO svo, SmartClosetVO vo) throws Exception {
 		log.info("deleteCloset 호출 성공");
 		
-		String m_id = (String) session.getAttribute("m_id");
-		svo.setM_id(m_id);
+		MemberVO login = (MemberVO) session.getAttribute("login");
+		svo.setM_id(login.getM_id());
 		
 		for (Integer i : chkArr) {
 			svo.setSc_num(i);
@@ -91,8 +92,8 @@ public class SmartClosetController {
 	public String updateTag(@ModelAttribute SmartClosetVO svo) {
 		log.info("updateTag 호출 성공");
 		
-		String m_id = (String) session.getAttribute("m_id");
-		svo.setM_id(m_id);
+		MemberVO login = (MemberVO) session.getAttribute("login");
+		svo.setM_id(login.getM_id());
 		
 		sClosetService.updateTag(svo);
 		

@@ -18,7 +18,26 @@
 <!--[if lt IE 9]>
 	<script src="../js/html5shiv.js"></script>
 	<![endif]-->
+<style>
+.qnasearch{
+ position: absolute;
+  top: 430px;
+  left: 100;
+  width: 500px;
+  height: 50px;
+ 
+}
+.page1 {
+	padding : 50px;
+	text-align: center;
+	
+	}
+.absoulte{
+font-weight:bold;
 
+}
+
+</style>
 <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
 <script type="text/javascript">
@@ -35,6 +54,8 @@ $(function(){
 				value="#list tr td.goDetail";
 			} else if($("#search").val()=='m_id'){
 				value="#list tr td.name";
+			} else if($("#search").val()=='q_category'){
+				value ="#list tr td.goCate";
 			}
 			console.log($(value+":contains('" +word+ "')").html());
 		
@@ -65,7 +86,12 @@ $(function(){
 	});
 	
 	$("#insertFormBtn").click(function(){
-	 location.href="/qna/writeQNA";
+		$("#detailForm").attr({
+			"method":"get",
+			"action": "/qna/writeQNA"
+			});
+			$("#detailForm").submit();
+		
 	});
 	
 	$(".goDetail").click(function(){
@@ -104,17 +130,18 @@ $(function(){
 <form id="detailForm">
 	<input type="hidden" id="q_num" name="q_num" />
 </form>
-<div id="QnaSearch" class="text-right">
+<div id="QnaSearch" class="qnasearch">
 	<%--==================검색기능시작=================== --%>
 	<form id="f_search" name="f_search" class="form-inline">
 			<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
 			<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
-	<div class="form-group" >
+	<div class="form-group"  style="float:left;">
 				<label>검색조건</label>
 		<select id="search" name="search" class="form-control">
 				<option value="all">전체</option>
 				<option value="q_title">제목</option>
-				<option value="q_content">내용</option>
+		        <option value="q_content">내용</option>
+				<option value="q_category">카테고리</option>
 				<option value="m_id">작성자</option>
 		</select>
 				<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요">
@@ -122,12 +149,13 @@ $(function(){
 		</div>
 	</form>
 </div>
-<div id="QnaList" class="absolute">
+<div id="QnaList" class="absolute" >
 <table summary="게시판 리스트" class="table table-bordered" border="1">
 	<thead>
 		<tr>
 			<th class="order text-center col-md 1">글번호</th>
 			<th class="text-center col-md-4">글제목</th>
+			<th class="order col-md-2">카테고리</th>
 			<th class="order col-md-2">작성일</th>
 			<th class="text-center col-md-2">작성자</th>
 	   </tr>
@@ -140,8 +168,9 @@ $(function(){
 			<tr class="text-center" data-num="${qna.q_num} ">
 				<td>${count - status.index}</td>
 				<td class="goDetail text-left">${qna.q_title}</td>
-				<td class="text-left">${qna.q_regdate}</td>
-				<td class="name">${qna.m_id}</td>
+				<td class="goCate text-center">${qna.q_category}</td>
+				<td class="text-left" >${qna.q_regdate}</td>
+				<td class="name" >${qna.m_id}</td>
 		   </tr>
 		</c:forEach>
 		</c:when>
@@ -154,15 +183,13 @@ $(function(){
 </tbody>
 </table>
 </div>
+<c:if test="${not empty login}">
 <div class="text-center">
-	<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-success">
+	<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-success" style ="float:right;">
 </div>
-<%--==================검색기능시작=================== --%>
-	
-		
-<%-- ==============리스트종료 ======--%>
+</c:if>
 <%-- ==============페이징출력 시작======--%>
-		<div class="text-center">
+		<div class="page1">
 				<ul class="pagination">
 					<c:if test="${pageMaker.prev}">
 						<li class="paginate_button previous">

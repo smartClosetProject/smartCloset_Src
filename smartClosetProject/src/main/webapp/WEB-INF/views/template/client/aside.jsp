@@ -13,7 +13,7 @@
 		<li class="mainLi"><a href="/member/mypage">마이페이지</a></li>
 		<li class="mainLi"><a href="/review/reviewList">리뷰게시판</a></li>
 		<li class="mainLi"><a href="/qna/qnaList">QnA게시판</a></li>
-		<li class="mainLi"><a href="#">공지게시판</a></li>
+		<li class="mainLi"><a href="/notice/noticeList">공지게시판</a></li>
 	</ul>
 	<br><br><br><br><br><br><br><br><br><br><br><br>
 	<ul class="nav nav-stacked large">
