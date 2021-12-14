@@ -84,9 +84,8 @@
 				  <li class="list-group-item d-flex justify-content-between align-items-start">
 					<a href = "/member/myorderList" class="count" >
 						<strong id="order_state">입금전</strong>
-						
 						<span >
-							<span id="myorderCount">${order_state.bd}</span>
+							<span id="myorderCount">${memberMypageCnt.bd}</span>
 						</span>
 					</a>
 				</li>
@@ -94,7 +93,7 @@
 					<a href = "/member/myorderList" class="count" >
 						<strong id="order_state">결제 완료</strong>
 						<span>
-							<span id="myorderCount">${order_state.bd1}</span>
+							<span id="myorderCount">${memberMypageCnt.bd1}</span>
 						</span>
 					</a>
 				</li>
@@ -102,7 +101,7 @@
 					<a href = "/member/myorderList" class="count" >
 						<strong id="order_state">배송준비중</strong>
 						<span>
-							<span id="myorderCount">${order_state.bd2}</span>
+							<span id="myorderCount">${memberMypageCnt.bd2}</span>
 						</span>
 					</a>
 				</li>
@@ -110,7 +109,7 @@
 					<a href = "/member/myorderList" class="count" >
 						<strong id="order_state">배송중</strong>
 						<span>
-							<span id="myorderCount">${order_state.bd3}</span>
+							<span id="myorderCount">${memberMypageCnt.bd3}</span>
 						</span>
 					</a>
 				</li>
@@ -118,7 +117,7 @@
 					<a href = "/member/myorderList" class="count" >
 						<strong id="order_state">배송완료</strong>
 						<span>
-							<span id="myorderCount">${order_state}</span>
+							<span id="myorderCount">${memberMypageCnt.bd4}</span>
 						</span>
 					</a>
 				</li>

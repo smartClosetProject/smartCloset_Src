@@ -30,7 +30,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	//마이페이지 주문내역 수 확인
 	@Override
-	public int memberMypageCnt(MyorderVO ovo) {
+	public MyorderVO memberMypageCnt(MyorderVO ovo) {
 		return memberDao.memberMypageCnt(ovo);
 	}
 
