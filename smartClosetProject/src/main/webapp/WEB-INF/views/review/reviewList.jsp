@@ -31,7 +31,7 @@
 			.contentBtn {
 				min-height: 100px;
 			}
-			img{
+			#reviewthumb{
 				width:120px !important; 
 				height: 150px !important; 
 			}
@@ -149,7 +149,7 @@
 							<c:forEach var="review" items="${reviewList}" varStatus="status">
 								<tr class="text-center" data-num="${review.r_num}"> <!-- ${review.r_num } 실제 글 번호 -->
 									<td>${count - status.index }</td>
-									<td class="text-left" ><img src="/uploadStorage/review/thumbnail/${review.r_thumb }"></td>
+									<td class="text-left" ><img id="reviewthumb"src="/uploadStorage/review/thumbnail/${review.r_thumb }"></td>
 									<td class="goDetail text-left">${review.r_title}</td>
 									<td class="text-left">${review.m_name}</td>
 								</tr>
