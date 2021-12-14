@@ -66,6 +66,7 @@
 <form id="returnPro" name="returnPro">
 	<input type="hidden" id="od_num" name="od_num" />
 	<input type="hidden" id="pr_num" name="pr_num"/>
+	<input type="hidden" id="pro_num" name="pro_num"/>
 </form>
 
 <h2 style="color : #1A5276;"><strong>주문 관리</strong></h2>
@@ -99,6 +100,7 @@
 	</c:choose>
 	</table>
 </div>
+<span>${msg}</span>
 <div class="text-right">
  <input type="button" id="returnProductBtn" name="returnProductBtn" class="btn btn-default" value="반품" />
  <input type="button" id="goToProDetailBtn" name="goToProDetailBtn" class="btn btn-default" value="취소"/>

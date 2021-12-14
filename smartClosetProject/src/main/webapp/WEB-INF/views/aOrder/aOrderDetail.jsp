@@ -71,6 +71,7 @@
 			$(".checkProduct").click(function () {
 				$("allCheck").prop("checked", false);
 			})
+			
 			$("#goToOrderListBtn").click(function () {
 				location.href="/aOrder/aOrderList";
 			})
@@ -82,7 +83,8 @@
 					$("input[class='checkProduct']:checked").each(function () {
 						chkArr.push($(this).attr("data-odnum"));
 					});
-					if(chkArr){
+					console.log(chkArr);
+					if(Array.isArray(chkArr)&&chkArr.length==0 ){
 						alert("최소 하나 이상의 상품을 선택해주세요.");
 					}
 					else{
@@ -164,7 +166,7 @@
 									<td colspan="2" class="highlight1">상품 가격</td>
 								</tr>
 								<tr>
-									<td colspan="2">${aOrder.pr_totalprice} 원</td>
+									<td colspan="2">${aOrder.od_totalPayment} 원</td>
 								</tr>
 							</c:forEach>
 						</c:when>

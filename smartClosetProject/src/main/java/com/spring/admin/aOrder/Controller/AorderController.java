@@ -154,13 +154,11 @@ public class AorderController {
 			log.info(aovo);
 	
 				aOrderservice.aOrderOptionChange(aovo);
-				
-				aOrderservice.aOdTotalPayChange(aovo);
-				
+			
 				ras.addFlashAttribute("data",aovo);
 				log.info(ras.getFlashAttributes());
-				
-			return "redirect:/aOrder/returnProDetailForm?od_num="+aovo.getOd_num();
+					
+				return "redirect:/aOrder/returnProDetailForm?od_num="+aovo.getOd_num();
 
 		}
 			
