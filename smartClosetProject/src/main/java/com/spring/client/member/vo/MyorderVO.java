@@ -23,6 +23,7 @@ public class MyorderVO extends CommonVO{
 	   private String pr_num = "";//
 	   private String pr_name = "";
 	   private String pr_thumb = "";
+	   private String pro_colorthumb="";
 	   
 	   private int bd = 0;
 	   private int bd1 = 0;
