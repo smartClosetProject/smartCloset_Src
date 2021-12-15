@@ -18,6 +18,7 @@ public interface PrDetailDAO {
 	public List<ProductVO> warehousingList(ProductVO pvo);
 	public int warehousingInsert(ProductVO pvo);
 	public int warehousing(ProductVO pvo);
+	public int stockInsert(ProductVO pvo);
 	public int updateStock(ProductVO pvo);
 	public int productCnt(PrDetailVO prvo);
 	public int updateAllStock(ProductVO pvo);

@@ -18,7 +18,7 @@
 			.title{font-size: 15px; font-weight: bold; text-align: left; padding-left: 18px;}
 			.price{font-size: 13px; text-align: left; margin-right: 15px; padding-left: 18px;padding-top: 3px;}
 			.line{ width: 240px; background: darkgray; color: darkgray; margin-left: 5px; margin-right: 5px;}
-			img{width:270px; margin-bottom: 15px; margin-top: 30px;}
+			.primg{width:270px; margin-bottom: 15px; margin-top: 30px;}
 			#mainListSales{width:890px; margin-bottom: 40px;}
 			#mainListDate{width:890px; margin-bottom: 25px; margin-top: 10px; padding-bottom: 50px;}
 			.line{width:267px; height:0.2px; background-color: #D8D8D8; margin-bottom: 15px; margin-top: 15px; }
@@ -26,6 +26,7 @@
 			.longline{width:860px; height:1px; background-color: #BDBDBD;}
 			#best{margin-top: 40px;}
 			.more{margin-right: 20px; color:#515151;}
+			
 		</style>
 		<script type="text/javascript">
 			$(function(){
@@ -55,7 +56,7 @@
 					<c:forEach var="date" items="${listDate}" varStatus="status">
 						<div class="product goDetail" data-num="${date.pr_num}">
 							<c:if test="${not empty date.pr_thumb}">
-								<img src="/uploadStorage/prDetail/thumb/${date.pr_thumb}">
+								<img class="primg" src="/uploadStorage/prDetail/thumb/${date.pr_thumb}">
 							</c:if>
 							<div class="title">${date.pr_name}</div>
 							<div class="line"> </div>
@@ -73,7 +74,7 @@
 					<c:forEach var="ListSales" items="${listSales}" varStatus="status">
 						<div class="product goDetail" data-num="${ListSales.pr_num}">
 							<c:if test="${not empty ListSales.pr_thumb}">
-								<img src="/uploadStorage/prDetail/thumb/${ListSales.pr_thumb}">
+								<img class="primg" src="/uploadStorage/prDetail/thumb/${ListSales.pr_thumb}">
 							</c:if>
 							<div class="title">${ListSales.pr_name}</div>
 							<div class="line"> </div>

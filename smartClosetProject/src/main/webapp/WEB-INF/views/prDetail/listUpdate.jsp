@@ -87,7 +87,7 @@
 	</head>
 	<body>
 		<div class="container">
-		<h2>상품 입력 페이지</h2>
+		<h2>상품 수정 페이지</h2>
 			<form id="updateForm">
 				<input type="hidden" name="pr_num" id="pr_num" value="${updateData.pr_num}">
 				<input type="hidden" name="pr_mainimg" id="pr_mainimg" value="${updateData.pr_mainimg }">

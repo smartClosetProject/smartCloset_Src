@@ -15,7 +15,7 @@
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
 		<style type="text/css">
 			.float{width:420px; margin:8px; float: left;}
-			img{width:410px; padding-bottom: 40px;}
+			.subimg{width:410px; padding-bottom: 40px;}
 			#order{float: right; text-align: right; margin-bottom: 40px;}
 			#pr_name{font-size: 20px; text-align: left;margin-bottom: 6px;}
 			#pr_price{font-size: 20px;text-align: left; font-weight: bold; margin-bottom: 8px;}
@@ -31,28 +31,31 @@
 			.new_div {with:420px;}
 			#content{text-align: center; }
 			#main{min-height:600px;}
-			select{width: 98%; height:30px; margin-bottom: 8px; font-size: 15px; margin-left: 15px;}
-			option{font-size: 12px;}
+			.pro{width: 98%; height:30px; margin-bottom: 8px; font-size: 15px; margin-left: 15px;}
+			.proselect{font-size: 12px;}
 			.longline{width:440px; height:1px; background-color: #BDBDBD; margin-top: 20px; margin-bottom: 40px;}
 			.line{width:400px; height:1px; background-color: #BDBDBD; margin-top: 8px; margin-bottom: 8px;}
 			.longlinediv{width:885px; height:1px; background-color: #BDBDBD; margin-top: 20px; margin-bottom: 20px; margin-left: 0px;}
 			.Shipping div div{margin-top: 10px; margin-bottom: 10px; }
 			.Shipping{margin-top: 15px; margin-bottom: 15px; border: 1px solid #BDBDBD; text-align: left;}
 			#pr_mile{margin-bottom: 10px; font-size: 13px; color:#5e5e5e; border-style: none;}
-			button{width:220px; margin-right: 5px; background-color: #c9c9c9; height: 50px; boarder:0px; outline: 0px;}
+			.prbutton{width:220px; margin-right: 5px; height: 50px; font-weight: lighter; outline : 0;  background-color: white;   color: black;   border: 2px solid #e7e7e7;}
+			.prbutton:hover {background-color: #e7e7e7;}
 			#listPr{list-style: none; margin:0;padding:0; }
 			.sp_name{width:200px;}
 			.pr_cnt{width:40px; text-align: center; margin-right: 0px;}
 			.pro_size, .pro_color{font-size: 10px;color:#a0a0a0; }
 			.pd_price{font-weight: bold;width:100px;}
-			.updatebtn{font-size: 8px; width: 30px; margin-left: 0px; padding-left: 0px;}
- 			input[type=checkbox]{width:0px; height:0px;} */
+			.updatebtn{font-size: 8px; width: 30px; margin-left: 0px; padding-left: 0px;  outline : 0;  background-color: white;   color: black;   border: 1px solid #e7e7e7;}
+ 			.proCheck{width:0px; height:0px;} */
 			.tablecl {width:420px; margin-left: 8px;}
 			.list{width: 420px;}
 			.title{color:#a0a0a0; margin-top:10px; margin-bottom: 10px; font-size: 15px; text-align: center; }
 			.history{margin-left: 15px; margin-bottom: 20px;}
 			.board{font-weight: bold; margin-left: 13px; margin-top: 20px;}
 			#gray{color:#a0a0a0; font-size: 13px;}
+			.a{color:black;}
+			#subPage{margin-top: 30px;}
 		</style>
 		<script type="text/javascript">
  			$(function(){
@@ -72,12 +75,12 @@
 						let pro_color=$("#pro_color").val()
 						
 						if(pro_size=="----선택하세요"){
-							 $(".select").attr("selected",true)
+							 $(".proselect").attr("selected",true)
 							alert("사이즈를 선택해주세요.");
 							return false;
 						}
 						
-						$(".select").attr("selected",false);
+						$(".proselect").attr("selected",false);
 	
 		               let new_li=$("<li>")
 		               new_li.addClass("list")
@@ -94,6 +97,7 @@
 		               let td_chk=$("<td>");
 		               let chk=$("<input>");
 		               chk.attr({"type":"checkbox","checked":"checked"});
+		               chk.addClass("proCheck");
 		               let sp_name=$("<td>");
 		               sp_name.attr({"value":"pr_name","colspan":"2"});
 		               sp_name.html(pr_name);
@@ -149,8 +153,8 @@
 		               $("#listPr").append(new_li);
 		              
 		               update_total();
-				 
-		               $(".select").attr("selected",true)
+				 		
+		               $(".proselect").attr("selected",true)
 		               
 			        
 			           	$(document).on("click",".updatebtn",function(){
@@ -184,6 +188,7 @@
 			           			
 								update_total();
 			           		})
+			           		$(".select").attr("selected",true)
 			           	}
 			            function update_total(){
 			            		total=0;
@@ -230,7 +235,7 @@
 		<div id="subPage">
 			<div id="main">
 				<div class="float">
-					<img src="/uploadStorage/prDetail/${detail.pr_mainimg}">
+					<img class="subimg" src="/uploadStorage/prDetail/${detail.pr_mainimg}">
 				</div>
 				<form id="productDetail">
 					<div class="float">
@@ -240,8 +245,8 @@
 						<div class="longline"> </div>
 						<div id="pr_mile"></div>
 						<div id="pr_size">
-							<select id="pro_size">
-								<option class="select">----선택하세요</option>
+							<select id="pro_size" class="pro">
+								<option class="proselect">----선택하세요</option>
 								<c:forEach var="size" items="${listSize}" varStatus="status">
 									<c:if test="${not empty size}">
 										<option data-proNum="${size}" value="${size}">${size}</option>
@@ -250,8 +255,8 @@
 							</select>
 						</div>
 						<div id="pr_color">
-							<select id="pro_color">
-								<option class="select" >----선택하세요</option>
+							<select id="pro_color" class="pro">
+								<option class="proselect" >----선택하세요</option>
 								<c:forEach var="color" items="${listColor}" varStatus="status">
 									<c:if test="${not empty color}">
 										<option data-proNum="${color}" value="${color}">${color}</option>
@@ -271,8 +276,8 @@
 						<span id="totalPrice">0</span>원
 						</div>
 						<div id="button">	
-							<button type="button" id="cartInput">장바구니 담기</button>
-								<button type="button" id="naver">네이버페이</button>
+							<button type="button" id="cartInput" class="prbutton">장바구니 담기</button>
+								<button type="button" id="naver" class="prbutton">네이버페이</button>
 							</div>
 						</div>
 					</form>
@@ -282,19 +287,19 @@
 				<div class="menu">
 					<table class="table-bordered tableMenu">
 						<tr>
-							<th class="th"> <a id="Detail" >디테일</a></th>
-							<td class="td"><a href="#Shipping"> 배송문의</a></td>	
+							<th class="th"> <a id="Detail" class="a">디테일</a></th>
+							<td class="td"><a href="#Shipping" class="a"> 배송문의</a></td>	
 						</tr>					
 					</table>
 				</div>
 				<div id="imgdiv">
-					<img id="img" src="/uploadStorage/prDetail/${detail.pr_contentimg}">
+					<img class="subimg" src="/uploadStorage/prDetail/${detail.pr_contentimg}">
 				</div>
 				<div class="menu">
 					<table class="table-bordered tableMenu">
 						<tr>
-							<td class="td"><a href="#Detail">디테일</a></td>
-							<th class="th"><a id="Shipping" >배송문의</a></th>
+							<td class="td"><a href="#Detail" class="a">디테일</a></td>
+							<th class="th"><a id="Shipping" class="a">배송문의</a></th>
 						</tr>					
 					</table>
 				</div>

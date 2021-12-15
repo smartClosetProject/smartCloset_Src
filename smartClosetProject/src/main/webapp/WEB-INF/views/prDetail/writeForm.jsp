@@ -17,7 +17,7 @@
 			.insert{width:1000px;}
 			#pr_num{width:550px;}
 			.float{float: right;}
-			select{width:300px;; height: 25px;}
+			.wrSelect{width:300px;; height: 25px;}
 			.width{width:200px;}
 		</style>
 		<script type="text/javascript">
@@ -108,7 +108,7 @@
 							<td class="col-md-2"><input type="text" name="pr_name" id="pr_name"></td>
 							<th class="col-md-1 width">계절</th>
 							<td class="col-md-2">
-								<select id="pr_season" name="pr_season">
+								<select id="pr_season" name="pr_season" class="wrSelect">
 									<option value="봄">봄</option>
 									<option value="여름">여름</option>
 									<option value="가을">가을</option>
@@ -119,7 +119,7 @@
 						<tr>
 							<th class="col-md-1 width">카테고리(대분류)</th>
 							<td class="col-md-2">
-								<select id="pr_categoryl" name="pr_categoryl" >
+								<select id="pr_categoryl" name="pr_categoryl" class="wrSelect">
 									<option value="상의">상의</option>
 									<option value="하의">하의</option>
 									<option value="아우터">아우터</option>
@@ -129,7 +129,7 @@
 							</td>
 							<th class="col-md-1 width">카테고리(소분류)</th>
 							<td class="col-md-2">
-								<select id="pr_categorys" name="pr_categorys">
+								<select id="pr_categorys" name="pr_categorys" class="wrSelect">
 									<option value="반팔">반팔</option>
 									<option value="긴팔">긴팔</option>
 									<option value="셔츠">셔츠</option>

@@ -14,13 +14,14 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png"/>
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
 		<style type="text/css">
-			.table-height{min-height:450px;  width:1600px;}
+			.table-height{min-height:450px;  width:100%;}
 			.date input{width:370px; height:25px; margin-right: 30px; margin-top: 5px;}
 			.height-btn{min-height:100px;}
 			#searchData{height:35px;}
 			#search{width:150px; margin-right: 30px; height:30px; margin-left: 20px;}
 			#keyword{width:400px; margin-right: 30px; height:30px;}
-			#productSearch{width:1550px;}
+			#productSearch{width:100%;}
+			.prDetail{width:100%;}
 		</style>
 		<script type="text/javascript">
 			$(function () {
@@ -105,7 +106,7 @@
 		</script>
 	</head>
 	<body>
-		<div class="contentContainer container">
+		<div class="contentContainer container prDetail">
 			<h2>상품 리스트</h2>
 			<div class="contentTit page-header">
 				<div id="productSearch"  class="text-right">

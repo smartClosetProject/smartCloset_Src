@@ -18,7 +18,7 @@
 			.title{font-size: 15px; font-weight: bold; text-align: left; padding-left: 18px;}
 			.price{font-size: 13px; text-align: left; margin-right: 15px; padding-left: 18px;padding-top: 3px;}
 			.line{ width: 240px; background: darkgray; color: darkgray; margin-left: 5px; margin-right: 5px;}
-			img{width:270px; margin-bottom: 15px; margin-top: 30px;}
+			.listimg{width:270px; margin-bottom: 15px; margin-top: 30px;}
 			#mainListDate{width:890px; margin-bottom: 25px; margin-top: 10px; padding-bottom: 50px; text-align: center;}
 			.line{width:267px; height:0.2px; background-color: #D8D8D8; margin-bottom: 15px; margin-top: 15px; }
 			#longline{width:880px; height:2px; background-color: gray; }
@@ -102,7 +102,7 @@
 					<c:forEach var="list" items="${listPage}" varStatus="status">
 						<div class="product goDetail" data-num="${list.pr_num}">
 							<c:if test="${not empty list.pr_thumb}">
-								<img src="/uploadStorage/prDetail/thumb/${list.pr_thumb}">
+								<img class="listimg" src="/uploadStorage/prDetail/thumb/${list.pr_thumb}">
 							</c:if>
 							<div class="title">${list.pr_name}</div>
 							<div class="line"> </div>
@@ -110,26 +110,6 @@
 						</div>					
 					</c:forEach>
 				</div>
-			</div>
-		</div>
-		<div class="text-center">
-				<ul class="pagination">
-					<c:if test="${pageMaker.prev}">
-						<li class="paginate_button previous">
-							<a href="${pageMaker.startPage -1}">Previous</a>
-						</li>
-					</c:if>
-					<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-						<li class="paginate_button ${pageMaker.cvo.pageNum ==num ? 'active':'' }">
-							<a href = "${num}">${num}</a>
-						</li>					
-					</c:forEach>
-					<c:if test="${pageMaker.next}">
-						<li class="paginate_button next">
-							<a href ="${pageMaker.endPage+1}">next</a>
-						</li>
-					</c:if>
-				</ul>
 			</div>
 		</div>
 	</body>

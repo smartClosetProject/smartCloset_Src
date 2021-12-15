@@ -139,6 +139,7 @@ public class PrDetailController {
 		result=prDetailService.warehousing(pvo);
 		result1=prDetailService.warehousingInsert(pvo);
 		prDetailService.updateProStock(pvo);
+		prDetailService.stockInsert(pvo);
 		if(result==1&&result1==1) {
 			url="/prDetail/warehousingList";
 		}else {
