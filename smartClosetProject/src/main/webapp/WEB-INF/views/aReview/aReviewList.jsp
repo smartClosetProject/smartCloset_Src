@@ -166,6 +166,14 @@
 											<td class="highlight1 col-md-1">글 내용</td>
 											<td class="text-left col-md-4" colspan="3">${review.r_content}</td>
 										</tr>
+										<c:if test="${not empty review.r_file }">
+							 				<tr class="text-center">
+							 					<td class="highlight1">이미지</td>
+							 					<td colspan="3" class="text-left">
+							 						<img style="max-width : 200px; max-height:200px;" src="/uploadStorage/Review/${review.r_file }">
+							 					</td>
+							 				</tr>
+		 								</c:if>		
 									</tbody>
 								</table>
 								

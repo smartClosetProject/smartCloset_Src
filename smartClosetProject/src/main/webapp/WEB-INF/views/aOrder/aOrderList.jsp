@@ -145,6 +145,7 @@
 						<th class="text-center ">회원 아이디</th>
 						<th class="text-center ">가격</th>
 						<th class="text-center ">주문 상태</th>
+						<th class="text-center ">주문일</th>
 						<th class="text-center ">배송 완료일</th>
 					</tr>
 				</thead>
@@ -157,6 +158,7 @@
 									<td class="goDetail text-center">${aOrder.m_id}</td>
 									<td class="text-center">${aOrder.order_totalPayment}</td>
 									<td class="text-center order_state" >${aOrder.order_state}</td>
+									<td class="text-center ">${aOrder.order_regdate}
 									<td class="text-center ">${aOrder.order_deliverydate}</td>
 								</tr>
 							</c:forEach>

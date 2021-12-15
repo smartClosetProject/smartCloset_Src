@@ -3,9 +3,9 @@
 <mapper namespace="com.spring.admin.aOrder.dao.AorderDAO">
 	<select id="aOrderList" parameterType="aorder" resultType="aorder">
 		<![CDATA[
-		SELECT m_id, order_num, order_totalPayment, order_state, to_char(order_deliveryDate,'YYYY-MM-DD') as order_deliverydate
+		SELECT m_id, order_num, order_totalPayment, order_state, to_char(order_deliveryDate,'YYYY-MM-DD') as order_deliverydate, to_char(order_regDate,'YYYY-MM-DD') as order_regdate
 		FROM (SELECT /*+ INDEX_DESC(SC_ORDER ORDER_ORDER_NUM_PK) */ 
-				ROWNUM rnum, m_id, order_num, order_totalPayment, order_state, order_deliverydate
+				ROWNUM rnum, m_id, order_num, order_totalPayment, order_state, order_deliverydate, order_regdate
 			  FROM SC_ORDER
 			  WHERE ]]>
 			  <trim prefix="(" suffix=") AND " prefixOverrides="AND">

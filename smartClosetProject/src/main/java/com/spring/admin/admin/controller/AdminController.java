@@ -44,7 +44,7 @@ public class AdminController {
 		log.info(adminVO);
 		if(adminVO != null) { // 로그인 성공
 			session.setAttribute("ad_id", adminVO.getAd_id());
-			return "redirect:/nboard/nboardTest";
+			return "redirect:/nboard/main";
 		} else {
 			model.addAttribute("msg", "아이디, 비밀번호를 확인하세요.");
 			return "admin/adminLoginForm";
