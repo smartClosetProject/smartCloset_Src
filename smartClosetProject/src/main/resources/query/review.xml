@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.client.review.dao.ReviewDAO">
+	<!-- 게시판 리스트 기본 조회 -->
+	<!--  <select id="reviewList" parameterType="review" resultType="review">
+		SELECT r_num, r_file, r_thumb, r_title, r_content, 
+		to_char(r_regdate, 'YYYY-MM-DD') AS r_regdate,m_id
+		FROM review
+		ORDER BY r_num desc
+	</select>-->
+	
+		<!-- 검색 중복사용 소스 -->
+		<sql id="reviewSearch">
+			<if test="search == 'r_title'">
+				<![CDATA[ r_title LIKE '%' || #{keyword} || '%' ]]>
+			</if>
+			<if test="search == 'm_id'">
+				<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
+			</if>
+			<if test="search == 'r_content'">
+				<![CDATA[ r_content LIKE '%' || #{keyword} || '%' ]]>
+			</if>
+		</sql>
+	
+	<select id="reviewList" parameterType="review" resultType="review">
+		<![CDATA[
+			SELECT  r_num, r_thumb, r_title, r_content, to_char(r_regdate, 'YYYY-MM-DD') AS r_regdate,m_id,m_name
+			FROM
+				(SELECT /*+ INDEX_DESC(review review_pk ) */
+					ROWNUM as rnum , r_num, r_thumb, r_title, r_content, r_regdate ,m.m_id,m.m_name 
+				FROM review r inner join member m on r.m_id = m.m_id
+				WHERE ]]>
+				 <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+						<include refid="reviewSearch"></include>
+				</trim>
+		<![CDATA[ ROWNUM <= #{pageNum} * #{amount} 
+			) reviewlist
+			WHERE rnum > (#{pageNum} - 1) * #{amount}
+			ORDER BY r_regdate desc
+		]]>		  
+	</select>
+	
+	<!-- 전체 레코드 수 조회 -->
+	<select id="reviewListCnt" parameterType="review" resultType="int">
+		SELECT count(*) FROM review
+		<trim prefix=" WHERE (" suffix=")">
+			<include refid="reviewSearch"></include>
+		</trim>
+	</select>
+	
+	<!-- 글쓰기  -->
+	<insert id="reviewInsert" parameterType="review">
+		INSERT INTO review(r_num, m_id, r_file, r_thumb, r_title, r_content)
+		values(review_seq.nextval, #{m_id}, #{r_file}, #{r_thumb}, #{r_title}, #{r_content})
+	</insert>
+	
+	<!-- 게시물 상세페이지 조회 -->
+	<select id="reviewDetail" parameterType="review" resultType="review">
+		SELECT r_num,r_thumb, r_title, r_content,r_file, TO_CHAR(r_regdate, 'YYYY-MM-DD HH24:MI:SS'),m.m_id,m_name
+		FROM review r inner join member m on r.m_id = m.m_id
+		WHERE r_num = #{r_num}
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<insert id="reviewUpdate" parameterType="review">
+		UPDATE review
+		SET r_title = #{r_title}, r_content = #{r_content}
+			<if test="r_thumb != ''">
+				, r_thumb = #{r_thumb}
+			</if>
+			<if test="r_file != ''">
+				, r_file = #{r_file}
+			</if>
+		WHERE r_num = #{r_num}
+	</insert>
+	
+	<!-- 글 삭제 처리 -->
+	<delete id="reviewDelete" parameterType="review">
+		DELETE FROM review
+		WHERE r_num = #{r_num}
+	</delete>
+
+</mapper>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.client.member.dao.MemberDAO">
+
+	<!-- 마이페이지 뷰 출력 -->
+	<select id="memberMypage" parameterType="member" resultType="member">
+		SELECT m_id, m_passwd, m_name, m_email, m_phone, m_addr,m_addr2,m_addr3, m_regdate,m_mile,m_acc
+		FROM member
+		WHERE m_id = #{m_id} 
+	</select>
+	
+	<!-- 마이페이지 출력시 주문배송조회 숫자 카운트 -->
+	<select id="memberMypageCnt" parameterType="myorder" resultType="myorder">
+	SELECT
+	    COUNT(CASE WHEN order_state='입금 전' THEN 1 END) AS bd,
+	    COUNT(CASE WHEN order_state='결제완료' THEN 1 END) AS bd1,
+	    COUNT(CASE WHEN order_state='배송 준비 중' THEN 1 END) AS bd2,
+	    COUNT(CASE WHEN order_state='배송 중' THEN 1 END) AS bd3,
+	    COUNT(CASE WHEN order_state='배송 완료' THEN 1 END) AS bd4
+	FROM myorderview 
+	WHERE m_id = #{m_id} 
+	</select>
+	
+	<!-- 검색 중복 소스 사용 -->
+	<sql id="postSearch">
+			<if test="search == 'r_title'">
+				<![CDATA[ r_title LIKE '%' || #{keyword} || '%' ]]>
+			</if> 
+			 <if test="search == 'm_id'">
+				<![CDATA[ m_id LIKE '%' || #{keyword} || '%' ]]>
+			</if> 
+			<if test="search == 'r_content'">
+				<![CDATA[ r_content LIKE '%' || #{keyword} || '%' ]]>
+			</if>
+	</sql>
+	
+	<!-- 회원정보 수정 뷰 -->
+	<select id="updateForm" parameterType="member" resultType="member">
+		SELECT m_num,m_id, m_passwd, m_name, m_email, m_phone, m_addr, m_addr2, m_addr3, m_regdate,m_mile,m_acc
+		FROM member
+		WHERE m_id = #{m_id}	
+	</select>
+	
+	<!-- 회원정보 수정 처리 -->
+	<update id="memberUpdate" parameterType="member">
+		UPDATE member
+		SET m_addr = #{m_addr}, m_addr2 = #{m_addr2}, m_addr3 = #{m_addr3}, m_phone = #{m_phone}, m_passwd = #{m_passwd}, m_email = #{m_email}
+		WHERE m_id = #{m_id}
+	</update>
+	
+	<!-- 회원 탈퇴 처리 -->
+	<update id="memberDelete" parameterType="member">
+		UPDATE member
+		SET m_passwd = '회원 탈퇴 했다.', m_exitdate = sysdate
+		WHERE m_id = #{m_id}
+	</update>
+	
+	<!--   게시판 목록 뷰 --> 
+	<!-- <select id="postList" parameterType="post" resultType="post">
+		SELECT review.r_num,r_title,r_content,r_regdate, qna.q_num, q_title,q_content,q_date,qna.m_id
+		FROM review INNER JOIN qna
+		ON review.m_id = qna.m_id 
+		order by r_regdate desc
+	</select> -->
+	
+	<!--   게시판 목록 뷰 --> 
+	<select id="postList" parameterType="post" resultType="post">
+		 <![CDATA[
+		 SELECT ROWNUM as rnum, m_id, r_num, r_content, r_title, r_regdate, category 
+			FROM 
+				(select ROWNUM as rnum, m_id, r_num, r_content, r_title, r_regdate, category 
+                 from reviewandqna
+				  WHERE  ]]>
+				  <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+					<include refid="postSearch"></include>
+				  </trim>
+		<![CDATA[ ROWNUM <= #{pageNum} * #{amount}  and m_id = #{m_id}
+		) list
+			WHERE rnum > (#{pageNum} - 1) * #{amount}
+		]]>
+		
+	</select>
+	
+	
+	<!-- 게시판 목록 레코드 수 조회 -->
+	<select id="postListCnt" parameterType="post" resultType="int">
+		SELECT COUNT(*)  FROM reviewandqna
+		<trim prefix=" WHERE (" suffix=")">
+			<include refid="postSearch"></include>
+		</trim>
+	</select>
+	
+	<!-- 나의 주문내역 조회 리스트 출력 -->
+	<select id="myorderList" parameterType="myorder" resultType="myorder" >
+		select * from myorderview
+		WHERE 
+		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+		<![CDATA[ order_regdate >= #{start_date} and order_regdate < #{end_date} ]]>	
+		</trim>
+		m_id = #{m_id}
+	</select>
+	
+	<!-- 주문내역조회 목록 레코드 수 조회 -->
+	<select id="myorderListCnt" parameterType="myorder" resultType="int">
+		SELECT COUNT(*)  FROM myorderview
+		<trim prefix=" WHERE (" suffix=")">
+			<include refid="postSearch"></include>
+		</trim>
+	</select>
+
+	<!-- 로그인 -->
+	<select id="login" parameterType="member" resultType="member">
+		/*Member - memberLogin*/
+		select m_num, m_id, m_name, m_email, m_phone, m_addr, m_exitDate, m_mile, m_acc, m_addr2, m_addr3
+		from member 
+		WHERE m_id = #{m_id} and m_passwd = #{m_passwd}
+	</select>
+	
+	<!--  회원가입 -->
+	<insert id="memberInsert">
+		insert into member(m_num, m_id, m_passwd, m_name, m_email, m_phone, m_addr, m_addr2, m_addr3)
+	    values (member_seq.nextval, #{m_id}, #{m_passwd}, #{m_name}, #{m_email}, #{m_phone}, #{m_addr}, #{m_addr2}, #{m_addr3})
+	</insert>
+	
+</mapper>

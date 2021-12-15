@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.client.product.dao.ProductDAO">
+	<select id="productListDate" parameterType="productC" resultType="productC">
+		<![CDATA[select  pr_num, pr_name, pr_price, pr_thumb 
+		from(
+			select 
+				rownum as rnum, pr_num, pr_name, pr_price,  pr_thumb
+			from pr_detail where PR_ISSALE='Y' order by pr_regdate desc]]>
+
+			<![CDATA[
+ 			)prDetailList where rownum<=6
+			]]>
+	</select>
+	<select id="productListSales" parameterType="productC" resultType="productC">
+		<![CDATA[select  pr_num, pr_name, pr_price, pr_thumb
+		from(
+			select
+				rownum as rnum, pr_num, pr_name, pr_price,  pr_thumb
+			from pr_detail where PR_ISSALE='Y' order by pr_sales desc
+			 ]]>
+
+			<![CDATA[ 
+ 			)prDetailList where rownum<=6 
+			]]>
+	</select>
+	<select id="productDetail" parameterType="productC" resultType="productC">
+		select pr_num, pr_name, pr_price, pr_mainimg, pr_contentimg,pr_mile from pr_detail where pr_num=#{pr_num}
+	</select>
+	<select id="listSize" parameterType="productC" resultType="String">
+		select DISTINCT(pro_size) from product where pr_num=#{pr_num} order by pro_size
+	</select>
+	<select id="listColor" parameterType="productC" resultType="String">
+		select DISTINCT(pro_color) from product where pr_num=#{pr_num} order by pro_color
+	</select>
+	
+	<select id="categoryPage" parameterType="productC" resultType="productC">
+		SELECT pr_categoryl ,pr_num, pr_name, pr_price, pr_thumb
+		FROM pr_detail
+		WHERE pr_categoryl = #{pr_categoryl} and PR_ISSALE='Y'
+	</select>
+	<select id="orderPage" parameterType="productC" resultType="productC">
+		<![CDATA[SELECT pr_categoryl ,pr_num, pr_name, pr_price, pr_thumb
+		FROM pr_detail
+		WHERE PR_ISSALE='Y' order by 
+		]]>
+		<if test="order=='pr_regdate'">
+			pr_regdate desc
+		</if>
+		<if test="order=='pr_sales'">
+			pr_sales desc
+		</if>
+	</select>
+	<select id="listPage" parameterType="productC" resultType="productC">
+		<![CDATA[select  pr_num, pr_name, pr_price, pr_thumb
+		from(
+			select
+				rownum as rnum, pr_num, pr_name, pr_price,  pr_thumb
+			from pr_detail where PR_ISSALE='Y' and pr_name like '%'||#{pro_keyword}||'%' and
+			]]>
+			<![CDATA[ rownum <=#{pageNum}*#{amount}
+ 			)listPage
+			where rnum >(#{pageNum} -1)*#{amount}
+			]]>
+	</select>
+	<select id="categorysPage" parameterType="productC" resultType="productC">
+		SELECT pr_categoryl ,pr_categorys, pr_num, pr_name, pr_price, pr_thumb
+		FROM pr_detail
+		WHERE pr_categoryl = #{pr_categoryl} and pr_categorys = #{pr_categorys} and PR_ISSALE='Y'
+	</select>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.client.cart.dao.CartDAO">
+	
+	<select id="isExist" parameterType="cart" resultType="int">
+		SELECT NVL((SELECT 1 FROM cart
+					WHERE m_id = #{m_id} AND pro_num = #{pro_num}), 0) state
+		FROM dual
+	</select>
+	
+	<insert id="insertCart" parameterType="cart">
+		INSERT INTO cart(cart_num, cart_goodsCount, pro_num, m_id)
+		VALUES(cart_seq.NEXTVAL, #{cart_goodsCount}, #{pro_num}, #{m_id})
+	</insert>
+	
+	<delete id="deleteSelectCart" parameterType="int">
+		DELETE FROM cart
+		WHERE cart_num = #{cart_num}
+	</delete>
+	
+	<delete id="deleteAllCart" parameterType="java.lang.String">
+		DELETE FROM cart
+		WHERE m_id = #{m_id}
+	</delete>
+	
+	<update id="modifyCount" parameterType="cart">
+		UPDATE cart
+		SET cart_goodsCount = #{cart_goodsCount}
+		WHERE m_id = #{m_id} AND pro_num = #{pro_num}
+	</update>
+	
+	<select id="cartList" parameterType="cart" resultType="cart">
+		SELECT cart_num, cart_goodsCount, m_id, p.pro_num, pro_size, pro_color, 
+				pr_name, p.pr_price, pro_colorThumb
+		FROM cart c INNER JOIN product p ON c.pro_num = p.pro_num
+           		 	INNER JOIN pr_detail pr ON p.pr_num = pr.pr_num
+        WHERE m_id = #{m_id} and pr.pr_isSale = 'Y' and <![CDATA[ (SYSDATE - cart_regdate) < 7 ]]>
+        ORDER BY cart_regdate
+	</select>
+	
+</mapper>

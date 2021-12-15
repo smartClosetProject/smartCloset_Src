@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.client.order.dao.OrderDAO">
+
+	<select id="orderForm" parameterType="order" resultType="order">
+		SELECT m_name, m_addr, m_addr2, m_addr3, m_phone, m_email, m_mile
+		FROM member
+		WHERE m_id = #{m_id}
+	</select>
+	
+	<select id="orderSeq" resultType="int">
+		SELECT order_seq.NEXTVAL
+		FROM DUAL
+	</select>
+	
+	<insert id="insertOrder" parameterType="order">
+		INSERT INTO sc_order(order_num, order_totalPayment, order_state, 
+				order_recipient, order_addr, order_phone, order_shipMessage, m_id)
+		VALUES(#{order_num}, #{order_totalPayment}, #{order_state}, 
+				#{m_name}, #{m_addr}, #{m_phone}, #{shipMessage}, #{m_id})
+	</insert>
+	
+	<insert id="insertOrderDetail" parameterType="orderDetail">
+		INSERT INTO sc_order_detail(od_num, od_goodscount, order_num, pro_num)
+					SELECT order_detail_seq.NEXTVAL, cart_goodsCount, #{order_num}, pro_num
+					FROM cart WHERE cart_num = #{cart_num}
+	</insert>
+	
+	<update id="updateMile" parameterType="order">
+		UPDATE member
+		SET m_mile = #{m_mile} - #{m_mileApply} + #{m_mileAdd}
+		WHERE m_id = #{m_id}
+	</update>
+	
+	<select id="productsInfo" parameterType="order" resultType="order">
+		SELECT cart_goodsCount, pro_color, pro_size, pro_colorthumb, pr.pr_name, pr.pr_price
+		FROM cart c INNER JOIN product p ON c.pro_num = p.pro_num
+            		INNER JOIN pr_detail pr ON p.pr_num = pr.pr_num
+		WHERE cart_num = #{cart_num} AND m_id = #{m_id} 
+	</select>
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.client.smartcloset.dao.SmartClosetDAO">
+
+	<insert id="buyInsertSCloset" parameterType="order">
+		INSERT INTO smart_closet(sc_num, sc_tag1, sc_tag2, sc_tag3, sc_isBuy, sc_image, sc_thumb, m_id)
+					SELECT smart_closet_seq.NEXTVAL, pr_categoryL, pr_categoryS, pr_season, 'YES', pro_colorImg, pro_colorThumb, #{m_id}
+					FROM product 
+					WHERE pro_num = (SELECT pro_num 
+									 FROM cart
+									 WHERE cart_num = #{cart_num})
+	</insert>
+	
+	<select id="smartCloset" parameterType="sCloset" resultType="sCloset">
+		SELECT sc_num, sc_image, sc_thumb
+		FROM smart_closet 
+		<where>
+			m_id = #{m_id} AND ROWID IN (SELECT MAX(ROWID) FROM smart_closet GROUP BY sc_image)
+			<if test="search == 'buy'">
+				AND sc_isBuy = 'YES'
+			</if>
+			<if test="search == 'reg'">
+				AND sc_isBuy = 'NO'
+			</if>
+			<if test="keyword != ''">
+				<![CDATA[ AND (sc_tag1 || sc_tag2 || sc_tag3 || sc_tag4 || sc_tag5)
+	     		 LIKE '%' || #{keyword} || '%' ]]>
+			</if>
+		</where>
+	</select>
+	
+	<insert id="regCloset" parameterType="sCloset">
+		INSERT INTO smart_closet(sc_num, sc_tag1, sc_tag2, sc_tag3, sc_tag4, sc_tag5, sc_isBuy, sc_image, sc_thumb, m_id)
+		VALUES(smart_closet_seq.NEXTVAL, #{sc_tag1}, #{sc_tag2}, #{sc_tag3}, #{sc_tag4}, #{sc_tag5}, #{sc_isBuy}, #{sc_image}, #{sc_thumb}, #{m_id})
+	</insert>
+	
+	<delete id="deleteCloset" parameterType="sCloset">
+		DELETE FROM smart_closet
+		WHERE sc_num = #{sc_num}
+	</delete>
+	
+	<select id="searchTag" parameterType="int" resultType="sCloset">
+		SELECT sc_tag1, sc_tag2, sc_tag3, sc_tag4, sc_tag5, sc_image, sc_thumb, sc_isBuy
+		FROM smart_closet
+		WHERE sc_num = #{sc_num}
+	</select>
+	
+	<update id="updateTag" parameterType="sCloset">
+		UPDATE smart_closet
+		SET sc_tag1 = #{sc_tag1}, sc_tag2 = #{sc_tag2}, sc_tag3 = #{sc_tag3}, sc_tag4 = #{sc_tag4}, sc_tag5 = #{sc_tag5}
+		WHERE sc_num = #{sc_num}
+	</update>
+	
+</mapper>
