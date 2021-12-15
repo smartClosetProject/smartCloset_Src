@@ -13,10 +13,14 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png"/>
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
 		<style type="text/css">
-			.table-height{min-height:450px;  width:100%;}
-			#odSelect{width:150px;; height: 25px;}
-			#prnumberST, #prnumberSA{width:60px;}
-			
+			.contentBtn {
+				min-height: 100px;
+			}
+			.container-fluid{
+				padding-bottom: 50px !important;
+			}
+			.table{margin-top: 20px;}
+			.pro{width: 75px;}
 		</style>
 		<script type="text/javascript">
 			$(function(){
@@ -61,19 +65,20 @@
 		</script>
 	</head>
 	<body>
-		<div id="prNumericalList" class="table-height">
-			<h2>상품 통계 페이지</h2>
-			<form id="orderby">
+		<div id="prNumericalList">
+			<h2 style="color : #1A5276;"><strong>상품 통계 페이지</strong></h2>
+			<form id="orderby" class="form-inline">
 				<input type="hidden" name="pr_num" class="pr_num">
 				<input type="hidden" name="orderOp" id="orderOp">
-			</form>
-				<div class="contentTit page-header text-right numdiv">
-					<select id="odSelect" name="order">
+				<span class="glyphicon glyphicon-search"></span>&nbsp;
+				<div class="form-group">
+					<select id="odSelect" name="order" class="form-control">
 						<option value="date">등록일</option>
 						<option value="sales">판매량</option>
 					</select>
-					<button type="button" id="lineup" class="btn btn-info btn-default">정렬</button>
+					<button type="button" id="lineup" class="btn btn-default">정렬</button>
 				</div>
+			</form>
 			<form id="updateNum">
 				<input type="hidden" name="pro_num" id="pro_num">
 				<input type="hidden" name="pr_num" class="pr_num">
@@ -105,10 +110,10 @@
 										<td class="text-center" >${prNumerical.pr_num}</td>
 										<td class="text-center">${prNumerical.pro_size}</td>
 										<td class="text-center">${prNumerical.pro_color}</td>
-										<td class="text-center"><input type="number" class="pro_stock" name="pro_stock" id="prnumberST" value="${prNumerical.pro_stock}"></td>
-										<td class="text-center"><input type="number" class="pro_sales" name="pro_sales" id="prnumberSA" value="${prNumerical.pro_sales}"></td>
+										<td class="text-center"><input type="number" class="form-control pro"name="pro_stock" id="prnumberST" value="${prNumerical.pro_stock}"></td>
+										<td class="text-center"><input type="number" class="form-control pro"name="pro_sales" id="prnumberSA" value="${prNumerical.pro_sales}"></td>
 										<td>
-											<button class="save">
+											<button class="btn btn-default">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" fill="currentColor" class="bi bi-file-earmark-check-fill" viewBox="0 0 16 16">
 											  		<path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm1.354 4.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708.708z"/>
 												</svg>

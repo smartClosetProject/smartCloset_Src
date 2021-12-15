@@ -13,13 +13,17 @@
 		<link rel="shortcut icon" href="../image/icon.png" />
      	<link rel="apple-touch-icon" href="../image/icon.png" />
 	<style type="text/css">
-			input[type=text]{width:250px; height: 25px;}
-			select{width:250px; height: 25px;}
-			.insert{width:900px;}
-			#img{width: 400px;}
-			td, th{height: 30px;}
-			input[type=file]{margin-top: 20px; margin-bottom: 20px;}
-/* 			img{margin-top: 20px; margin-bottom: 20px;} */
+			.highlight1
+			{	width:120px;
+				background-color:#A4AFBC; 
+				color : white;
+			}
+			.write{width: 80%;}
+			#updateBtn{margin-bottom: 10px;}
+			#prductList{margin-bottom: 10px;}
+			.pr_issale{margin-right: 40px;}
+			input[name=pr_issale]{margin-left: 40px;}
+			#pr_issale{text-align: center;}
 		</style>
 		<script type="text/javascript">
 		$(function(){
@@ -86,38 +90,38 @@
 		</script>
 	</head>
 	<body>
-		<div class="container">
-		<h2>상품 수정 페이지</h2>
+		<h2 style="color : #1A5276;"><strong>상품 수정 페이지</strong></h2>
+		<div class="form-group" id="text">
 			<form id="updateForm">
 				<input type="hidden" name="pr_num" id="pr_num" value="${updateData.pr_num}">
 				<input type="hidden" name="pr_mainimg" id="pr_mainimg" value="${updateData.pr_mainimg }">
 				<input type="hidden" name="pr_contentimg" id="pr_contentimg" value="${updateData.pr_contentimg }">
 				<input type="hidden" name="pr_thumb" id="pr_thumb" value="${updateData.pr_thumb}">
 				<div class="form-group">
-					<button type="button" class="btn btn-success" id="updateBtn">저장</button>
-					<input type="button" class="btn btn-success" id="prductList" value="상품 리스트">
-					<table class="table-bordered insert">
+					<button type="button" class="btn btn-default" id="updateBtn">저장</button>
+					<input type="button" class="btn btn-default" id="prductList" value="상품 리스트">
+					<table class="table-bordered write">
 						<tr>
-							<th class="col-md-2">상품 번호</th>
-							<td colspan="3" class="col-md-1">
-							 	${updateData.pr_num}
+							<td class="  highlight1 col-md-5">상품 번호</td>
+							<td colspan="3">
+							 	<input type="text" class="form-control" value="${updateData.pr_num}" readonly="readonly">
 							</td>
 						</tr>
 						<tr>
-							<th class="col-md-2">판매가</th>
-							<td class="col-md-1"><input type="text" name="pr_price" id="pr_price" value="${updateData.pr_price}"></td>
-							<th class="col-md-2">판매 여부</th>
-							<td class="col-md-1" id="pr_issale">
+							<td class="  highlight1 col-md-5">판매가</td>
+							<td><input type="text" name="pr_price" id="pr_price" class="form-control" value="${updateData.pr_price}"></td>
+							<td class="  highlight1 col-md-5">판매 여부</td>
+							<td id="pr_issale">
 								<input type="radio" name="pr_issale" value="Y" checked="checked"/> <label>Y</label>
 								<input type="radio" name="pr_issale" value="N"/> <label>N</label>
 							</td>
 						</tr>
 						<tr>
-							<th class="col-md-2">상품명</th>
-							<td class="col-md-1"><input type="text" name="pr_name" id="pr_name" value="${updateData.pr_name}"></td>
-							<th class="col-md-2">계절</th>
-							<td class="col-md-1">
-								<select id="pr_season" name="pr_season">
+							<td class="  highlight1 col-md-5">상품명</td>
+							<td><input type="text" name="pr_name" id="pr_name" class="form-control" value="${updateData.pr_name}"></td>
+							<td class="  highlight1 col-md-5">계절</td>
+							<td >
+								<select id="pr_season" name="pr_season"  class="form-control">
 									<option value="봄">봄</option>
 									<option value="여름">여름</option>
 									<option value="가을">가을</option>
@@ -126,9 +130,9 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="col-md-2">카테고리(대분류)</th>
-							<td class="col-md-1">
-								<select id="pr_categoryl" name="pr_categoryl" >
+							<td class="  highlight1 col-md-5">카테고리<br>(대분류)</td>
+							<td >
+								<select id="pr_categoryl" name="pr_categoryl" class="form-control">
 									<option value="상의">상의</option>
 									<option value="하의">하의</option>
 									<option value="아우터">아우터</option>
@@ -136,9 +140,9 @@
 									<option value="액세서리">액세서리</option>
 								</select>
 							</td>
-							<th class="col-md-2">카테고리(소분류)</th>
-							<td class="col-md-1">
-								<select id="pr_categorys" name="pr_categorys">
+							<td class="  highlight1 col-md-5">카테고리<br>(소분류)</td>
+							<td >
+								<select id="pr_categorys" name="pr_categorys"class="form-control">
 									<option value="반팔">반팔</option>
 									<option value="긴팔">긴팔</option>
 									<option value="셔츠">셔츠</option>
@@ -149,15 +153,15 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="col-md-2">대표 이미지</th>
-							<td colspan="3" class="col-md-1">
-							<input  type="file" name=file id="file"/>
+							<td class="  highlight1 col-md-5">대표 이미지</td>
+							<td colspan="3">
+							<input  type="file" name=file id="file" class="form-control"/>
 								<img src="/uploadStorage/prDetail/${updateData.pr_mainimg}">
 							</td>
 						</tr>
 						<tr>
-							<th class="col-md-2">내용 이미지</th>
-							<td colspan="3" class="col-md-1"><input  type="file" name="file1" id="file1" />
+							<td class="  highlight1 col-md-5">내용 이미지</td>
+							<td colspan="3"> <input  type="file" name="file1" id="file1" class="form-control"/>
 								<img id="img" src="/uploadStorage/prDetail/${updateData.pr_contentimg}">
 							</td>
 						</tr>

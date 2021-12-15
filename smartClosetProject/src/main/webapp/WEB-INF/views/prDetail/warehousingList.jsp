@@ -16,10 +16,14 @@
 		<style type="text/css">
 			.table-height{min-height:450px;  width:100%;}
 			.date input{width:370px; height:25px; margin-right: 30px; margin-top: 5px;}
-			.issale{margin-right: 75px;}
-			#searchData{height:35px;}
-			#search{width:150px; margin-right: 30px; height:30px; margin-left: 20px;}
-			#keyword{width:400px; margin-right: 30px; height:30px;}
+			.height-btn{min-height:100px;}
+			.contentBtn {
+				min-height: 100px;
+			}
+			.container-fluid{
+				padding-bottom: 50px !important;
+			}
+			.table{margin-top: 20px;}
 		</style>
 		<script type="text/javascript">
 			$(function(){
@@ -66,20 +70,21 @@
 		</script>
 	</head>
 	<body>
-		<div id="prDetailList" class="table-height">
-			<div id="detailsearch" class="text-right">
-				<form id="pr_search">
+		<div>
+			<h2 style="color : #1A5276;"><strong>입고 리스트 페이지</strong></h2>
+			<div id="detailsearch" class="text-left">
+				<form id="pr_search" class="form-inline">
 					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
 					<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
 						<div class="form-group">
 							<label>검색 조건</label>
-							<select id="search" name="search" >
+							<select id="search" name="search" class="form-control">
 								<option value="all">전체</option>
 								<option value="pro_num">상품 상세 번호</option>
 								<option value="cl_name">거래처 번호</option>
 							</select>
-							<input type="text" id="keyword" name="keyword" value="검색어를 입력하세요" style="text-transform: uppercase;">
-							<button type="button" class="btn btn-info btn-default" id="searchData">검색</button>
+							<input type="text" class="form-control" id="keyword" name="keyword" value="검색어를 입력하세요" style="text-transform: uppercase;">
+							<button type="button" class="btn btn-default" id="searchData">검색</button>
 						</div>
 				</form>
 			</div>

@@ -13,12 +13,17 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png"/>
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
 		<style type="text/css">
-			input[type=text]{width:300px; height: 25px;}
-			.insert{width:1000px;}
-			#pr_num{width:550px;}
-			.float{float: right;}
-			.wrSelect{width:300px;; height: 25px;}
-			.width{width:200px;}
+			.highlight1
+			{	width:120px;
+				background-color:#A4AFBC; 
+				color : white;
+			}
+			.write{width: 80%;}
+			#insertBtn{margin-top: 20px;}
+			#prductList{margin-top: 20px;}
+			.pr_issale{margin-right: 40px;}
+			input[name=pr_issale]{margin-left: 40px;}
+			#pr_issale{text-align: center;}
 		</style>
 		<script type="text/javascript">
 		$(function(){
@@ -88,27 +93,26 @@
 		</script>
 	</head>
 	<body>
-		<div class="container">
-		<h2>상품 입력 페이지</h2>
+		<div >
+		<h2 style="color : #1A5276;"><strong>상품 입력 페이지</strong></h2>
 			<form id="insertForm">
 				<div class="form-group" id="text">
-					<table class="table-bordered insert">
-						
+					<table class="table-bordered write">
 						<tr>
-							<th class="col-md-1 width">판매가</th>
-							<td class="col-md-2"><input type="text" name="pr_price" id="pr_price"></td>
-							<th class="col-md-1 width">판매 여부</th>
-							<td class="col-md-2" id="pr_issale">
-								<input type="radio" name="pr_issale" value="Y" checked="checked"/> <label>Y</label>
-								<input type="radio" name="pr_issale" value="N"/> <label>N</label>
+							<td class="  highlight1 col-md-5">판매가</td>
+							<td><input type="text" name="pr_price" id="pr_price" class="form-control"></td>
+							<td class="  highlight1 col-md-5">판매 여부</td>
+							<td id="pr_issale">
+								<input type="radio" name="pr_issale" value="Y" checked="checked" /> <label class="pr_issale">Y</label>
+								<input type="radio" name="pr_issale" value="N"/> <label  class="pr_issale">N</label>
 							</td>
 						</tr>
 						<tr>
-							<th class="col-md-1 width">상품명</th>
-							<td class="col-md-2"><input type="text" name="pr_name" id="pr_name"></td>
-							<th class="col-md-1 width">계절</th>
-							<td class="col-md-2">
-								<select id="pr_season" name="pr_season" class="wrSelect">
+							<td class="  highlight1 col-md-5">상품명</td>
+							<td ><input type="text" name="pr_name" id="pr_name" class="form-control"></td>
+							<td class="  highlight1 col-md-5">계절</td>
+							<td >
+								<select id="pr_season" name="pr_season" class="form-control">
 									<option value="봄">봄</option>
 									<option value="여름">여름</option>
 									<option value="가을">가을</option>
@@ -117,9 +121,9 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="col-md-1 width">카테고리(대분류)</th>
-							<td class="col-md-2">
-								<select id="pr_categoryl" name="pr_categoryl" class="wrSelect">
+							<td class="  highlight1 col-md-5">카테고리<br>(대분류)</td>
+							<td >
+								<select id="pr_categoryl" name="pr_categoryl" class="form-control">
 									<option value="상의">상의</option>
 									<option value="하의">하의</option>
 									<option value="아우터">아우터</option>
@@ -127,9 +131,9 @@
 									<option value="액세서리">액세서리</option>
 								</select>
 							</td>
-							<th class="col-md-1 width">카테고리(소분류)</th>
-							<td class="col-md-2">
-								<select id="pr_categorys" name="pr_categorys" class="wrSelect">
+							<td class=" highlight1 col-md-5">카테고리<br>(소분류)</td>
+							<td >
+								<select id="pr_categorys" name="pr_categorys" class="form-control">
 									<option value="반팔">반팔</option>
 									<option value="긴팔">긴팔</option>
 									<option value="셔츠">셔츠</option>
@@ -140,16 +144,16 @@
 							</td>
 						</tr>
 						<tr>
-							<th class="col-md-1 width">대표 이미지</th>
-							<td colspan="3" class="col-md-1"><input  type="file" name="file" id="file" /></td>
+							<td class="  highlight1 col-md-5">대표 이미지</td>
+							<td colspan="3"><input  type="file" name="file" id="file" class="form-control"/></td>
 						</tr>
 						<tr>
-							<th class="col-md-1 width">내용 이미지</th>
-							<td colspan="3" class="col-md-2"><input  type="file" name="file1" id="file1" /></td>
+							<td class=" highlight1 col-md-5">내용 이미지</td>
+							<td colspan="3"><input  type="file" name="file1" id="file1" class="form-control"/></td>
 						</tr>
 					</table>
-					<button type="button" class="btn btn-success" id="insertBtn">저장</button>
-					<input type="button" class="btn btn-success" id="prductList" value="상품 리스트">
+					<button type="button" class="btn btn-default" id="insertBtn">저장</button>
+					<input type="button" class="btn btn-default" id="prductList" value="상품 리스트">
 				</div>
 			</form>
 		</div>

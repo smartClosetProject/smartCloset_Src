@@ -13,9 +13,14 @@
 		<link rel="apple-touch-icon" href="/resources/image/icon.png"/>
 	
 		<style type="text/css">
-			input[type=text]{width:100%}
-			input[type=select]{width:100%}
-			.insert{width:900px;}
+			.highlight1
+			{	width:150px;
+				background-color:#A4AFBC; 
+				color : white;
+			}
+			.write{width: 80%;}
+			#insertBtn{margin-top: 20px;}
+			#warehousingList{margin-top: 20px;}
 		</style>
 		<script type="text/javascript">
 			$(function() {
@@ -44,31 +49,31 @@
 		</script>
 	</head>
 <body>
-	<div class="container">
-		<h2>입고 등록 페이지</h2>
+	<div>
+		<h2 style="color : #1A5276;"><strong>입고 등록 페이지</strong></h2>
 		<form id="insertForm">
-			<div class="form-group">
-				<table class="table-bordered insert">
+			<div class="form-group width">
+				<table class="table-bordered write">
 					<tr>
-						<th class="col-md-1">거래처 번호</th>
-						<td class="col-md-2" colspan="3"><input type="text" name="cl_name" id="cl_name" style="text-transform: uppercase;"></td>
+						<th class="highlight1 col-md-5">거래처 번호</th>
+						<td colspan="3"><input type="text" name="cl_name" id="cl_name" class="form-control"style="text-transform: uppercase;"></td>
 					</tr>
 					<tr>
-						<th class="col-md-1">상품 번호</th>
-						<td class="col-md-2" colspan="3" ><input type="text" id="pr_num" name="pr_num" value="${updateData.pr_num}" readonly="readonly"></td>
+						<th class="highlight1 col-md-5">상품 번호</th>
+						<td colspan="3" ><input type="text" id="pr_num" name="pr_num" class="form-control"value="${updateData.pr_num}" readonly="readonly"></td>
 					</tr>
 					<tr>
-						<th class="col-md-1">상품 상세 번호</th>
-						<td class="col-md-2" colspan="3"><input type="text" name="pro_num" id="pro_num" style="text-transform: uppercase;" value="${updateData.pr_num}"></td>
+						<th class="highlight1 col-md-5">상품 상세 번호</th>
+						<td colspan="3"><input type="text" name="pro_num" id="pro_num" class="form-control"style="text-transform: uppercase;" value="${updateData.pr_num}"></td>
 					</tr>
 					<tr>
-						<th class="col-md-1">색상 이미지</th>
-						<td class="col-md-2" colspan="3"><input type="file" name="file" id="file"></td>
+						<th class="highlight1 col-md-5">색상 이미지</th>
+						<td colspan="3"><input type="file" name="file" id="file" class="form-control"></td>
 					</tr>
 					<tr>
-						<th class="col-md-1">사이즈</th>
-						<td class="col-md-2"  colspan="3">
-							<select id="pro_size" name="pro_size">
+						<th class="highlight1 col-md-5">사이즈</th>
+						<td  colspan="3">
+							<select id="pro_size" name="pro_size" class="form-control">
 								<option value="S" selected="selected">S</option>
 								<option value="M">M</option>
 								<option value="L">L</option>
@@ -77,22 +82,22 @@
 						</td>
 					</tr>
 					<tr>
-						<th class="col-md-1">색상(한국어)</th>
-						<td class="col-md-2"><input type="text" name="colorKo" id="colorKo"></td>
-						<th class="col-md-1">색상(영어)</th>
-						<td class="col-md-2"><input type="text" name="colorEn" id="colorEn"></td>
+						<th class="highlight1 col-md-5">색상(한국어)</th>
+						<td><input type="text" name="colorKo" id="colorKo" class="form-control"></td>
+						<th class="highlight1 col-md-5">색상(영어)</th>
+						<td ><input type="text" name="colorEn" id="colorEn" class="form-control"></td>
 					</tr>
 					<tr>
-						<th class="col-md-1">원가</th>
-						<td class="col-md-2" colspan="3"><input type="text" name="cl_price" id="cl_price"></td>
+						<th class="highlight1 col-md-5">원가</th>
+						<td colspan="3"><input type="text" name="cl_price" id="cl_price" class="form-control"></td>
 					</tr>
 					<tr>
-						<th class="col-md-1">입고량</th>
-						<td class="col-md-2" colspan="3"><input type="text" name="cl_amount" id="cl_amount"></td>
+						<th class="highlight1 col-md-5">입고량</th>
+						<td colspan="3"><input type="text" name="cl_amount" id="cl_amount" class="form-control"></td>
 					</tr>
 				</table>
-				<button type="button" class="btn btn-success" id="insertBtn">저장</button>
-				<input type="button" class="btn btn-success" id="warehousingList" value="입고 리스트">
+				<button type="button" class="btn btn-default" id="insertBtn">저장</button>
+				<input type="button" class="btn btn-default" id="warehousingList" value="입고 리스트">
 			</div>
 		</form>
 	</div>

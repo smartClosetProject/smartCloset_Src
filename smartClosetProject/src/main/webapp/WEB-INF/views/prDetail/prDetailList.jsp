@@ -17,11 +17,13 @@
 			.table-height{min-height:450px;  width:100%;}
 			.date input{width:370px; height:25px; margin-right: 30px; margin-top: 5px;}
 			.height-btn{min-height:100px;}
-			#searchData{height:35px;}
-			#search{width:150px; margin-right: 30px; height:30px; margin-left: 20px;}
-			#keyword{width:400px; margin-right: 30px; height:30px;}
-			#productSearch{width:100%;}
 			.prDetail{width:100%;}
+			.contentBtn {
+				min-height: 100px;
+			}
+			.container-fluid{
+				padding-bottom: 50px !important;
+			}
 		</style>
 		<script type="text/javascript">
 			$(function () {
@@ -106,28 +108,24 @@
 		</script>
 	</head>
 	<body>
-		<div class="contentContainer container prDetail">
-			<h2>상품 리스트</h2>
-			<div class="contentTit page-header">
-				<div id="productSearch"  class="text-right">
-					<form id="pr_search" name="pr_seach" >
+		<div>
+			<h2 style="color : #1A5276;"><strong>상품 리스트</strong></h2>
+				<div id="productSearch"  class="text-left">
+					<form id="pr_search" name="pr_seach" class="form-inline"  >
 						<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}">
 						<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
-						<div class="form-group text-right" >
-							<label>검색 조건</label>
-							<select id="search" name="search" >
+						<span class="glyphicon glyphicon-search"></span>&nbsp;
+						<div class="form-group">
+							<select id="search" name="search" class="form-control">
 								<option value="all">전체</option>
 								<option value="pr_num">상품 번호</option>
 								<option value="pr_name">상품명</option>
-								<option value="pr_categoryl">카테고리(대)</option>
-								<option value="pr_categorys">카테고리(소)</option>
 							</select>
-							<input type="text" id="keyword" name="keyword" value="검색어를 입력하세요" style="text-transform: uppercase;">
-							<button type="button" class="btn btn-info btn-default" id="searchData">검색</button>
+							<input type="text" class="form-control" id="keyword" name="keyword" value="검색어를 입력하세요" style="text-transform: uppercase;">
+							<button type="button" class="btn btn-default" id="searchData">검색</button>
 						</div>
 					</form>
 				</div>
-			</div>
 		</div>
 		<div id="prDetailList" class="table-height">
 			<form id="detailProduct">
@@ -155,18 +153,18 @@
 									<td>${prDetail.pr_issale}</td>
 									<td>${prDetail.pr_price}</td>
 									<td>
-										<button class="insert" name="insert">
+										<button class="insert btn btn-default" name="insert">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
  											 <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
 											</svg>
 										</button>
-										<button class="update" name="update">
+										<button class="update btn btn-default" name="update">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 											  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
 											  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
 											</svg>
 										</button>
-										<button class="delete" name="delete">
+										<button class="delete btn btn-default" name="delete">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
 											  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
 											  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
@@ -206,7 +204,7 @@
 				</ul>
 			</div>
 			<div class="height-btn">
-				<input type="button" value="등록" id="insertFormBtn" class="btn btn-info btn-default" />
+				<input type="button" value="등록" id="insertFormBtn" class="btn btn-default" />
 			</div>
 		</div>
 	</body>
