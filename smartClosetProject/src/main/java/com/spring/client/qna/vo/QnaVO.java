@@ -31,5 +31,6 @@ public class QnaVO extends CommonVO{
     private String q_file ="";
     private String q_category ="";
     private MultipartFile file;
+    private String m_name = "";
 	
 }
