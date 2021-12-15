@@ -49,5 +49,11 @@ public class OrderServiceImpl implements OrderService {
 	public void updateMile(OrderVO ovo) {
 		orderDao.updateMile(ovo);
 	}
+
+	@Override
+	public OrderVO productsInfo(OrderVO ovo) {
+		OrderVO proInfo = orderDao.productsInfo(ovo);
+		return proInfo;
+	}
 	
 }

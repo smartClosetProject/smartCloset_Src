@@ -77,9 +77,25 @@
 		    	width: 90px;
 		    	text-align: center;
 		    }
+		    #SClogo {
+		    	height: 34px;
+		    }
   		</style>
 		<script type="text/javascript">
-			
+			$(function(){
+				$("#searchBtn").click(function(){
+					if(!chkData("#pro_keyword","검색어를"))return false;
+					console.log($("#pro_keyword").val())
+					goPage();
+				})
+				function goPage(){
+					$("#pro_search").attr({
+						"method":"get",
+						"action":"/product/listPage"
+					});
+					$("#pro_search").submit();
+				}
+			})
 		</script>
 	</head>
 	<body>

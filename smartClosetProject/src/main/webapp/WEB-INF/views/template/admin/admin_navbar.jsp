@@ -16,8 +16,14 @@
             <li class="nav-item"><a class="nav-link" href="/nboard/nboardTest">메인 페이지</a></li>
             <li class="nav-item"><a class="nav-link" href="/nboard/nboardList">공지 관리</a></li>
             <li class="nav-item"><a class="nav-link" href="/aOrder/aOrderList">주문 관리</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">상품 관리</a></li>
-            <li class="nav-item"><a class="nav-link" href="/aMember/aMemberList">회원 관리</a></li>
+            <li class="nav-item"><a class="nav-link" href="/prDetail/prDetailList">상품 관리</a>
+            	<ul class="sub_menu">
+					<li><a href="/prDetail/prDetailList" >상품 리스트</a></li>
+					<li><a href="/prDetail/pr_numerical" >통계리스트</a></li>
+					<li><a href="/prDetail/warehousingList" >입고 확인</a></li>
+				</ul>
+			</li>
+			<li class="nav-item"><a class="nav-link" href="/aMember/aMemberList">회원 관리</a></li>
             <li class="nav-item"><a class="nav-link" href="/aReview/aReviewList">리뷰 게시판 관리</a></li>
             <li class="nav-item"><a class="nav-link" href="/aQna/aQnaList">QnA 게시판 관리</a></li>
           </ul>

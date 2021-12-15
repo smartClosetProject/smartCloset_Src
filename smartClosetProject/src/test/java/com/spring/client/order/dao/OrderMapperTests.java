@@ -29,22 +29,22 @@ public class OrderMapperTests {
 //		log.info("result : " + vo);
 //	}
 //	
-	@Test
-	public void testInsertOrder() {
-		log.info("testInsertOrder 호출 성공");
-		
-		OrderVO ovo = new OrderVO();
-		ovo.setOrder_num(1234567890);
-		ovo.setOrder_totalPayment(370000);
-		ovo.setOrder_state("결제완료");
-		ovo.setM_id("smartmember");
-		ovo.setM_name("김자바");
-		ovo.setM_addr("서울시 중랑구 상봉동");
-		ovo.setM_phone("010-1234-4321");
-		ovo.setShipMessage("부재 시 문 앞에 놓아주세요.");
-		
-		orderDao.insertOrder(ovo);
-	}
+//	@Test
+//	public void testInsertOrder() {
+//		log.info("testInsertOrder 호출 성공");
+//		
+//		OrderVO ovo = new OrderVO();
+//		ovo.setOrder_num(1234567890);
+//		ovo.setOrder_totalPayment(370000);
+//		ovo.setOrder_state("결제완료");
+//		ovo.setM_id("smartmember");
+//		ovo.setM_name("김자바");
+//		ovo.setM_addr("서울시 중랑구 상봉동");
+//		ovo.setM_phone("010-1234-4321");
+//		ovo.setShipMessage("부재 시 문 앞에 놓아주세요.");
+//		
+//		orderDao.insertOrder(ovo);
+//	}
 //	
 //	@Test
 //	public void testInsertOrderDetail() {
@@ -67,4 +67,16 @@ public class OrderMapperTests {
 //		
 //		orderDao.updateMile(ovo);
 //	}
+	
+	@Test
+	public void testProductsInfo() {
+		log.info("testProductsInfo 호출 성공");
+		
+		OrderVO ovo = new OrderVO();
+		ovo.setM_id("smartmember");
+		ovo.setCart_num(57);
+		
+		OrderVO vo = orderDao.productsInfo(ovo);
+		log.info(vo);
+	}
 }

@@ -19,6 +19,7 @@
 		<![endif]-->
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+			<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 		<style type="text/css">
 			nav span {
 				font-size: 20px;
@@ -114,6 +115,17 @@
 			#goPayment:hover {
 				font-weight: bold;
 			}
+			#proInfo tr td img{
+				width: 90px;
+				margin-left: 10px;
+				margin-right: 30px;
+			}
+			#proInfo tr td {
+				padding: 10px;
+			}
+			#toggleBtn {
+				margin-left: 700px;
+			}
 		</style>
 		<script type="text/javascript">
 			$(function() {
@@ -167,12 +179,24 @@
 				
 				// 적립금 적용과 최종 결제가 처리
 				$("#m_mileApply").focusout(function() {
-					totalSum();
+					if ($("#m_mileApply").val() < 0) {
+						alert("0이하의 적립금은 사용할 수 없습니다.");
+						$("#m_mileApply").val("");
+						return;
+					} else {
+						totalSum();
+					}
 				});
 				
 				$("#m_mileApply").keydown(function(key) {
-	                if (key.keyCode == 13) {
-	                	totalSum();
+					if ($("#m_mileApply").val() < 0) {
+						alert("0이하의 적립금은 사용할 수 없습니다.");
+						$("#m_mileApply").val("");
+						return;
+					} else {
+						if (key.keyCode == 13) {
+							totalSum();
+						}
 	                }
 	            });
 
@@ -231,6 +255,62 @@
 			            }
 			        }).open();
 			    });
+				
+				// 버튼 클릭 시 상품 보이기
+				let i = 0;
+				$("#toggleBtn").click(function() {
+					i = i + 1;
+					$("#toggleBtn").fadeOut(0.000001);
+					
+					if (i % 2 == 1) {
+						$("#toggleBtn").removeClass("glyphicon-menu-up");
+						$("#toggleBtn").addClass("glyphicon-menu-down");
+						$("#toggleBtn").fadeIn(1000);
+						$("#proInfo").toggle();
+					} else {
+						$("#toggleBtn").removeClass("glyphicon-menu-down");
+						$("#toggleBtn").addClass("glyphicon-menu-up");
+						$("#toggleBtn").fadeIn(1000);
+						$("#proInfo").toggle();
+					}
+					
+				});
+// 				$("#goPayment").click(function(){
+// 					IMP.init('iamport');
+// 				  	//결제시 전달되는 정보
+// 				  	let addr=$("#m_addr2").val();
+// 				  	addr+=" ";
+// 				  	addr+=$("#m_addr3").val();
+// 				  	let amount= ${order.order_totalPayment};
+// 				  	let email= $("#m_email").val();
+// 				  	let name=${order.m_mile}
+// 				  	let tel=${order.m_phone}
+// 				  	let postcode=$("#m_addr").val();
+// 					IMP.request_pay({
+// 							    pg : 'html5_inicis', 
+// 							    pay_method : 'card',
+// 							    merchant_uid : 'merchant_'+ new Date().getTime(),
+// 							    name : '주문명:결제테스트'/*상품명*/,
+// 							    amount : amount/*상품 가격*/, 
+// 							    buyer_email : eamil/*구매자 이메일*/,
+// 							    buyer_name : name,
+// 							    buyer_tel : tel/*구매자 연락처*/,
+// 							    buyer_addr : addr /*구매자 주소*/,
+// 							    buyer_postcode : postcode/*구매자 우편번호*/
+// 							}, function (rsp) { // callback
+// 							      if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+// 							          // jQuery로 HTTP 요청
+// 							          jQuery.ajax({
+// 							              url: "/order/orderComplete", // 예: https://www.myservice.com/payments/complete
+// 							              method: "POST",
+// 							              data: {
+// 							                  "complete":"success"
+// 							              }
+// 							          })
+// 							        } else {
+// 							          alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+// 							        }
+// 							      });
 			});
 			
 			function totalSum() {
@@ -243,14 +323,14 @@
 					applyMile = m_mile;
 				}
 				$("#applyMile2").html(applyMile.toLocaleString() + "원");
-				$("#applyShipCharge").html("-" + applyMile.toLocaleString() + "원");
+				$("#useMile").html("-" + applyMile.toLocaleString() + "원");
 				
 				let totalSum = (${order.order_totalPayment} - applyMile).toLocaleString();
 				$(".totalSum").html(totalSum);
 				
 				$("input[name='m_mile']").val(${order.m_mile });
 				$("input[name='m_mileApply']").val(applyMile);
-				$("input[name='m_mileAdd']").val(Math.floor((${order.order_totalPayment} - applyMile) * 0.02));
+				$("input[name='m_mileAdd']").val(Math.floor((${order.order_totalPayment} - applyMile) * 0.025 ));
 				$("input[name='order_totalPayment']").val(${order.order_totalPayment} - applyMile);
 			}
 		</script>
@@ -319,7 +399,26 @@
 					</select>
 					<input type="text" name="shipMessage" id="selectMessage" class="form-control msg" readonly="readonly">
 				</div><br>
-
+			</div>
+			
+			<div class="title">
+				<hr><h3>주문상품<span id="toggleBtn" class="glyphicon glyphicon-menu-up"></span></h3><hr>
+			</div>
+			<div>
+				<table id="proInfo">
+					<c:forEach var="info" items="${productsInfo }">
+						<tr>
+							<td><img src="/uploadStorage/warehousing/thumb/${info.pro_colorthumb }"></td>
+							<td>
+								<div>${info.pr_name }</div>
+								<div>[옵션: ${info.pro_size } / ${info.pro_color }]</div>
+								<div>수량: ${info.cart_goodsCount }</div>
+								<div><fmt:formatNumber type="currency" currencySymbol="" maxFractionDigits="0" 
+										value="${info.pr_price * info.cart_goodsCount}" groupingUsed="true" />원</div>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
 			</div>
 			<div class="title">
 				<hr><h3>할인/부가결제</h3><hr>
@@ -330,7 +429,7 @@
 					value="${order.m_mile }" groupingUsed="true" />원)</span>
 			</div>
 			<div>
-				<input type="number" id="m_mileApply" class="form-control">
+				<input type="number" id="m_mileApply" class="form-control" min="0">
 			</div>
 			<div class="mileApply">
 				<span class="applyMile1">적용금액</span>
@@ -355,7 +454,8 @@
 			</div>
 			<div>
 				<label class="n">할인/부가결제</label>
-				<label class="v" id="applyShipCharge">원</label>
+				<label class="v" id="useMile">
+				원</label>
 			</div>
 			<div>
 				<label class="n">배송비</label>

@@ -21,6 +21,7 @@
 		<![endif]-->
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<style type="text/css">
 		.button4 {
 		   background-color: white;
@@ -74,9 +75,56 @@
 					
 				
 				$("#memberExitBtn").click(function(){
+					if(confirm("정말 탈퇴 하시겠습니까?(탈퇴후 5년간 같은 아이디로 가입이 불가능합니다.)")){
+						goUrl = "/member/memberDelete";
+						$("#f_updateForm").attr("action", goUrl);
+						$("#f_updateForm").submit();
+					}
 					
 				});
 			});
+			function execPostCode() {
+	             new daum.Postcode({
+	                 oncomplete: function(data) {
+	                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	     
+	                    // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+	                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                    var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+	                    var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+	     
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraRoadAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                       extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraRoadAddr !== ''){
+	                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+	                    }
+	                    // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+	                    if(fullRoadAddr !== ''){
+	                        fullRoadAddr += extraRoadAddr;
+	                    }
+	     
+	                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                    console.log(data.zonecode);
+	                    console.log(fullRoadAddr);
+	                    
+	                    
+	                    $("[name=m_addr]").val(data.zonecode);
+	                    $("[name=m_addr2]").val(fullRoadAddr);
+	                    
+	                    /* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
+	                    document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
+	                    document.getElementById('signUpUserCompanyAddressDetail').value = data.jibunAddress; */
+	                }
+	             }).open();
+	         }
 		</script>
 	</head>
 	<body>
@@ -114,24 +162,31 @@
 						<span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
     					<span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
 					</td>
-					
+				</tr>
 				<tr>
 					<th>이름
 						<img src="/resources/image/star.jpg" alt="필수">
 					</th>
 					<td id="m_name">${updateData.m_name}</td>
 				</tr>
-				<tr>
-					<th>주소
-						<img src="/resources/image/star.jpg" alt="필수">
-					</th>
-					<td>
-					<input type="text" id="m_addr" name="m_addr" value="${updateData.m_addr}">
-					<input type="text" id="m_addr2" name="m_addr2" value="${updateData.m_addr2}">
-					<input type="text" id="m_addr3" name="m_addr3" value="${updateData.m_addr3}">
-					</td>
-					
-				</tr>
+				
+					<tr>
+						<th rowspan="2">주소
+							<img src="/resources/image/star.jpg" class="" alt="필수">
+						</th>
+						<td>
+							<input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="m_addr" id="m_addr" type="text" readonly="readonly" >
+		   		 			<button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>
+		   		 		</td>
+					</tr>
+					<tr>
+						<td>
+							<input class="form-control" style="top: 5px; width:40%; display: inline;" placeholder="도로명 주소" name="m_addr2" id="m_addr2" type="text" readonly="readonly" />
+							<input class="form-control" placeholder="상세주소"  style="width: 40%; display: inline;" name="m_addr3" id="m_addr3" type="text"  />
+						</td>
+					</tr>
+			
+				
 				<tr>
 					<th>휴대전화
 						<img src="/resources/image/star.jpg" alt="필수">

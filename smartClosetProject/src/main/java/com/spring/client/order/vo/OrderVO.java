@@ -26,4 +26,10 @@ public class OrderVO {
 	private String payMethod = "";			// 결제 수단
 	
 	private int cart_num = 0;				// 카트 번호
+	private int cart_goodsCount = 0;		// 상품 개수
+	private String pro_color = "";			// 색상
+	private String pro_size = "";			// 사이즈
+	private String pro_colorthumb = "";		// 썸네일
+	private String pr_name = "";			// 상품명
+	private int pr_price = 0;				// 상품가격
 }

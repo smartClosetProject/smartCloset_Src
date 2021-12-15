@@ -12,9 +12,10 @@
 	</insert>
 	
 	<select id="smartCloset" parameterType="sCloset" resultType="sCloset">
-		SELECT DISTINCT sc_num, sc_image, sc_thumb FROM smart_closet
+		SELECT sc_num, sc_image, sc_thumb
+		FROM smart_closet 
 		<where>
-			m_id = #{m_id}
+			m_id = #{m_id} AND ROWID IN (SELECT MAX(ROWID) FROM smart_closet GROUP BY sc_image)
 			<if test="search == 'buy'">
 				AND sc_isBuy = 'YES'
 			</if>
@@ -26,7 +27,6 @@
 	     		 LIKE '%' || #{keyword} || '%' ]]>
 			</if>
 		</where>
-		
 	</select>
 	
 	<insert id="regCloset" parameterType="sCloset">

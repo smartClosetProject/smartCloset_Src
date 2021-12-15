@@ -34,7 +34,6 @@
 		</style>
 		<script type="text/javascript">
 			$(function(){
-				//검색후 검색 대상과 검색 단어 출력
 				// 검색 후 검색 대상과 검색 단어 출력
 				let word = "<c:out value='${data.keyword}' />"
 				let value = "";
@@ -47,7 +46,7 @@
 						if ($("#re_Search").val() == 'r_content') {
 							value = "#po_list tr td.goDetail";
 						} else if ($("#re_Search").val() == 'm_id') {
-							value = "#po_list tr td.name";
+							value = "#po_list tr td.m_id";
 						}
 						console.log($(value + ":contains('" + word + "')").html());
 						
@@ -93,6 +92,7 @@
 						});
 						$("#r_numForm").submit();
 					} else if(category=="QNA"){
+						$("#q_num").val(r_num);
 						$("#r_numForm").attr({
 							"method" : "get",
 							"action" : "/qna/qnaDetail"
@@ -127,6 +127,7 @@
 			<form id="r_numForm">
 				<input type="hidden" id="r_num" value="r_num" name="r_num">
 				<input type="hidden" id="q_num" value="q_num" name="q_num">
+				<input type="hidden" id="m_id" value="m_id" name="m_id">
 				<input type="hidden" id="r_content" value="r_content" name="r_content">
 			</form>
 			<!-- --------------------검색 종료 ---------------------------->
@@ -148,19 +149,12 @@
 					<c:choose>
 						<c:when test="${not empty postList}">
 							<c:forEach var="post" items="${postList}" varStatus="status">
-								<tr class="text-center" data-num="${post.r_num}" data-category="${post.category}"> <!-- ${review.r_num } 실제 글 번호 -->
+								<tr class="text-center" data-num="${post.r_num}" data-category="${post.category}"> 
 									<td>${count - status.index }</td>
 									<td class="text-left">${post.category}</td>
 									<td class="goDetail text-left">${post.r_title}</td>
 									<td class="text-left">${post.m_id}</td>
 									<td class="text-left">${post.r_regdate}</td>
-							
-								<%-- <tr class="text-center" data-num="${post.q_num}">
-									<td>${count - status.index }</td>
-									<td class="goDetail text-left">${post.q_title}</td>
-									<td class="text-left">${post.m_id}</td>
-									<td class="text-left">${post.r_regdate}</td>
-								</tr> --%>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -175,17 +169,17 @@
 			</table>
 			</div>			
 			<%-- =================== 검색 버튼 =================== --%>
-			<div id="reviewSearch" class="text-left">
+			<div id="postSearch" class="text-left">
 				<form id="r_search" name="r_search" class="form-inline">
 					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum }">
 					<input type="hidden" name="amount" value="${pageMaker.cvo.amount }">
+					<input type="hidden" id="m_id" value="${login.m_id}" name="m_id">
 						<span class="glyphicon glyphicon-search"></span>&nbsp;
 					 <div class="form-group">
 						<select id ="re_Search" name="search" class="form-control">
 							<option value="all">전체</option>
-							
-							<option value="r_content">제목</option>
-					
+							<option value="r_title">제목</option>
+							<option value="r_content">내용</option>
 						</select>
 							<input type="text" id="reviewKeyword" name="keyword" value="검색어 입력" class="form-control">
 							<button type="button" class="btn btn-default" id="reviewSearchBtn" >검색</button>

@@ -17,6 +17,15 @@
 <!--[if lt IE 9]>
 	<script src="../js/html5shiv.js"></script>
 	<![endif]-->
+<style>
+.cate{
+position: absoulte;
+ left: 100;
+
+}
+
+</style>
+
 <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/resources/include/js/common.js"></script>
 <script type="text/javascript">
@@ -25,8 +34,8 @@ $(function(){
 		if (!chkData("#m_id", "아이디를")) return;
 		else if (!chkData("#q_title", "글제목을")) return;
 		else if (!chkData("#q_content", "글내용을")) return;
-		/*else if (!chkFile($"#file"))) return;*/
-		else {
+		else if (!chkData("#q_category","카테고리를")) return;
+	    else {
 			if($("#file").val() != "") {
 				if(!chkFile($("#file"))) return;
 			}
@@ -56,7 +65,7 @@ $(function(){
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name ="m_id" id="m_id" >
+      <input type="text" class="form-control" name ="m_id" id="m_id" value="${login.m_id}" >
     </div>
   </div>
    <div class="form-group">
@@ -71,8 +80,16 @@ $(function(){
       <textarea name="q_content" id="q_content" class="form-control" rows="8"></textarea>
     </div>
   </div>
- 	
-  <div class="form-group">
+ 	 <div class="form-group">
+    <label class="col-sm-2 control-label">카테고리</label>
+    	  <select id ="q_category" name="q_category" class="cate">
+                        <option value="교환">교환</option>
+                        <option value="환불">환불</option>
+                        <option value="기타">기타</option>
+            </select>            
+  </div>
+ 
+<div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">파일첨부</label>
     <div class="col-sm-10">
       <input type="file" class="form-control" name ="file" id="file" >

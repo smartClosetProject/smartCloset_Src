@@ -2,7 +2,6 @@ package com.spring.admin.aOrder.service;
 
 import java.util.List;
 
-import com.spring.admin.aOrder.vo.AorderDetailVO;
 import com.spring.admin.aOrder.vo.AorderVO;
 
 public interface AorderService {
@@ -13,6 +12,7 @@ public interface AorderService {
 	public AorderVO aOrderDetail(AorderVO aovo);
 	public int aOrderChangeState(AorderVO aovo);
 	public void aOrderAllDelete();
+	public int aOrderChangeStock(AorderVO aovo);
 	public int aOrderOptionChange(AorderVO aovo);
 	public AorderVO aOrderReturnDetail(AorderVO aovo);
 	public List<String> aGetProColor(AorderVO advo);

@@ -55,9 +55,6 @@ $(function(){
 		$("#f_data").submit();
 		
 	});
-	$("#qnainsertBtn").click(function(){
-		location.href="/qna/writeQNA";
-	});
 	
 	$("#qnaListBtn").click(function(){
 		location.href="/qna/qnaList";
@@ -72,29 +69,34 @@ $(function(){
 		<form name="f_data" id="f_data" method="post">
 			<input type="hidden" name="q_num" value="${detail.q_num }" />
 			<input type="hidden" name="q_file" value="${detail.q_file }" />
+			<input type="hidden" name="q_category" value="${detail.q_category}">
 		</form>
 <div class="text-center"><h3>QNA게시판 상세화면</h3></div>
 	<div class="container">
 			<table class="table table-bordered">
 		 			<tr>
-		 				<td>회원아이디</td>
-		 				<td colspan="3">${detail.m_id}</td>
+		 				<td>회원이름</td>
+		 				<td colspan="3" style="font-size:15px;font-family:sans-serif">${detail.m_name}</td>
 		 			</tr>
 		 			<tr>
 		 				<td>글번호</td>
-		 				<td colspan="3">${detail.q_num}</td>
+		 				<td colspan="3" style="font-size:15px;font-family:sans-serif">${detail.q_num}</td>
 		 			</tr>
 		 			<tr>
 		 				<td>글제목</td>
-		 				<td colspan="3">${detail.q_title}</td>
+		 				<td colspan="3" style="font-size:15px;font-family:sans-serif">${detail.q_title}</td>
 		 			</tr>
 		 			<tr class="table-height">
 		 				<td>글내용</td>
-		 				<td colspan="3">${detail.q_content}</td>
+		 				<td colspan="3" style="font-size:15px;font-family:sans-serif">${detail.q_content}</td>
 		 			</tr>
 					<tr>
+						<td>카테고리</td>
+						<td colspan="3" style="font-size:15px;font-family:sans-serif">${detail.q_category}</td>
+					</tr>
+					<tr>
 						<td>작성일</td>
-						<td colspan="3">${detail.q_regdate}</td>
+						<td colspan="3" style="font-size:15px;font-family:sans-serif">${detail.q_regdate}</td>
 					</tr>
 					<c:if test = "${not empty detail.q_file}">
 					<tr>
@@ -107,9 +109,11 @@ $(function(){
 				</table>
 		</div>
 					<div class="btnArea col-md-50 text-right">
+					
+					<c:if test="${login.m_id == detail.m_id}">
 					<input type="button" value="글수정" id="updateQnaBtn" class="btn btn-success" />
 					<input type="button" value="글삭제" id="qnaDeleteBtn" class="btn btn-success" />
-					<input type="button" value="글쓰기" id="qnainsertBtn" class="btn btn-success" />
+					</c:if>
 					<input type="button" value="목록"  id="qnaListBtn" class="btn btn-success" />			
 				</div>
 		<jsp:include page="reply.jsp" />

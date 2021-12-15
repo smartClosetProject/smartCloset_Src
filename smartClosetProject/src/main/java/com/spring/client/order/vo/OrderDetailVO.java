@@ -9,5 +9,6 @@ public class OrderDetailVO {
 	private long order_num = 0;		// 주문 번호
 	private String pro_num = "";	// 상품 번호
 	
+	private String m_id;
 	private int cart_num;			// 카트 번호
 }

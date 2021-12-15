@@ -19,6 +19,21 @@
       <!--[if lt IE 9]>
       <script src="/resources/js/html5shiv.js"></script>
       <![endif]-->
+<style>
+#formbtn{
+margin-left :690px;
+}
+.button4 {
+         background-color: white;
+         color: black;
+         border: 2px solid #e7e7e7;
+}
+.button4:hover {
+background-color: #e7e7e7;
+opactiy: ;
+}
+
+</style>
       <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
       <script type="text/javascript" src="/resources/include/js/common.js"></script>
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -37,13 +52,13 @@
                   return;
                } else if (!chkData("#m_phone3","핸드폰 번호를")) {
                   return;
-               } else if (!chkData("#m_email","이메일을")) {
+               } else if (!chkData("#m_email1","이메일을")) {
                   return ;
                } else if (!chkData("#m_addr3","주소를")) {
                    return ;
                } else{
-                  $("#m_phone").val( $("#m_phone1").val()+"-"+$("#m_phone2").val()+"-"+$("#m_phone3").val() )
-                  //console.log( $("#m_phone").val() );
+                  $("#m_phone").val( $("#m_phone1").val()+"-"+$("#m_phone2").val()+"-"+$("#m_phone3").val())
+                  $("#m_email").val( $("#m_email1").val()+"@"+$("#m_email2").val())
                   $("#f_updateForm").attr({
                      "method" : "POST",
                      "action" : "/member/memberInsert"
@@ -129,7 +144,7 @@
          <input type="hidden" name="m_phone" id="m_phone" /> -->
          <form id="f_updateForm">
          <input type="hidden" name="m_phone" id="m_phone" /> 
-         
+         <input type="hidden" name="m_email" id="m_email" /> 
          <div class="titleArea">  
             <h2>회원 가입</h2>
          </div>
@@ -137,29 +152,29 @@
             <tr>
                <th>아이디＊
                </th>
-                 <td><input type="text" id="m_id" name="m_id"></td>
+                 <td><input type="text" id="m_id" name="m_id" style="height:22px;"></td>
            </tr>
             <tr>
                <th>비밀번호＊
                </th>
-               <td><input type="password" id="m_passwd" class="pw" name="m_passwd" maxlength="8">(8자까지 가능합니다.)</td>
+               <td><input type="password" id="m_passwd" class="pw" name="m_passwd" maxlength="12" style="height:22px;"> (12자까지 가능합니다.)</td>
             </tr>
             <tr>
                <th>비밀번호확인＊
                </th>
-               <td><input type="password" id="m_passwd2" class="pw" name="m_passwd2">
+               <td><input type="password" id="m_passwd2" class="pw" name="m_passwd2" maxlength="12" style="height:22px;">
                   <span id="alert-success" style="display: none;">비밀번호가 일치합니다.</span>
                    <span id="alert-danger" style="display: none; color: #d92742; font-weight: bold; ">비밀번호가 일치하지 않습니다.</span>
                </td>
             <tr>
-               <td>이름＊</td>
-               	<td><input type="text" id="m_name" name="m_name"></td>
+               <td style="font-weight:bold">이름＊</td>
+               	<td><input type="text" id="m_name" name="m_name" style="height:22px;"></td>
             </tr>
             <tr>
                <th>휴대전화＊
                </th>
                <td>
-                  <div id ="m_phone">
+                  <div>
                      <select id ="m_phone1" name="m_phone1">
                         <option value="010">010</option>
                         <option value="010">011</option>
@@ -168,34 +183,46 @@
                         <option value="010">018</option>
                         <option value="010">019</option>
                      </select>
-                     <input type="text" id ="m_phone2" maxlength="4" name="m_phone2">
-                     <input type="text" id ="m_phone3" maxlength="4" name="m_phone3">
+                     - <input type="text" id ="m_phone2" maxlength="4" name="m_phone2" style="width:53px;height:19px;">
+                     - <input type="text" id ="m_phone3" maxlength="4" name="m_phone3" style="width:53px;height:19px;">
                   </div>
                </td>
             </tr>
-            <tr>
-               <th>이메일＊
+               <tr>
+               <th >이메일＊
                </th>
-               <td><input type="text" id="m_email" name="m_email"></td>
+               <td>
+               <div>
+                 <input type="text" id ="m_email1" maxlength="20" name="m_email1" style="height:22px;"> @ 
+                 <select id ="m_email2" name="m_email2">
+                        <option value="naver.com">naver.com</option>
+                        <option value="daum.net">daum.net</option>
+                        <option value="google.com">google.com</option>
+                        <option value="직접입력">직접입력</option>
+                 </select>
+            </div>
+            </td>
             </tr>
 		<tr>	
 		<tr>                 
+		 <td style="font-weight:bold">주소＊
+		 </td>
 		 <td><input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="m_addr" id="m_addr" type="text" readonly="readonly" >
    		  <button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button></td>                           
 		</tr>
 		<tr>
-		<td><input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="m_addr2" id="m_addr2" type="text" readonly="readonly" /></td>
-		</tr>
-	    <tr>
-		<td><input class="form-control" placeholder="상세주소" name="m_addr3" id="m_addr3" type="text"  /></td>
+		<td>
+		</td>
+		<td><input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="m_addr2" id="m_addr2" type="text" readonly="readonly" />
+		<input class="form-control" placeholder="상세주소" name="m_addr3" id="m_addr3" type="text"  /></td>
+		
 		</tr>
 		</table>
     </form>
-
-   <form>
-         <div class="ec-base-button justify">
-            <button type="button" id="membersubmitBtn"  class="btn btn-default btn-lg active" >회원가입</button>
-            <button type="button" id="memberresetBtn" class="btn btn-default btn-lg active">뒤로가기</button>
+     <form name="formbtn" id="formbtn">
+         <div class="ec-base-button justify-content:flex-end">
+           <button type="button" id="memberresetBtn" class="button button4" style="width:100px;height:40px; font-size:15px;background:white;" >뒤로가기</button>
+           <button type="button" id="membersubmitBtn"  class="button button4" style="width:100px;height:40px;font-size:15px;background:white;">회원가입</button>
          </div>
     </form>
    </body>

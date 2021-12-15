@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.client.member.vo.MemberVO;
 import com.spring.client.order.service.OrderService;
 import com.spring.client.order.vo.OrderDetailVO;
 import com.spring.client.order.vo.OrderVO;
@@ -39,35 +40,31 @@ public class OrderController {
 	private HttpSession session;
 	
 	@PostMapping("orderForm")
-	public String orderForm(@RequestParam("chkBox") List<Integer> cartNum, @RequestParam("totalPayment") int totalPayment, OrderVO ovo, Model model) {
+	public String orderForm(@RequestParam("chkBox") List<Integer> cartNum, @RequestParam("totalPayment") int totalPayment, OrderVO ovo, ArrayList<OrderVO> productsInfo, Model model) {
 		log.info("OrderForm 호출 성공");
 		
-		String m_id = (String) session.getAttribute("m_id");
-		m_id = "smartmember";
-		ovo.setM_id(m_id);
+		MemberVO login = (MemberVO) session.getAttribute("login");
+		ovo.setM_id(login.getM_id());
 		
+		for (Integer i : cartNum) {
+			ovo.setCart_num(i);
+			productsInfo.add(orderService.productsInfo(ovo));
+		}
 		OrderVO vo = orderService.orderForm(ovo);
 		vo.setOrder_totalPayment(totalPayment);
 		model.addAttribute("order", vo);
+		model.addAttribute("productsInfo", productsInfo);
 		session.setAttribute("cart", cartNum);
 		
 		return "order/orderForm";
-	}
-	
-	@PostMapping("orderPayment")
-	@ResponseBody
-	public String orderPayment() {
-		// 결제 ajax
-		return "success";
 	}
 	
 	@PostMapping("orderComplete")
 	public String orderComplete(@ModelAttribute OrderVO ovo, OrderDetailVO odvo) {
 		log.info("OrderComplete 호출 성공");
 		
-		String m_id = (String) session.getAttribute("m_id");
-		m_id = "smartmember";
-		ovo.setM_id(m_id);
+		MemberVO login = (MemberVO) session.getAttribute("login");
+		ovo.setM_id(login.getM_id());
 		
 		Calendar cal = Calendar.getInstance();
 		String date = cal.get(Calendar.YEAR) + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1)
@@ -83,7 +80,6 @@ public class OrderController {
 		List<Integer> cartNums = (ArrayList<Integer>) session.getAttribute("cart");
 		odvo.setOrder_num(order_num);
 		
-		//String pro_num = 
 		for (Integer i : cartNums) {
 			odvo.setCart_num(i);
 			ovo.setCart_num(i);
@@ -98,7 +94,6 @@ public class OrderController {
 		String dateFormat = sdf.format(cal.getTime());
 		ovo.setOrder_regdate(dateFormat);
 
-		// 새로고침 시 주문이 계속 insert 되는 현상을 방지하기 위해 session과 redirect 활용
 		session.setAttribute("order", ovo);
 		
 		return "redirect:/order/orderComplete";

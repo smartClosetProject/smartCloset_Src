@@ -434,7 +434,7 @@
 						<c:forEach var="closet" items="${closetList }">
 							<div class="section1 text-center">
 								<div class="section2">
-									<img class="cloth" data-num="${i = i + 1 }" src="/uploadStorage/sCloset/${closet.sc_image }" /> 
+									<img class="cloth" data-num="${i = i + 1 }" src="/uploadStorage/warehousing/${closet.sc_image }" /> 
 									<input type="checkbox" data-sc_num="${closet.sc_num }" class="checkboxs">
 								</div>
 								<input type="button" class="btn tagBtn" value="태그수정">

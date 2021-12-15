@@ -5,56 +5,64 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="container-fluid">
 	<div class="navbar-header">
-		<a class="navbar-brand" href="/sCloset/sClosetHome">SmartCloset</a>
+		<a class="navbar-brand" href="/sCloset/sClosetHome"><img id="SClogo" src="/resources/image/SClogo.png"></a>
 	</div>
 	<ul class="nav navbar-nav">
-		<li><a href="#">홈</a></li><!-- class="active" -->
+		<li><a href="/product/mainPage">홈</a></li><!-- class="active" -->
 		<li class="dropdown"><a class="dropdown-toggle"
-			data-toggle="dropdown" href="#">아우터 <span class="caret"></span></a>
+			data-toggle="dropdown" href="/product/cate/아우터">아우터 <span class="caret"></span></a>
 			<ul class="dropdown-menu">
-				<li><a href="#">패딩</a></li>
-				<li><a href="#">자켓</a></li>
-				<li><a href="#">코드</a></li>
-				<li><a href="#">점퍼/짚업</a></li>
+				<li><a href="/product/cate/아우터/자켓">자켓</a></li>
+				<li><a href="/product/cate/아우터/코트">코트</a></li>
+				<li><a href="/product/cate/아우터/패딩">패딩</a></li>
+				<li><a href="/product/cate/아우터/야상">야상</a></li>
+				<li><a href="/product/cate/아우터/집업">집업</a></li>
 			</ul></li>
 		<li class="dropdown"><a class="dropdown-toggle"
-			data-toggle="dropdown" href="#">상의 <span class="caret"></span></a>
+			data-toggle="dropdown" href="/product/cate/상의">상의 <span class="caret"></span></a>
 			<ul class="dropdown-menu">
-				<li><a href="#">긴팔</a></li>
-				<li><a href="#">니트</a></li>
-				<li><a href="#">가디건</a></li>
-				<li><a href="#">조끼</a></li>
-				<li><a href="#">반팔</a></li>
+				<li><a href="/product/cate/상의/반팔">반팔</a></li>
+				<li><a href="/product/cate/상의/긴팔">긴팔</a></li>
+				<li><a href="/product/cate/상의/셔츠">셔츠</a></li>
+				<li><a href="/product/cate/상의/니트">니트</a></li>
+				<li><a href="/product/cate/상의/맨투맨">맨투맨</a></li>
+				<li><a href="/product/cate/상의/후드티">후드티</a></li>
 			</ul></li>
 		<li class="dropdown"><a class="dropdown-toggle"
-			data-toggle="dropdown" href="#">하의 <span class="caret"></span></a>
+			data-toggle="dropdown" href="/product/cate/하의">하의 <span class="caret"></span></a>
 			<ul class="dropdown-menu">
-				<li><a href="#">슬랙스</a></li>
-				<li><a href="#">데님</a></li>
-				<li><a href="#">면바지</a></li>
-				<li><a href="#">반바지</a></li>
+				<li><a href="/product/cate/하의/반바지">반바지</a></li>
+				<li><a href="/product/cate/하의/긴바지">긴바지</a></li>
+				<li><a href="/product/cate/하의/청바지">청바지</a></li>
+				<li><a href="/product/cate/하의/면바지">면바지</a></li>
+				<li><a href="/product/cate/하의/슬랙스">슬랙스</a></li>
 			</ul></li>
 		<li class="dropdown"><a class="dropdown-toggle"
-			data-toggle="dropdown" href="#">가방/신발 <span class="caret"></span></a>
+			data-toggle="dropdown" href="/product/cate/가방신발">가방/신발 <span class="caret"></span></a>
 			<ul class="dropdown-menu">
-				<li><a href="#">가방</a></li>
-				<li><a href="#">신발</a></li>
+				<li><a href="/product/cate/가방신발/가방">가방</a></li>
+				<li><a href="/product/cate/가방신발/신발">신발</a></li>
 			</ul></li>
 		<li class="dropdown"><a class="dropdown-toggle"
-			data-toggle="dropdown" href="#">악세사리 <span class="caret"></span></a>
+			data-toggle="dropdown" href="/product/cate/액세서리">액세서리 <span class="caret"></span></a>
 			<ul class="dropdown-menu">
-				<li><a href="#">벨트</a></li>
-				<li><a href="#">스카프</a></li>
+				<li><a href="/product/cate/액세서리/벨트">벨트</a></li>
+				<li><a href="/product/cate/액세서리/스카프">스카프</a></li>
 			</ul></li>
+			
 	</ul>
 	<ul class="nav navbar-nav navbar-right">
 		<li><a href="/cart/cartList"><span
 				class="glyphicon glyphicon glyphicon-shopping-cart"></span> </a></li>
 		<li><a href="/member/mypage"><span class="glyphicon glyphicon-user"></span>
 		</a></li>
-		<li><a href="/member/loginForm"><span class="glyphicon glyphicon-log-in"></span>
+		<c:if test="${empty login.m_id }">
+			<li><a href="/member/loginForm"><span class="glyphicon glyphicon-log-in"></span>
 		</a></li>
-		<li><a href="/member/logout"><span class="glyphicon glyphicon-log-out"></span>
+		</c:if>
+		<c:if test="${not empty login.m_id }">
+			<li><a href="/member/logout"><span class="glyphicon glyphicon-log-out"></span>
 		</a></li>
+		</c:if>
 	</ul>
 </div>

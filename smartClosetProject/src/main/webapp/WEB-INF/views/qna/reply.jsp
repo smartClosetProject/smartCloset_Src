@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +64,8 @@ $(function(){
       });
 
 	/**수정하기 버튼 클릭시 수정폼 출력*/
-$(document).on("click", ".update_form", function() {
+
+	$(document).on("click", ".update_form", function() {
 			//$(".reset_btn").click();
 			let currLi = $(this).parents("li");
 			replyNum = currLi.attr("data-num");
@@ -221,6 +223,7 @@ $(document).on("click", ".update_form", function() {
 		date_span.html("/" + r_date + " ");
 
 		//수정하기 버튼
+		
 		let up_input = $("<input>");
 		up_input.attr({
 			"type" : "button",
@@ -234,6 +237,7 @@ $(document).on("click", ".update_form", function() {
 			"type" : "button",
 			"value" : "삭제하기"
 		});
+		
 		del_input.addClass("delete_btn");
 
 		//내용
@@ -365,18 +369,21 @@ $(document).on("click", ".update_form", function() {
 <div id="replyContainer">
 	<div id="comment_write">
 		<!-- 입력화면 구현 -->
-	<form class="form-inline">
-  	<div class="form-group">
-    		<label for="exampleInputName2">작성자</label>
-    		<input type="text" class="form-control" id="r_name" name="r_name">
- 	 </div>
- 	 <div class="form-group">
-  		  <label for="exampleInputEmail2">비밀번호</label>
-  		  <input type="text" class="form-control" id="r_passwd" name="r_passwd">
-  	</div>
- 		 <button type="button"  id="replyInsert" class="btn btn-default">저장하기</button>
-			<label>댓글내용</label>
-			<textarea class="form-control" rows="3" id="r_content" name="r_content"></textarea>
+		
+<form class="form-inline">
+	<c:if test="${not empty login}">
+			<div class="form-group">
+		    		<label for="exampleInputName2">작성자</label>
+		    		<input type="text" class="form-control" id="r_name" name="r_name" value="${login.m_id}">
+		 	 </div>
+		 	 <div class="form-group">
+		  		  <label for="exampleInputEmail2">비밀번호</label>
+		  		  <input type="text" class="form-control" id="r_passwd" name="r_passwd">
+		  	</div>
+		 		 <button type="button"  id="replyInsert" class="btn btn-default">저장하기</button>
+					<label>댓글내용</label>
+					<textarea class="form-control" rows="8" id="r_content" name="r_content"></textarea>
+	</c:if>
 	</form>
 	</div>
 	<ul id="comment_list">

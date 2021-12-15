@@ -28,6 +28,11 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return member;
 	}
+	//마이페이지 주문내역 수 확인
+	@Override
+	public MyorderVO memberMypageCnt(MyorderVO ovo) {
+		return memberDao.memberMypageCnt(ovo);
+	}
 
 	//회원정보 수정 페이지 구현
 	@Override
@@ -41,6 +46,12 @@ public class MemberServiceImpl implements MemberService{
 	public int memberUpdate(MemberVO mvo) {
 		int result = 0;
 		result = memberDao.memberUpdate(mvo);
+		return result;
+	}
+	@Override
+	public int memberDelete(MemberVO mvo) {
+		int result = 0;
+		result = memberDao.memberDelete(mvo);
 		return result;
 	}
 	
@@ -59,6 +70,7 @@ public class MemberServiceImpl implements MemberService{
 	//주문 내역 리스트 목록 구현
 	@Override
 	public List<MyorderVO> myorderList(MyorderVO mvo) {
+		System.out.println(mvo.getStart_date() + " / " + mvo.getEnd_date());
 		List<MyorderVO> list = memberDao.myorderList(mvo);
 		return list;
 	}
@@ -77,8 +89,11 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberVO login(MemberVO memberVO) {
-		MemberVO mvo = new MemberVO();
-		 mvo = memberDao.login(mvo);
+		MemberVO mvo = memberDao.login(memberVO);
 		return mvo;
 	}
+
+	
+
+	
 }

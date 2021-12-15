@@ -74,6 +74,11 @@
 		DELETE FROM sc_order WHERE order_deliverydate <![CDATA[<]]> to_date(sysdate)-7
 	</delete>
 	
+	<update id="aOrderChangeStock" parameterType="aorder">
+		update product pr set pr.pro_stock = prpro_stock-(select od.order_goodsCount from sc_order_detail od where pd.pro_num = od.pro_num),
+		pr.pro_sales = pr.pro_sales-(select order_goodsCount from sc_order_detail od where pd.pro_num = od.pro_num)
+	</update>
+	
 	<update id="aOrderOptionChange" >
 	update sc_order_detail
 	set pro_num = (select DISTINCT p2.pro_num

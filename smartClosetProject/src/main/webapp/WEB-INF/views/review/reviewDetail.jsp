@@ -58,6 +58,7 @@
 			<form name="f_data" id="f_data" method="post">
 				<input type="hidden" name="r_num" value="${detail.r_num}">
 				<input type="hidden" name="m_id" value="${detail.m_id}">
+				<input type="hidden" name="m_id" value="${detail.m_name}">
 				<input type="hidden" name="r_file" value="${detail.r_file }">
 				<input type="hidden" name="r_thumb" value="${detail.r_thumb }">
 			</form>
@@ -76,7 +77,7 @@
 		 			</tr>
 		 			<tr>
 		 				<td>작성자</td>
-		 				<td colspan="3">${detail.m_id}</td>
+		 				<td colspan="3">${detail.m_name}</td>
 		 			</tr>
 		 			<tr class="table-height">
 		 				<td>글내용</td>
@@ -90,14 +91,15 @@
 		 						<img src="/uploadStorage/review/${detail.r_file }">
 		 					</td>
 		 				</tr>
+		 			</c:if>	
 		 				<tr>
-		 					<td>
-		 						<button type="button" class="btn btn-success text-right btn-sm" id="updateFormBtn">수정</button>
-								<button type="button" class="btn btn-success text-right btn-sm" id="reviewDeleteBtn">삭제</button>
-								<button type="button" class="btn btn-success text-right btn-sm" id="reviewListBtn">목록</button>
+		 					<td><c:if test="${login.m_id == detail.m_id}">
+			 						<button type="button" class="btn btn-default" id="updateFormBtn">수정</button>
+									<button type="button" class="btn btn-default" id="reviewDeleteBtn">삭제</button>
+								</c:if>
+								<button type="button" class="btn btn-default" id="reviewListBtn">목록</button>
 							</td>
 						</tr>
-		 			</c:if>
 				</table>
 			</div>
 			<%-- =============== 상세 정보 보여주기 종료 =============== --%>
