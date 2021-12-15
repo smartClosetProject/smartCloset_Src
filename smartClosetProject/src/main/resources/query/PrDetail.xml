@@ -35,7 +35,10 @@
 			]]>
 		</select>
 		<select id="prDetailListCnt" parameterType="prDetail" resultType="int">
-			select count(*) from pr_detail
+			select count(*) from pr_detail 
+			<trim prefix="WHERE (" suffix=")">
+				<include refid="prdetailSearch"></include>
+			</trim>
 		</select>
 		<insert id="prDetailInsert" parameterType="prDetail">
 			insert into pr_detail (pr_num, pr_name, pr_price, pr_issale, pr_mainimg, 
@@ -125,10 +128,13 @@
 		<update id="updateProStock" parameterType="product">
 			update product set pr_sales =#{cl_amount} where pro_num=#{pro_num}
 		</update>
+		<update id="productDelete" parameterType="product">
+			update pr_detail set pr_issale='N' where pr_num=#{pr_num}
+		</update>
 		<!-- 삭제 -->
-		<delete id="productDelete" parameterType="product">
-			delete from product where pr_num=#{pr_num}
-		</delete>
+<!-- 		<delete id="productDelete" parameterType="product"> -->
+<!-- 			delete from product where pr_num=#{pr_num} -->
+<!-- 		</delete> -->
 		<delete id="prdetailDelete" parameterType="product">
 			delete from pr_detail where pr_num=#{pr_num}
 		</delete>

@@ -158,8 +158,8 @@ public class PrDetailController {
 	@RequestMapping(value="delete",method =RequestMethod.POST)
 	public String delete(ProductVO pvo, RedirectAttributes ras) {
 		log.info("delete 호출 성공");
-		prDetailService.productDelete(pvo);
-		prDetailService.prdetailDelete(pvo);
+		int result=prDetailService.productDelete(pvo);
+		log.info(result);
 		return "redirect:/prDetail/prDetailList";
 	}
 	@RequestMapping(value="/listUpdate")
