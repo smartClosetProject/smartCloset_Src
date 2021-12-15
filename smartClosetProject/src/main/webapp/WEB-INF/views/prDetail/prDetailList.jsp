@@ -60,7 +60,7 @@
 				$(".delete").click(function(){
 					let pr_num=$(this).parents("tr").attr("data-num");
 					$(".pr_num").val(pr_num);
-					alert("해당 상품 번호에 속한 모든 상품이 삭제됩니다.")
+					alert("해당 상품이 판매 페이지에 공개되지 않습니다.")
 					$("#detailProduct").attr({
 						"method":"post",
 						"action":"/prDetail/delete"
