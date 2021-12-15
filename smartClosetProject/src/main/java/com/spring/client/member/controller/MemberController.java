@@ -230,7 +230,7 @@ public class MemberController {
 				path = "member/loginForm";
 			} else {
 				session.setAttribute("login", vo);
-				path = "product/mainPage";
+				path = "redirect:/product/mainPage";
 			}
 			return path;
 		}
