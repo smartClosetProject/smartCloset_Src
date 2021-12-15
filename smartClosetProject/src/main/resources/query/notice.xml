@@ -31,15 +31,15 @@
 			SELECT
 				n_num, n_content,n_author, n_title,to_char(n_writedate,'YYYY-MM-DD') as n_writedate
 				FROM (
-				 SELECT /*+ INDEX_DESC(notice notice_pk) */
+				SELECT
 				 rownum as rnum, n_num, n_content,n_author, n_title, n_writedate
 				 FROM notice
 				 WHERE]]>
-				
-	<![CDATA[  rownum <= #{pageNum} * #{amount}
+	<![CDATA[    rownum <= #{pageNum} * #{amount}
+				 order by n_writedate desc
 				 ) noticelist
 				 WHERE rnum > (#{pageNum}-1) * #{amount}
-				]]>
+				 ]]>
 	</select>
 
 

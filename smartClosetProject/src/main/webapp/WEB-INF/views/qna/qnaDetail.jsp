@@ -75,8 +75,8 @@ $(function(){
 	<div class="container">
 			<table class="table table-bordered">
 		 			<tr>
-		 				<td>회원아이디</td>
-		 				<td colspan="3" style="font-size:15px;font-family:sans-serif">${detail.m_id}</td>
+		 				<td>회원이름</td>
+		 				<td colspan="3" style="font-size:15px;font-family:sans-serif">${detail.m_name}</td>
 		 			</tr>
 		 			<tr>
 		 				<td>글번호</td>

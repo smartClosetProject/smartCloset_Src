@@ -32,10 +32,15 @@
 	text-align: center;
 	
 	}
-.absoulte{
-font-weight:bold;
+.button2{
+width:80px;
+height:35px; 
 
+font-size:15px;
+background:white;
 }
+
+
 
 </style>
 <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -137,15 +142,15 @@ $(function(){
 			<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
 	<div class="form-group"  style="float:left;">
 				<label>검색조건</label>
-		<select id="search" name="search" class="form-control">
+		<select id="search" name="search" class="form-control" >
 				<option value="all">전체</option>
 				<option value="q_title">제목</option>
 		        <option value="q_content">내용</option>
 				<option value="q_category">카테고리</option>
 				<option value="m_id">작성자</option>
 		</select>
-				<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요">
-				<button type="button" id="searchData" class="btn btn-success">검색</button>
+				<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요" style="width:150px;height:30px;" />
+				<button type="button" id="searchData" class="button button2" style="width:80px;height:30px; font-size:13px;">검색</button>
 		</div>
 	</form>
 </div>
@@ -170,7 +175,7 @@ $(function(){
 					<td class="goDetail text-left">${qna.q_title}</td>
 					<td class="goCate text-center">${qna.q_category}</td>
 					<td class="text-left" >${qna.q_regdate}</td>
-					<td class="name" >${qna.m_id}</td>
+					<td class="name" >${qna.m_name}</td>
 			   </tr>
 		</c:forEach>
 		</c:when>
@@ -185,7 +190,7 @@ $(function(){
 </div>
 <c:if test="${not empty login}">
 <div class="text-center">
-	<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-success" style ="float:right;">
+	<input type="button" value="글쓰기" id="insertFormBtn" class="button button2" style ="float:right;">
 </div>
 </c:if>
 <%-- ==============페이징출력 시작======--%>
