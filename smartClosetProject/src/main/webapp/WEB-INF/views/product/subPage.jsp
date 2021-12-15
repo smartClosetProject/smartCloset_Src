@@ -39,13 +39,14 @@
 			.Shipping div div{margin-top: 10px; margin-bottom: 10px; }
 			.Shipping{margin-top: 15px; margin-bottom: 15px; border: 1px solid #BDBDBD; text-align: left;}
 			#pr_mile{margin-bottom: 10px; font-size: 13px; color:#5e5e5e; border-style: none;}
-			.prbutton{width:220px; margin-right: 5px; background-color: #c9c9c9; height: 50px; boarder:0px; outline: 0px;}
+			.prbutton{width:220px; margin-right: 5px; height: 50px; font-weight: lighter; outline : 0;  background-color: white;   color: black;   border: 2px solid #e7e7e7;}
+			.prbutton:hover {background-color: #e7e7e7;}
 			#listPr{list-style: none; margin:0;padding:0; }
 			.sp_name{width:200px;}
 			.pr_cnt{width:40px; text-align: center; margin-right: 0px;}
 			.pro_size, .pro_color{font-size: 10px;color:#a0a0a0; }
 			.pd_price{font-weight: bold;width:100px;}
-			.updatebtn{font-size: 8px; width: 30px; margin-left: 0px; padding-left: 0px;}
+			.updatebtn{font-size: 8px; width: 30px; margin-left: 0px; padding-left: 0px;  outline : 0;  background-color: white;   color: black;   border: 1px solid #e7e7e7;}
  			.proCheck{width:0px; height:0px;} */
 			.tablecl {width:420px; margin-left: 8px;}
 			.list{width: 420px;}
@@ -54,6 +55,7 @@
 			.board{font-weight: bold; margin-left: 13px; margin-top: 20px;}
 			#gray{color:#a0a0a0; font-size: 13px;}
 			.a{color:black;}
+			#subPage{margin-top: 30px;}
 		</style>
 		<script type="text/javascript">
  			$(function(){
@@ -73,12 +75,12 @@
 						let pro_color=$("#pro_color").val()
 						
 						if(pro_size=="----선택하세요"){
-							 $(".select").attr("selected",true)
+							 $(".proselect").attr("selected",true)
 							alert("사이즈를 선택해주세요.");
 							return false;
 						}
 						
-						$(".select").attr("selected",false);
+						$(".proselect").attr("selected",false);
 	
 		               let new_li=$("<li>")
 		               new_li.addClass("list")
@@ -151,8 +153,8 @@
 		               $("#listPr").append(new_li);
 		              
 		               update_total();
-				 
-		               $(".select").attr("selected",true)
+				 		
+		               $(".proselect").attr("selected",true)
 		               
 			        
 			           	$(document).on("click",".updatebtn",function(){
@@ -186,6 +188,7 @@
 			           			
 								update_total();
 			           		})
+			           		$(".select").attr("selected",true)
 			           	}
 			            function update_total(){
 			            		total=0;
