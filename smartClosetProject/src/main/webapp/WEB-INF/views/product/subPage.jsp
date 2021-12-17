@@ -73,14 +73,14 @@
 				$("#pro_color").change(function(){
 						let pro_size=$("#pro_size").val()
 						let pro_color=$("#pro_color").val()
-						
+						$(".proselect").attr("selected",false);
 						if(pro_size=="----선택하세요"){
 							 $(".proselect").attr("selected",true)
 							alert("사이즈를 선택해주세요.");
 							return false;
 						}
 						
-						$(".proselect").attr("selected",false);
+						
 	
 		               let new_li=$("<li>")
 		               new_li.addClass("list")
