@@ -106,7 +106,7 @@
 				    				<c:forEach var="myorder" items="${myorderList}" varStatus="status">
 				    					<tr>
 				    						<td class="text-center">${myorder.order_regdate}</td>
-				    						<td class="text-center">${myorder.pr_thumb}</td>
+				    						<td class="text-center"><img src="/uploadStorage/warehousing/thumb/${myorder.pro_colorthumb}"></td>
 				    						<td class="text-center">${myorder.pr_name}</td>
 				    						<td class="text-center">${myorder.od_goodscount}</td>
 				    						<td class="text-center">${myorder.order_totalPayment}</td>
