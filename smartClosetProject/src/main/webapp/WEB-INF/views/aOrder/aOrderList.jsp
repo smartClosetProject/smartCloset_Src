@@ -21,6 +21,9 @@
 			.col-sm-9{
 				width: 100%;
 			}
+			.required {
+				color : red;
+			}
 		</style>
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>

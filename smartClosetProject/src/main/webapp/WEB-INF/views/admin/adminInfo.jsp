@@ -28,16 +28,19 @@
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$(function () {
+				// 정보 변경 버튼 클릭시
 				$("#changeInfoBtn").click(function () {
 					goUrl = "/admin/adminUpdateForm";
 					$("#f_adData").attr("action", goUrl);
 					$("#f_adData").submit();
 				})
 				
+				// 메인으로 버튼 클릭
 				$("#toGoMainBtn").click(function () {
-					location.href = "/nboard/nboardTest";
+					location.href = "/nboard/main";
 				})
 				
+				// 로그아웃 버튼 클릭
 				$("#adminLogoutBtn").click(function () {
 					if(confirm("로그아웃 하시겠습니까?")){
 						location.href = "/admin/adminLogout"
@@ -51,6 +54,7 @@
 	</head>
 	<body>
 		<div>
+			<%-- 회원정보 변경을 위해 사용할 관리자 id를 전달 --%>
 			<form name="f_adData" id="f_adData" method="post">
 				<input type="hidden" name="ad_id" value="${adminInfo.ad_id}">
 			</form>

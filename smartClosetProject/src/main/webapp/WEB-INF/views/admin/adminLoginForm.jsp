@@ -10,7 +10,6 @@
 		
 		<title>Insert title here</title>
 	
-		<!-- 모바일 웹 페이지 설정 -->
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
@@ -64,24 +63,20 @@
 		
 		<script type="text/javascript">
 		$(function () {
+			//로그인 버튼 클릭시
 			$("#loginAdminBtn").click(function() {
 				if(!chkData("#ad_id","아이디를")) return;
-				else if(!chkData("#ad_passwd","비밀번호를")) return;
+				else if(!chkData("#ad_passwd","비밀번호를")) return; //아이디 비밀번호의 공백 확인
 				else{
 					$("#f_loginAdmin").attr({
 						"method" : "post",
 						"action" : "/admin/adminLogin"
 					});
 					$("#f_loginAdmin").submit();
-					console.log('$("#ad_id").val()');
 				}
 			});
 		});
 		</script>
-	
-		<!--[if lt IE 9]>
-		<script src="/resources/js/html5shiv.js"></script>
-		<![endif]-->
 	</head>
 	<body>
 		<div class="container text-center">

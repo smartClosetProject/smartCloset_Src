@@ -15,6 +15,8 @@
 		<link rel="shortcut icon" href="/resources/image/icon.png" />
 		<link rel="apple-touch-icon" href="/resources/image/icon.png" />
 		<!-- 모바일 웹 페이지 설정 끝 -->
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
 	
 	
 		<!--[if lt IE 9]>

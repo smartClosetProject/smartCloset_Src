@@ -21,6 +21,9 @@
 			.col-sm-9{
 				width: 100%;
 			}
+			.required {
+				color : red;
+			}
 		</style>
 		
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
@@ -28,6 +31,47 @@
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$(function () {
+				// 검색 후 검색 대상과 검색 단어 출력
+				let word = "<c:out value='${data.keyword}' />"
+				let value = "";
+				if (word != "") {
+					$("#keyword").val("<c:out value = '${data.keyword}' />");
+					$("#search").val("<c:out value = '${data.search}' />");
+				
+					if ($("#search").val() =='m_id'){
+						value = "#list tr td.goDetail";
+					} else if ($("#search").val() =='m_name'){
+						value = "#list tr td.m_name";
+					}
+					console.log($(value + ":contains('" + word + "')").html());
+					
+					$(value + ":contains('" + word + "')").each(function() {
+						var regex = new RegExp(word, 'gi'); // g: 모든 , i: 대소문자 관계없이
+							$(this).html($(this).html().replace(regex, "<span class='required'>" + word + "</span>"));
+					});
+				}
+
+				// 검색 대상이 변경될 때마다 처리 이벤트
+				$("#search").change(function() {
+					if ($("#search").val() == "all") {
+						$("#keyword").val("전체 데이터 조회");
+					} else if ($("#search").val() != "all") {
+						$("#keyword").val("");
+						$("#keyword").focus();
+					}
+				});
+				
+				// 검색 버튼 클릭 시 처리 이벤트
+				$("#searchData").click(function() {
+					if ($("#search").val() != "all") {
+						if (!chkData("#keyword", "검색어를")) {
+							return;
+						}
+					}
+					goPage();
+				});
+				
+				
 				//제목 믈릭시 회원 상세 페이지로 이동을 위한 처리 이벤트
 				$(".goDetail").click(function () {
 					let m_id = $(this).parents("tr").attr("data-num");
@@ -49,7 +93,20 @@
 					}
 				
 				})
-			}); //최상위 $ 종료
+			}); 
+			
+			//최상위 $ 종료
+			// 검색을 위한 실질적인 처리 함수
+		function goPage() {
+			if ($("#search").val() == "all") {
+				$("#keyword").val("");
+			}
+			$("#f_search").attr({
+				"method" : "get",
+				"action" : "/aMember/aMemberList"
+			});
+			$("#f_search").submit();
+		}
 		
 		</script>
 	</head>
@@ -62,7 +119,7 @@
 	
 		<%-- ================= 검색 시작 ================== --%>
 		<div id="aMemberSearch" class="text-left" style="margin-bottom : 20px">
-			<form id="f_amsearch" name="f_amsearch" class="form-inline">
+			<form id="f_search" name="f_search" class="form-inline">
 				<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum }">
 				<input type="hidden" name="amount" value="${pageMaker.cvo.amount }">
 				<div class="form-group">
@@ -96,7 +153,7 @@
 							<c:forEach var="aMember" items="${aMemberList}" varStatus="status">
 								<tr class="text-center" data-num ="${aMember.m_id}">
 									<td class="goDetail text-center">${aMember.m_id }</td>
-									<td class="text-center">${aMember.m_name}</td>
+									<td class="text-center m_name">${aMember.m_name}</td>
 									<td class="text-center">${aMember.m_regdate}</td>
 									<td class="text-center">${aMember.m_exitdate}</td>
 								</tr>

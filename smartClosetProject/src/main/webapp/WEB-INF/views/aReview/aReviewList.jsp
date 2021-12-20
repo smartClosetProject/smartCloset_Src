@@ -38,43 +38,42 @@
 		</style>
 		<script type="text/javascript">
 			$(function(){
-				// 검색 후 검색 대상과 검색 단어 출력
-				let word = "<c:out value='${data.keyword}' />"
-				let value = "";
-				if (word != "") {
-					$("#reviewKeyword").val("<c:out value = '${data.keyword}' />");
-					$("#re_Search").val("<c:out value = '${data.search}' />");
 				
-					if ($("#re_Search").val() != 'r_title') {
-						// :contains()는 특정 텍스트를 포함한 요소 반환
-						if ($("#re_Search").val() == 'r_content') {
-							value = "#list tr td.goDetail";
-						} else if ($("#re_Search").val() == 'm_id') {
-							value = "#list tr td.name";
-						}
-						console.log($(value + ":contains('" + word + "')").html());
-						
-						$(value + ":contains('" + word + "')").each(function() {
-							var regex = new RegExp(word, 'gi'); // g: 모든 , i: 대소문자 관계없이
-							$(this).html($(this).html().replace(regex, "<span class='required'>" + word + "</span>"));
-						});
+				
+				// 검색 후 검색 대상과 검색 단어 출력
+				let word = "<c:out value='${data.keyword}'/>"
+				let value = "";
+				if(word != ""){
+					$("#keyword").val("<c:out value = '${data.keyword}' />");
+					$("#search").val("<c:out value = '${data.search}' />");
+					
+					if ($("#search").val() =='r_title'){
+						value = "#list tr td.title";
+					} else if ($("#search").val() =='r_content'){
+						value = "#list tr td.content";
 					}
+					console.log($(value + ":contains('" + word + "')").html());
+					
+					$(value + ":contains('" + word + "')").each(function() {
+						var regex = new RegExp(word, 'gi'); // g: 모든 , i: 대소문자 관계없이
+							$(this).html($(this).html().replace(regex, "<span class='required'>" + word + "</span>"));
+					});
 				}
 				
 				// 검색 대상이 변경될 때마다 처리 이벤트
-				$("#re_Search").change(function() {
-					if ($("#re_Search").val() == "all") {
-						$("#reviewKeyword").val("검색어 입력");
-					} else if ($("#re_Search").val() != "all") {
-						$("#reviewKeyword").val("");
-						$("#reviewKeyword").focus();
+				$("#search").change(function() {
+					if ($("#search").val() == "all") {
+						$("#keyword").val("전체 데이터 조회");
+					} else if ($("#search").val() != "all") {
+						$("#keyword").val("");
+						$("#keyword").focus();
 					}
 				});
 				
 				// 검색 버튼 클릭 시 처리 이벤트
-				$("#reviewSearchBtn").click(function() {
-					if ($("#re_Search").val() != "all") {
-						if (!chkData("#reviewKeyword", "검색어를")) {
+				$("#searchData").click(function() {
+					if ($("#search").val() != "all") {
+						if (!chkData("#keyword", "검색어를")) {
 							return;
 						}
 					}
@@ -101,10 +100,12 @@
 					goPage();
 				});
 			});
+			
+			
 			// 검색을 위한 실질적인 처리 함수
 			function goPage() {
-				if ($("#re_Search").val() == "all") {
-					$("#reviewKeyword").val("");
+				if ($("#search").val() == "all") {
+					$("#keyword").val("");
 				}
 				$("#r_search").attr({
 					"method" : "get",
@@ -127,14 +128,13 @@
 					<input type="hidden" name="amount" value="${pageMaker.cvo.amount }">
 						<span class="glyphicon glyphicon-search"></span>&nbsp;
 					 <div class="form-group">
-						<select id ="re_Search" name="search" class="form-control">
+						<select id ="search" name="search" class="form-control">
 							<option value="all">전체</option>
 							<option value="r_title">제목</option>
 							<option value="r_content">내용</option>
-							<option value="m_id">아이디</option>							
 						</select>
-							<input type="text" id="reviewKeyword" name="keyword" value="검색어 입력" class="form-control">
-							<button type="button" class="btn btn-default" id="reviewSearchBtn" >검색</button>
+							<input type="text" id="keyword" name="keyword" value="검색어 입력" class="form-control">
+							<button type="button" class="btn btn-default" id="searchData" >검색</button>
 					</div>
 				</form> 
 			</div>
@@ -156,7 +156,7 @@
 										</tr>
 										<tr class="text-center">
 											<td class="highlight1 col-md-1">글 제목</td>
-											<td class="text-left col-md-4">${review.r_title}</td>
+											<td class="text-left col-md-4 title">${review.r_title}</td>
 											
 											<td class="highlight1 col-md-1">작성일</td>
 											<td class="text-left col-md-4">${review.r_regdate}</td>
@@ -164,7 +164,7 @@
 										</tr>
 										<tr class="text-center">
 											<td class="highlight1 col-md-1">글 내용</td>
-											<td class="text-left col-md-4" colspan="3">${review.r_content}</td>
+											<td class="text-left col-md-4 content"  colspan="3">${review.r_content}</td>
 										</tr>
 										<c:if test="${not empty review.r_file }">
 							 				<tr class="text-center">

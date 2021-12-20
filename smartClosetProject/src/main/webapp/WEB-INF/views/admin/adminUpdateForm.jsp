@@ -30,12 +30,13 @@
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$(function () {
+				// 변경 버튼 클릭시
 				$("#changeInfoBtn").click(function () {
 					if(!chkData("#ad_passwd", "비밀번호를")) return;
 					else if(!chkData("#ad_name", "이름을")) return;
 					else if(!chkData("#ad_email", "이메일을")) return;
 					else if(!chkData("#ad_phone", "번화번호를")) return;
-					else if(!chkData("#ad_addr", "주소를")) return;
+					else if(!chkData("#ad_addr", "주소를")) return; // 공백 확인
 					else {
 						$("#f_adUpdateData").attr({
 							"method" : "post",
@@ -44,11 +45,15 @@
 						$("#f_adUpdateData").submit();
 					}
 				})
+				
+				// 초기화 버튼 클릭시
 				$("#resetBtn").click(function () {
 					$("#f_adUpdateData").each(function () {
 						this.reset();
 					})
 				})
+				
+				// 관리자 마이페이지로 이동
 				$("#goToAdminInfofBtn").click(function () {
 					location.href = "/admin/adminInfo";
 				})

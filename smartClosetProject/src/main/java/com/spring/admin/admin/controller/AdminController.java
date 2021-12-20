@@ -56,6 +56,7 @@ public class AdminController {
 	 ****************************************************/
 	@GetMapping("adminInfo")
 	public String adminInfo(HttpSession session, Model model) {
+		if(session.getAttribute("ad_id")!=null) {
 		log.info("adminInfo 호출 성공");
 
 		AdminVO adminInfo = adminService.readAdminInfo((String) session.getAttribute("ad_id"));
@@ -64,17 +65,21 @@ public class AdminController {
 		model.addAttribute("adminInfo",adminInfo);
 
 		return "admin/adminInfo";
+		} else return "error";
+		
 	}
 	/****************************************************
 	 * 정보 수정 폼
 	 ****************************************************/
 	@RequestMapping("adminUpdateForm")
 	public String adminUpdateForm(HttpSession session, Model model) {
+		if(session.getAttribute("ad_id")!=null) {
 		log.info("adminUpdateForm 호출 성공");
 		
 		model.addAttribute("adminUpdateInfo", adminService.readAdminInfo((String)session.getAttribute("ad_id")));
 
 		return "admin/adminUpdateForm";
+		} else return "error";
 	}
 	
 	/****************************************************
@@ -82,12 +87,14 @@ public class AdminController {
 	 ****************************************************/
 	@RequestMapping("adminUpdate")
 	public String adminUpdate(AdminVO avo, RedirectAttributes ras) {
+		if(session.getAttribute("ad_id")!=null) {
 		log.info("adminUpdate 호출 성공");
 		
-		int result = adminService.adminUpdate(avo);
+		adminService.adminUpdate(avo);
 		ras.addFlashAttribute("data",avo);
 		
 		return "redirect:/admin/adminInfo";
+		} else return "error";
 	}
 	
 	/****************************************************

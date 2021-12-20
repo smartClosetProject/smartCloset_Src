@@ -37,11 +37,11 @@
 					let order_state = $(this).val();
 					console.log($(".stateBtn").val());
 					$("#order_state").val(order_state);
-					$("#detailForm").attr({
+					$("#detailForm2").attr({
 						"method" : "get",
 						"action" : "/aOrder/aOrderchangeState"
 					});
-					$("#detailForm").submit();
+					$("#detailForm2").submit();
 				} 
 			}
 			})
@@ -119,7 +119,7 @@
 				<!--  <input type="hidden" id="od_num" name="od_num" value="${aOrder.od_num}"> -->
 			</form>
 			<form id="detailForm">
-				
+				<input type="hidden" id="order_state2" name="order_state2"/>
 			</form>
 			<h2 style="color : #1A5276;"><strong>주문 관리</strong></h2>
 			<br>

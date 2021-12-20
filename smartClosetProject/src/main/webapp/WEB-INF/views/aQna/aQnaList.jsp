@@ -12,6 +12,11 @@
 		
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="/resources/include/dist/css/bootstrap-theme.css">
+		<style type="text/css">
+			.required {
+					color : red;
+				}
+		</style>
 		<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/dist/js/bootstrap.min.js"></script>
@@ -118,7 +123,7 @@
 							<option value="all">전체</option>
 							<option value="q_title">제목</option>
 							<option value="q_content">내용</option>
-							<option value="m_id">작성자 아이디</option>
+							<option value="m_id">작성자</option>
 						</select>
 						<input type="text" id="keyword" name="keyword" value="전체 데이터 조회" class="form-control">
 						<button type="button" id="searchData" class="btn btn-default">검색</button>

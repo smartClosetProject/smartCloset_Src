@@ -29,7 +29,7 @@
 		<script type="text/javascript">
 			$(function () {
 				$("#QnaDeleteBtn").click(function () {
-					if (confirm("정말 삭제하시겠습니까?")) {
+					if (confirm("게시글을 삭제하시겠습니까?")) {
 						goUrl = "/aQna/aQnaDelete";
 						$("#f_data").attr("action", goUrl);
 						$("#f_data").submit();
