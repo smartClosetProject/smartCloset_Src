@@ -35,7 +35,9 @@ public class AreplyController {
 	@Setter(onMethod_ = @Autowired)
 	private HttpSession session;
 	
-	
+	/***********************************************************************
+	 * 댓글 리스트 출력 구현
+	 ***********************************************************************/
 	@GetMapping(value = "/all/{q_num}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<AreplyVO>> replyList(@PathVariable("q_num") Integer q_num){ 
 		//@GetMapping(value = "/all/{q_num}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE) <<이걸로 URL을 주고, @PathVariable("q_num")<<이걸로 파라미터 꺼내오기
@@ -49,6 +51,9 @@ public class AreplyController {
 	}
 	
 
+	/***********************************************************************
+	 * 댓글 등록 기능 구현
+	 ***********************************************************************/
 	@PostMapping(value = "/aReplyInsert", consumes = "application/json",
 			produces = {MediaType.TEXT_PLAIN_VALUE })
 	public String replyInsert(@RequestBody AreplyVO rvo) {
@@ -63,21 +68,9 @@ public class AreplyController {
 
 	}
 
-
-	@RequestMapping(value="/{r_num}",method= {RequestMethod.PUT, RequestMethod.PATCH},
-			consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> aReplyUpdate(@PathVariable("r_num") Integer r_num,
-			@RequestBody AreplyVO rvo){
-		log.info("aReplyUpdate 호출 성공");
-		
-		
-		rvo.setR_num(r_num);
-		int result = replyService.aReplyUpdate(rvo);
-		return result==1 ? new ResponseEntity<String>("SUCCESS",HttpStatus.OK):
-			new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-	
-
+	/***********************************************************************
+	 * 댓글 삭제 기능 구현
+	 ***********************************************************************/
 	@DeleteMapping(value="/{r_num}",produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> aReplyDelete(@PathVariable("r_num") Integer r_num){
 		log.info("aReplyDelete 호출 성공");

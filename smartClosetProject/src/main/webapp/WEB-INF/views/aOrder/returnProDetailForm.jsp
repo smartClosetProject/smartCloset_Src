@@ -40,8 +40,7 @@
 			
 			var od_num = opener.$("#od_num").val();
 			$("#test").val(od_num);
-			console.log(od_num); //5
-			console.log($("#test").val(od_num))
+
 			
 			$("#returnCheckBtn").click(function () {
 				var form ={
@@ -49,25 +48,43 @@
 						pro_color : $("#pro_color option:selected").val(),
 						pro_size : $("#pro_size option:selected").val(),
 						od_goodscount : $("#od_goodscount").val(),
-						pr_num : $("#pr_num").val()
-				}
-				$.ajax({
-					url : "/aOrder/aOrderOptionChange",
-					type : "post",
-					data : JSON.stringify(form),
-					contentType: "application/json; charset=utf-8;",
-					dataType: "text",
-					success : function (data) {
-						alert("적용이 완료 되었습니다.");
-					},
-					error : function () {
-						alert("재고가 없는 상품입니다. 다시 선택해 주세요.");
-					}
+						pr_num : $("#pr_num").val(),
+						pro_num : $("#pro_num").val() 
 
-				})
+				}
+				
+				console.log("수량 : "+$("#od_goodscount").val());
+				console.log("재고 : "+$("#pro_stock").val());
+				console.log(($("#od_goodscount").val()-$("#pro_stock").val())>0);
+				if($("#od_goodscount").val()==0){
+					alert("수량을 입력해 주세요.");
+				} 
+
+				else if(($("#od_goodscount").val()-$("#pro_stock").val())>0){
+					alert("재고가 부족합니다.다시 변경해주세요.");
+				}
+				else{
+				
+					$.ajax({
+						url : "/aOrder/aOrderOptionChange",
+						type : "post",
+						data : JSON.stringify(form),
+						contentType: "application/json; charset=utf-8;",
+						dataType: "text",
+						success : function (data) {
+							alert("적용이 완료 되었습니다.");
+						},
+						error : function () {
+							alert("재고가 없는 상품입니다. 다시 선택해 주세요.");
+						}
+
+					})
+				}
+				
 			});
 				
 			$("#returnOrderBtn").click(function () {
+
 				opener.parent.location.reload();
 				window.close();
 			});
@@ -81,9 +98,12 @@
 				<form id="returnProInfo" name="returnProInfo" class="form-inline">
 					<input type="hidden" id="od_num" name="od_num" value="${detail.od_num}"/>
 					<input type="hidden" id="pr_num" name="pr_num" value="${detail.pr_num}"/>
+					<input type="hidden" id="pro_num" name="pro_num" value="${detail.pro_num}"/>
+					<input type="hidden" id="pro_stock" name="pro_stock" value="${detail.pro_stock}"/>
+					<input type="hidden" id="pro_sales" name="pro_sales" value="${detail.pro_sales}"/>
 						<h3>${detail.pr_name}</h3>
 						<hr>
-						<h4><strong>변경 전 옵션</strong> </h4><h5> 색상 : ${detail.pro_color}, 사이즈 : ${detail.pro_size}, 수량 : ${detail.od_goodscount} </h5>
+						<h4><strong>변경 전 옵션</strong> </h4><h5> 색상 : ${detail.pro_color}, 사이즈 : ${detail.pro_size}, 수량 : ${detail.od_goodscount}</h5>
 						<div class="form-group">
 						<br>
 						<h4><strong>변경할 옵션</strong> </h4>
@@ -105,11 +125,12 @@
 							</c:when>
 						</c:choose>
 						</select>
-						<input type="text"  style="width : 100px;" id="od_goodscount" name="od_goodscount" placeholder="수량"> 개</input>		
+						<input type="text"  style="width : 100px;" id="od_goodscount" name="od_goodscount" placeholder="수량" max="${detail.pro_stock}"> 개</input>		
 					</div>
 				</form>
 			</div>
 			<br>
+			<p>${msg}</p>
 			<div class="text-left">
 				<input type="button" class="btn btn-default" id="returnCheckBtn" value="옵션 변경"/>
 				<input type="button" class="btn btn-default" id="returnOrderBtn" value="옵션 적용"/>

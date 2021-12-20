@@ -19,5 +19,7 @@ public interface AorderDAO {
 	public List<String> aGetProSize(AorderVO advo);
 	public int aOrderTotalPayChange(AorderVO aovo);
 	public int aOdTotalPayChange(AorderVO aovo);
+	public int aOrderProCountChange(AorderVO aovo);
+	public int aOrderProCountReset(AorderVO aovo);
 	
 }

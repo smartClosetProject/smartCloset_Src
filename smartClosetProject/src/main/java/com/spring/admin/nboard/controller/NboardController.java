@@ -31,7 +31,7 @@ public class NboardController {
 	@Setter(onMethod_ = @Autowired)
 	private HttpSession session;
 	
-	@GetMapping("nboardTest") 
+	@GetMapping("main") 
 	public String nboardTest() {
 		if(session.getAttribute("ad_id")!=null) {
 	

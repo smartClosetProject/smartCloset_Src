@@ -72,6 +72,9 @@ public class AorderController {
 		
 	}
 	
+	/***********************************************************************
+	 * 주문 상태 변경 구현
+	 ***********************************************************************/
 	@GetMapping("aOrderchangeState")
 	public String aOrderchangeState(@ModelAttribute AorderVO aovo, RedirectAttributes ras) {
 		if(session.getAttribute("ad_id")!=null) {
@@ -86,19 +89,31 @@ public class AorderController {
 		else return "error";
 	}
 	
+	/***********************************************************************
+	 * 환불할 경우, 환불의 상태로 변경하며 상품의 재고 및 판매량 수정
+	 ***********************************************************************/
 	@GetMapping("aOrderchangeRefundState")
 	public String aOrderchangeRefundState(@ModelAttribute AorderVO aovo, RedirectAttributes ras) {
 		if(session.getAttribute("ad_id")!=null) {
 			aOrderservice.aOrderChangeState(aovo);
 			ras.addFlashAttribute("data",aovo);
 			aOrderservice.aOrderTotalPayChange(aovo);
-			
+			log.info(aovo.getOrder_state());
+			if(aovo.getOrder_state().equals("전체 환불")) {
+				aOrderservice.aOrderProCountReset(aovo);
+			}
+			else {
+				aOrderservice.aOrderProCountChange(aovo);
+			}
 			return "redirect:/aOrder/aOrderList";
 		}
 		else return "error";
 		
 	}
 	
+	/***********************************************************************
+	 * 완료로 부터 7일이 지난 주문 일괄 삭제
+	 ***********************************************************************/
 	@RequestMapping("aOrderAllDelete")
 	public String aOrderAllDelete() throws Exception{
 		aOrderservice.aOrderAllDelete();
@@ -106,6 +121,9 @@ public class AorderController {
 		return "redirect:/aOrder/aOrderList";
 	}
 	
+	/***********************************************************************
+	 * 반품 옵션 변경 창 구현
+	 ***********************************************************************/
 	@RequestMapping("aOrderReturnForm")
 	public String aOrderReturnForm(@RequestParam(value ="checkProduct") List<Integer> checkProduct, Model model) throws Exception {
 		if(session.getAttribute("ad_id")!=null) {
@@ -124,6 +142,9 @@ public class AorderController {
 		else return "error";
 	}
 	
+	/***********************************************************************
+	 * 옵션 변경 기능 구현(반품)
+	 ***********************************************************************/
 	@RequestMapping("returnProDetailForm")
 	public String returnProDetailForm(@RequestParam(value ="od_num") int od_num, Model model) {
 		if(session.getAttribute("ad_id")!=null) {
@@ -150,41 +171,27 @@ public class AorderController {
 		else return "error";
 	}
 	
+	
+	/***********************************************************************
+	 * 반품 시 재고와 판매량 변경 기능 구현
+	 ***********************************************************************/
 	@RequestMapping("aOrderOptionChange")
 	public String aOrderOptionChange(@RequestBody AorderVO aovo, RedirectAttributes ras, Model model) throws SQLException {
 		if(session.getAttribute("ad_id")!=null) {
+			log.info("aOrderOptionChange  실행완료");
 			log.info(aovo);
-	
-				aOrderservice.aOrderOptionChange(aovo);
-				
-				aOrderservice.aOdTotalPayChange(aovo);
-				
-				ras.addFlashAttribute("data",aovo);
-				log.info(ras.getFlashAttributes());
-				
+			log.info(aovo.getPro_num());
+			aOrderservice.aOrderProCountReset(aovo);
+			aOrderservice.aOrderOptionChange(aovo);
+			ras.addFlashAttribute("data",aovo);
+			log.info(ras.getFlashAttributes());
+						
 			return "redirect:/aOrder/returnProDetailForm?od_num="+aovo.getOd_num();
-
 		}
 			
 		else return "error";
 	}
 	
-	
-	
-	
-//	@RequestMapping("returnOrder")
-//	public int returnOrder(@RequestParam(value ="checkProduct[]") List<String> checkProduct, AorderVO aovo) throws Exception{
-//		log.info("checkProduct : " + checkProduct);
-//		int result = 0;
-//		int od_num = 0;
-//		for(String i : checkProduct) {
-//			od_num = Integer.parseInt(i);
-//			aovo.setOd_num(od_num);
-//			result = aOrderservice.returnOrder(aovo);
-//		}
-//		
-//		return result;
-//		
-//	}
+
 
 }

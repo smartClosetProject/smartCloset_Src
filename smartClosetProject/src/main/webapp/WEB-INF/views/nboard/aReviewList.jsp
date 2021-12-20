@@ -38,42 +38,43 @@
 		</style>
 		<script type="text/javascript">
 			$(function(){
-				
-				
 				// 검색 후 검색 대상과 검색 단어 출력
-				let word = "<c:out value='${data.keyword}'/>"
+				let word = "<c:out value='${data.keyword}' />"
 				let value = "";
-				if(word != ""){
-					$("#keyword").val("<c:out value = '${data.keyword}' />");
-					$("#search").val("<c:out value = '${data.search}' />");
-					
-					if ($("#search").val() =='r_title'){
-						value = "#list tr td.title";
-					} else if ($("#search").val() =='r_content'){
-						value = "#list tr td.content";
-					}
-					console.log($(value + ":contains('" + word + "')").html());
-					
-					$(value + ":contains('" + word + "')").each(function() {
-						var regex = new RegExp(word, 'gi'); // g: 모든 , i: 대소문자 관계없이
+				if (word != "") {
+					$("#reviewKeyword").val("<c:out value = '${data.keyword}' />");
+					$("#re_Search").val("<c:out value = '${data.search}' />");
+				
+					if ($("#re_Search").val() != 'r_title') {
+						// :contains()는 특정 텍스트를 포함한 요소 반환
+						if ($("#re_Search").val() == 'r_content') {
+							value = "#list tr td.goDetail";
+						} else if ($("#re_Search").val() == 'm_id') {
+							value = "#list tr td.name";
+						}
+						console.log($(value + ":contains('" + word + "')").html());
+						
+						$(value + ":contains('" + word + "')").each(function() {
+							var regex = new RegExp(word, 'gi'); // g: 모든 , i: 대소문자 관계없이
 							$(this).html($(this).html().replace(regex, "<span class='required'>" + word + "</span>"));
-					});
+						});
+					}
 				}
 				
 				// 검색 대상이 변경될 때마다 처리 이벤트
-				$("#search").change(function() {
-					if ($("#search").val() == "all") {
-						$("#keyword").val("전체 데이터 조회");
-					} else if ($("#search").val() != "all") {
-						$("#keyword").val("");
-						$("#keyword").focus();
+				$("#re_Search").change(function() {
+					if ($("#re_Search").val() == "all") {
+						$("#reviewKeyword").val("검색어 입력");
+					} else if ($("#re_Search").val() != "all") {
+						$("#reviewKeyword").val("");
+						$("#reviewKeyword").focus();
 					}
 				});
 				
 				// 검색 버튼 클릭 시 처리 이벤트
-				$("#searchData").click(function() {
-					if ($("#search").val() != "all") {
-						if (!chkData("#keyword", "검색어를")) {
+				$("#reviewSearchBtn").click(function() {
+					if ($("#re_Search").val() != "all") {
+						if (!chkData("#reviewKeyword", "검색어를")) {
 							return;
 						}
 					}
@@ -100,12 +101,10 @@
 					goPage();
 				});
 			});
-			
-			
 			// 검색을 위한 실질적인 처리 함수
 			function goPage() {
-				if ($("#search").val() == "all") {
-					$("#keyword").val("");
+				if ($("#re_Search").val() == "all") {
+					$("#reviewKeyword").val("");
 				}
 				$("#r_search").attr({
 					"method" : "get",
@@ -121,24 +120,6 @@
 				<input type="hidden" id="r_num" value="r_num" name="r_num">
 			</form>
 			<h2 style="color : #1A5276;"><strong>리뷰 게시판 관리</strong></h2><br>
-			<%-- =================== 검색 버튼 =================== --%>
-			<div id="reviewSearch" class="text-left">
-				<form id="r_search" name="r_search" class="form-inline" style="margin-bottom : 20px">
-					<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum }">
-					<input type="hidden" name="amount" value="${pageMaker.cvo.amount }">
-						<span class="glyphicon glyphicon-search"></span>&nbsp;
-					 <div class="form-group">
-						<select id ="search" name="search" class="form-control">
-							<option value="all">전체</option>
-							<option value="r_title">제목</option>
-							<option value="r_content">내용</option>
-						</select>
-							<input type="text" id="keyword" name="keyword" value="검색어 입력" class="form-control">
-							<button type="button" class="btn btn-default" id="searchData" >검색</button>
-					</div>
-				</form> 
-			</div>
-			<!-- ---------------------검색 종료 ------------------------------>
 			<!-- -------------------- 리스트 시작 -------------------------->
 			<div id="reviewList" class="table-height">
 			
@@ -156,7 +137,7 @@
 										</tr>
 										<tr class="text-center">
 											<td class="highlight1 col-md-1">글 제목</td>
-											<td class="text-left col-md-4 title">${review.r_title}</td>
+											<td class="text-left col-md-4">${review.r_title}</td>
 											
 											<td class="highlight1 col-md-1">작성일</td>
 											<td class="text-left col-md-4">${review.r_regdate}</td>
@@ -164,16 +145,8 @@
 										</tr>
 										<tr class="text-center">
 											<td class="highlight1 col-md-1">글 내용</td>
-											<td class="text-left col-md-4 content"  colspan="3">${review.r_content}</td>
+											<td class="text-left col-md-4" colspan="3">${review.r_content}</td>
 										</tr>
-										<c:if test="${not empty review.r_file }">
-							 				<tr class="text-center">
-							 					<td class="highlight1">이미지</td>
-							 					<td colspan="3" class="text-left">
-							 						<img style="max-width : 200px; max-height:200px;" src="/uploadStorage/Review/${review.r_file }">
-							 					</td>
-							 				</tr>
-		 								</c:if>		
 									</tbody>
 								</table>
 								
@@ -192,28 +165,6 @@
 					</c:choose>
 
 			</div>			
-
-			
-			<!------------------------ 페이징 출력 ---------------------------->
-			<div class="text-center">
-				<ul class="pagination">
-					<c:if test="${pageMaker.prev }">
-						<li class="paginate_button previous">
-							<a href="${pageMaker.startPage - 1 }">Previous</a>
-						</li>
-					</c:if>
-					<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-						<li class="paginate_button ${(pageMaker.cvo.pageNum == num) ? 'active':''}">
-							<a href="${num }">${num }</a>
-						</li>
-					</c:forEach>
-					<c:if test="${pageMaker.next }">
-						<li class="paginate_button next">
-							<a href="${pageMaker.endPage + 1 }">Next</a>
-						</li>
-					</c:if>
-				</ul>
-			</div>
 		</div>
 	</body>
 </html>

@@ -37,22 +37,21 @@
 				
 				var pop = window.open("/aOrder/returnProDetailForm?od_num="+$("#od_num").val(), "childWin", "width = 500, height = 370, top = 100, left = 200, location = no , resizable=no");
 				$("#test").val(od_num);
-				console.log(od_num);
-				console.log($("#od_num").val());
-				console.log($("#order_num").val());
-				console.log(order_num);
+
 
 			});
 			$("#returnProductBtn").click(function () {
 				let order_state ="반품 중";
-				console.log($("#order_num").val());
+				console.log("pro_num : " + $("#pro_num").val())
+				console.log("od_num : " + $("#od_num").val())
+				console.log("order_num : " + $("#order_num").val())
 				$("#order_state").val(order_state);
-				$("#stateChange").attr({
+				$("#returnPro").attr({
 					"method" : "get",
 					"action" : "/aOrder/aOrderchangeRefundState"
 				});
-				$("#stateChange").submit();
-				alert("반품이 완료되었습니다.");
+				$("#returnPro").submit();
+				alert("반품이 완료되었습니다."); 
 			});
 			$("#goToProDetailBtn").click(function () {
 				history.back();
@@ -63,10 +62,6 @@
 		</script>
 </head>
 <body>
-<form id="returnPro" name="returnPro">
-	<input type="hidden" id="od_num" name="od_num" />
-	<input type="hidden" id="pr_num" name="pr_num"/>
-</form>
 
 <h2 style="color : #1A5276;"><strong>주문 관리</strong></h2>
 <br>
@@ -75,13 +70,12 @@
 	<c:choose>
 		<c:when test="${not empty checkProduct}">
 			<c:forEach var="returnPro" items="${returnProduct}" varStatus="status">
-			<form id="stateChange" name="stateChange">
+			<form id="returnPro" name="returnPro">
 				<input type="hidden" id="order_num" name="order_num" value="${returnPro.order_num}"/>
+				<input type="hidden" id="pro_num" name="pro_num" value="${returnPro.pro_num}"/>
 				<input type="hidden" id="order_state" name="order_state"/>
-			</form>
-			<form id="stateChange" name="stateChange">
-				<input type="hidden" id="order_num" name="order_num" />
-				<input type="hidden" id="order_state" name="order_state"/>
+				<input type="hidden" id="od_num" name="od_num" value="${returnPro.od_num}"/>
+				<input type="hidden" id="pr_num" name="pr_num" value="${returnPro.pr_num}"/>
 			</form>
 				<tr data-num="${returnPro.od_num}">
 					<td rowspan="2" class="highlight1">상품 정보</td>
@@ -99,6 +93,7 @@
 	</c:choose>
 	</table>
 </div>
+<p>${msg}</p>
 <div class="text-right">
  <input type="button" id="returnProductBtn" name="returnProductBtn" class="btn btn-default" value="반품" />
  <input type="button" id="goToProDetailBtn" name="goToProDetailBtn" class="btn btn-default" value="취소"/>

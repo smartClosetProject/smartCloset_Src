@@ -80,6 +80,9 @@
 			<nav class="navbar navbar-fixed-top">
 				<tiles:insertAttribute name="header" ignore="true"/>
 			</nav>
+			<div>
+			<tiles:getAsString name="title" />
+			</div>
 			<div class="active">
 				<tiles:insertAttribute name="navbar" ignore="true"/>
 			</div>

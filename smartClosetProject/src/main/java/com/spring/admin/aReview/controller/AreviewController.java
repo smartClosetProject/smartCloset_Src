@@ -33,9 +33,9 @@ public class AreviewController {
 	@Setter(onMethod_ = @Autowired)
 	private HttpSession session;
 	
-	/**********
-	 * 리뷰게시판 구현
-	 * **********/
+	/**************************************************************
+	 * 리뷰 게시판 구현
+	 * ************************************************************/
 	@GetMapping("aReviewList")
 	public String reviewList(@ModelAttribute("data")AreviewVO arvo, Model model) {
 		log.info("reviewList 호출 성공");
@@ -56,7 +56,7 @@ public class AreviewController {
 	
 	/**************************************************************
 	 * 글 삭제 처리
-	 * ************/
+	 * ************************************************************/
 	@RequestMapping("aReviewDelete")
 	public String reviewDelete(@ModelAttribute("data") AreviewVO arvo) throws Exception{
 		areviewService.aReviewDelete(arvo);

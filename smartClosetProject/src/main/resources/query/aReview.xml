@@ -16,10 +16,10 @@
 	
 	<select id="aReviewList" parameterType="areview" resultType="areview">
 		<![CDATA[
-			SELECT  r_num, r_title, r_content, to_char(r_regdate, 'YYYY-MM-DD') AS r_regdate, m_id 
+			SELECT  r_num, r_title, r_content, to_char(r_regdate, 'YYYY-MM-DD') AS r_regdate, r_file, m_id 
 			FROM
 				(SELECT /*+ INDEX_DESC(review review_pk ) */
-					ROWNUM as rnum ,  r_num, r_title, r_content, r_regdate, m_id 
+					ROWNUM as rnum ,  r_num, r_title, r_content, r_regdate, r_file, m_id 
 				FROM review
 				WHERE ]]>
 				 <trim prefix="(" suffix=") AND " prefixOverrides="AND">

@@ -13,7 +13,7 @@
         <div class="sidebar">
 
           <ul class="nav nav-sidebar">
-            <li class="nav-item"><a class="nav-link" href="/nboard/nboardTest">메인 페이지</a></li>
+            <li class="nav-item"><a class="nav-link" href="/nboard/main">메인 페이지</a></li>
             <li class="nav-item"><a class="nav-link" href="/nboard/nboardList">공지 관리</a></li>
             <li class="nav-item"><a class="nav-link" href="/aOrder/aOrderList">주문 관리</a></li>
             <li class="nav-item"><a class="nav-link" href="/prDetail/prDetailList">상품 관리</a>

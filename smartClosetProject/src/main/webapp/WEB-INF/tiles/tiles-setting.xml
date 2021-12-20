@@ -59,7 +59,7 @@
 
 	<!-- 관리자 -->
 	<definition name="content" template="/WEB-INF/views/template/admin/admin_Layout.jsp">
-		<put-attribute name="title" value="" />
+		<put-attribute name="title" value="Smart Closet" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="header" value="/WEB-INF/views/template/admin/admin_header.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/admin/admin_footer.jsp" />

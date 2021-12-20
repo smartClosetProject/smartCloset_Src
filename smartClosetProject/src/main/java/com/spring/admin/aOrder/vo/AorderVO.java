@@ -22,7 +22,9 @@ public class AorderVO extends CommonVO{
 	private String order_cancelReason;	
 	private String order_deliverydate;	
 	private String order_regdate;			
-	private String m_id;				
+	private String m_id;	
+	private int pro_stock;
+	private int pro_sales;
 
 	private int od_num;			
 	private int od_goodscount;	
