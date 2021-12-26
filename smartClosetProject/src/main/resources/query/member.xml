@@ -12,11 +12,11 @@
 	<!-- 마이페이지 출력시 주문배송조회 숫자 카운트 -->
 	<select id="memberMypageCnt" parameterType="myorder" resultType="myorder">
 	SELECT
-	    COUNT(CASE WHEN order_state='입금 전' THEN 1 END) AS bd,
+	    COUNT(CASE WHEN order_state='입금전' THEN 1 END) AS bd,
 	    COUNT(CASE WHEN order_state='결제완료' THEN 1 END) AS bd1,
-	    COUNT(CASE WHEN order_state='배송 준비 중' THEN 1 END) AS bd2,
-	    COUNT(CASE WHEN order_state='배송 중' THEN 1 END) AS bd3,
-	    COUNT(CASE WHEN order_state='배송 완료' THEN 1 END) AS bd4
+	    COUNT(CASE WHEN order_state='배송준비중' THEN 1 END) AS bd2,
+	    COUNT(CASE WHEN order_state='배송중' THEN 1 END) AS bd3,
+	    COUNT(CASE WHEN order_state='배송완료' THEN 1 END) AS bd4
 	FROM myorderview 
 	WHERE m_id = #{m_id} 
 	</select>
