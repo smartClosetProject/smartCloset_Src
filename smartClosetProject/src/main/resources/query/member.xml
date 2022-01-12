@@ -102,7 +102,7 @@
 	    	on pro.pr_num = pd.pr_num
 		WHERE 
 		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
-		<![CDATA[ order_regdate >= #{start_date} and order_regdate < #{end_date} ]]>	
+		<![CDATA[ order_regdate >= #{start_date} and order_regdate <= #{end_date} ]]>	
 		</trim>
 		so.m_id = #{m_id}
 	</select>
